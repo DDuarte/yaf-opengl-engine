@@ -1,5 +1,7 @@
 #include <tinyxml.h>
 #include <cstdlib>
+#include <map>
+#include <vector>
 
 //#include <gl/GL.h>
 
@@ -138,7 +140,7 @@ public:
     float Far;
 };
 
-class YafOmniCamera : public YafCamera
+class YafPerspectiveCamera : public YafCamera
 {
 public:
     float Angle;
@@ -148,6 +150,7 @@ public:
 
 class YafOrthoCamera : public YafCamera
 {
+public:
     float Left;
     float Right;
     float Top;
@@ -156,6 +159,7 @@ class YafOrthoCamera : public YafCamera
 
 class YafLight : public YafElement
 {
+public:
     bool Enabled;
     YafXYZ Location;
     YafRGBA Ambient;
@@ -170,6 +174,7 @@ class YafOmniLight : public YafLight
 
 class YafSpotLight : public YafLight
 {
+public:
     float Angle;
     float Exponent;
     YafXYZ Direction;
@@ -182,12 +187,13 @@ class YafTexture : public YafElement
 
 class YafAppearance : public YafElement
 {
+public:
     YafRGBA Emissive;
     YafRGBA Ambient;
     YafRGBA Diffuse;
     YafRGBA Specular;
     float Shininess;
-    YafTexture Texture; // maybe ptr
+    YafTexture* Texture; // can be null
     float TexLengthS;
     float TexLengthT;
 };
@@ -218,7 +224,12 @@ public:
     YafXYZ Factor;
 };
 
-class YafPrimitive : public /* ? */ YafElement
+class YafChild
+{
+
+};
+
+class YafPrimitive : public YafChild
 {
 
 };
@@ -265,10 +276,41 @@ public:
     int Loops;
 };
 
+class YafNode : public YafChild, public YafElement
+{
+public:
+    std::vector<YafTransform*> _transforms;
+    YafAppearance* _appearance; // can be null
+
+    std::vector<YafChild*> _children;
+};
+
 class YafScene
 {
 public:
-    // TODO: methods
+    void SetGlobals(YafDrawMode dm, YafShading s, YafCullFace cf, YafCullOrder co)
+    {
+        _drawMode = dm;
+        _shading = s;
+        _cullFace = cf;
+        _cullOrder = co;
+    }
+
+    void SetLightOptions(bool doubleSided, bool local, bool enabled, YafRGBA ambient)
+    {
+        _lightDoubleSided = doubleSided;
+        _lightLocal = local;
+        _lightEnabled = enabled;
+        _lightAmbient = ambient;
+    }
+
+    void SetRootNode(std::string id) { _rootNode = _nodes[id]; }
+
+    void AddCamera(YafCamera* camera) { _cameras[camera->Id] = camera; }
+    void AddLight(YafLight* light) { _lights[light->Id] = light; }
+    void AddTexture(YafTexture* texture) { _textures[texture->Id] = texture; }
+    void AddAppearance(YafAppearance* appearance) { _appearances[appearance->Id] = appearance; }
+    void AddNode(YafNode* node) { _nodes[node->Id] = node; }
 private:
     // Globals
     YafDrawMode _drawMode;
@@ -276,14 +318,31 @@ private:
     YafCullFace _cullFace;
     YafCullOrder _cullOrder;
 
-    // TODO: more members
+    // Cameras
+    std::map<std::string, YafCamera*> _cameras;
+
+    // Lighting
+    bool _lightDoubleSided;
+    bool _lightLocal;
+    bool _lightEnabled;
+    YafRGBA _lightAmbient;
+    std::map<std::string, YafLight*> _lights;
+
+    // Textures
+    std::map<std::string, YafTexture*> _textures;
+
+    // Appearances
+    std::map<std::string, YafAppearance*> _appearances;
+
+    // Graph
+    YafNode* _rootNode;
+    std::map<std::string, YafNode*> _nodes;
 };
 
 void t()
 {
     auto document = new TiXmlDocument("sintax_yaf.xml");
-    bool loaded = document->LoadFile();
-    if (!loaded)
+    if (!document->LoadFile())
         throw YafParsingException("Could not load file 'sintax_yaf.xml'. Error: " + std::string(document->ErrorDesc()));
 
     // <yaf>
