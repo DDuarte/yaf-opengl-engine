@@ -192,7 +192,7 @@ class YafAppearance : public YafElement
     float TexLengthT;
 };
 
-// TODO: YafNode, YafTransform, YafChildren
+// TODO: YafNode, YafChildren
 
 class YafTransform
 {
@@ -267,12 +267,16 @@ public:
 
 class YafScene
 {
+public:
+    // TODO: methods
 private:
     // Globals
     YafDrawMode _drawMode;
     YafShading _shading;
     YafCullFace _cullFace;
     YafCullOrder _cullOrder;
+
+    // TODO: more members
 };
 
 void t()
@@ -362,7 +366,7 @@ void t()
 
     std::string graphRootId;
     if (graphElement->QueryValueAttribute("rootid", &graphRootId) != TIXML_SUCCESS)
-        throw YafParsingException("<graph graphRootId> not found");
+        throw YafParsingException("<graph rootid> not found");
 
     // TODO: node
 }
