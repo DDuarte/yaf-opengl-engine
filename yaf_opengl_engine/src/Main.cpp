@@ -109,9 +109,37 @@ enum class YafCullOrder
 //     }
 // }
 
+std::vector<float> ParseFloats( const std::string &s , int n) 
+{
+	unsigned int i = 0;
+
+	std::vector<float> floats;
+
+	while (i < s.length())
+	{
+		std::string temp;
+		for(i ; s[i] != ' ' ; ++i)
+			temp.push_back(s[i]);
+
+		floats.push_back(atof(temp.c_str()));
+	}
+
+	if (floats.size() != n)
+		throw YafParsingException("Incorrect number of arguments: " + s);
+	return floats;
+}
+
 class YafXY
 {
 public:
+	YafXY(const std::string& s)
+	{
+		std::vector<float> XY = ParseFloats(s, 2);
+
+		X = XY[0];
+		Y = XY[1];
+	}
+
     float X;
     float Y;
 };
@@ -119,6 +147,15 @@ public:
 class YafXYZ
 {
 public:
+	YafXYZ(const std::string& s)
+	{
+		std::vector<float> XYZ = ParseFloats(s, 3);
+
+		X = XYZ[0];
+		Y = XYZ[1];
+		Z = XYZ[2];
+	}
+
     float X;
     float Y;
     float Z;
@@ -127,6 +164,16 @@ public:
 class YafRGBA
 {
 public:
+	YafRGBA(const std::string& s)
+	{
+		std::vector<float> RGBA = ParseFloats(s, 4);
+
+		R = RGBA[0];
+		G = RGBA[1];
+		B = RGBA[2];
+		A = RGBA[3];
+	}
+
     float R;
     float G;
     float B;
