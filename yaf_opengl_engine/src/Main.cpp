@@ -407,18 +407,8 @@ public:
     int Loops;
 };
 
-class YafNode : public YafChild, public YafElement
-{
-public:
-    void AddTransform(YafTransform* t) { _transforms.push_back(t); }
-    void AddChild(YafChild* c) { _children.push_back(c); }
-    void SetAppearance(YafAppearance* a) { _appearance = a; }
-private:
-    std::vector<YafTransform*> _transforms;
-    YafAppearance* _appearance; // can be null
+class YafNode;
 
-    std::vector<YafChild*> _children;
-};
 
 class YafScene
 {
@@ -454,6 +444,9 @@ public:
     YafTexture* GetTexture(const std::string& id) const { return _textures.find(id)->second; }
     YafAppearance* GetAppearance(const std::string& id) const { return _appearances.find(id)->second; }
     YafLight* GetLight(const std::string& id) const { return _lights.find(id)->second; }
+    YafNode* GetNode(const std::string& id) const { return _nodes.find(id)->second; }
+
+    std::map<std::string, YafNode*>& GetNodes() { return _nodes; }
 
 private:
     // Globals
@@ -484,6 +477,34 @@ private:
     YafNode* _rootNode;
     std::map<std::string, YafNode*> _nodes;
 };
+
+class YafNode : public YafChild, public YafElement
+{
+public:
+    void AddTransform(YafTransform* t) { _transforms.push_back(t); }
+    void AddChild(YafChild* c) { _children.push_back(c); }
+    void SetAppearance(YafAppearance* a) { _appearance = a; }
+
+    void AddNodeRef(const std::string& id) { _refNodes.push_back(id); }
+
+    void MoveRefNodesToChildren(YafScene* scene)
+    {
+        for (auto s : _refNodes)
+            AddChild(scene->GetNode(s));
+
+        _refNodes.clear();
+    }
+
+private:
+    std::vector<YafTransform*> _transforms;
+    YafAppearance* _appearance; // can be null
+
+    std::vector<YafChild*> _children;
+
+    std::vector<std::string> _refNodes;
+};
+
+
 
 std::vector<TiXmlElement*> GetAllChildren(TiXmlElement* root, const std::string& name)
 {
@@ -773,9 +794,9 @@ void t()
         for (auto s : childrenSphere)
         {
             YafSphere* sph = new YafSphere;
-            sph->Radius = GetAttribute<float>(s, "radius", "graph node children Sphere");
-            sph->Slices = GetAttribute<int>(s, "slices", "graph node children Sphere");
-            sph->Stacks = GetAttribute<int>(s, "stacks", "graph node children Sphere");
+            sph->Radius = GetAttribute<float>(s, "radius", "graph node children sphere");
+            sph->Slices = GetAttribute<int>(s, "slices", "graph node children sphere");
+            sph->Stacks = GetAttribute<int>(s, "stacks", "graph node children sphere");
 
             node->AddChild(sph);
         }
@@ -783,16 +804,25 @@ void t()
         for (auto t : childrenTorus)
         {
             YafTorus* tor = new YafTorus;
-            tor->Inner = GetAttribute<float>(t, "inner", "graph node children Torus");
-            tor->Outer = GetAttribute<float>(t, "outer", "graph node children Torus");
-            tor->Slices = GetAttribute<int>(t, "slices", "graph node children Torus");
-            tor->Loops = GetAttribute<int>(t, "loops", "graph node children Torus");
+            tor->Inner = GetAttribute<float>(t, "inner", "graph node children torus");
+            tor->Outer = GetAttribute<float>(t, "outer", "graph node children torus");
+            tor->Slices = GetAttribute<int>(t, "slices", "graph node children torus");
+            tor->Loops = GetAttribute<int>(t, "loops", "graph node children torus");
 
             node->AddChild(tor);
         }
 
-        // TODO: add the rest of the primitives and node ref
+        for (auto n : childrenNodeRef)
+        {
+            std::string nodeRef = GetAttribute<std::string>(n, "id", "graph node children noderef");
+            node->AddNodeRef(nodeRef);
+        }
+
+        scene->AddNode(node);
     }
+
+    for (auto n : scene->GetNodes())
+        n.second->MoveRefNodesToChildren(scene);
 }
 
 int main(int argc, char* argv[])
