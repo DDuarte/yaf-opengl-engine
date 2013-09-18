@@ -117,6 +117,16 @@ YafCullOrder YafCullOrderFromString(const std::string& str)
         throw YafParsingException("Invalid cull order " + str + " used");
 }
 
+bool BoolFromString(const std::string& str)
+{
+    if (str == "true")
+        return true;
+    else if (str == "false")
+        return false;
+    else
+        throw YafParsingException("Invalid bool " + str + " used");
+}
+
 // unsigned int /* GLenum */ YafToOpenGL(YafDrawMode dm) // glPolygonMode
 // {
 //     switch (dm)
@@ -186,7 +196,7 @@ std::vector<float> ParseFloats(std::string s , int n)
     pch = strtok_s(str, " ", &context);
     while (pch)
     {
-        floats.push_back(atof(pch));
+        floats.push_back(static_cast<float>(atof(pch)));
         pch = strtok_s(nullptr, " ", &context);
     }
 
@@ -302,6 +312,7 @@ public:
 
 class YafTexture : public YafElement
 {
+public:
     std::string File;
 };
 
@@ -399,6 +410,10 @@ public:
 class YafNode : public YafChild, public YafElement
 {
 public:
+    void AddTransform(YafTransform* t) { _transforms.push_back(t); }
+    void AddChild(YafChild* c) { _children.push_back(c); }
+    void SetAppearance(YafAppearance* a) { _appearance = a; }
+private:
     std::vector<YafTransform*> _transforms;
     YafAppearance* _appearance; // can be null
 
@@ -427,14 +442,19 @@ public:
         _lightAmbient = ambient;
     }
 
-    void SetInitialCamera(std::string id) { _initialCamera = _cameras[id]; }
-    void SetRootNode(std::string id) { _rootNode = _nodes[id]; }
+    void SetInitialCamera(const std::string& id) { _initialCamera = _cameras[id]; }
+    void SetRootNode(const std::string& id) { _rootNode = _nodes[id]; }
 
     void AddCamera(YafCamera* camera) { _cameras[camera->Id] = camera; }
     void AddLight(YafLight* light) { _lights[light->Id] = light; }
     void AddTexture(YafTexture* texture) { _textures[texture->Id] = texture; }
     void AddAppearance(YafAppearance* appearance) { _appearances[appearance->Id] = appearance; }
     void AddNode(YafNode* node) { _nodes[node->Id] = node; }
+
+    YafTexture* GetTexture(const std::string& id) const { return _textures.find(id)->second; }
+    YafAppearance* GetAppearance(const std::string& id) const { return _appearances.find(id)->second; }
+    YafLight* GetLight(const std::string& id) const { return _lights.find(id)->second; }
+
 private:
     // Globals
     YafRGBA _backgroundColor;
@@ -489,47 +509,44 @@ std::vector<TiXmlElement*> GetAllChildren(TiXmlElement* root, const std::string&
 }
 
 template<typename T>
-T GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix = "")
+T GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix, bool required = true)
 {
     T res;
     if (element->QueryValueAttribute(name, &res) != TIXML_SUCCESS)
-        throw YafParsingException("<" + prefix + " " + name + "> not found");
+        if (required)
+            throw YafParsingException("<" + prefix + " " + name + "> not found");
+        else
+            return T();
     return res;
 }
 
 template<>
-bool GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix /* = "" */)
+bool GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix, bool required /* = true */)
 {
-    std::string str = GetAttribute<std::string>(element, name, prefix);
-    if (str == "true")
-        return true;
-    else if (str == "false")
-        return false;
-    else
-        throw YafParsingException("Boolean " + str + " invalid.");
+    return BoolFromString(GetAttribute<std::string>(element, name, prefix, required));
 }
 
 template<>
-YafRGBA GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix /* = "" */)
+YafRGBA GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix, bool required /* = true */)
 {
-    return YafRGBA(GetAttribute<std::string>(element, name, prefix));
+    return YafRGBA(GetAttribute<std::string>(element, name, prefix, required));
 }
 
 template<>
-YafXY GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix /* = "" */)
+YafXY GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix, bool required /* = true */)
 {
-    return YafXY(GetAttribute<std::string>(element, name, prefix));
+    return YafXY(GetAttribute<std::string>(element, name, prefix, required));
 }
 
 template<>
-YafXYZ GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix /* = "" */)
+YafXYZ GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix, bool required /* = true */)
 {
-    return YafXYZ(GetAttribute<std::string>(element, name, prefix));
+    return YafXYZ(GetAttribute<std::string>(element, name, prefix, required));
 }
 
 void t()
 {
-    auto scene = new YafScene();
+    auto scene = new YafScene;
 
     auto document = new TiXmlDocument("sintax_yaf2.xml");
     if (!document->LoadFile())
@@ -565,12 +582,12 @@ void t()
     for (auto cp : camerasPerspective)
     {
         YafPerspectiveCamera* camera = new YafPerspectiveCamera;
-        camera->Id = GetAttribute<std::string>(cp, "id", "cameras perspective");
-        camera->Near = GetAttribute<float>(cp, "near", "cameras perspective");
-        camera->Far = GetAttribute<float>(cp, "far", "cameras perspective");
-        camera->Angle = GetAttribute<float>(cp, "angle", "cameras perspective");
+        camera->Id       = GetAttribute<std::string>(cp, "id", "cameras perspective");
+        camera->Near     = GetAttribute<float>(cp, "near", "cameras perspective");
+        camera->Far      = GetAttribute<float>(cp, "far", "cameras perspective");
+        camera->Angle    = GetAttribute<float>(cp, "angle", "cameras perspective");
         camera->Position = GetAttribute<YafXYZ>(cp, "pos", "cameras perspective");
-        camera->Target = GetAttribute<YafXYZ>(cp, "target", "cameras perspective");
+        camera->Target   = GetAttribute<YafXYZ>(cp, "target", "cameras perspective");
 
         scene->AddCamera(camera);
     }
@@ -578,12 +595,12 @@ void t()
     for (auto op : camerasOrtho)
     {
         YafOrthoCamera* camera = new YafOrthoCamera;
-        camera->Id = GetAttribute<std::string>(op, "id", "cameras ortho");
-        camera->Near = GetAttribute<float>(op, "near", "cameras ortho");
-        camera->Far = GetAttribute<float>(op, "far", "cameras ortho");
-        camera->Left = GetAttribute<float>(op, "left", "cameras ortho");
-        camera->Right = GetAttribute<float>(op, "right", "cameras ortho");
-        camera->Top = GetAttribute<float>(op, "top", "cameras ortho");
+        camera->Id     = GetAttribute<std::string>(op, "id", "cameras ortho");
+        camera->Near   = GetAttribute<float>(op, "near", "cameras ortho");
+        camera->Far    = GetAttribute<float>(op, "far", "cameras ortho");
+        camera->Left   = GetAttribute<float>(op, "left", "cameras ortho");
+        camera->Right  = GetAttribute<float>(op, "right", "cameras ortho");
+        camera->Top    = GetAttribute<float>(op, "top", "cameras ortho");
         camera->Bottom = GetAttribute<float>(op, "bottom", "cameras ortho");
 
         scene->AddCamera(camera);
@@ -602,7 +619,37 @@ void t()
                            GetAttribute<bool>(lightingElement, "enabled", "lighting"),
                            GetAttribute<YafRGBA>(lightingElement, "ambient", "lighting"));
 
-    // TODO: omni/spot
+    auto lightsOmni = GetAllChildren(lightingElement, "omni");
+    auto lightsSpot = GetAllChildren(lightingElement, "spot");
+
+    for (auto lo : lightsOmni)
+    {
+        YafOmniLight* light = new YafOmniLight;
+        light->Id = GetAttribute<std::string>(lo, "id", "lighting omni");
+        light->Enabled = GetAttribute<bool>(lo, "enabled", "lighting omni");
+        light->Location = GetAttribute<YafXYZ>(lo, "location", "lighting omni");
+        light->Ambient = GetAttribute<YafRGBA>(lo, "ambient", "lighting omni");
+        light->Diffuse = GetAttribute<YafRGBA>(lo, "diffuse", "lighting omni");
+        light->Specular = GetAttribute<YafRGBA>(lo, "specular", "lighting omni");
+
+        scene->AddLight(light);
+    }
+
+    for (auto lo : lightsSpot)
+    {
+        YafSpotLight* light = new YafSpotLight;
+        light->Id = GetAttribute<std::string>(lo, "id", "lighting spot");
+        light->Enabled = GetAttribute<bool>(lo, "enabled", "lighting spot");
+        light->Location = GetAttribute<YafXYZ>(lo, "location", "lighting spot");
+        light->Ambient = GetAttribute<YafRGBA>(lo, "ambient", "lighting spot");
+        light->Diffuse = GetAttribute<YafRGBA>(lo, "diffuse", "lighting spot");
+        light->Specular = GetAttribute<YafRGBA>(lo, "specular", "lighting spot");
+        light->Angle = GetAttribute<float>(lo, "angle", "lighting spot");
+        light->Exponent = GetAttribute<float>(lo, "exponent", "lighting spot");
+        light->Direction = GetAttribute<YafXYZ>(lo, "direction", "lighting spot");
+
+        scene->AddLight(light);
+    }
 
     // <textures>
 
@@ -610,7 +657,16 @@ void t()
     if (!texturesElement)
         throw YafParsingException("<textures> not found");
 
-    // TODO: texture
+    auto textures = GetAllChildren(texturesElement, "texture");
+
+    for (auto t : textures)
+    {
+        YafTexture* tex = new YafTexture;
+        tex->Id = GetAttribute<std::string>(t, "id", "textures texture");
+        tex->File = GetAttribute<std::string>(t, "file", "textures texture");
+
+        scene->AddTexture(tex);
+    }
 
     // <appearances>
 
@@ -618,7 +674,33 @@ void t()
     if (!appearancesElement)
         throw YafParsingException("<appearances> not found");
 
-    // TODO: appearance
+    auto appearances = GetAllChildren(appearancesElement, "appearance");
+
+    for (auto a : appearances)
+    {
+        YafAppearance* app = new YafAppearance;
+        app->Id = GetAttribute<std::string>(a, "id", "appearances appearance");
+        app->Emissive = GetAttribute<YafRGBA>(a, "emissive", "appearances appearance");
+        app->Ambient = GetAttribute<YafRGBA>(a, "ambient", "appearances appearance");
+        app->Diffuse = GetAttribute<YafRGBA>(a, "diffuse", "appearances appearance");
+        app->Specular = GetAttribute<YafRGBA>(a, "specular", "appearances appearance");
+        app->Shininess = GetAttribute<float>(a, "shininess", "appearances appearance");
+
+        std::string texRef = GetAttribute<std::string>(a, "textureref", "appearances appearance", false);
+        if (texRef.empty())
+        {
+            app->Texture = nullptr;
+            app->TexLengthS = 0.0f;
+            app->TexLengthT = 0.0f;
+        }
+        else
+        {
+            app->Texture = scene->GetTexture(texRef);
+            app->TexLengthS = GetAttribute<float>(a, "texlength_s", "appearances appearance");
+            app->TexLengthT = GetAttribute<float>(a, "texlength_t", "appearances appearance");
+        }
+
+    }
 
     // <graph>
 
@@ -626,11 +708,48 @@ void t()
     if (!graphElement)
         throw YafParsingException("<graph> not found");
 
-    std::string graphRootId;
-    if (graphElement->QueryValueAttribute("rootid", &graphRootId) != TIXML_SUCCESS)
-        throw YafParsingException("<graph rootid> not found");
+    std::string graphRootId = GetAttribute<std::string>(graphElement, "rootid", "graph");
 
-    // TODO: node
+    auto nodes = GetAllChildren(graphElement, "node");
+
+    if (nodes.empty())
+        throw YafParsingException("<graph node> needs at least one node");
+
+    for (auto n : nodes)
+    {
+        YafNode* node = new YafNode;
+        node->Id = GetAttribute<std::string>(n, "id", "graph node");
+        
+        std::string appRef = GetAttribute<std::string>(n, "appearanceref", "graph node", false);
+        node->SetAppearance(appRef.empty() ? nullptr : scene->GetAppearance(appRef));
+
+        auto childrenElement = n->FirstChildElement("children");
+        if (!childrenElement)
+            throw YafParsingException("<graph node children> not found");
+
+        auto childrenRectangle = GetAllChildren(childrenElement, "rectangle");
+        auto childrenTriangle = GetAllChildren(childrenElement, "triangle");
+        auto childrenCylinder = GetAllChildren(childrenElement, "cylinder");
+        auto childrenSphere = GetAllChildren(childrenElement, "sphere");
+        auto childrenTorus = GetAllChildren(childrenElement, "torus");
+        auto childrenNodeRef = GetAllChildren(childrenElement, "noderef");
+
+        if (childrenRectangle.empty() && childrenTriangle.empty() &&
+            childrenCylinder.empty() && childrenSphere.empty() &&
+            childrenTorus.empty() && childrenNodeRef.empty())
+            throw YafParsingException("<graph node children> needs at least one primitive or node");
+
+        for (auto r : childrenRectangle)
+        {
+            YafRectangle* rect = new YafRectangle;
+            rect->Point1 = GetAttribute<YafXY>(r, "xy1", "graph node children rectangle");
+            rect->Point2 = GetAttribute<YafXY>(r, "xy2", "graph node children rectangle");
+
+            node->AddChild(rect);
+        }
+
+        // TODO: add the rest of the primitives and node ref
+    }
 }
 
 int main(int argc, char* argv[])
