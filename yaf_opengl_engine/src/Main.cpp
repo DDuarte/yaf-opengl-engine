@@ -24,6 +24,18 @@ enum class YafAxis
     Z
 };
 
+YafAxis YafAxisFromString(const std::string& str)
+{
+    if (str == "x")
+        return YafAxis::X;
+    else if (str == "y")
+        return YafAxis::Y;
+    else if (str == "z")
+        return YafAxis::Z;
+    else
+        throw YafParsingException("Invalid axis " + str + " used");
+}
+
 enum class YafDrawMode
 {
     Fill,
@@ -31,11 +43,33 @@ enum class YafDrawMode
     Point
 };
 
+YafDrawMode YafDrawModeFromString(const std::string& str)
+{
+    if (str == "fill")
+        return YafDrawMode::Fill;
+    else if (str == "line")
+        return YafDrawMode::Line;
+    else if (str == "point")
+        return YafDrawMode::Point;
+    else
+        throw YafParsingException("Invalid draw mode " + str + " used");
+}
+
 enum class YafShading
 {
     Flat,
     Gouraud
 };
+
+YafShading YafShadingFromString(const std::string& str)
+{
+    if (str == "flat")
+        return YafShading::Flat;
+    else if (str == "gouraud")
+        return YafShading::Gouraud;
+    else
+        throw YafParsingException("Invalid shading " + str + " used");
+}
 
 enum class YafCullFace
 {
@@ -45,11 +79,35 @@ enum class YafCullFace
     Both
 };
 
+YafCullFace YafCullFaceFromString(const std::string& str)
+{
+    if (str == "none")
+        return YafCullFace::None;
+    else if (str == "back")
+        return YafCullFace::Back;
+    else if (str == "front")
+        return YafCullFace::Front;
+    else if (str == "both")
+        return YafCullFace::Both;
+    else
+        throw YafParsingException("Invalid cull face " + str + " used");
+}
+
 enum class YafCullOrder
 {
     CCW,
     CW
 };
+
+YafCullOrder YafCullOrderFromString(const std::string& str)
+{
+    if (str == "ccw")
+        return YafCullOrder::CCW;
+    else if (str == "cw")
+        return YafCullOrder::CW;
+    else
+        throw YafParsingException("Invalid cull order " + str + " used");
+}
 
 // unsigned int /* GLenum */ YafToOpenGL(YafDrawMode dm) // glPolygonMode
 // {
@@ -335,8 +393,9 @@ public:
 class YafScene
 {
 public:
-    void SetGlobals(YafDrawMode dm, YafShading s, YafCullFace cf, YafCullOrder co)
+    void SetGlobals(YafRGBA bg, YafDrawMode dm, YafShading s, YafCullFace cf, YafCullOrder co)
     {
+        _backgroundColor = bg;
         _drawMode = dm;
         _shading = s;
         _cullFace = cf;
@@ -360,6 +419,7 @@ public:
     void AddNode(YafNode* node) { _nodes[node->Id] = node; }
 private:
     // Globals
+    YafRGBA _backgroundColor;
     YafDrawMode _drawMode;
     YafShading _shading;
     YafCullFace _cullFace;
