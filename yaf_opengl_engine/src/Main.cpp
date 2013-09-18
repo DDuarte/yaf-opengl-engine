@@ -748,6 +748,49 @@ void t()
             node->AddChild(rect);
         }
 
+        for (auto t : childrenTriangle)
+        {
+            YafTriangle* tri = new YafTriangle;
+            tri->Point1 = GetAttribute<YafXYZ>(t, "xyz1", "graph node children triangle");
+            tri->Point2 = GetAttribute<YafXYZ>(t, "xyz2", "graph node children triangle");
+            tri->Point3 = GetAttribute<YafXYZ>(t, "xyz3", "graph node children triangle");
+
+            node->AddChild(tri);
+        }
+
+        for (auto c : childrenCylinder)
+        {
+            YafCylinder* cy = new YafCylinder;
+            cy->Base = GetAttribute<float>(c, "base", "graph node children cylinder");
+            cy->Top = GetAttribute<float>(c, "top", "graph node children cylinder");
+            cy->Height = GetAttribute<float>(c, "height", "graph node children cylinder");
+            cy->Slices = GetAttribute<int>(c, "slices", "graph node children cylinder");
+            cy->Stacks = GetAttribute<int>(c, "stacks", "graph node children cylinder");
+
+            node->AddChild(cy);
+        }
+
+        for (auto s : childrenSphere)
+        {
+            YafSphere* sph = new YafSphere;
+            sph->Radius = GetAttribute<float>(s, "radius", "graph node children Sphere");
+            sph->Slices = GetAttribute<int>(s, "slices", "graph node children Sphere");
+            sph->Stacks = GetAttribute<int>(s, "stacks", "graph node children Sphere");
+
+            node->AddChild(sph);
+        }
+
+        for (auto t : childrenTorus)
+        {
+            YafTorus* tor = new YafTorus;
+            tor->Inner = GetAttribute<float>(t, "inner", "graph node children Torus");
+            tor->Outer = GetAttribute<float>(t, "outer", "graph node children Torus");
+            tor->Slices = GetAttribute<int>(t, "slices", "graph node children Torus");
+            tor->Loops = GetAttribute<int>(t, "loops", "graph node children Torus");
+
+            node->AddChild(tor);
+        }
+
         // TODO: add the rest of the primitives and node ref
     }
 }
