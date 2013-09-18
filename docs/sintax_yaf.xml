@@ -1,0 +1,121 @@
+<!-- Os comentarios devem ter espacos no inicio e no fim, para --> 
+<!-- separar dos hifens --> 
+<!-- Nao devem ser usados caracteres especiais (p.ex. acentos) --> 
+<!-- Todas as tags e atributos sao obrigatorios, exceto onde for --> 
+<!-- referido o contrario --> 
+
+<yaf> 
+
+    <!-- bloco de configuracoes globais --> 
+    <!-- a declaracao dos atributos deste bloco e' obrigatoria --> 
+    <!-- Valores para draw mode: "fill" , "line", "point" --> 
+    <!-- Valores para shading: "flat", "gouraud" ) --> 
+    <!-- Valores para cullface: "none", "back" , "front" ou "both" --> 
+    <!-- Valores para cullorder : "CCW" ou "CW" --> 
+    <globals background="ff ff ff ff" drawmode="ss" shading="ss" cullface="ss" cullorder="ss" /> 
+     
+    <!-- bloco de camaras: o atributo "initial" identifica a camara/ponto de vista inicial --> 
+    <cameras initial="ss" > 
+        <!-- tem de existir, pelo menos uma camara dos tipos seguintes (perspective ou ortho) --> 
+
+        <perspective id="ss" near="ff" far="ff" angle="ff" pos="ff ff ff" target="ff ff ff" /> 
+        <ortho id="ss" near="ff" far="ff" left="ff" right="ff" top="ff" bottom="ff" /> 
+
+    </cameras> 
+   
+
+    <!-- bloco de iluminacao; segue os parametros do OpenGL --> 
+    <lighting doublesided="tt" local="tt" enabled="tt" ambient="ff ff ff ff" > 
+             <!-- Deve existir pelo menos um dos seguintes blocos: omin ou spot --> 
+            <!-- Os identificadores "id" nao podem ser repetidos --> 
+            <omni id="ss" enabled="tt" 
+                location="ff ff ff" 
+                ambient="ff ff ff ff" 
+                diffuse="ff ff ff ff" 
+                specular="ff ff ff ff" 
+            /> 
+
+            <spot id="ss" enabled="tt" 
+                location="ff ff ff" 
+                ambient="ff ff ff ff" 
+                diffuse="ff ff ff ff" 
+                specular="ff ff ff ff"
+                angle="ff" 
+                exponent="ff" 
+                direction="ff ff ff" 
+            /> 
+
+    </lighting> 
+
+    <!-- bloco de texturas. Este bloco tem de existir mas pode estar vazio, se nao forem usadas texturas --> 
+    <textures>        
+          <texture id="ss" file="ss" /> 
+    </textures> 
+
+    <!-- bloco de materiais; --> 
+    <appearances> 
+        <!-- deve existir um ou mais blocos "appearance" -->
+        <!-- IMPORTANTE: -->
+        <!--   textureref, texlength_s e textlength_t sao atributos -->
+        <!--   opcionais se for usada uma textura. --> 
+        <!--   ver topico 'Notas finais' no enunciado sobre os -->
+        <!--   parametros texlength_...) -->  
+        <appearance id="ss" 
+            emissive="ff ff ff ff" 
+            ambient="ff ff ff ff" 
+            diffuse="ff ff ff ff" 
+            specular="ff ff ff ff" 
+            shininess="ff" 
+            textureref="ss" 
+            texlength_s="ff" 
+            texlength_t="ff" /> 
+    </appearances> 
+
+    <!-- bloco do grafo; "rootid" identifica o no de raiz --> 
+    <graph rootid="ss"> 
+
+        <!-- tem de existir, pelo menos, um bloco "node" --> 
+        <node id="ss"> 
+            <!-- bloco "transforms" obrigatorio --> 
+            <transforms> 
+                <!-- deve conter transformacoes explicitas usando as instrucoes seguintes sem limite nem ordem --> 
+                <!-- ex: bloco transforms pode ficar sem conteudo --> 
+                <!-- ex: bloco transforms pode ser R,T (nao tem S) --> 
+                <!-- ex: bloco transforms pode ser R,S,T,S --> 
+                <translate to="ff ff ff" /> 
+                <rotate axis="ee" angle="ff" /> 
+                <scale factor="ff ff ff" /> 
+            </transforms> 
+           
+            <!-- declaracao da aparencia a utilizar (pode ser omitida): --> 
+            <!-- a) se declarada sobrepoe-se 'a aparencia do "pai" --> 
+            <!-- b) se omitida, o no' mantem (herda) a aparencia do "pai" --> 
+
+            <appearanceref id="ss" /> 
+                               
+             <!-- bloco "children" obrigatorio --> 
+            <children> 
+
+                <!-- deve existir no minimo uma primitiva, ou uma referencia a outros nos --> 
+                <!-- podem existir varias primitivas e/ou referencias a outros nos --> 
+
+                <!-- Primitivas : rectangle, triangle, cylinder, sphere, torus --> 
+                <!--   Comandos a serem interpretados genericamente como em OpenGL/GLUT, exceto --> 
+                <!--   o cilindro, que deve adicionalmente ter topos ou tampas) -->             
+                <rectangle xy1="ff ff" xy2="ff ff" /> 
+                <triangle xyz1="ff ff ff" xyz2="ff ff ff" xyz3="ff ff ff" /> 
+                <cylinder base="ff" top="ff" height="ff" slices="ii" stacks="ii" />      <!-- deve ter topos --> 
+                <sphere radius="ff" slices="ii" stacks="ii" /> 
+                <torus inner="ff" outer="ff" slices="ii" loops="ii" /> 
+                
+                <!-- Referencia a outros elementos do grafo --> 
+                <!-- (repetir o nº de vezes necessario) --> 
+                <!-- LEMBRANDO: qualquer no' pode ser referenciado previamente 'a sua declaracao; isto --> 
+                <!--            é, a ordem pela qual os nós são declarados é irrelevante --> 
+
+                <noderef id="ss" /> 
+
+            </children> 
+        </node> 
+    </graph> 
+</yaf>

@@ -1,0 +1,317 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>CS215 OpenGL Online Manual</title>
+</head>
+
+<body>
+<a name="top"></a>
+<h1>OpenGL Online Manual </h1></a>
+<hr>
+Manual
+<a href="http://www.ncrg.aston.ac.uk/~cornfosd/graphics/opengl/openglman.html">
+source</a>
+<hr>
+
+<p>This page provides an online OpenGL manual. The commands are grouped, to aid the user. An online GLUT manual can be found <a href = "http://www.opengl.org/developers/documentation/glut/spec3/spec3.html">here</a>. 
+
+<hr>
+<a href = "#bitmap">Bitmap manipulation</a> /
+<a href = "#colour">Colour manipulation</a> /
+<a href = "#drawing">Drawing and Matrix manipulation</a> /
+<a href = "#lighting">Lightning manipulation</a> /
+<a href = "#list">Display list manipulation</a> /
+<a href = "#stack">Stack manipulation</a> /
+<a href = "#stencil">Stencil manipulation</a> /
+<a href = "#texture">Texture manipulation</a> /
+<a href = "#viewing">Viewing manipulation</a> /
+<a href = "#vertex">Vertex Array manipulation</a> /
+<a href = "#eval">Evaluators (for curves)</a> /
+<a href = "#others">Other OpenGL commands</a> /
+<a href = "#glunurbs">NURBS curves (glu)</a> /
+<a href = "#glutess">Tesselation structures (glu)</a> /
+<a href = "#glupredef">Predefined 3D shapes and Quadratics (glu)</a> /
+<a href = "#gluother">Other glu commands</a> 
+<hr>
+
+
+<a name="bitmap"></a>
+<h4>Bitmap manipulation</h4>
+<ul>
+<li><A HREF="./htmlman/aretexturesresident.html">glAreTexturesResident</A>
+<li><A HREF="./htmlman/bindtexture.html">glBindTexture</A>
+<li><A HREF="./htmlman/bitmap.html">glBitmap</A>
+<li><A HREF="./htmlman/copypixels.html">glCopyPixels</A>
+<li><A HREF="./htmlman/copyteximage1d.html">glCopyTexImage1D</A>
+<li><A HREF="./htmlman/copyteximage2d.html">glCopyTexImage2D</A>
+<li><A HREF="./htmlman/copytexsubimage1d.html">glCopyTexSubImage1D</A>
+<li><A HREF="./htmlman/copytexsubimage2d.html">glCopyTexSubImage2D</A>
+<li><A HREF="./htmlman/drawpixels.html">glDrawPixels</A>
+<li><A HREF="./htmlman/getpixelmap.html">glGetPixelMap</A>
+<li><A HREF="./htmlman/pixelmap.html">glPixelMap</A>
+<li><A HREF="./htmlman/pixelstore.html">glPixelStore</A>
+<li><A HREF="./htmlman/pixeltransfer.html">glPixelTransfer</A>
+<li><A HREF="./htmlman/pixelzoom.html">glPixelZoom</A>
+<li><A HREF="./htmlman/rasterpos.html">glRasterPos</A>
+<li><A HREF="./htmlman/readpixels.html">glReadPixels</A>
+<li><A HREF="./htmlman/scaleimage.html">gluScaleImage</A>
+</ul>
+Return to the <a href = "#top"><font color="red">top</font></a> 
+
+<a name="colour"></a>
+<h4>Colour manipulation</h4>
+<ul>
+<li><A HREF="./htmlman/alphafunc.html">glAlphaFunc</A>
+<li><A HREF="./htmlman/blendcolorext.html">glBlendColorEXT</A>
+<li><A HREF="./htmlman/blendfunc.html">glBlendFunc</A>
+<li><A HREF="./htmlman/clearcolor.html">glClearColor</A>
+<li><A HREF="./htmlman/clearindex.html">glClearIndex</A>
+<li><A HREF="./htmlman/color.html">glColor</A>
+<li><A HREF="./htmlman/colormask.html">glColorMask</A>
+<li><A HREF="./htmlman/colormaterial.html">glColorMaterial</A>
+<li><A HREF="./htmlman/colorpointer.html">glColorPointer</A>
+<li><A HREF="./htmlman/drawbuffer.html">glDrawBuffer</A>
+<li><A HREF="./htmlman/glindex.html">glIndex</A>
+<li><A HREF="./htmlman/indexmask.html">glIndexMask</A>
+<li><A HREF="./htmlman/indexpointer.html">glIndexPointer</A>
+</ul>
+Return to the <a href = "#top"><font color="red">top</font></a> 
+
+<a name="drawing"></a>
+<h4>Drawing and Matrix manipulation</h4>
+<ul>
+<li><A HREF="./htmlman/begin.html">glBegin / glEnd</A>
+<li><A HREF="./htmlman/edgeflag.html">glEdgeFlag</A>
+<li><A HREF="./htmlman/getpolygonstipple.html">glGetPolygonStipple</A>
+<li><A HREF="./htmlman/linestipple.html">glLineStipple</A>
+<li><A HREF="./htmlman/linewidth.html">glLineWidth</A>
+<li><A HREF="./htmlman/loadidentity.html">glLoadIdentity</A>
+<li><A HREF="./htmlman/loadmatrix.html">glLoadMatrix</A>
+<li><A HREF="./htmlman/matrixmode.html">glMatrixMode</A>
+<li><A HREF="./htmlman/multmatrix.html">glMultMatrix</A>
+<li><A HREF="./htmlman/pointsize.html">glPointSize</A>
+<li><A HREF="./htmlman/polygonmode.html">glPolygonMode</A>
+<li><A HREF="./htmlman/polygonoffset.html">glPolygonOffset</A>
+<li><A HREF="./htmlman/polygonstipple.html">glPolygonStipple</A>
+<li><A HREF="./htmlman/rect.html">glRect</A>
+<li><A HREF="./htmlman/rotate.html">glRotate</A>
+<li><A HREF="./htmlman/scale.html">glScale</A>
+<li><A HREF="./htmlman/translate.html">glTranslate</A>
+<li><A HREF="./htmlman/vertex.html">glVertex</A>
+</ul>
+Return to the <a href = "#top"><font color="red">top</font></a> 
+
+
+<a name="lighting"></a>
+<h4>Lightning manipulation</h4>
+<ul>
+<li><A HREF="./htmlman/fog.html">glFog</A>
+<li><A HREF="./htmlman/getlight.html">glGetLight</A>
+<li><A HREF="./htmlman/getmaterial.html">glGetMaterial</A>
+<li><A HREF="./htmlman/light.html">glLight</A>
+<li><A HREF="./htmlman/lightmodel.html">glLightModel</A>
+<li><A HREF="./htmlman/material.html">glMaterial</A>
+<li><A HREF="./htmlman/normal.html">glNormal</A>
+<li><A HREF="./htmlman/shademodel.html">glShadeModel</A>
+</ul>
+Return to the <a href = "#top"><font color="red">top</font></a> 
+
+<a name="list"></a>
+<h4>Display list manipulation</h4>
+<ul>
+<li><A HREF="./htmlman/calllist.html">glCallList</A>
+<li><A HREF="./htmlman/calllists.html">glCallLists</A>
+<li><A HREF="./htmlman/genlists.html">glGenLists</A>
+<li><A HREF="./htmlman/islist.html">glIsList</A>
+</ul>
+Return to the <a href = "#top"><font color="red">top</font></a> 
+
+<a name="stack"></a>
+<h4>Stack manipulation</h4>
+<ul>
+<li><A HREF="./htmlman/pushattrib.html">glPushAttrib / glPopAttrib</A>
+<li><A HREF="./htmlman/pushclientattrib.html">glPushClientAttrib / glPopClientAttrib</A>
+<li><A HREF="./htmlman/pushmatrix.html">glPushMatrix / glPopMatrix</A>
+<li><A HREF="./htmlman/pushname.html">glPushName / glPopName</A>
+</ul>
+Return to the <a href = "#top"><font color="red">top</font></a> 
+
+<a name="stencil"></a>
+<h4>Stencil manipulation</h4>
+<ul>
+<li><A HREF="./htmlman/clearstencil.html">glClearStencil</A>
+<li><A HREF="./htmlman/stencilfunc.html">glStencilFunc</A>
+<li><A HREF="./htmlman/stencilmask.html">glStencilMask</A>
+<li><A HREF="./htmlman/stencilop.html">glStencilOp</A>
+</ul>
+Return to the <a href = "#top"><font color="red">top</font></a> 
+
+<a name="texture"></a>
+<h4>Texture manipulation</h4>
+<ul>
+<li><A HREF="./htmlman/deletetextures.html">glDeleteTextures</A>
+<li><A HREF="./htmlman/gentextures.html">glGenTextures</A>
+<li><A HREF="./htmlman/gettexenv.html">glGetTexEnv</A>
+<li><A HREF="./htmlman/gettexgen.html">glGetTexGen</A>
+<li><A HREF="./htmlman/getteximage.html">glGetTexImage</A>
+<li><A HREF="./htmlman/gettexlevelparameter.html">glGetTexLevelParameter</A>
+<li><A HREF="./htmlman/gettexparameter.html">glGetTexParameter</A>
+<li><A HREF="./htmlman/istexture.html">glIsTexture</A>
+<li><A HREF="./htmlman/prioritizetextures.html">glPrioritizeTextures</A>
+<li><A HREF="./htmlman/texcoord.html">glTexCoord</A>
+<li><A HREF="./htmlman/texcoordpointer.html">glTexCoordPointer</A>
+<li><A HREF="./htmlman/texenv.html">glTexEnv</A>
+<li><A HREF="./htmlman/texgen.html">glTexGen</A>
+<li><A HREF="./htmlman/teximage1d.html">glTexImage1D</A>
+<li><A HREF="./htmlman/teximage2d.html">glTexImage2D</A>
+<li><A HREF="./htmlman/texparameter.html">glTexParameter</A>
+<li><A HREF="./htmlman/texsubimage1d.html">glTexSubImage1D</A>
+<li><A HREF="./htmlman/texsubimage2d.html">glTexSubImage2D</A>
+</ul>
+Return to the <a href = "#top"><font color="red">top</font></a> 
+
+<a name="viewing"></a>
+<h4>Viewing manipulation</h4>
+<ul>
+<li><A HREF="./htmlman/clipplane.html">glClipPlane</A>
+<li><A HREF="./htmlman/cullface.html">glCullFace</A>
+<li><A HREF="./htmlman/depthrange.html">glDepthRange</A>
+<li><A HREF="./htmlman/frontface.html">glFrontFace</A>
+<li><A HREF="./htmlman/frustum.html">glFrustum</A>
+<li><A HREF="./htmlman/getclipplane.html">glGetClipPlane</A>
+<li><A HREF="./htmlman/ortho.html">glOrtho</A>
+<li><A HREF="./htmlman/viewport.html">glViewport</A>
+<li><A HREF="./htmlman/lookat.html">gluLookat</A>
+<li><A HREF="./htmlman/ortho2d.html">gluOrtho2D</A>
+<li><A HREF="./htmlman/perspective.html">gluPerspective</A>
+<li><A HREF="./htmlman/project.html">gluProject</A>
+<li><A HREF="./htmlman/unproject.html">gluUnProject</A>
+</ul>
+Return to the <a href = "#top"><font color="red">top</font></a> 
+
+<a name="vertex"></a>
+<h4>Vertex Array manipulation</h4>
+<ul>
+<li><A HREF="./htmlman/arrayelement.html">glArrayElement</A>
+<li><A HREF="./htmlman/drawarrays.html">glDrawArrays</A>
+<li><A HREF="./htmlman/drawelements.html">glDrawElements</A>
+<li><A HREF="./htmlman/edgeflagpointer.html">glEdgeFlagPointer</A>
+<li><A HREF="./htmlman/interleavedarrays.html">glInterleavedArrays</A>
+<li><A HREF="./htmlman/normalpointer.html">glNormalPointer</A>
+<li><A HREF="./htmlman/vertexpointer.html">glVertexPointer</A>
+</ul>
+Return to the <a href = "#top"><font color="red">top</font></a> 
+
+<a name="eval"></a>
+<h4>Evaluators (for curves)</h4>
+<ul>
+<li><A HREF="./htmlman/evalcoord.html">glEvalCoord</A>
+<li><A HREF="./htmlman/evalmesh.html">glEvalMesh</A>
+<li><A HREF="./htmlman/evalpoint.html">glEvalPoint</A>
+<li><A HREF="./htmlman/getmap.html">glGetMap</A>
+<li><A HREF="./htmlman/map1.html">glMap1</A>
+<li><A HREF="./htmlman/map2.html">glMap2</A>
+<li><A HREF="./htmlman/mapgrid.html">glMapGrid</A>
+</ul>
+Return to the <a href = "#top"><font color="red">top</font></a> 
+
+<a name="others"></a>
+<h4>Other OpenGL commands</h4>
+<ul>
+<li><A HREF="./htmlman/accum.html">glAccum</A>
+<li><A HREF="./htmlman/clear.html">glClear</A>
+<li><A HREF="./htmlman/clearaccum.html">glClearAccum</A>
+<li><A HREF="./htmlman/cleardepth.html">glClearDepth</A>
+<li><A HREF="./htmlman/deletelists.html">glDeleteLists</A>
+<li><A HREF="./htmlman/depthfunc.html">glDepthFunc</A>
+<li><A HREF="./htmlman/depthmask.html">glDepthMask</A>
+<li><A HREF="./htmlman/enable.html">glEnable</A>
+<li><A HREF="./htmlman/enableclientstate.html">glEnableClientState</A>
+<li><A HREF="./htmlman/feedbackbuffer.html">glFeedbackBuffer</A>
+<li><A HREF="./htmlman/finish.html">glFinish</A>
+<li><A HREF="./htmlman/flush.html">glFlush</A>
+<li><A HREF="./htmlman/get.html">glGet</A>
+<li><A HREF="./htmlman/geterror.html">glGetError</A>
+<li><A HREF="./htmlman/getpointerv.html">glGetPointerv</A>
+<li><A HREF="./htmlman/getstring.html">glGetString</A>
+<li><A HREF="./htmlman/hint.html">glHint</A>
+<li><A HREF="./htmlman/initnames.html">glInitNames</A>
+<li><A HREF="./htmlman/isenabled.html">glIsEnabled</A>
+<li><A HREF="./htmlman/listbase.html">glListBase</A>
+<li><A HREF="./htmlman/loadname.html">glLoadName</A>
+<li><A HREF="./htmlman/logicop.html">glLogicOp</A>
+<li><A HREF="./htmlman/newlist.html">glNewList</A>
+<li><A HREF="./htmlman/passthrough.html">glPassThrough</A>
+<li><A HREF="./htmlman/readbuffer.html">glReadBuffer</A>
+<li><A HREF="./htmlman/rendermode.html">glRenderMode</A>
+<li><A HREF="./htmlman/scissor.html">glScissor</A>
+<li><A HREF="./htmlman/selectbuffer.html">glSelectBuffer</A>
+</ul>
+Return to the <a href = "#top"><font color="red">top</font></a> 
+
+<a name="glunurbs"></a>
+<h4>NURBS curves (glu)</h4>
+<ul>
+<li><A HREF="./htmlman/begincurve.html">gluBeginCurve / gluEndCurve</A>
+<li><A HREF="./htmlman/beginsurface.html">gluBeginSurface / gluEndSurface</A>
+<li><A HREF="./htmlman/begintrim.html">gluBeginTrim / gluEndTrim</A>
+<li><A HREF="./htmlman/deletenurbsrenderer.html">gluDeleteNurbsRenderer</A>
+<li><A HREF="./htmlman/getnurbsproperty.html">gluGetNurbsProperty</A>
+<li><A HREF="./htmlman/newnurbsrenderer.html">gluNewNurbsRenderer</A>
+<li><A HREF="./htmlman/nurbscallback.html">gluNurbsCallback</A>
+<li><A HREF="./htmlman/nurbscallbackdataext.html">gluNurbsCallbackDataEXT</A>
+<li><A HREF="./htmlman/nurbscurve.html">gluNurbsCurve</A>
+<li><A HREF="./htmlman/nurbsproperty.html">gluNurbsProperty</A>
+<li><A HREF="./htmlman/nurbssurface.html">gluNurbsSurface</A>
+<li><A HREF="./htmlman/pwlcurve.html">gluPwlCurve</A>
+</ul>
+Return to the <a href = "#top"><font color="red">top</font></a> 
+
+<a name="glupredef"></a>
+<h4>Predefined 3D shapes and Quadratics (glu)</h4>
+<ul>
+<li><A HREF="./htmlman/cylinder.html">gluCylinder</A>
+<li><A HREF="./htmlman/deletequadric.html">gluDeleteQuadric</A>
+<li><A HREF="./htmlman/disk.html">gluDisk</A>
+<li><A HREF="./htmlman/newquadric.html">gluNewQuadric</A>
+<li><A HREF="./htmlman/partialdisk.html">gluPartialDisk</A>
+<li><A HREF="./htmlman/quadriccallback.html">gluQuadricCallback</A>
+<li><A HREF="./htmlman/quadricdrawstyle.html">gluQuadricDrawStyle</A>
+<li><A HREF="./htmlman/quadricnormals.html">gluQuadricNormals</A>
+<li><A HREF="./htmlman/quadricorientation.html">gluQuadricOrientation</A>
+<li><A HREF="./htmlman/quadrictexture.html">gluQuadricTexture</A>
+<li><A HREF="./htmlman/sphere.html">gluSphere</A>
+</ul>
+Return to the <a href = "#top"><font color="red">top</font></a> 
+
+<a name="glutess"></a>
+<h4>Tesselation structures (glu)</h4>
+<ul>
+<li><A HREF="./htmlman/deletetess.html">gluDeleteTess</A>
+<li><A HREF="./htmlman/gettessproperty.html">gluGetTessProperty</A>
+<li><A HREF="./htmlman/newtess.html">gluNewTess</A>
+<li><A HREF="./htmlman/nextcontour.html">gluNextContour</A>
+<li><A HREF="./htmlman/tessbegincontour.html">gluTessBeginContour</A>
+<li><A HREF="./htmlman/tessbeginpolygon.html">gluTessBeginPolygon</A>
+<li><A HREF="./htmlman/tesscallback.html">gluTessCallback</A>
+<li><A HREF="./htmlman/tessendpolygon.html">gluTessEndPolygon</A>
+<li><A HREF="./htmlman/tessnormal.html">gluTessNormal</A>
+<li><A HREF="./htmlman/tessproperty.html">gluTessProperty</A>
+<li><A HREF="./htmlman/tessvertex.html">gluTessVertex</A>
+</ul>
+Return to the <a href = "#top"><font color="red">top</font></a> 
+
+<a name="otherglu"></a>
+<h4>Other glu commands</h4>
+<ul>
+<li><A HREF="./htmlman/beginpolygon.html">gluBeginPolygon / gluEndPolygon</A>
+<li><A HREF="./htmlman/build1dmipmaps.html">gluBuild1DMipMaps</A>
+<li><A HREF="./htmlman/build2dmipmaps.html">gluBuild2DMipMaps</A>
+<li><A HREF="./htmlman/errorstring.html">gluErrorString</A>
+<li><A HREF="./htmlman/getstring.html">gluGetString</A>
+<li><A HREF="./htmlman/loadsamplingmatrices.html">gluLoadSamplingMatrices</A>
+<li><A HREF="./htmlman/pickmatrix.html">gluPickMatrix</A>
+</ul>
+Return to the <a href = "#top"><font color="red">top</font></a> 
+
+<!-- hhmts end -->
+</body> </html>
