@@ -17,6 +17,14 @@ public:
     std::string Id;
 };
 
+template<typename T>
+std::vector<T> ConcatenateVectors(std::vector<T>& v1, std::vector<T>& v2)
+{
+    std::vector<T> result = v1;
+    result.insert(result.end(), v2.begin(), v2.end());
+    return result;
+}
+
 enum class YafAxis
 {
     X,
@@ -101,9 +109,9 @@ enum class YafCullOrder
 
 YafCullOrder YafCullOrderFromString(const std::string& str)
 {
-    if (str == "ccw")
+    if (str == "CCW")
         return YafCullOrder::CCW;
-    else if (str == "cw")
+    else if (str == "CW")
         return YafCullOrder::CW;
     else
         throw YafParsingException("Invalid cull order " + str + " used");
@@ -167,36 +175,39 @@ YafCullOrder YafCullOrderFromString(const std::string& str)
 //     }
 // }
 
-std::vector<float> ParseFloats( const std::string &s , int n) 
+std::vector<float> ParseFloats(std::string s , int n) 
 {
-	unsigned int i = 0;
+    std::vector<float> floats;
 
-	std::vector<float> floats;
+    char* str = const_cast<char*>(s.c_str());
+    char* pch;
+    char* context = nullptr;
 
-	while (i < s.length())
-	{
-		std::string temp;
-		for(i ; s[i] != ' ' ; ++i)
-			temp.push_back(s[i]);
+    pch = strtok_s(str, " ", &context);
+    while (pch)
+    {
+        floats.push_back(atof(pch));
+        pch = strtok_s(nullptr, " ", &context);
+    }
 
-		floats.push_back(atof(temp.c_str()));
-	}
+    if (floats.size() != n)
+        throw YafParsingException("Incorrect number of arguments: " + s);
 
-	if (floats.size() != n)
-		throw YafParsingException("Incorrect number of arguments: " + s);
-	return floats;
+    return floats;
 }
 
 class YafXY
 {
 public:
-	YafXY(const std::string& s)
-	{
-		std::vector<float> XY = ParseFloats(s, 2);
+    YafXY() : X(0.0f), Y(0.0f) { }
 
-		X = XY[0];
-		Y = XY[1];
-	}
+    YafXY(const std::string& s)
+    {
+        std::vector<float> XY = ParseFloats(s, 2);
+
+        X = XY[0];
+        Y = XY[1];
+    }
 
     float X;
     float Y;
@@ -205,14 +216,16 @@ public:
 class YafXYZ
 {
 public:
-	YafXYZ(const std::string& s)
-	{
-		std::vector<float> XYZ = ParseFloats(s, 3);
+    YafXYZ() : X(0.0f), Y(0.0f), Z(0.0f) { }
 
-		X = XYZ[0];
-		Y = XYZ[1];
-		Z = XYZ[2];
-	}
+    YafXYZ(const std::string& s)
+    {
+        std::vector<float> XYZ = ParseFloats(s, 3);
+
+        X = XYZ[0];
+        Y = XYZ[1];
+        Z = XYZ[2];
+    }
 
     float X;
     float Y;
@@ -222,15 +235,17 @@ public:
 class YafRGBA
 {
 public:
-	YafRGBA(const std::string& s)
-	{
-		std::vector<float> RGBA = ParseFloats(s, 4);
+    YafRGBA() : R(0.0f), G(0.0f), B(0.0f), A(0.0f) { }
 
-		R = RGBA[0];
-		G = RGBA[1];
-		B = RGBA[2];
-		A = RGBA[3];
-	}
+    YafRGBA(const std::string& s)
+    {
+        std::vector<float> RGBA = ParseFloats(s, 4);
+
+        R = RGBA[0];
+        G = RGBA[1];
+        B = RGBA[2];
+        A = RGBA[3];
+    }
 
     float R;
     float G;
@@ -393,6 +408,8 @@ public:
 class YafScene
 {
 public:
+    YafScene() { };
+
     void SetGlobals(YafRGBA bg, YafDrawMode dm, YafShading s, YafCullFace cf, YafCullOrder co)
     {
         _backgroundColor = bg;
@@ -410,6 +427,7 @@ public:
         _lightAmbient = ambient;
     }
 
+    void SetInitialCamera(std::string id) { _initialCamera = _cameras[id]; }
     void SetRootNode(std::string id) { _rootNode = _nodes[id]; }
 
     void AddCamera(YafCamera* camera) { _cameras[camera->Id] = camera; }
@@ -426,6 +444,7 @@ private:
     YafCullOrder _cullOrder;
 
     // Cameras
+    YafCamera* _initialCamera;
     std::map<std::string, YafCamera*> _cameras;
 
     // Lighting
@@ -446,9 +465,73 @@ private:
     std::map<std::string, YafNode*> _nodes;
 };
 
+std::vector<TiXmlElement*> GetAllChildren(TiXmlElement* root, const std::string& name)
+{
+    std::vector<TiXmlElement*> children;
+
+    if (root)
+    {
+        if (TiXmlElement* first = root->FirstChildElement(name))
+        {
+            children.push_back(first);
+
+            TiXmlElement* next = first->NextSiblingElement(name);
+
+            while (next)
+            {
+                children.push_back(next);
+                next = next->NextSiblingElement(name);
+            } 
+        }
+    }
+
+    return children;
+}
+
+template<typename T>
+T GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix = "")
+{
+    T res;
+    if (element->QueryValueAttribute(name, &res) != TIXML_SUCCESS)
+        throw YafParsingException("<" + prefix + " " + name + "> not found");
+    return res;
+}
+
+template<>
+bool GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix /* = "" */)
+{
+    std::string str = GetAttribute<std::string>(element, name, prefix);
+    if (str == "true")
+        return true;
+    else if (str == "false")
+        return false;
+    else
+        throw YafParsingException("Boolean " + str + " invalid.");
+}
+
+template<>
+YafRGBA GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix /* = "" */)
+{
+    return YafRGBA(GetAttribute<std::string>(element, name, prefix));
+}
+
+template<>
+YafXY GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix /* = "" */)
+{
+    return YafXY(GetAttribute<std::string>(element, name, prefix));
+}
+
+template<>
+YafXYZ GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix /* = "" */)
+{
+    return YafXYZ(GetAttribute<std::string>(element, name, prefix));
+}
+
 void t()
 {
-    auto document = new TiXmlDocument("sintax_yaf.xml");
+    auto scene = new YafScene();
+
+    auto document = new TiXmlDocument("sintax_yaf2.xml");
     if (!document->LoadFile())
         throw YafParsingException("Could not load file 'sintax_yaf.xml'. Error: " + std::string(document->ErrorDesc()));
 
@@ -464,18 +547,11 @@ void t()
     if (!globalsElement)
         throw YafParsingException("<globals> not found");
 
-    std::string globalsBackgroundStr; // RBBA floats
-    std::string globalsDrawMode, globalsShading, globalsCullFace, globalsCullOrder;
-    if (globalsElement->QueryValueAttribute("background", &globalsBackgroundStr) != TIXML_SUCCESS)
-        throw YafParsingException("<globals background> not found");
-    if (globalsElement->QueryValueAttribute("drawmode", &globalsDrawMode) != TIXML_SUCCESS)
-        throw YafParsingException("<globals drawmode> not found");
-    if (globalsElement->QueryValueAttribute("shading", &globalsShading) != TIXML_SUCCESS)
-        throw YafParsingException("<globals shading> not found");
-    if (globalsElement->QueryValueAttribute("cullface", &globalsCullFace) != TIXML_SUCCESS)
-        throw YafParsingException("<globals cullface> not found");
-    if (globalsElement->QueryValueAttribute("cullorder", &globalsCullOrder) != TIXML_SUCCESS)
-        throw YafParsingException("<globals cullorder> not found");
+    scene->SetGlobals(GetAttribute<YafRGBA>(globalsElement, "background", "globals"),
+                      YafDrawModeFromString(GetAttribute<std::string>(globalsElement, "drawmode", "globals")),
+                      YafShadingFromString(GetAttribute<std::string>(globalsElement, "shading", "globals")),
+                      YafCullFaceFromString(GetAttribute<std::string>(globalsElement, "cullface", "globals")),
+                      YafCullOrderFromString(GetAttribute<std::string>(globalsElement, "cullorder", "globals")));
 
     // <cameras>
 
@@ -483,11 +559,37 @@ void t()
     if (!camerasElement)
         throw YafParsingException("<cameras> not found");
 
-    std::string camerasInitial;
-    if (camerasElement->QueryValueAttribute("initial", &camerasInitial) != TIXML_SUCCESS)
-        throw YafParsingException("<cameras initial> not found");
+    auto camerasPerspective = GetAllChildren(camerasElement, "perspective");
+    auto camerasOrtho = GetAllChildren(camerasElement, "ortho");
 
-    // TODO: perpendicular/ortho
+    for (auto cp : camerasPerspective)
+    {
+        YafPerspectiveCamera* camera = new YafPerspectiveCamera;
+        camera->Id = GetAttribute<std::string>(cp, "id", "cameras perspective");
+        camera->Near = GetAttribute<float>(cp, "near", "cameras perspective");
+        camera->Far = GetAttribute<float>(cp, "far", "cameras perspective");
+        camera->Angle = GetAttribute<float>(cp, "angle", "cameras perspective");
+        camera->Position = GetAttribute<YafXYZ>(cp, "pos", "cameras perspective");
+        camera->Target = GetAttribute<YafXYZ>(cp, "target", "cameras perspective");
+
+        scene->AddCamera(camera);
+    }
+
+    for (auto op : camerasOrtho)
+    {
+        YafOrthoCamera* camera = new YafOrthoCamera;
+        camera->Id = GetAttribute<std::string>(op, "id", "cameras ortho");
+        camera->Near = GetAttribute<float>(op, "near", "cameras ortho");
+        camera->Far = GetAttribute<float>(op, "far", "cameras ortho");
+        camera->Left = GetAttribute<float>(op, "left", "cameras ortho");
+        camera->Right = GetAttribute<float>(op, "right", "cameras ortho");
+        camera->Top = GetAttribute<float>(op, "top", "cameras ortho");
+        camera->Bottom = GetAttribute<float>(op, "bottom", "cameras ortho");
+
+        scene->AddCamera(camera);
+    }
+
+    scene->SetInitialCamera(GetAttribute<std::string>(camerasElement, "initial", "cameras"));
 
     // <lighting>
 
@@ -495,16 +597,10 @@ void t()
     if (!lightingElement)
         throw YafParsingException("<lighting> not found");
 
-    std::string lightingDoubleSidedStr, lightingLocalStr, lightingEnabledStr; // bools
-    std::string lightingAmbientStr; // RGBA floats
-    if (lightingElement->QueryValueAttribute("doublesided", &lightingDoubleSidedStr) != TIXML_SUCCESS)
-        throw YafParsingException("<lighting doublesided> not found");
-    if (lightingElement->QueryValueAttribute("local", &lightingLocalStr) != TIXML_SUCCESS)
-        throw YafParsingException("<lighting local> not found");
-    if (lightingElement->QueryValueAttribute("enabled", &lightingEnabledStr) != TIXML_SUCCESS)
-        throw YafParsingException("<lighting enabled> not found");
-    if (lightingElement->QueryValueAttribute("ambient", &lightingAmbientStr) != TIXML_SUCCESS)
-        throw YafParsingException("<lighting ambient> not found");
+    scene->SetLightOptions(GetAttribute<bool>(lightingElement, "doublesided", "lighting"),
+                           GetAttribute<bool>(lightingElement, "local", "lighting"),
+                           GetAttribute<bool>(lightingElement, "enabled", "lighting"),
+                           GetAttribute<YafRGBA>(lightingElement, "ambient", "lighting"));
 
     // TODO: omni/spot
 
@@ -545,7 +641,7 @@ int main(int argc, char* argv[])
     }
     catch (YafParsingException& ex)
     {
-    	std::cout << "Exception caught: " << ex.what() << std::endl;
+        std::cout << "Exception caught: " << ex.what() << std::endl;
     }
 
     system("PAUSE");
