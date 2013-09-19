@@ -12,5 +12,19 @@
     <ClCompile Include="src\Main.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\YafNode.cpp" />
+    <ClCompile Include="src\YafMisc.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\YafScene.h" />
+    <ClInclude Include="src\YafNode.h" />
+    <ClInclude Include="src\TinyXMLYafHelpers.h" />
+    <ClInclude Include="src\YafTransform.h" />
+    <ClInclude Include="src\YafLight.h" />
+    <ClInclude Include="src\Utilities.h" />
+    <ClInclude Include="src\YafMisc.h" />
+    <ClInclude Include="src\YafEnums.h" />
+    <ClInclude Include="src\YafCamera.h" />
+    <ClInclude Include="src\YafAppearance.h" />
   </ItemGroup>
 </Project>

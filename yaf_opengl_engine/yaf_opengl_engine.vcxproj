@@ -8,6 +8,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\YafMisc.cpp" />
+    <ClCompile Include="src\YafNode.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\TinyXMLYafHelpers.h" />
+    <ClInclude Include="src\Utilities.h" />
+    <ClInclude Include="src\YafAppearance.h" />
+    <ClInclude Include="src\YafCamera.h" />
+    <ClInclude Include="src\YafEnums.h" />
+    <ClInclude Include="src\YafLight.h" />
+    <ClInclude Include="src\YafMisc.h" />
+    <ClInclude Include="src\YafNode.h" />
+    <ClInclude Include="src\YafScene.h" />
+    <ClInclude Include="src\YafTransform.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E025CA71-C6C5-491D-8CD9-77241CFB850A}</ProjectGuid>
