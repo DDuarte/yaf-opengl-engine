@@ -1,12 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20827.3
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "yaf_opengl_engine", "yaf_opengl_engine.vcxproj", "{E025CA71-C6C5-491D-8CD9-77241CFB850A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{05237F97-B99E-4C40-8D08-5B3124981FE9} = {05237F97-B99E-4C40-8D08-5B3124981FE9}
+		{8900C2D7-745E-4483-B6C0-57D434147F40} = {8900C2D7-745E-4483-B6C0-57D434147F40}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tinyxml", "dep\tinyxml\tinyxml.vcxproj", "{05237F97-B99E-4C40-8D08-5B3124981FE9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CGFlib", "dep\CGFlib\cfglib.vcxproj", "{8900C2D7-745E-4483-B6C0-57D434147F40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,6 +22,8 @@ Global
 		{E025CA71-C6C5-491D-8CD9-77241CFB850A}.Debug|x64.Build.0 = Debug|x64
 		{05237F97-B99E-4C40-8D08-5B3124981FE9}.Debug|x64.ActiveCfg = Debug|x64
 		{05237F97-B99E-4C40-8D08-5B3124981FE9}.Debug|x64.Build.0 = Debug|x64
+		{8900C2D7-745E-4483-B6C0-57D434147F40}.Debug|x64.ActiveCfg = Debug|x64
+		{8900C2D7-745E-4483-B6C0-57D434147F40}.Debug|x64.Build.0 = Debug|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
