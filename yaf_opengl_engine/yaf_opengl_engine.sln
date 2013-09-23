@@ -12,6 +12,20 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tinyxml", "dep\tinyxml\tinyxml.vcxproj", "{05237F97-B99E-4C40-8D08-5B3124981FE9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CGFlib", "dep\CGFlib\cfglib.vcxproj", "{8900C2D7-745E-4483-B6C0-57D434147F40}"
+	ProjectSection(ProjectDependencies) = postProject
+		{664E6F0D-6784-4760-9565-D54F8EB1EDF4} = {664E6F0D-6784-4760-9565-D54F8EB1EDF4}
+		{1AE4E979-0D35-4747-BF8E-DD60358F49DB} = {1AE4E979-0D35-4747-BF8E-DD60358F49DB}
+		{29B0A995-6517-49AE-BA75-41E4C37A4202} = {29B0A995-6517-49AE-BA75-41E4C37A4202}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "freeglut", "dep\freeglut\VisualStudio\2012\freeglut.vcxproj", "{1AE4E979-0D35-4747-BF8E-DD60358F49DB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glew_static", "dep\glew\build\vc10\glew_static.vcxproj", "{664E6F0D-6784-4760-9565-D54F8EB1EDF4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glui", "dep\glui\glui.vcxproj", "{29B0A995-6517-49AE-BA75-41E4C37A4202}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1AE4E979-0D35-4747-BF8E-DD60358F49DB} = {1AE4E979-0D35-4747-BF8E-DD60358F49DB}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +38,12 @@ Global
 		{05237F97-B99E-4C40-8D08-5B3124981FE9}.Debug|x64.Build.0 = Debug|x64
 		{8900C2D7-745E-4483-B6C0-57D434147F40}.Debug|x64.ActiveCfg = Debug|x64
 		{8900C2D7-745E-4483-B6C0-57D434147F40}.Debug|x64.Build.0 = Debug|x64
+		{1AE4E979-0D35-4747-BF8E-DD60358F49DB}.Debug|x64.ActiveCfg = Debug|x64
+		{1AE4E979-0D35-4747-BF8E-DD60358F49DB}.Debug|x64.Build.0 = Debug|x64
+		{664E6F0D-6784-4760-9565-D54F8EB1EDF4}.Debug|x64.ActiveCfg = Debug|x64
+		{664E6F0D-6784-4760-9565-D54F8EB1EDF4}.Debug|x64.Build.0 = Debug|x64
+		{29B0A995-6517-49AE-BA75-41E4C37A4202}.Debug|x64.ActiveCfg = Debug|x64
+		{29B0A995-6517-49AE-BA75-41E4C37A4202}.Debug|x64.Build.0 = Debug|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

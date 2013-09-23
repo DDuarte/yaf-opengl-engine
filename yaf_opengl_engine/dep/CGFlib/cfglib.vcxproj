@@ -29,11 +29,11 @@
     <OutDir>$(ProjectDir)bin\</OutDir>
     <IntDir>$(ProjectDir)temp\</IntDir>
     <IncludePath>$(SolutionDir)dep\CGFlib\include\;$(SolutionDir)dep\freeglut\include\;$(SolutionDir)dep\glui\include\;$(SolutionDir)dep\glew\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)lib\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)dep\glew\build\vc10\bin\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;FREEGLUT_STATIC;GLUI_FREEGLUT;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;FREEGLUT_STATIC;GLUI_FREEGLUT;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>

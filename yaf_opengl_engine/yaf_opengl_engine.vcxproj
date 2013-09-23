@@ -13,8 +13,6 @@
     <ClCompile Include="src\YafNode.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\DemoScene.h" />
-    <ClInclude Include="src\ExampleObject.h" />
     <ClInclude Include="src\TinyXMLYafHelpers.h" />
     <ClInclude Include="src\Utilities.h" />
     <ClInclude Include="src\YafAppearance.h" />
@@ -48,7 +46,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(SolutionDir)dep\tinyxml\;$(SolutionDir)dep\CGFlib\include\;$(SolutionDir)dep\freeglut\include\;$(SolutionDir)dep\glui\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)dep\tinyxml\bin\;$(SolutionDir)dep\CGFlib\bin\;$(SolutionDir)lib\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)dep\tinyxml\bin\;$(SolutionDir)dep\CGFlib\bin\;$(SolutionDir)dep\glui\bin\;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)bin\</OutDir>
     <IntDir>$(ProjectDir)temp\</IntDir>
     <TargetName>yaf</TargetName>

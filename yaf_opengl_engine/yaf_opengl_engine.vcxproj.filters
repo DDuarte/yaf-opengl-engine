@@ -51,11 +51,5 @@
     <ClInclude Include="src\YafTransform.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="src\DemoScene.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ExampleObject.h">
-      <Filter>include</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

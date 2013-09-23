@@ -266,7 +266,6 @@ YafScene* ParseYafFile(const std::string& file)
     return scene;
 }
 
-/*
 int main(int argc, char* argv[])
 {
     try
@@ -281,4 +280,3 @@ int main(int argc, char* argv[])
     system("PAUSE");
     return EXIT_SUCCESS;
 }
-*/

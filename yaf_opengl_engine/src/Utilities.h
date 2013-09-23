@@ -15,7 +15,7 @@ std::vector<T> ConcatenateVectors(std::vector<T>& v1, std::vector<T>& v2)
     return result;
 }
 
-std::vector<float> ParseFloats(std::string s, int n)
+std::vector<float> ParseFloats(const std::string& s, int n)
 {
     std::vector<float> floats;
 
