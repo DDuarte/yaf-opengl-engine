@@ -8,10 +8,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\TinyXMLYafHelpers.cpp" />
     <ClCompile Include="src\YafMisc.cpp" />
     <ClCompile Include="src\YafNode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\DemoScene.h" />
+    <ClInclude Include="src\ExampleObject.h" />
     <ClInclude Include="src\TinyXMLYafHelpers.h" />
     <ClInclude Include="src\Utilities.h" />
     <ClInclude Include="src\YafAppearance.h" />
@@ -44,8 +47,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)dep\tinyxml\;$(SolutionDir)dep\CGFlib\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)dep\tinyxml\bin\;$(SolutionDir)dep\CFGlib\bin\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)dep\tinyxml\;$(SolutionDir)dep\CGFlib\include\;$(SolutionDir)dep\freeglut\include\;$(SolutionDir)dep\glui\include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)dep\tinyxml\bin\;$(SolutionDir)dep\CGFlib\bin\;$(SolutionDir)lib\;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)bin\</OutDir>
     <IntDir>$(ProjectDir)temp\</IntDir>
     <TargetName>yaf</TargetName>
@@ -56,14 +59,14 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;TIXML_USE_STL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;TIXML_USE_STL;FREEGLUT_STATIC;GLUI_FREEGLUT;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>tinyxml.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>tinyxml.lib;CGFlib.lib;glui32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>

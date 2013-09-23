@@ -9,22 +9,53 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\YafMisc.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YafNode.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TinyXMLYafHelpers.cpp" />
     <ClCompile Include="src\Main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\YafNode.cpp" />
-    <ClCompile Include="src\YafMisc.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\YafScene.h" />
-    <ClInclude Include="src\YafNode.h" />
-    <ClInclude Include="src\TinyXMLYafHelpers.h" />
-    <ClInclude Include="src\YafTransform.h" />
-    <ClInclude Include="src\YafLight.h" />
-    <ClInclude Include="src\Utilities.h" />
-    <ClInclude Include="src\YafMisc.h" />
-    <ClInclude Include="src\YafEnums.h" />
-    <ClInclude Include="src\YafCamera.h" />
-    <ClInclude Include="src\YafAppearance.h" />
+    <ClInclude Include="src\YafLight.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TinyXMLYafHelpers.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utilities.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YafAppearance.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YafCamera.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YafEnums.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YafMisc.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YafNode.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YafScene.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YafTransform.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DemoScene.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ExampleObject.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

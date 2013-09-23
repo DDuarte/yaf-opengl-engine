@@ -4,13 +4,13 @@
 #include "YafScene.h"
 #include "TinyXMLYafHelpers.h"
 
-void t()
+YafScene* ParseYafFile(const std::string& file)
 {
     auto scene = new YafScene;
 
-    auto document = new TiXmlDocument("sintax_yaf2.xml");
+    auto document = new TiXmlDocument(file);
     if (!document->LoadFile())
-        throw YafParsingException("Could not load file 'sintax_yaf.xml'. Error: " + std::string(document->ErrorDesc()));
+        throw YafParsingException("Could not load file '" + file + "'. Error: " + std::string(document->ErrorDesc()));
 
     // <yaf>
 
@@ -262,13 +262,16 @@ void t()
 
     for (auto n : scene->GetNodes())
         n.second->MoveRefNodesToChildren(scene);
+
+    return scene;
 }
 
+/*
 int main(int argc, char* argv[])
 {
     try
     {
-        t();
+        auto scene = ParseYafFile("sintax_yaf2.xml");
     }
     catch (YafParsingException& ex)
     {
@@ -278,3 +281,4 @@ int main(int argc, char* argv[])
     system("PAUSE");
     return EXIT_SUCCESS;
 }
+*/

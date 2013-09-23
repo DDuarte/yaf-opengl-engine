@@ -7,31 +7,10 @@
 
 #include "YafEnums.h"
 
-std::vector<TiXmlElement*> GetAllChildren(TiXmlElement* root, const std::string& name)
-{
-    std::vector<TiXmlElement*> children;
-
-    if (root)
-    {
-        if (TiXmlElement* first = root->FirstChildElement(name))
-        {
-            children.push_back(first);
-
-            TiXmlElement* next = first->NextSiblingElement(name);
-
-            while (next)
-            {
-                children.push_back(next);
-                next = next->NextSiblingElement(name);
-            } 
-        }
-    }
-
-    return children;
-}
+std::vector<TiXmlElement*> GetAllChildren(TiXmlElement* root, const std::string& name);
 
 template<typename T>
-T GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix, bool required = true)
+inline T GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix, bool required = true)
 {
     T res;
     if (element->QueryValueAttribute(name, &res) != TIXML_SUCCESS)
@@ -43,25 +22,25 @@ T GetAttribute(const TiXmlElement* element, const std::string& name, const std::
 }
 
 template<>
-bool GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix, bool required /* = true */)
+inline bool GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix, bool required /* = true */)
 {
     return BoolFromString(GetAttribute<std::string>(element, name, prefix, required));
 }
 
 template<>
-YafRGBA GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix, bool required /* = true */)
+inline YafRGBA GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix, bool required /* = true */)
 {
     return YafRGBA(GetAttribute<std::string>(element, name, prefix, required));
 }
 
 template<>
-YafXY GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix, bool required /* = true */)
+inline YafXY GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix, bool required /* = true */)
 {
     return YafXY(GetAttribute<std::string>(element, name, prefix, required));
 }
 
 template<>
-YafXYZ GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix, bool required /* = true */)
+inline YafXYZ GetAttribute(const TiXmlElement* element, const std::string& name, const std::string& prefix, bool required /* = true */)
 {
     return YafXYZ(GetAttribute<std::string>(element, name, prefix, required));
 }
