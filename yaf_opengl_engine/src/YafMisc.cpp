@@ -18,6 +18,13 @@ YafXYZ::YafXYZ(const std::string& s)
     Z = XYZ[2];
 }
 
+YafXYZ YafXYZ::GetNormalized()
+{
+        double length = sqrt(X * X + Y * Y + Z * Z);
+        return YafXYZ(X / length, Y / length, Z / length);
+}
+
+
 YafRGBA::YafRGBA(const std::string& s)
 {
     std::vector<float> RGBA = ParseFloats(s, 4);

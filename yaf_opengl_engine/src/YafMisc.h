@@ -32,12 +32,14 @@ class YafXYZ
 {
 public:
     YafXYZ() : X(0.0f), Y(0.0f), Z(0.0f) { }
+    YafXYZ(float x, float y, float z) : X(x), Y(y), Z(z) { }
 
     YafXYZ(const std::string& s);
 
     float X;
     float Y;
     float Z;
+    YafXYZ GetNormalized();
 };
 
 class YafRGBA

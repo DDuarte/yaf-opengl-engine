@@ -13,6 +13,7 @@
     <ClCompile Include="src\YafNode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\NewellsMethod.h" />
     <ClInclude Include="src\TinyXMLYafHelpers.h" />
     <ClInclude Include="src\Utilities.h" />
     <ClInclude Include="src\YafAppearance.h" />

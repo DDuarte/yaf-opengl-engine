@@ -210,10 +210,9 @@ YafScene* ParseYafFile(const std::string& file)
 
         for (auto t : childrenTriangle)
         {
-            YafTriangle* tri = new YafTriangle;
-            tri->Point1 = GetAttribute<YafXYZ>(t, "xyz1", "graph node children triangle");
-            tri->Point2 = GetAttribute<YafXYZ>(t, "xyz2", "graph node children triangle");
-            tri->Point3 = GetAttribute<YafXYZ>(t, "xyz3", "graph node children triangle");
+            YafTriangle* tri = new YafTriangle(GetAttribute<YafXYZ>(t, "xyz1", "graph node children triangle"),
+                                               GetAttribute<YafXYZ>(t, "xyz2", "graph node children triangle"),
+                                               GetAttribute<YafXYZ>(t, "xyz3", "graph node children triangle"));
 
             node->AddChild(tri);
         }
