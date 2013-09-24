@@ -15,8 +15,10 @@
     <ClCompile Include="src\YafNode.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\TinyXMLYafHelpers.cpp" />
     <ClCompile Include="src\Main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TinyXMLYafHelpers.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
