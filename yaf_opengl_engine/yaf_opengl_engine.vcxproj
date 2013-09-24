@@ -45,7 +45,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)dep\tinyxml\;$(SolutionDir)dep\CGFlib\include\;$(SolutionDir)dep\freeglut\include\;$(SolutionDir)dep\glui\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)dep\tinyxml\;$(SolutionDir)dep\CGFlib\include\;$(SolutionDir)dep\freeglut\include\;$(SolutionDir)dep\glui\include\;$(SolutionDir)dep\glm\include\;$(SolutionDir)dep\glew\include\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)dep\tinyxml\bin\;$(SolutionDir)dep\CGFlib\bin\;$(SolutionDir)dep\glui\bin\;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)bin\</OutDir>
     <IntDir>$(ProjectDir)temp\</IntDir>
