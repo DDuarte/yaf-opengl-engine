@@ -52,6 +52,8 @@ public:
 
     virtual void updateProjectionMatrix(int /*width*/, int /*height*/) override
     {
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
         gluOrtho2D(Left, Right, Bottom, Top);
     }
 };
