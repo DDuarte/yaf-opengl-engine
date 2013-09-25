@@ -41,7 +41,7 @@ public:
     YafXYZ Point1;
     YafXYZ Point2;
     YafXYZ Point3;
-    
+
 
     virtual void draw();
 
@@ -96,6 +96,7 @@ public:
 class YafNode : public YafChild, public YafElement
 {
 public:
+    YafNode(const std::string& id) : YafElement(id) { }
     void AddTransform(YafTransform* t) { _transforms.push_back(t); }
     void AddChild(YafChild* c) { _children.push_back(c); }
     void SetAppearance(YafAppearance* a) { _appearance = a; }

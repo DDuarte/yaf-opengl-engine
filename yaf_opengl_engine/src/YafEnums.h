@@ -2,7 +2,8 @@
 #define YafEnums_h__
 
 #include <string>
-//#include <gl/GL.h>
+#include <windows.h>
+#include <gl/GL.h>
 
 #include "YafMisc.h"
 
@@ -108,62 +109,62 @@ inline bool BoolFromString(const std::string& str)
         throw YafParsingException("Invalid bool " + str + " used");
 }
 
-// unsigned int /* GLenum */ YafToOpenGL(YafDrawMode dm) // glPolygonMode
-// {
-//     switch (dm)
-//     {
-//     case YafDrawMode::Fill:
-//         return GL_FILL;
-//     case YafDrawMode::Line:
-//         return GL_LINE;
-//     case YafDrawMode::Point:
-//         return GL_POINT;
-//     default:
-//         return GL_INVALID_ENUM;
-//     }
-// }
-// 
-// unsigned int /* GLenum */ YafToOpenGL(YafShading s) // glShadeModel
-// {
-//     switch (s)
-//     {
-//     case YafShading::Flat:
-//         return GL_FLAT;
-//     case YafShading::Gouraud:
-//         return GL_SMOOTH;
-//     default:
-//         return GL_INVALID_ENUM;
-//     }
-// }
-// 
-// unsigned int /* GLenum */ YafToOpenGL(YafCullFace cf) // glCullFace
-// {
-//     switch (cf)
-//     {
-//     case YafCullFace::None:
-//         return GL_NONE;
-//     case YafCullFace::Back:
-//         return GL_BACK;
-//     case YafCullFace::Front:
-//         return GL_FRONT;
-//     case YafCullFace::Both:
-//         return GL_FRONT_AND_BACK;
-//     default:
-//         return GL_INVALID_ENUM;
-//     }
-// }
-// 
-// unsigned int /* GLenum */ YafToOpenGL(YafCullOrder co) // glFrontFace
-// {
-//     switch (co)
-//     {
-//     case YafCullOrder::CCW:
-//         return GL_CCW;
-//     case YafCullOrder::CW:
-//         return GL_CW;
-//     default:
-//         return GL_INVALID_ENUM;
-//     }
-// }
+inline GLenum YafToOpenGL(YafDrawMode dm) // glPolygonMode
+{
+    switch (dm)
+    {
+    case YafDrawMode::Fill:
+        return GL_FILL;
+    case YafDrawMode::Line:
+        return GL_LINE;
+    case YafDrawMode::Point:
+        return GL_POINT;
+    default:
+        return GL_INVALID_ENUM;
+    }
+}
+
+inline GLenum YafToOpenGL(YafShading s) // glShadeModel
+{
+    switch (s)
+    {
+    case YafShading::Flat:
+        return GL_FLAT;
+    case YafShading::Gouraud:
+        return GL_SMOOTH;
+    default:
+        return GL_INVALID_ENUM;
+    }
+}
+
+inline GLenum YafToOpenGL(YafCullFace cf) // glCullFace
+{
+    switch (cf)
+    {
+    case YafCullFace::None:
+        return GL_NONE;
+    case YafCullFace::Back:
+        return GL_BACK;
+    case YafCullFace::Front:
+        return GL_FRONT;
+    case YafCullFace::Both:
+        return GL_FRONT_AND_BACK;
+    default:
+        return GL_INVALID_ENUM;
+    }
+}
+
+inline GLenum YafToOpenGL(YafCullOrder co) // glFrontFace
+{
+    switch (co)
+    {
+    case YafCullOrder::CCW:
+        return GL_CCW;
+    case YafCullOrder::CW:
+        return GL_CW;
+    default:
+        return GL_INVALID_ENUM;
+    }
+}
 
 #endif // YafEnums_h__

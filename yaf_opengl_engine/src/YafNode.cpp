@@ -14,22 +14,22 @@ void YafNode::MoveRefNodesToChildren(YafScene* scene)
 void YafRectangle::draw()
 {
     glNormal3d(0.0, 0.0, 1.0);
-    glBegin(GL_QUADS);            
-    glTexCoord2f(0.0f, 0.0f);       
-    glVertex3f(Point1.X, Point1.Y, 0.0f); 
-    glTexCoord2f(1.0f, 0.0f);       
-    glVertex3f(Point2.X, Point1.Y, 0.0f);  
-    glTexCoord2f(1.0f, 1.0f);       
-    glVertex3f(Point2.X, Point2.Y, 0.0f);   
-    glTexCoord2f(0.0f, 1.0f);      
-    glVertex3f(Point1.X, Point2.Y, 0.0f);  
+    glBegin(GL_QUADS);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(Point1.X, Point1.Y, 0.0f);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(Point2.X, Point1.Y, 0.0f);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(Point2.X, Point2.Y, 0.0f);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(Point1.X, Point2.Y, 0.0f);
     glEnd();
 }
 
 void YafTriangle::draw()
 {
     glNormal3d(_normal.X, _normal.Y, _normal.Z);
-    glBegin(GL_TRIANGLES);            
+    glBegin(GL_TRIANGLES);
     glVertex3f(Point1.X, Point1.Y, Point1.Z);
     glVertex3f(Point2.X, Point2.Y, Point2.Z);
     glVertex3f(Point3.X, Point3.Y, Point3.Z);

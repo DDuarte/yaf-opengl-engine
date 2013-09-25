@@ -44,8 +44,7 @@ YafScene* ParseYafFile(const std::string& file)
 
     for (auto cp : camerasPerspective)
     {
-        YafPerspectiveCamera* camera = new YafPerspectiveCamera;
-        camera->Id       = GetAttribute<std::string>(cp, "id", "cameras perspective");
+        YafPerspectiveCamera* camera = new YafPerspectiveCamera(GetAttribute<std::string>(cp, "id", "cameras perspective"));
         camera->Near     = GetAttribute<float>(cp, "near", "cameras perspective");
         camera->Far      = GetAttribute<float>(cp, "far", "cameras perspective");
         camera->Angle    = GetAttribute<float>(cp, "angle", "cameras perspective");
@@ -57,8 +56,7 @@ YafScene* ParseYafFile(const std::string& file)
 
     for (auto op : camerasOrtho)
     {
-        YafOrthoCamera* camera = new YafOrthoCamera;
-        camera->Id     = GetAttribute<std::string>(op, "id", "cameras ortho");
+        YafOrthoCamera* camera = new YafOrthoCamera(GetAttribute<std::string>(op, "id", "cameras ortho"));
         camera->Near   = GetAttribute<float>(op, "near", "cameras ortho");
         camera->Far    = GetAttribute<float>(op, "far", "cameras ortho");
         camera->Left   = GetAttribute<float>(op, "left", "cameras ortho");
@@ -87,8 +85,7 @@ YafScene* ParseYafFile(const std::string& file)
 
     for (auto lo : lightsOmni)
     {
-        YafOmniLight* light = new YafOmniLight;
-        light->Id = GetAttribute<std::string>(lo, "id", "lighting omni");
+        YafOmniLight* light = new YafOmniLight(GetAttribute<std::string>(lo, "id", "lighting omni"));
         light->Enabled = GetAttribute<bool>(lo, "enabled", "lighting omni");
         light->Location = GetAttribute<YafXYZ>(lo, "location", "lighting omni");
         light->Ambient = GetAttribute<YafRGBA>(lo, "ambient", "lighting omni");
@@ -100,8 +97,7 @@ YafScene* ParseYafFile(const std::string& file)
 
     for (auto lo : lightsSpot)
     {
-        YafSpotLight* light = new YafSpotLight;
-        light->Id = GetAttribute<std::string>(lo, "id", "lighting spot");
+        YafSpotLight* light = new YafSpotLight(GetAttribute<std::string>(lo, "id", "lighting spot"));
         light->Enabled = GetAttribute<bool>(lo, "enabled", "lighting spot");
         light->Location = GetAttribute<YafXYZ>(lo, "location", "lighting spot");
         light->Ambient = GetAttribute<YafRGBA>(lo, "ambient", "lighting spot");
@@ -124,10 +120,8 @@ YafScene* ParseYafFile(const std::string& file)
 
     for (auto t : textures)
     {
-        YafTexture* tex = new YafTexture;
-        tex->Id = GetAttribute<std::string>(t, "id", "textures texture");
-        tex->File = GetAttribute<std::string>(t, "file", "textures texture");
-
+        YafTexture* tex = new YafTexture(GetAttribute<std::string>(t, "id", "textures texture"),
+                                         GetAttribute<std::string>(t, "file", "textures texture"));
         scene->AddTexture(tex);
     }
 
@@ -141,8 +135,7 @@ YafScene* ParseYafFile(const std::string& file)
 
     for (auto a : appearances)
     {
-        YafAppearance* app = new YafAppearance;
-        app->Id = GetAttribute<std::string>(a, "id", "appearances appearance");
+        YafAppearance* app = new YafAppearance(GetAttribute<std::string>(a, "id", "appearances appearance"));
         app->Emissive = GetAttribute<YafRGBA>(a, "emissive", "appearances appearance");
         app->Ambient = GetAttribute<YafRGBA>(a, "ambient", "appearances appearance");
         app->Diffuse = GetAttribute<YafRGBA>(a, "diffuse", "appearances appearance");
@@ -180,9 +173,8 @@ YafScene* ParseYafFile(const std::string& file)
 
     for (auto n : nodes)
     {
-        YafNode* node = new YafNode;
-        node->Id = GetAttribute<std::string>(n, "id", "graph node");
-        
+        YafNode* node = new YafNode(GetAttribute<std::string>(n, "id", "graph node"));
+
         std::string appRef = GetAttribute<std::string>(n, "appearanceref", "graph node", false);
         node->SetAppearance(appRef.empty() ? nullptr : scene->GetAppearance(appRef));
 

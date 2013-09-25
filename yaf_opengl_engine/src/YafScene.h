@@ -53,22 +53,55 @@ public:
 
     virtual void init() override
     {
-        throw std::logic_error("The method or operation is not implemented.");
+        if (_lightEnabled)
+            glEnable(GL_LIGHTING);
+
+        glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, _lightDoubleSided);
+        glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, _lightLocal);
+        glLightModelfv(GL_LIGHT_MODEL_AMBIENT, reinterpret_cast<float*>(&_lightAmbient));
+
+        glEnable(GL_NORMALIZE);
+
+        glShadeModel(YafToOpenGL(_shading));
+
+        glPolygonMode(GL_FRONT_AND_BACK, YafToOpenGL(_drawMode));
+        glCullFace(YafToOpenGL(_cullFace));
+        glFrontFace(YafToOpenGL(_cullOrder));
+
+        glClearColor(_backgroundColor.R, _backgroundColor.G, _backgroundColor.B, _backgroundColor.A);
     }
 
     virtual void display() override
     {
-        throw std::logic_error("The method or operation is not implemented.");
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+
+        CGFscene::activeCamera->applyView();
+
+        //
+
+        glutSwapBuffers();
     }
 
     virtual void update(unsigned long millis) override
     {
-        throw std::logic_error("The method or operation is not implemented.");
+        //throw std::logic_error("The method or operation is not implemented.");
     }
 
     virtual void initCameras() override
     {
-        throw std::logic_error("The method or operation is not implemented.");
+        int i = 0;
+        int initialCamera = 0;
+        for (auto cam : _cameras)
+        {
+            scene_cameras.push_back(cam.second);
+            if (cam.second->Id == _initialCamera->Id)
+                initialCamera = i;
+            i++;
+        }
+
+        activateCamera(initialCamera);
     }
 
 private:
@@ -99,6 +132,8 @@ private:
     // Graph
     YafNode* _rootNode;
     std::map<std::string, YafNode*> _nodes;
+
+    // CGFstuff
 };
 
 #endif // YafScene_h__
