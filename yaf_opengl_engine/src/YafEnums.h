@@ -7,7 +7,7 @@
 
 #include "YafMisc.h"
 
-enum class YafAxis
+enum YafAxis
 {
     X,
     Y,
@@ -26,7 +26,7 @@ inline YafAxis YafAxisFromString(const std::string& str)
         throw YafParsingException("Invalid axis " + str + " used");
 }
 
-enum class YafDrawMode
+enum YafDrawMode
 {
     Fill,
     Line,
@@ -45,7 +45,7 @@ inline YafDrawMode YafDrawModeFromString(const std::string& str)
         throw YafParsingException("Invalid draw mode " + str + " used");
 }
 
-enum class YafShading
+enum YafShading
 {
     Flat,
     Gouraud
@@ -61,7 +61,7 @@ inline YafShading YafShadingFromString(const std::string& str)
         throw YafParsingException("Invalid shading " + str + " used");
 }
 
-enum class YafCullFace
+enum YafCullFace
 {
     None,
     Back,
@@ -83,7 +83,7 @@ inline YafCullFace YafCullFaceFromString(const std::string& str)
         throw YafParsingException("Invalid cull face " + str + " used");
 }
 
-enum class YafCullOrder
+enum YafCullOrder
 {
     CCW,
     CW

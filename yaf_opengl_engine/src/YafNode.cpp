@@ -3,8 +3,8 @@
 
 void YafNode::MoveRefNodesToChildren(YafScene* scene)
 {
-    for (auto s : _refNodes)
-        AddChild(scene->GetNode(s));
+    for (auto s = _refNodes.begin(); s != _refNodes.end(); ++s)
+        AddChild(scene->GetNode(*s));
 
     _refNodes.clear();
 }

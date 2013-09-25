@@ -59,7 +59,7 @@ public:
 
         glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, _lightDoubleSided);
         glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, _lightLocal);
-        glLightModelfv(GL_LIGHT_MODEL_AMBIENT, reinterpret_cast<float*>(&_lightAmbient));
+        glLightModelfv(GL_LIGHT_MODEL_AMBIENT, _lightAmbient);
 
         glEnable(GL_NORMALIZE);
 
@@ -94,10 +94,10 @@ public:
     {
         int i = 0;
         int initialCamera = 0;
-        for (auto cam : _cameras)
+        for (auto cam = _cameras.begin(); cam != _cameras.end(); ++cam)
         {
-            scene_cameras.push_back(cam.second);
-            if (cam.second->Id == _initialCamera->Id)
+            scene_cameras.push_back(cam->second);
+            if (cam->second->Id == _initialCamera->Id)
                 initialCamera = i;
             i++;
         }

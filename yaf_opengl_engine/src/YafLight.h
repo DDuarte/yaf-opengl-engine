@@ -2,12 +2,13 @@
 #define YafLight_h__
 
 #include <CGFlight.h>
+#include "YafMisc.h"
 
 class YafLight : public YafElement, public CGFlight
 {
 public:
-    YafLight(const std::string& id, int i, YafXYZ pos) : YafElement(id), Location(pos), CGFlight(0x4000 + i, reinterpret_cast<float*>(&pos)) { }
-    YafLight(const std::string& id, int i, YafXYZ pos, YafXYZ dir) : YafElement(id), Location(pos), CGFlight(0x4000 + i, reinterpret_cast<float*>(&pos), reinterpret_cast<float*>(&dir)) { }
+    YafLight(const std::string& id, int i, YafXYZ pos) : YafElement(id), Location(pos), CGFlight(0x4000 + i, pos) { }
+    YafLight(const std::string& id, int i, YafXYZ pos, YafXYZ dir) : YafElement(id), Location(pos), CGFlight(0x4000 + i, pos, dir) { }
     bool Enabled;
     YafXYZ Location;
     YafRGBA Ambient;
@@ -37,7 +38,7 @@ public:
         YafLight::UpdateLight();
         setAngle(Angle);
         glLightf(id, GL_SPOT_EXPONENT, Exponent);
-        glLightfv(id, GL_SPOT_DIRECTION, reinterpret_cast<float*>(&Direction));
+        glLightfv(id, GL_SPOT_DIRECTION, Direction);
     }
 
     float Angle;
