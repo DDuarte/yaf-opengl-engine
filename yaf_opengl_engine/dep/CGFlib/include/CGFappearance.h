@@ -31,6 +31,8 @@ class CGFappearance
 		void setSpecular(float*);						///< Sets the Specular component of the material (4-float vector)
 		void setShininess(float);						///< Sets the Shininess coefficient of the material
 
+        void setEmissive(float*); // addition
+
 		void setTexture(string);						///< Loads the texture specified by filename and stores it
 		void setTexture(CGFtexture *tp);				///< Assigns a texture preloaded in a CGFtexture instance to this appearance instance. Useful to avoid multiple loading of the same texture for differente appearances (e.g. with different wrapping parameters or material properties)
 		void setTextureWrap(int, int);					///< Sets the texture wrapping mode
@@ -42,6 +44,7 @@ class CGFappearance
 		float ambient[4];
 		float diffuse[4];
 		float specular[4];
+        float emissive[4];
 		float shininess;
 
 		float color[4];

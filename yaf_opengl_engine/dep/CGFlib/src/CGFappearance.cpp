@@ -76,6 +76,7 @@ void CGFappearance::apply()
 		glMaterialfv(GL_FRONT, GL_SPECULAR,  specular);
 		glMaterialfv(GL_FRONT, GL_DIFFUSE,   diffuse);
 		glMaterialfv(GL_FRONT, GL_AMBIENT,   ambient);
+        glMaterialfv(GL_FRONT, GL_EMISSION,  emissive);
 	}
 	else if(materialType==CG_GLMAT_COLOR) {
 		glEnable(GL_COLOR_MATERIAL);
@@ -118,6 +119,15 @@ void CGFappearance::setSpecular(float* li)
 	specular [2] = li[2];
 	specular [3] = li[3];
 	materialType = CG_GLMAT_MATERIAL;
+}
+
+void CGFappearance::setEmissive(float* li)
+{
+    emissive [0] = li[0];
+    emissive [1] = li[1];
+    emissive [2] = li[2];
+    emissive [3] = li[3];
+    materialType = CG_GLMAT_MATERIAL;
 }
 
 void CGFappearance::setShininess(float shi) 
