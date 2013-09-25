@@ -17,8 +17,6 @@ class YafAppearance;
 class YafScene : public CGFscene
 {
 public:
-    YafScene() { };
-
     void SetGlobals(YafRGBA bg, YafDrawMode dm, YafShading s, YafCullFace cf, YafCullOrder co)
     {
         _backgroundColor = bg;
@@ -35,6 +33,8 @@ public:
         _lightEnabled = enabled;
         _lightAmbient = ambient;
     }
+
+    void DoPostProcessing();
 
     void SetInitialCamera(const std::string& id) { _initialCamera = _cameras[id]; }
     void SetRootNode(const std::string& id) { _rootNode = _nodes[id]; }

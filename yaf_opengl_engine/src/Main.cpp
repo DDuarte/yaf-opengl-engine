@@ -89,20 +89,18 @@ YafScene* ParseYafFile(const std::string& file)
     for (auto lo = lightsOmni.begin(); lo != lightsOmni.end(); ++lo)
     {
         YafOmniLight* light = new YafOmniLight(GetAttribute<std::string>(*lo, "id", "lighting omni"), 
-                                               i, GetAttribute<YafXYZ>(*lo, "location", "lighting omni"));
+                                               i++, GetAttribute<YafXYZ>(*lo, "location", "lighting omni"));
         light->Enabled = GetAttribute<bool>(*lo, "enabled", "lighting omni");
         light->Ambient = GetAttribute<YafRGBA>(*lo, "ambient", "lighting omni");
         light->Diffuse = GetAttribute<YafRGBA>(*lo, "diffuse", "lighting omni");
         light->Specular = GetAttribute<YafRGBA>(*lo, "specular", "lighting omni");
-        light->UpdateLight();
         scene->AddLight(light);
-        ++i;
     }
 
     for (auto ls = lightsSpot.begin(); ls != lightsSpot.end(); ++ls)
     {
         YafSpotLight* light = new YafSpotLight(GetAttribute<std::string>(*ls, "id", "lighting spot"), 
-                                               i, GetAttribute<YafXYZ>(*ls, "location", "lighting spot"), 
+                                               i++, GetAttribute<YafXYZ>(*ls, "location", "lighting spot"), 
                                                GetAttribute<YafXYZ>(*ls, "direction", "lighting spot"));
         light->Enabled = GetAttribute<bool>(*ls, "enabled", "lighting spot");
         light->Ambient = GetAttribute<YafRGBA>(*ls, "ambient", "lighting spot");
@@ -110,9 +108,7 @@ YafScene* ParseYafFile(const std::string& file)
         light->Specular = GetAttribute<YafRGBA>(*ls, "specular", "lighting spot");
         light->Angle = GetAttribute<float>(*ls, "angle", "lighting spot");
         light->Exponent = GetAttribute<float>(*ls, "exponent", "lighting spot");
-        light->UpdateLight();
         scene->AddLight(light);
-        ++i;
     }
 
     // <textures>
@@ -258,10 +254,7 @@ YafScene* ParseYafFile(const std::string& file)
         scene->AddNode(node);
     }
 
-    // Post parsing processing
-
-    for (auto n = scene->GetNodes().begin(); n != scene->GetNodes().end(); ++n)
-        n->second->MoveRefNodesToChildren(scene);
+    scene->DoPostProcessing();
 
     return scene;
 }
