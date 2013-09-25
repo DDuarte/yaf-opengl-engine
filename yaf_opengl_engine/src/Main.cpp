@@ -83,32 +83,38 @@ YafScene* ParseYafFile(const std::string& file)
     auto lightsOmni = GetAllChildren(lightingElement, "omni");
     auto lightsSpot = GetAllChildren(lightingElement, "spot");
 
+    int i = 0;
     for (auto lo : lightsOmni)
     {
-        YafOmniLight* light = new YafOmniLight(GetAttribute<std::string>(lo, "id", "lighting omni"));
+        YafOmniLight* light = new YafOmniLight(GetAttribute<std::string>(lo, "id", "lighting omni"), 
+                                               i, GetAttribute<YafXYZ>(lo, "location", "lighting omni"));
         light->Enabled = GetAttribute<bool>(lo, "enabled", "lighting omni");
-        light->Location = GetAttribute<YafXYZ>(lo, "location", "lighting omni");
         light->Ambient = GetAttribute<YafRGBA>(lo, "ambient", "lighting omni");
         light->Diffuse = GetAttribute<YafRGBA>(lo, "diffuse", "lighting omni");
         light->Specular = GetAttribute<YafRGBA>(lo, "specular", "lighting omni");
 
+        light->UpdateLight();
         scene->AddLight(light);
+        ++i;
     }
 
     for (auto lo : lightsSpot)
     {
-        YafSpotLight* light = new YafSpotLight(GetAttribute<std::string>(lo, "id", "lighting spot"));
+        YafSpotLight* light = new YafSpotLight(GetAttribute<std::string>(lo, "id", "lighting spot"), 
+                                               i, GetAttribute<YafXYZ>(lo, "location", "lighting spot"), 
+                                               GetAttribute<YafXYZ>(lo, "direction", "lighting spot"));
         light->Enabled = GetAttribute<bool>(lo, "enabled", "lighting spot");
-        light->Location = GetAttribute<YafXYZ>(lo, "location", "lighting spot");
         light->Ambient = GetAttribute<YafRGBA>(lo, "ambient", "lighting spot");
         light->Diffuse = GetAttribute<YafRGBA>(lo, "diffuse", "lighting spot");
         light->Specular = GetAttribute<YafRGBA>(lo, "specular", "lighting spot");
         light->Angle = GetAttribute<float>(lo, "angle", "lighting spot");
         light->Exponent = GetAttribute<float>(lo, "exponent", "lighting spot");
-        light->Direction = GetAttribute<YafXYZ>(lo, "direction", "lighting spot");
 
+        light->UpdateLight();
         scene->AddLight(light);
+        ++i;
     }
+
 
     // <textures>
 
