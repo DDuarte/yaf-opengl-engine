@@ -14,8 +14,11 @@ public:
     YafRGBA Ambient;
     YafRGBA Diffuse;
     YafRGBA Specular;
-    virtual void UpdateLight()
+    virtual void InitLight()
     {
+        if (Enabled)
+            enable();
+
         setAmbient(Ambient);
         setDiffuse(Diffuse);
         setSpecular(Specular);
@@ -33,9 +36,9 @@ class YafSpotLight : public YafLight
 public:
     YafSpotLight(const std::string& id, int i, YafXYZ pos, YafXYZ dir) : YafLight(id, i, pos, dir), Direction(dir) { }
 
-    virtual void UpdateLight() 
+    virtual void InitLight() 
     {
-        YafLight::UpdateLight();
+        YafLight::InitLight();
         setAngle(Angle);
         glLightf(id, GL_SPOT_EXPONENT, Exponent);
         glLightfv(id, GL_SPOT_DIRECTION, Direction);

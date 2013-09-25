@@ -3,6 +3,7 @@
 
 #include <string>
 #include <CGFtexture.h>
+#include <CGFappearance.h>
 #include "YafMisc.h"
 
 class YafTexture : public YafElement, public CGFtexture
@@ -12,7 +13,7 @@ public:
     std::string File;
 };
 
-class YafAppearance : public YafElement
+class YafAppearance : public YafElement, public CGFappearance
 {
 public:
     YafAppearance(const std::string& id) : YafElement(id) { }
@@ -24,6 +25,18 @@ public:
     YafTexture* Texture; // can be null
     float TexLengthS;
     float TexLengthT;
+
+    void InitAppearance()
+    {
+        setEmissive(Emissive);
+        setAmbient(Ambient);
+        setDiffuse(Diffuse);
+        setSpecular(Specular);
+        setShininess(Shininess);
+
+        if (Texture)
+            setTexture(Texture);
+    }
 };
 
 #endif // YafAppearance_h__

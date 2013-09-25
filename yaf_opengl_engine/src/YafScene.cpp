@@ -54,9 +54,6 @@ std::map<std::string, YafNode*>& YafScene::GetNodes()
 
 void YafScene::DoPostProcessing()
 {
-    for (auto l = _lights.begin(); l != _lights.end(); ++l)
-        l->second->UpdateLight();
-
     for (auto n = _nodes.begin(); n != _nodes.end(); ++n)
         n->second->MoveRefNodesToChildren(this);
 }

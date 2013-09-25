@@ -70,6 +70,11 @@ public:
         glFrontFace(YafToOpenGL(_cullOrder));
 
         glClearColor(_backgroundColor.R, _backgroundColor.G, _backgroundColor.B, _backgroundColor.A);
+
+        for (auto l = _lights.begin(); l != _lights.end(); ++l)
+            l->second->InitLight();
+
+        setUpdatePeriod(100);
     }
 
     virtual void display() override

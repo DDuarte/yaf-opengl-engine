@@ -23,6 +23,8 @@ public:
 
     virtual void applyView() override
     {
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
         gluLookAt(Position.X, Position.Y, Position.Z,
                   Target.X, Target.Y, Target.Z,
                   0.0, 1.0, 0.0);
@@ -48,6 +50,8 @@ public:
 
     virtual void applyView() override
     {
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
         glOrtho(Left, Right, Bottom, Top, Near, Far);
     }
 

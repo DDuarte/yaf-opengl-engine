@@ -22,7 +22,7 @@ class YafChild
 class YafPrimitive : public YafChild
 {
 public:
-    virtual void draw() = 0;
+    virtual void draw(YafAppearance* app = nullptr) = 0;
 };
 
 class YafRectangle : public YafPrimitive
@@ -31,21 +31,21 @@ public:
     YafXY Point1;
     YafXY Point2;
 
-    virtual void draw();
+    virtual void draw(YafAppearance* app = nullptr) override;
 
 };
 
 class YafTriangle : public YafPrimitive
 {
 public:
+    YafTriangle(YafXYZ p1, YafXYZ p2, YafXYZ p3);
+
     YafXYZ Point1;
     YafXYZ Point2;
     YafXYZ Point3;
 
+    virtual void draw(YafAppearance* app = nullptr) override;
 
-    virtual void draw();
-
-    YafTriangle(YafXYZ p1, YafXYZ p2, YafXYZ p3);
 private:
     YafXYZ _normal;
 
@@ -54,20 +54,19 @@ private:
 class YafCylinder : public YafPrimitive
 {
 public:
+    YafCylinder();
+    ~YafCylinder();
+
     float Base;
     float Top;
     float Height;
     int Slices;
     int Stacks;
 
-    virtual void draw();
-
-    YafCylinder();
-    ~YafCylinder();
+    virtual void draw(YafAppearance* app = nullptr) override;
 
 private:
     GLUquadricObj* _quadric;
-
 };
 
 class YafSphere : public YafPrimitive
@@ -77,8 +76,7 @@ public:
     int Slices;
     int Stacks;
 
-    virtual void draw();
-
+    virtual void draw(YafAppearance* app = nullptr) override;
 };
 
 class YafTorus : public YafPrimitive
@@ -89,8 +87,7 @@ public:
     int Slices;
     int Loops;
 
-    virtual void draw();
-
+    virtual void draw(YafAppearance* app = nullptr) override;
 };
 
 class YafNode : public YafChild, public YafElement
