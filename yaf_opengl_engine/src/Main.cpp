@@ -2,8 +2,10 @@
 #include <cstdlib>
 
 #include "YafScene.h"
+#include "YafNode.h"
 #include "TinyXMLYafHelpers.h"
 #include "YafInterface.h"
+#include "YafAppearance.h"
 
 #include <CGFapplication.h>
 

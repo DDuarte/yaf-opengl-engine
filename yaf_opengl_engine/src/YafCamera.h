@@ -3,6 +3,7 @@
 
 #include "YafMisc.h"
 #include <CGFcamera.h>
+#include <gl/GL.h>
 
 class YafCamera : public YafElement, public CGFcamera
 {

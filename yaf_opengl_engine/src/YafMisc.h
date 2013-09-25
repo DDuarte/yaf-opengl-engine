@@ -24,6 +24,11 @@ public:
     YafXY() : X(0.0f), Y(0.0f) { }
     YafXY(const std::string& s);
 
+    operator float*()
+    {
+        return reinterpret_cast<float*>(this); // this won't work if class has virtual methods
+    }
+
     float X;
     float Y;
 };
@@ -34,6 +39,11 @@ public:
     YafXYZ() : X(0.0f), Y(0.0f), Z(0.0f) { }
     YafXYZ(float x, float y, float z) : X(x), Y(y), Z(z) { }
     YafXYZ(const std::string& s);
+
+    operator float*()
+    {
+        return reinterpret_cast<float*>(this); // this won't work if class has virtual methods
+    }
 
     float X;
     float Y;
@@ -46,6 +56,11 @@ class YafRGBA
 public:
     YafRGBA() : R(0.0f), G(0.0f), B(0.0f), A(0.0f) { }
     YafRGBA(const std::string& s);
+
+    operator float*()
+    {
+        return reinterpret_cast<float*>(this); // this won't work if class has virtual methods
+    }
 
     float R;
     float G;

@@ -21,6 +21,9 @@
     <ClCompile Include="src\TinyXMLYafHelpers.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\YafScene.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\YafLight.h">

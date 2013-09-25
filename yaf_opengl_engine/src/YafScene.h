@@ -7,11 +7,12 @@
 #include <CGFscene.h>
 
 #include "YafEnums.h"
-
 #include "YafCamera.h"
 #include "YafLight.h"
-#include "YafNode.h"
-#include "YafAppearance.h"
+
+class YafNode;
+class YafTexture;
+class YafAppearance;
 
 class YafScene : public CGFscene
 {
@@ -38,18 +39,18 @@ public:
     void SetInitialCamera(const std::string& id) { _initialCamera = _cameras[id]; }
     void SetRootNode(const std::string& id) { _rootNode = _nodes[id]; }
 
-    void AddCamera(YafCamera* camera) { _cameras[camera->Id] = camera; }
-    void AddLight(YafLight* light) { _lights[light->Id] = light; }
-    void AddTexture(YafTexture* texture) { _textures[texture->Id] = texture; }
-    void AddAppearance(YafAppearance* appearance) { _appearances[appearance->Id] = appearance; }
-    void AddNode(YafNode* node) { _nodes[node->Id] = node; }
+    void AddCamera(YafCamera* camera);
+    void AddLight(YafLight* light);
+    void AddTexture(YafTexture* texture);
+    void AddAppearance(YafAppearance* appearance);
+    void AddNode(YafNode* node);
 
-    YafTexture* GetTexture(const std::string& id) const { return _textures.find(id)->second; }
-    YafAppearance* GetAppearance(const std::string& id) const { return _appearances.find(id)->second; }
-    YafLight* GetLight(const std::string& id) const { return _lights.find(id)->second; }
-    YafNode* GetNode(const std::string& id) const { return _nodes.find(id)->second; }
+    YafTexture* GetTexture(const std::string& id) const;
+    YafAppearance* GetAppearance(const std::string& id) const;
+    YafLight* GetLight(const std::string& id) const;
+    YafNode* GetNode(const std::string& id) const;
 
-    std::map<std::string, YafNode*>& GetNodes() { return _nodes; }
+    std::map<std::string, YafNode*>& GetNodes();
 
     virtual void init() override
     {
