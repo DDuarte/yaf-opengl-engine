@@ -85,7 +85,18 @@ public:
 
         CGFscene::activeCamera->applyView();
 
-        //
+        // TODO: disable or enable lights (check boxes in interface)
+        for (auto l = _lights.begin(); l != _lights.end(); ++l)
+        {
+            l->second->update();
+            l->second->draw();
+        }
+
+        glPushMatrix();
+
+        // draw everything
+
+        glPopMatrix();
 
         glutSwapBuffers();
     }

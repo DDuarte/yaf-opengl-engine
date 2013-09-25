@@ -274,6 +274,13 @@ int main(int argc, char* argv[])
         std::cin.get();
         return EXIT_FAILURE;
     }
+    catch (GLexception& ex)
+    {
+        std::cerr << "Glexception while parsing caught: " << ex.what() << std::endl;
+        std::cout << "Press ENTER key to continue." << std::endl;
+        std::cin.get();
+        return EXIT_FAILURE;
+    }
 
     CGFapplication app;
 

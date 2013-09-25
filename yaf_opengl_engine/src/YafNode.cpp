@@ -1,6 +1,8 @@
 #include "YafNode.h"
 #include "YafScene.h"
 
+#include <glm/gtc/matrix_transform.hpp>
+
 void YafNode::MoveRefNodesToChildren(YafScene* scene)
 {
     for (auto s = _refNodes.begin(); s != _refNodes.end(); ++s)
@@ -8,6 +10,18 @@ void YafNode::MoveRefNodesToChildren(YafScene* scene)
 
     _refNodes.clear();
 }
+
+void YafNode::CalculateTransformMatrix()
+{
+    for (auto t = _transforms.begin(); t != _transforms.end(); ++t)
+    {
+        (*t)->ApplyTransform(_m);
+        delete (*t);
+    }
+
+    _transforms.clear();
+}
+
 
 YafTriangle::YafTriangle(YafXYZ p1, YafXYZ p2, YafXYZ p3)
 {

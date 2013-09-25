@@ -7,6 +7,7 @@
 #include <gl/GL.h>
 #include <gl/freeglut.h>
 #include <gl/glui.h>
+#include <glm/glm.hpp>
 
 #include "YafTransform.h"
 #include "YafAppearance.h"
@@ -100,15 +101,22 @@ public:
 
     void AddNodeRef(const std::string& id) { _refNodes.push_back(id); }
 
-    void MoveRefNodesToChildren(YafScene* scene);
+    void DoPostProcessing(YafScene* scene) { MoveRefNodesToChildren(scene); CalculateTransformMatrix(); }
+
+    
 
 private:
+    void MoveRefNodesToChildren(YafScene* scene);
+    void CalculateTransformMatrix();
+
     std::vector<YafTransform*> _transforms;
     YafAppearance* _appearance; // can be null
 
     std::vector<YafChild*> _children;
 
     std::vector<std::string> _refNodes;
+
+    glm::mat4 _m; // partial matrix
 };
 
 #endif // YafNode_h__
