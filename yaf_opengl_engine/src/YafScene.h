@@ -4,6 +4,8 @@
 #include <string>
 #include <map>
 
+#include <CGFscene.h>
+
 #include "YafEnums.h"
 
 #include "YafCamera.h"
@@ -11,7 +13,7 @@
 #include "YafNode.h"
 #include "YafAppearance.h"
 
-class YafScene
+class YafScene : public CGFscene
 {
 public:
     YafScene() { };
@@ -48,6 +50,26 @@ public:
     YafNode* GetNode(const std::string& id) const { return _nodes.find(id)->second; }
 
     std::map<std::string, YafNode*>& GetNodes() { return _nodes; }
+
+    virtual void init() override
+    {
+        throw std::logic_error("The method or operation is not implemented.");
+    }
+
+    virtual void display() override
+    {
+        throw std::logic_error("The method or operation is not implemented.");
+    }
+
+    virtual void update(unsigned long millis) override
+    {
+        throw std::logic_error("The method or operation is not implemented.");
+    }
+
+    virtual void initCameras() override
+    {
+        throw std::logic_error("The method or operation is not implemented.");
+    }
 
 private:
     // Globals

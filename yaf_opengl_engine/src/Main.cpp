@@ -3,6 +3,9 @@
 
 #include "YafScene.h"
 #include "TinyXMLYafHelpers.h"
+#include "YafInterface.h"
+
+#include <CGFapplication.h>
 
 YafScene* ParseYafFile(const std::string& file)
 {
@@ -267,15 +270,47 @@ YafScene* ParseYafFile(const std::string& file)
 
 int main(int argc, char* argv[])
 {
+    YafScene* scene = nullptr;
+
     try
     {
-        auto scene = ParseYafFile("sintax_yaf2.xml");
+        scene = ParseYafFile("sintax_yaf2.xml");
     }
     catch (YafParsingException& ex)
     {
-        std::cout << "Exception caught: " << ex.what() << std::endl;
+        std::cerr << "Exception while parsing caught: " << ex.what() << std::endl;
+        std::cout << "Press ENTER key to continue." << std::endl;
+        std::cin.get();
+        return EXIT_FAILURE;
     }
 
-    system("PAUSE");
+    CGFapplication app;
+
+    try
+    {
+        app.init(&argc, argv);
+
+        app.setScene(scene);
+        app.setInterface(new YafInterface());
+
+        app.run();
+    }
+    catch (GLexception& ex)
+    {
+        std::cerr << "GLexception: " << ex.what() << std::endl;
+        std::cout << "Press ENTER key to continue." << std::endl;
+        std::cin.get();
+        return EXIT_FAILURE;
+    }
+    catch (std::exception& ex)
+    {
+        std::cerr << "Exception: " << ex.what() << std::endl;
+        std::cout << "Press ENTER key to continue." << std::endl;
+        std::cin.get();
+        return EXIT_FAILURE;
+    }
+
+    std::cout << "Press ENTER key to continue." << std::endl;
+    std::cin.get();
     return EXIT_SUCCESS;
 }

@@ -19,6 +19,7 @@
     <ClInclude Include="src\YafAppearance.h" />
     <ClInclude Include="src\YafCamera.h" />
     <ClInclude Include="src\YafEnums.h" />
+    <ClInclude Include="src\YafInterface.h" />
     <ClInclude Include="src\YafLight.h" />
     <ClInclude Include="src\YafMisc.h" />
     <ClInclude Include="src\YafNode.h" />

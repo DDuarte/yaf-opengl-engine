@@ -56,5 +56,8 @@
     <ClInclude Include="src\NewellsMethod.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="src\YafInterface.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

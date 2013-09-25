@@ -65,8 +65,6 @@ YafCylinder::~YafCylinder()
     gluDeleteQuadric(_quadric);
 }
 
-
-
 void YafSphere::draw()
 {
     glutSolidSphere(Radius, Slices, Stacks);
