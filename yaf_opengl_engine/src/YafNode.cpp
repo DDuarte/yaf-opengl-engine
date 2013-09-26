@@ -22,6 +22,13 @@ void YafNode::CalculateTransformMatrix()
     _transforms.clear();
 }
 
+void YafNode::draw(YafAppearance* app)
+{
+    for(int i = 0 ; i < _children.size() ; ++i)
+        _children[i]->draw(app);
+}
+
+
 
 YafTriangle::YafTriangle(YafXYZ p1, YafXYZ p2, YafXYZ p3)
 {

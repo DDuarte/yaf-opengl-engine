@@ -9,6 +9,7 @@
 #include "YafEnums.h"
 #include "YafCamera.h"
 #include "YafLight.h"
+#include "YafNode.h"
 
 class YafNode;
 class YafTexture;
@@ -94,7 +95,7 @@ public:
 
         glPushMatrix();
 
-        // draw everything
+        _rootNode->draw(_rootNode->getAppearance());
 
         glPopMatrix();
 

@@ -17,13 +17,13 @@ class YafScene;
 
 class YafChild
 {
-
+public:
+    virtual void draw(YafAppearance* app = nullptr) = 0;
 };
 
 class YafPrimitive : public YafChild
 {
-public:
-    virtual void draw(YafAppearance* app = nullptr) = 0;
+
 };
 
 class YafRectangle : public YafPrimitive
@@ -103,7 +103,9 @@ public:
 
     void DoPostProcessing(YafScene* scene) { MoveRefNodesToChildren(scene); CalculateTransformMatrix(); }
 
-    
+    void draw(YafAppearance* app = nullptr);
+
+    YafAppearance* getAppearance(){return _appearance;}
 
 private:
     void MoveRefNodesToChildren(YafScene* scene);
