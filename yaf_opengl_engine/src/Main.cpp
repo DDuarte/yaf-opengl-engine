@@ -255,6 +255,7 @@ YafScene* ParseYafFile(const std::string& file)
     }
 
     scene->DoPostProcessing();
+    scene->SetRootNode(graphRootId);
 
     return scene;
 }
