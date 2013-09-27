@@ -24,8 +24,11 @@ void YafNode::CalculateTransformMatrix()
 
 void YafNode::draw(YafAppearance* app)
 {
+    glPushMatrix();
+    glLoadMatrix(_m);
     for(int i = 0 ; i < _children.size() ; ++i)
         _children[i]->draw(app);
+    glPopMatrix();
 }
 
 
