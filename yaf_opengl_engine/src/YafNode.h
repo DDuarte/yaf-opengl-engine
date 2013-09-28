@@ -73,11 +73,18 @@ private:
 class YafSphere : public YafPrimitive
 {
 public:
+    YafSphere();
+    ~YafSphere();
+
     float Radius;
     int Slices;
     int Stacks;
 
     virtual void draw(YafAppearance* app = nullptr) override;
+
+private:
+    GLUquadricObj* _quadric;
+
 };
 
 class YafTorus : public YafPrimitive

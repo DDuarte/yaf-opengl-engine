@@ -25,12 +25,12 @@ void YafNode::CalculateTransformMatrix()
 void YafNode::draw(YafAppearance* app)
 {
     glPushMatrix();
+    glLoadIdentity(); // required?
     glLoadMatrixf(glm::value_ptr(_m));
-    for(int i = 0 ; i < _children.size() ; ++i)
+    for (auto i = 0u; i < _children.size(); ++i)
         _children[i]->draw(app);
     glPopMatrix();
 }
-
 
 YafTriangle::YafTriangle(YafXYZ p1, YafXYZ p2, YafXYZ p3)
 {
@@ -51,6 +51,17 @@ YafCylinder::YafCylinder()
 }
 
 YafCylinder::~YafCylinder()
+{
+    gluDeleteQuadric(_quadric);
+}
+
+YafSphere::YafSphere()
+{
+    _quadric = gluNewQuadric();
+    gluQuadricTexture(_quadric, true);
+}
+
+YafSphere::~YafSphere()
 {
     gluDeleteQuadric(_quadric);
 }
@@ -97,11 +108,11 @@ void YafCylinder::draw(YafAppearance* /* app /* = nullptr */)
 
 void YafSphere::draw(YafAppearance* /* app /* = nullptr */)
 {
-    glutSolidSphere(Radius, Slices, Stacks);
+    gluSphere(_quadric, Radius, Slices, Stacks);
 }
-
 
 void YafTorus::draw(YafAppearance* /* app /* = nullptr */)
 {
+    // TODO: rewrite this, do not use glut
     glutSolidTorus(Inner, Outer, Slices, Loops);
 }
