@@ -44,7 +44,7 @@ public:
             axis = glm::vec3(0.0f, 0.0f, 1.0f);
             break;
         }
-        
+
         m = glm::rotate(m, Angle, axis);
     }
 };

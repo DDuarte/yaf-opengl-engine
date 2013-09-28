@@ -95,6 +95,8 @@ public:
 
         glPushMatrix();
 
+        axis.draw();
+
         _rootNode->draw(_rootNode->getAppearance());
 
         glPopMatrix();

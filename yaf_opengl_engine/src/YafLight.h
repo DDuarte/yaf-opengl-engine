@@ -36,7 +36,7 @@ class YafSpotLight : public YafLight
 public:
     YafSpotLight(const std::string& id, int i, YafXYZ pos, YafXYZ dir) : YafLight(id, i, pos, dir), Direction(dir) { }
 
-    virtual void InitLight() 
+    virtual void InitLight()
     {
         YafLight::InitLight();
         setAngle(Angle);

@@ -29,7 +29,7 @@ void CGFaxis::draw() {
 
 		// esfera representativa da origem das coordenadas
 		glColor3f(1.0,1.0,1.0);		// cor branca
-		gluSphere(glu_quadric, ball_radius, ball_slices, ball_radius);
+		gluSphere(glu_quadric, ball_radius, ball_slices, ball_stacks);
 
 		// cilindro representativo do eixo X
 		glColor3f(1.0,0.0,0.0);		// vermelho
