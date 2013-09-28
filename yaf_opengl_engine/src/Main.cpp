@@ -19,46 +19,46 @@ YafScene* ParseYafFile(const std::string& file)
 
     // <yaf>
 
-    auto yafElement = document->FirstChildElement("yaf");
-    if (!yafElement)
-        throw YafParsingException("<yaf> not found");
+    auto yafElement = GetChildren(document, "yaf", "");
 
     // <globals>
 
-    auto globalsElement = yafElement->FirstChildElement("globals");
-    if (!globalsElement)
-        throw YafParsingException("<globals> not found");
+    auto globalsElement = GetChildren(yafElement, "globals", "yaf");
 
-    scene->SetGlobals(GetAttribute<YafRGBA>(globalsElement, "background", "globals"),
-                      YafDrawModeFromString(GetAttribute<std::string>(globalsElement, "drawmode", "globals")),
-                      YafShadingFromString(GetAttribute<std::string>(globalsElement, "shading", "globals")),
-                      YafCullFaceFromString(GetAttribute<std::string>(globalsElement, "cullface", "globals")),
-                      YafCullOrderFromString(GetAttribute<std::string>(globalsElement, "cullorder", "globals")));
+    auto background = GetAttribute<YafRGBA>(globalsElement, "background", "globals");
+    auto drawMode = YafDrawModeFromString(GetAttribute<std::string>(globalsElement, "drawmode", "globals"));
+    auto shading = YafShadingFromString(GetAttribute<std::string>(globalsElement, "shading", "globals"));
+    auto cullFace = YafCullFaceFromString(GetAttribute<std::string>(globalsElement, "cullface", "globals"));
+    auto cullOrder = YafCullOrderFromString(GetAttribute<std::string>(globalsElement, "cullorder", "globals"));
+
+    scene->SetGlobals(background, drawMode, shading, cullFace, cullOrder);
 
     // <cameras>
 
-    auto camerasElement = yafElement->FirstChildElement("cameras");
-    if (!camerasElement)
-        throw YafParsingException("<cameras> not found");
+    auto camerasElement = GetChildren(yafElement, "cameras", "yaf");
 
     auto camerasPerspective = GetAllChildren(camerasElement, "perspective");
     auto camerasOrtho = GetAllChildren(camerasElement, "ortho");
 
+    if (camerasPerspective.empty() && camerasOrtho.empty())
+        throw YafParsingException("<yaf cameras> needs at least one camera");
+
     for (auto cp = camerasPerspective.begin(); cp != camerasPerspective.end(); ++cp)
     {
-        YafPerspectiveCamera* camera = new YafPerspectiveCamera(GetAttribute<std::string>(*cp, "id", "cameras perspective"));
+        auto id = GetAttribute<std::string>(*cp, "id", "cameras perspective");
+        auto camera = new YafPerspectiveCamera(id);
         camera->Near     = GetAttribute<float>(*cp, "near", "cameras perspective");
         camera->Far      = GetAttribute<float>(*cp, "far", "cameras perspective");
         camera->Angle    = GetAttribute<float>(*cp, "angle", "cameras perspective");
         camera->Position = GetAttribute<YafXYZ>(*cp, "pos", "cameras perspective");
         camera->Target   = GetAttribute<YafXYZ>(*cp, "target", "cameras perspective");
-
         scene->AddCamera(camera);
     }
 
     for (auto op = camerasOrtho.begin(); op != camerasOrtho.end(); ++op)
     {
-        YafOrthoCamera* camera = new YafOrthoCamera(GetAttribute<std::string>(*op, "id", "cameras ortho"));
+        auto id = GetAttribute<std::string>(*op, "id", "cameras ortho");
+        auto camera = new YafOrthoCamera(id);
         camera->Near   = GetAttribute<float>(*op, "near", "cameras ortho");
         camera->Far    = GetAttribute<float>(*op, "far", "cameras ortho");
         camera->Left   = GetAttribute<float>(*op, "left", "cameras ortho");
@@ -73,14 +73,14 @@ YafScene* ParseYafFile(const std::string& file)
 
     // <lighting>
 
-    auto lightingElement = yafElement->FirstChildElement("lighting");
-    if (!lightingElement)
-        throw YafParsingException("<lighting> not found");
+    auto lightingElement = GetChildren(yafElement, "lighting", "yaf");
 
-    scene->SetLightOptions(GetAttribute<bool>(lightingElement, "doublesided", "lighting"),
-                           GetAttribute<bool>(lightingElement, "local", "lighting"),
-                           GetAttribute<bool>(lightingElement, "enabled", "lighting"),
-                           GetAttribute<YafRGBA>(lightingElement, "ambient", "lighting"));
+    auto doubleSided = GetAttribute<bool>(lightingElement, "doublesided", "lighting");
+    auto local = GetAttribute<bool>(lightingElement, "local", "lighting");
+    auto enabled = GetAttribute<bool>(lightingElement, "enabled", "lighting");
+    auto ambient = GetAttribute<YafRGBA>(lightingElement, "ambient", "lighting");
+
+    scene->SetLightOptions(doubleSided, local, enabled, ambient);
 
     auto lightsOmni = GetAllChildren(lightingElement, "omni");
     auto lightsSpot = GetAllChildren(lightingElement, "spot");
@@ -88,8 +88,9 @@ YafScene* ParseYafFile(const std::string& file)
     int i = 0;
     for (auto lo = lightsOmni.begin(); lo != lightsOmni.end(); ++lo)
     {
-        YafOmniLight* light = new YafOmniLight(GetAttribute<std::string>(*lo, "id", "lighting omni"), 
-                                               i++, GetAttribute<YafXYZ>(*lo, "location", "lighting omni"));
+        auto id = GetAttribute<std::string>(*lo, "id", "lighting omni");
+        auto location = GetAttribute<YafXYZ>(*lo, "location", "lighting omni");
+        auto light = new YafOmniLight(id, i++, location);
         light->Enabled = GetAttribute<bool>(*lo, "enabled", "lighting omni");
         light->Ambient = GetAttribute<YafRGBA>(*lo, "ambient", "lighting omni");
         light->Diffuse = GetAttribute<YafRGBA>(*lo, "diffuse", "lighting omni");
@@ -99,9 +100,10 @@ YafScene* ParseYafFile(const std::string& file)
 
     for (auto ls = lightsSpot.begin(); ls != lightsSpot.end(); ++ls)
     {
-        YafSpotLight* light = new YafSpotLight(GetAttribute<std::string>(*ls, "id", "lighting spot"), 
-                                               i++, GetAttribute<YafXYZ>(*ls, "location", "lighting spot"), 
-                                               GetAttribute<YafXYZ>(*ls, "direction", "lighting spot"));
+        auto id = GetAttribute<std::string>(*ls, "id", "lighting spot");
+        auto location = GetAttribute<YafXYZ>(*ls, "location", "lighting spot");
+        auto direction = GetAttribute<YafXYZ>(*ls, "direction", "lighting spot");
+        YafSpotLight* light = new YafSpotLight(id, i++, location, direction);
         light->Enabled = GetAttribute<bool>(*ls, "enabled", "lighting spot");
         light->Ambient = GetAttribute<YafRGBA>(*ls, "ambient", "lighting spot");
         light->Diffuse = GetAttribute<YafRGBA>(*ls, "diffuse", "lighting spot");
@@ -113,37 +115,34 @@ YafScene* ParseYafFile(const std::string& file)
 
     // <textures>
 
-    auto texturesElement = yafElement->FirstChildElement("textures");
-    if (!texturesElement)
-        throw YafParsingException("<textures> not found");
+    auto texturesElement = GetChildren(yafElement, "textures", "yaf");
 
     auto textures = GetAllChildren(texturesElement, "texture");
 
     for (auto t = textures.begin(); t != textures.end(); ++t)
     {
-        YafTexture* tex = new YafTexture(GetAttribute<std::string>(*t, "id", "textures texture"),
-                                         GetAttribute<std::string>(*t, "file", "textures texture"));
+        auto id = GetAttribute<std::string>(*t, "id", "textures texture");
+        auto file = GetAttribute<std::string>(*t, "file", "textures texture");
+        auto tex = new YafTexture(id, file);
         scene->AddTexture(tex);
     }
 
     // <appearances>
 
-    auto appearancesElement = yafElement->FirstChildElement("appearances");
-    if (!appearancesElement)
-        throw YafParsingException("<appearances> not found");
+    auto appearancesElement = GetChildren(yafElement, "appearances", "yaf");
 
     auto appearances = GetAllChildren(appearancesElement, "appearance");
 
     for (auto a = appearances.begin(); a != appearances.end(); ++a)
     {
-        YafAppearance* app = new YafAppearance(GetAttribute<std::string>(*a, "id", "appearances appearance"));
+        auto app = new YafAppearance(GetAttribute<std::string>(*a, "id", "appearances appearance"));
         app->Emissive = GetAttribute<YafRGBA>(*a, "emissive", "appearances appearance");
         app->Ambient = GetAttribute<YafRGBA>(*a, "ambient", "appearances appearance");
         app->Diffuse = GetAttribute<YafRGBA>(*a, "diffuse", "appearances appearance");
         app->Specular = GetAttribute<YafRGBA>(*a, "specular", "appearances appearance");
         app->Shininess = GetAttribute<float>(*a, "shininess", "appearances appearance");
 
-        std::string texRef = GetAttribute<std::string>(*a, "textureref", "appearances appearance", false);
+        auto texRef = GetAttribute<std::string>(*a, "textureref", "appearances appearance", false);
         if (texRef.empty())
         {
             app->Texture = nullptr;
@@ -160,22 +159,48 @@ YafScene* ParseYafFile(const std::string& file)
 
     // <graph>
 
-    auto graphElement = yafElement->FirstChildElement("graph");
-    if (!graphElement)
-        throw YafParsingException("<graph> not found");
+    auto graphElement = GetChildren(yafElement, "graph", "yaf");
 
-    std::string graphRootId = GetAttribute<std::string>(graphElement, "rootid", "graph");
+    auto graphRootId = GetAttribute<std::string>(graphElement, "rootid", "graph");
 
     auto nodes = GetAllChildren(graphElement, "node");
 
     if (nodes.empty())
-        throw YafParsingException("<graph node> needs at least one node");
+        throw YafParsingException("<yaf graph node> needs at least one node");
 
     for (auto n = nodes.begin(); n != nodes.end(); ++n)
     {
-        YafNode* node = new YafNode(GetAttribute<std::string>(*n, "id", "graph node"));
+        auto node = new YafNode(GetAttribute<std::string>(*n, "id", "graph node"));
 
-        std::string appRef = GetAttribute<std::string>(*n, "appearanceref", "graph node", false);
+        auto transformsElement = GetChildren(*n, "transforms", "graph node");
+
+        auto translateTransforms = GetAllChildren(transformsElement, "translate");
+        auto rotateTransforms = GetAllChildren(transformsElement, "rotate");
+        auto scaleTransforms = GetAllChildren(transformsElement, "scale");
+
+        for (auto t = translateTransforms.begin(); t != translateTransforms.end(); ++t)
+        {
+            auto transform = new YafTranslateTransform;
+            transform->To = GetAttribute<YafXYZ>(*t, "to", "graph node transforms translate");
+            node->AddTransform(transform);
+        }
+
+        for (auto t = rotateTransforms.begin(); t != rotateTransforms.end(); ++t)
+        {
+            auto transform = new YafRotateTransform;
+            transform->Axis = YafAxisFromString(GetAttribute<std::string>(*t, "axis", "graph node transforms translate"));
+            transform->Angle = GetAttribute<float>(*t, "angle", "graph node transforms translate");
+            node->AddTransform(transform);
+        }
+
+        for (auto t = scaleTransforms.begin(); t != scaleTransforms.end(); ++t)
+        {
+            auto transform = new YafScaleTransform;
+            transform->Factor = GetAttribute<YafXYZ>(*t, "factor", "graph node transforms translate");
+            node->AddTransform(transform);
+        }
+
+        auto appRef = GetAttribute<std::string>(*n, "appearanceref", "graph node", false);
         node->SetAppearance(appRef.empty() ? nullptr : scene->GetAppearance(appRef));
 
         auto childrenElement = (*n)->FirstChildElement("children");
@@ -196,58 +221,54 @@ YafScene* ParseYafFile(const std::string& file)
 
         for (auto r = childrenRectangle.begin(); r != childrenRectangle.end(); ++r)
         {
-            YafRectangle* rect = new YafRectangle;
+            auto rect = new YafRectangle;
             rect->Point1 = GetAttribute<YafXY>(*r, "xy1", "graph node children rectangle");
             rect->Point2 = GetAttribute<YafXY>(*r, "xy2", "graph node children rectangle");
-
             node->AddChild(rect);
         }
 
         for (auto t = childrenTriangle.begin(); t != childrenTriangle.end(); ++t)
         {
-            YafTriangle* tri = new YafTriangle(GetAttribute<YafXYZ>(*t, "xyz1", "graph node children triangle"),
-                                               GetAttribute<YafXYZ>(*t, "xyz2", "graph node children triangle"),
-                                               GetAttribute<YafXYZ>(*t, "xyz3", "graph node children triangle"));
-
+            auto p1 = GetAttribute<YafXYZ>(*t, "xyz1", "graph node children triangle");
+            auto p2 = GetAttribute<YafXYZ>(*t, "xyz2", "graph node children triangle");
+            auto p3 = GetAttribute<YafXYZ>(*t, "xyz3", "graph node children triangle");
+            auto tri = new YafTriangle(p1, p2, p3);
             node->AddChild(tri);
         }
 
         for (auto c = childrenCylinder.begin(); c != childrenCylinder.end(); ++c)
         {
-            YafCylinder* cy = new YafCylinder;
+            auto cy = new YafCylinder;
             cy->Base = GetAttribute<float>(*c, "base", "graph node children cylinder");
             cy->Top = GetAttribute<float>(*c, "top", "graph node children cylinder");
             cy->Height = GetAttribute<float>(*c, "height", "graph node children cylinder");
             cy->Slices = GetAttribute<int>(*c, "slices", "graph node children cylinder");
             cy->Stacks = GetAttribute<int>(*c, "stacks", "graph node children cylinder");
-
             node->AddChild(cy);
         }
 
         for (auto s = childrenSphere.begin(); s != childrenSphere.end(); ++s)
         {
-            YafSphere* sph = new YafSphere;
+            auto sph = new YafSphere;
             sph->Radius = GetAttribute<float>(*s, "radius", "graph node children sphere");
             sph->Slices = GetAttribute<int>(*s, "slices", "graph node children sphere");
             sph->Stacks = GetAttribute<int>(*s, "stacks", "graph node children sphere");
-
             node->AddChild(sph);
         }
 
         for (auto t = childrenTorus.begin(); t != childrenTorus.end(); ++t)
         {
-            YafTorus* tor = new YafTorus;
+            auto tor = new YafTorus;
             tor->Inner = GetAttribute<float>(*t, "inner", "graph node children torus");
             tor->Outer = GetAttribute<float>(*t, "outer", "graph node children torus");
             tor->Slices = GetAttribute<int>(*t, "slices", "graph node children torus");
             tor->Loops = GetAttribute<int>(*t, "loops", "graph node children torus");
-
             node->AddChild(tor);
         }
 
         for (auto n = childrenNodeRef.begin(); n != childrenNodeRef.end(); ++n)
         {
-            std::string nodeRef = GetAttribute<std::string>(*n, "id", "graph node children noderef");
+            auto nodeRef = GetAttribute<std::string>(*n, "id", "graph node children noderef");
             node->AddNodeRef(nodeRef);
         }
 
@@ -266,7 +287,7 @@ int main(int argc, char* argv[])
 
     try
     {
-        scene = ParseYafFile("sintax_yaf2.xml");
+        scene = ParseYafFile("yaf_min.xml");
     }
     catch (YafParsingException& ex)
     {
