@@ -110,7 +110,7 @@ public:
 
     void DoPostProcessing(YafScene* scene) { MoveRefNodesToChildren(scene); CalculateTransformMatrix(); }
 
-    void draw(YafAppearance* app = nullptr);
+    virtual void draw(YafAppearance* app = nullptr) override;
 
     YafAppearance* getAppearance(){return _appearance;}
 

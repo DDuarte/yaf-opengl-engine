@@ -152,8 +152,6 @@ private:
     // Graph
     YafNode* _rootNode;
     std::map<std::string, YafNode*> _nodes;
-
-    // CGFstuff
 };
 
 #endif // YafScene_h__

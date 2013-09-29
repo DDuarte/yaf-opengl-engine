@@ -25,18 +25,14 @@ void YafNode::CalculateTransformMatrix()
 void YafNode::draw(YafAppearance* app)
 {
     glPushMatrix();
-    glLoadIdentity(); // required?
-    glLoadMatrixf(glm::value_ptr(_m));
+    glMultMatrixf(glm::value_ptr(_m));
     for (auto i = 0u; i < _children.size(); ++i)
         _children[i]->draw(app);
     glPopMatrix();
 }
 
-YafTriangle::YafTriangle(YafXYZ p1, YafXYZ p2, YafXYZ p3)
+YafTriangle::YafTriangle(YafXYZ p1, YafXYZ p2, YafXYZ p3) : Point1(p1), Point2(p2), Point3(p3)
 {
-    Point1 = p1;
-    Point2 = p2;
-    Point3 = p3;
     std::vector<YafXYZ> vec;
     vec.push_back(Point1);
     vec.push_back(Point2);
@@ -68,7 +64,7 @@ YafSphere::~YafSphere()
 
 void YafRectangle::draw(YafAppearance* app /* = nullptr */)
 {
-    glNormal3d(0.0, 0.0, 1.0);
+    glNormal3f(0.0f, 0.0f, 1.0f);
     glBegin(GL_QUADS);
     if (app && app->Texture)
         glTexCoord2f(0.0f, 0.0f);
