@@ -8,6 +8,8 @@
 #include <gl/freeglut.h>
 #include <gl/glui.h>
 #include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include "../dep/glui/src/glui_internal.h"
 
 #include "YafTransform.h"
 #include "YafAppearance.h"

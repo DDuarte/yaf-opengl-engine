@@ -1,7 +1,7 @@
 #include "YafNode.h"
 #include "YafScene.h"
 
-#include <glm/gtc/type_ptr.hpp>
+
 
 void YafNode::MoveRefNodesToChildren(YafScene* scene)
 {
@@ -119,6 +119,46 @@ void YafSphere::Draw(YafAppearance* /* app /* = nullptr */)
 
 void YafTorus::Draw(YafAppearance* /* app /* = nullptr */)
 {
-    // TODO: rewrite this, do not use glut
-    glutSolidTorus(Inner, Outer, Slices, Loops);
+    YafXYZ vNormal;
+    double majorStep = 2.0f * M_PI / Slices;
+    double minorStep = 2.0f * M_PI / Loops;
+    int i, j;
+
+    for (i = 0; i < Slices; i++)
+    {
+        double a0 = i * majorStep;
+        double a1 = a0 + majorStep;
+        float x0 = (float)cos(a0);
+        float y0 = (float)sin(a0);
+        float x1 = (float)cos(a1);
+        float y1 = (float)sin(a1);
+
+        glBegin(GL_TRIANGLE_STRIP);
+        for (j = 0; j <= Loops; j++)
+        {
+            double b = j * minorStep;
+            float c = (float)cos(b);
+            float r = Inner * c + Outer;
+            float z = Inner * (float)sin(b);
+
+            //First point
+            glTexCoord2f((float)i / (float)(Slices), (float)(j) / (float)(Loops));
+            vNormal.X = x0 * c;
+            vNormal.Y = y0 * c;
+            vNormal.Z = z / Loops;
+            vNormal.GetNormalized();
+
+            glNormal3f(vNormal.X, vNormal.Y, vNormal.Z);
+            glVertex3f(x0 * r, y0 * r, z);
+
+            glTexCoord2f((float)(i + 1) / (float)(Slices), (float)(j) / (float)(Loops));
+            vNormal.X = x1 * c;
+            vNormal.Y = y1 * c;
+            vNormal.Z = z / Loops;
+            vNormal.GetNormalized();
+            glNormal3f(vNormal.Z, vNormal.Y, vNormal.Z);
+            glVertex3f(x1 * r, y1 * r, z);
+        }
+        glEnd();
+    }
 }
