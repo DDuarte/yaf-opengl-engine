@@ -97,7 +97,7 @@ public:
 
         axis.draw();
 
-        _rootNode->draw(_rootNode->getAppearance());
+        _rootNode->Draw(_rootNode->GetAppearance());
 
         glPopMatrix();
 

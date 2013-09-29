@@ -52,6 +52,6 @@ void CGFtexture::loadTexture(string t)
 		free(data);	
 	}
 	else
-		throw GLexception("CGFtexture::loadTexture failed");
+		throw GLexception("CGFtexture::loadTexture failed: " + t);
 }
 

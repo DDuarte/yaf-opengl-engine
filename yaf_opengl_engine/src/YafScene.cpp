@@ -9,7 +9,8 @@ void YafScene::AddNode(YafNode* node)
 
 YafNode* YafScene::GetNode(const std::string& id) const
 {
-    return _nodes.find(id)->second;
+    auto n = _nodes.find(id);
+    return n != _nodes.end() ? n->second : nullptr;
 }
 
 void YafScene::AddAppearance(YafAppearance* appearance)
@@ -34,17 +35,20 @@ void YafScene::AddCamera(YafCamera* camera)
 
 YafTexture* YafScene::GetTexture(const std::string& id) const
 {
-    return _textures.find(id)->second;
+    auto t = _textures.find(id);
+    return t != _textures.end() ? t->second : nullptr;
 }
 
 YafAppearance* YafScene::GetAppearance(const std::string& id) const
 {
-    return _appearances.find(id)->second;
+    auto a = _appearances.find(id);
+    return a != _appearances.end() ? a->second : nullptr;
 }
 
 YafLight* YafScene::GetLight(const std::string& id) const
 {
-    return _lights.find(id)->second;
+    auto l = _lights.find(id);
+    return l != _lights.end() ? l->second : nullptr;
 }
 
 std::map<std::string, YafNode*>& YafScene::GetNodes()

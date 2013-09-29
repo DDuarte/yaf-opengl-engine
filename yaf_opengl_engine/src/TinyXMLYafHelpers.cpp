@@ -26,7 +26,7 @@ std::vector<TiXmlElement*> GetAllChildren(TiXmlElement* root, const std::string&
 TiXmlElement* GetChildren(TiXmlElement* root, const std::string& name, const std::string& prefix, bool required /*= true*/)
 {
     TiXmlElement* ele = root->FirstChildElement(name);
-    if (!ele)
+    if (!ele && required)
         throw YafParsingException("<" + prefix + " " + name + "> not found");
 
     return ele;
@@ -35,7 +35,7 @@ TiXmlElement* GetChildren(TiXmlElement* root, const std::string& name, const std
 TiXmlElement* GetChildren(TiXmlDocument* root, const std::string& name, const std::string& prefix, bool required /*= true*/)
 {
     TiXmlElement* ele = root->FirstChildElement(name);
-    if (!ele)
+    if (!ele && required)
         throw YafParsingException("<" + prefix + " " + name + "> not found");
 
     return ele;

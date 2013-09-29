@@ -10,7 +10,6 @@ class YafTexture : public YafElement, public CGFtexture
 {
 public:
     YafTexture(const std::string& id, const std::string& file) : YafElement(id), CGFtexture(file) { }
-    std::string File;
 };
 
 class YafAppearance : public YafElement, public CGFappearance

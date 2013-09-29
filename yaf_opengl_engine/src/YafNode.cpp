@@ -6,7 +6,12 @@
 void YafNode::MoveRefNodesToChildren(YafScene* scene)
 {
     for (auto s = _refNodes.begin(); s != _refNodes.end(); ++s)
-        AddChild(scene->GetNode(*s));
+    {
+        if (auto n = scene->GetNode(*s))
+            AddChild(n);
+        else
+            throw YafParsingException("Node " + (*s) + " referenced but not found.");
+    }
 
     _refNodes.clear();
 }
@@ -22,12 +27,16 @@ void YafNode::CalculateTransformMatrix()
     _transforms.clear();
 }
 
-void YafNode::draw(YafAppearance* app)
+void YafNode::Draw(YafAppearance* app)
 {
+    if (_appearance)
+        _appearance->apply();
+    else if (app)
+        app->apply();
     glPushMatrix();
     glMultMatrixf(glm::value_ptr(_m));
     for (auto i = 0u; i < _children.size(); ++i)
-        _children[i]->draw(app);
+        _children[i]->Draw(app);
     glPopMatrix();
 }
 
@@ -62,7 +71,7 @@ YafSphere::~YafSphere()
     gluDeleteQuadric(_quadric);
 }
 
-void YafRectangle::draw(YafAppearance* app /* = nullptr */)
+void YafRectangle::Draw(YafAppearance* app /* = nullptr */)
 {
     glNormal3f(0.0f, 0.0f, 1.0f);
     glBegin(GL_QUADS);
@@ -81,7 +90,7 @@ void YafRectangle::draw(YafAppearance* app /* = nullptr */)
     glEnd();
 }
 
-void YafTriangle::draw(YafAppearance* app /* = nullptr */)
+void YafTriangle::Draw(YafAppearance* app /* = nullptr */)
 {
     glNormal3d(_normal.X, _normal.Y, _normal.Z);
     glBegin(GL_TRIANGLES);
@@ -97,17 +106,18 @@ void YafTriangle::draw(YafAppearance* app /* = nullptr */)
     glEnd();
 }
 
-void YafCylinder::draw(YafAppearance* /* app /* = nullptr */)
+void YafCylinder::Draw(YafAppearance* /* app /* = nullptr */)
 {
+    // TODO: add base and top (circles)
     gluCylinder(_quadric, Base, Top, Height, Slices, Stacks);
 }
 
-void YafSphere::draw(YafAppearance* /* app /* = nullptr */)
+void YafSphere::Draw(YafAppearance* /* app /* = nullptr */)
 {
     gluSphere(_quadric, Radius, Slices, Stacks);
 }
 
-void YafTorus::draw(YafAppearance* /* app /* = nullptr */)
+void YafTorus::Draw(YafAppearance* /* app /* = nullptr */)
 {
     // TODO: rewrite this, do not use glut
     glutSolidTorus(Inner, Outer, Slices, Loops);

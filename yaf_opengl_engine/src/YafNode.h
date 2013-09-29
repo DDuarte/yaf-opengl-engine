@@ -18,7 +18,7 @@ class YafScene;
 class YafChild
 {
 public:
-    virtual void draw(YafAppearance* app = nullptr) = 0;
+    virtual void Draw(YafAppearance* app = nullptr) = 0;
 };
 
 class YafPrimitive : public YafChild
@@ -32,7 +32,7 @@ public:
     YafXY Point1;
     YafXY Point2;
 
-    virtual void draw(YafAppearance* app = nullptr) override;
+    virtual void Draw(YafAppearance* app = nullptr) override;
 
 };
 
@@ -45,7 +45,7 @@ public:
     YafXYZ Point2;
     YafXYZ Point3;
 
-    virtual void draw(YafAppearance* app = nullptr) override;
+    virtual void Draw(YafAppearance* app = nullptr) override;
 
 private:
     YafXYZ _normal;
@@ -64,7 +64,7 @@ public:
     int Slices;
     int Stacks;
 
-    virtual void draw(YafAppearance* app = nullptr) override;
+    virtual void Draw(YafAppearance* app = nullptr) override;
 
 private:
     GLUquadricObj* _quadric;
@@ -80,7 +80,7 @@ public:
     int Slices;
     int Stacks;
 
-    virtual void draw(YafAppearance* app = nullptr) override;
+    virtual void Draw(YafAppearance* app = nullptr) override;
 
 private:
     GLUquadricObj* _quadric;
@@ -95,7 +95,7 @@ public:
     int Slices;
     int Loops;
 
-    virtual void draw(YafAppearance* app = nullptr) override;
+    virtual void Draw(YafAppearance* app = nullptr) override;
 };
 
 class YafNode : public YafChild, public YafElement
@@ -110,9 +110,9 @@ public:
 
     void DoPostProcessing(YafScene* scene) { MoveRefNodesToChildren(scene); CalculateTransformMatrix(); }
 
-    virtual void draw(YafAppearance* app = nullptr) override;
+    virtual void Draw(YafAppearance* app = nullptr) override;
 
-    YafAppearance* getAppearance(){return _appearance;}
+    YafAppearance* GetAppearance() const { return _appearance; }
 
 private:
     void MoveRefNodesToChildren(YafScene* scene);

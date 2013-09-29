@@ -155,6 +155,8 @@ YafScene* ParseYafFile(const std::string& file)
             app->TexLengthS = GetAttribute<float>(*a, "texlength_s", "appearances appearance");
             app->TexLengthT = GetAttribute<float>(*a, "texlength_t", "appearances appearance");
         }
+
+        scene->AddAppearance(app);
     }
 
     // <graph>
@@ -200,8 +202,13 @@ YafScene* ParseYafFile(const std::string& file)
             node->AddTransform(transform);
         }
 
-        auto appRef = GetAttribute<std::string>(*n, "appearanceref", "graph node", false);
-        node->SetAppearance(appRef.empty() ? nullptr : scene->GetAppearance(appRef));
+        if (auto appRefElement = GetChildren(*n, "appearanceref", "graph node", false))
+        {
+            auto appRef = GetAttribute<std::string>(appRefElement, "id", "graph node appearanceref");
+            node->SetAppearance(scene->GetAppearance(appRef));
+        }
+        else
+            node->SetAppearance(nullptr);
 
         auto childrenElement = (*n)->FirstChildElement("children");
         if (!childrenElement)
