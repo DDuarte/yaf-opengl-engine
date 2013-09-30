@@ -23,6 +23,8 @@ public:
     void SetGlobals(YafRGBA bg, YafDrawMode dm, YafShading s, YafCullFace cf, YafCullOrder co);
     void SetLightOptions(bool doubleSided, bool local, bool enabled, YafRGBA ambient);
 
+    YafDrawMode* GetDrawMode() { return &_drawMode; } // can be changed
+
     void DoPostProcessing();
 
     void SetInitialCamera(const std::string& id) { _initialCamera = _cameras[id]; }

@@ -111,7 +111,6 @@ void YafScene::init()
 
     glShadeModel(YafToOpenGL(_shading));
 
-    glPolygonMode(GL_FRONT_AND_BACK, YafToOpenGL(_drawMode));
     glCullFace(YafToOpenGL(_cullFace));
     glFrontFace(YafToOpenGL(_cullOrder));
 
@@ -134,6 +133,8 @@ void YafScene::display()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
+
+    glPolygonMode(GL_FRONT_AND_BACK, YafToOpenGL(_drawMode)); // can be changed in interface
 
     CGFscene::activeCamera->applyView();
 

@@ -12,14 +12,19 @@ public:
     {
         _scene = (YafScene*)scene;
 
-        GLUI_Panel* lightsPanel = addPanel("Lights");
+        auto lightsPanel = addPanel("Lights");
 
         for (auto light = _scene->GetLights().begin(); light != _scene->GetLights().end(); ++light)
-        {
             addCheckboxToPanel(lightsPanel, const_cast<char*>(light->first.c_str()), reinterpret_cast<int*>(&light->second->Enabled));
 
-            addColumn();
-        }
+        addColumn();
+
+        auto visPanel = addPanel("Visualization");
+
+        auto drawModeRadioGroup = addRadioGroupToPanel(visPanel, reinterpret_cast<int*>(_scene->GetDrawMode()));
+        addRadioButtonToGroup(drawModeRadioGroup, "Fill"); // must match order of YafDrawMode (0, 1, 2)
+        addRadioButtonToGroup(drawModeRadioGroup, "Line");
+        addRadioButtonToGroup(drawModeRadioGroup, "Point");
     }
 
     virtual void processGUI(GLUI_Control *ctrl) override
