@@ -7,6 +7,9 @@
     <Filter Include="include">
       <UniqueIdentifier>{94f50b71-c968-4f28-a4b4-ed4bdc751d05}</UniqueIdentifier>
     </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{f3538cfb-2f11-4eb6-b6d2-9575bb9d581e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\YafMisc.cpp">
@@ -62,5 +65,48 @@
     <ClInclude Include="src\YafInterface.h">
       <Filter>include</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\earth.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\jupiter.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\mars.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\mecury.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\moon.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\neptune.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\saturn.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\saturn_ring.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\sun.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\uranus.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\uranus_ring.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\venus.jpg">
+      <Filter>resources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="resources\T01G04_solarsystem.xml">
+      <Filter>resources</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

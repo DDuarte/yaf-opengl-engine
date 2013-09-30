@@ -1,0 +1,239 @@
+<yaf>
+    <globals background="0 0 0 0" drawmode="fill" shading="gouraud" cullface="front" cullorder="CW" />
+    <cameras initial="cam1" >
+        <perspective id="cam1" near="4.5" far="3" angle="45" pos="0.5 7.5 4.5" target="2.5 2.3 2.1" />
+        <ortho id="cam2" near="6.9" far="8.6" left="4.3" right="6.2" top="8.5" bottom="2.4" />
+    </cameras>
+    <lighting doublesided="true" local="false" enabled="true" ambient="0.5 2.5 9.3 4.6" >
+        <omni id="light1" enabled="true"
+            location="0 0 0"
+            ambient="10 10.2 10.3 5.2"
+            diffuse="10 10.2 10.3 5.2"
+            specular="10 10.2 10.3 5.2"
+        />
+    </lighting>
+    <textures>
+        <texture id="sun" file="sun.jpg" />
+        <texture id="mercury" file="mercury.jpg" />
+        <texture id="venus" file="venus.jpg" />
+        <texture id="earth" file="earth.jpg" />
+        <texture id="moon" file="moon.jpg" />
+        <texture id="mars" file="mars.jpg" />
+        <texture id="jupiter" file="jupiter.jpg" />
+        <texture id="saturn" file="saturn.jpg" />
+        <texture id="saturn_ring" file="saturn_ring.jpg" />
+        <texture id="uranus" file="uranus.jpg" />
+        <texture id="uranus_ring" file="uranus_ring.jpg" />
+        <texture id="neptune" file="neptune.jpg" />
+    </textures>
+    <appearances>
+        <appearance id="sun"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="sun"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="mercury"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="mercury"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="venus"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="venus"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="earth"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="earth"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="moon"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="moon"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="mars"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="mars"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="jupiter"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="jupiter"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="saturn"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="saturn"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="saturn_ring"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="saturn_ring"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="uranus"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="uranus"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="uranus_ring"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="uranus_ring"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="neptune"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="neptune"
+            texlength_s="1"
+            texlength_t="1" />
+    </appearances>
+    <graph rootid="solarsystem">
+        <node id="solarsystem">
+            <transforms />
+            <children>
+                <noderef id="sun" />
+                <noderef id="mercury" />
+                <noderef id="venus" />
+                <noderef id="earthsystem" />
+                <noderef id="mars" />
+                <noderef id="jupiter" />
+                <noderef id="saturn" /> <!-- with ring -->
+                <noderef id="uranus" /> <!-- with ring -->
+                <noderef id="neptune" />
+            </children>
+        </node>
+        <node id="sun">
+            <transforms />
+            <appearanceref id="sun" />
+            <children>
+                <sphere radius="6.96" slices="20" stacks="20" />
+            </children>
+        </node>
+        <node id="earthsystem">
+            <transforms>
+                <translate to="14.96 0 0"/>
+            </transforms>
+            <children>
+                <noderef id="earth" />
+                <noderef id="moon" />
+            </children>
+        </node>
+        <node id="earth">
+            <transforms>
+                <rotate axis="x" angle="-80"/>
+                <scale factor="0.06371 0.06371 0.06371" />
+            </transforms>
+            <appearanceref id="earth" />
+            <children>
+                <noderef id="planet" />
+            </children>
+        </node>
+        <node id="moon">
+            <transforms>
+                <translate to="0 0.19 0.19"/>
+                <rotate axis="z" angle="45" />
+                <scale factor="0.017371 0.017371 0.017371" />
+            </transforms>
+            <appearanceref id="moon" />
+            <children>
+                <noderef id="planet" />
+            </children>
+        </node>
+        <node id="saturn">
+            <transforms>
+                <scale factor="0.58232 0.58232 0.58232" />
+                <translate to="142.94 0 0"/>
+                <rotate axis="x" angle="90" />
+            </transforms>
+            <children>
+                <noderef id="saturnplanet" />
+                <noderef id="saturnring" />
+            </children>
+        </node>
+        <node id="saturnplanet">
+            <transforms />
+            <appearanceref id="saturn" />
+            <children>
+                <noderef id="planet" />
+            </children>
+        </node>
+        <node id="saturnring">
+            <transforms />
+            <appearanceref id="saturn_ring" />
+            <children>
+                <noderef id="planetring" />
+            </children>
+        </node>
+        <node id="planet">
+            <transforms />
+            <children>
+                <sphere radius="1" slices="15" stacks="15" />
+            </children>
+        </node>
+        <node id="planetring">
+            <transforms />
+            <children>
+                <torus inner="0.015" outer="1.4" slices="50" loops="50" />
+            </children>
+        </node>
+        <node id="mercury">
+            <transforms>
+                <scale factor="0.02576 0.02576 0.02576" />
+                <translate to="5.791 0 0"/>
+            </transforms>
+            <appearanceref id="mercury" />
+            <children>
+                <noderef id="planet" />
+            </children>
+        </node>
+    </graph>
+</yaf>

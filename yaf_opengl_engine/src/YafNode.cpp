@@ -141,7 +141,6 @@ void YafTorus::Draw(YafAppearance* /* app /* = nullptr */)
             float r = Inner * c + Outer;
             float z = Inner * (float)sin(b);
 
-            //First point
             glTexCoord2f((float)i / (float)(Slices), (float)(j) / (float)(Loops));
             vNormal.X = x0 * c;
             vNormal.Y = y0 * c;
