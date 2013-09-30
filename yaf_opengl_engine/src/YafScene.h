@@ -75,6 +75,12 @@ public:
         for (auto l = _lights.begin(); l != _lights.end(); ++l)
             l->second->InitLight();
 
+        for (auto t = _textures.begin(); t != _textures.end(); ++t)
+            t->second->InitTexture();
+
+        for (auto a = _appearances.begin(); a != _appearances.end(); ++a)
+            a->second->InitAppearance();
+
         setUpdatePeriod(100);
     }
 

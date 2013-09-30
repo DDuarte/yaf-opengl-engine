@@ -294,7 +294,7 @@ int main(int argc, char* argv[])
 
     try
     {
-        scene = ParseYafFile("yaf_min.xml");
+        scene = ParseYafFile("T01G04_solarsystem.xml");
     }
     catch (YafParsingException& ex)
     {
