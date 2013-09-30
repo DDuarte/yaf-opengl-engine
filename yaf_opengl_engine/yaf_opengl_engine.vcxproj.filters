@@ -76,9 +76,6 @@
     <Image Include="resources\mars.jpg">
       <Filter>resources</Filter>
     </Image>
-    <Image Include="resources\mecury.jpg">
-      <Filter>resources</Filter>
-    </Image>
     <Image Include="resources\moon.jpg">
       <Filter>resources</Filter>
     </Image>
@@ -101,6 +98,9 @@
       <Filter>resources</Filter>
     </Image>
     <Image Include="resources\venus.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\mercury.jpg">
       <Filter>resources</Filter>
     </Image>
   </ItemGroup>

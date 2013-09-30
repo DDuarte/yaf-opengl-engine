@@ -45,7 +45,7 @@
     <Image Include="resources\mars.jpg">
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
     </Image>
-    <Image Include="resources\mecury.jpg">
+    <Image Include="resources\mercury.jpg">
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
     </Image>
     <Image Include="resources\moon.jpg">

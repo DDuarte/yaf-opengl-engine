@@ -7,9 +7,9 @@
     <lighting doublesided="true" local="false" enabled="true" ambient="0.5 2.5 9.3 4.6" >
         <omni id="light1" enabled="true"
             location="0 0 0"
-            ambient="10 10.2 10.3 5.2"
-            diffuse="10 10.2 10.3 5.2"
-            specular="10 10.2 10.3 5.2"
+            ambient="1 1 1 1"
+            diffuse="1 1 1 1"
+            specular="1 1 1 1"
         />
     </lighting>
     <textures>
@@ -143,12 +143,12 @@
                 <noderef id="sun" />
                 <noderef id="mercury" />
                 <noderef id="venus" />
-                <noderef id="earthsystem" />
+                <noderef id="earthsystem" /> 
                 <noderef id="mars" />
                 <noderef id="jupiter" />
                 <noderef id="saturn" /> <!-- with ring -->
                 <noderef id="uranus" /> <!-- with ring -->
-                <noderef id="neptune" />
+                <noderef id="neptune" /> 
             </children>
         </node>
         <node id="sun">
@@ -179,9 +179,9 @@
         </node>
         <node id="moon">
             <transforms>
-                <translate to="0 0.19 0.19"/>
+				<scale factor="0.017371 0.017371 0.017371" />
+                <translate to="0 0.095 0.095"/>
                 <rotate axis="z" angle="45" />
-                <scale factor="0.017371 0.017371 0.017371" />
             </transforms>
             <appearanceref id="moon" />
             <children>
@@ -214,7 +214,8 @@
             </children>
         </node>
         <node id="planet">
-            <transforms />
+            <transforms/>
+		
             <children>
                 <sphere radius="1" slices="15" stacks="15" />
             </children>
@@ -228,11 +229,75 @@
         <node id="mercury">
             <transforms>
                 <scale factor="0.02576 0.02576 0.02576" />
-                <translate to="5.791 0 0"/>
+                <translate to="8.35 0 0"/>
             </transforms>
             <appearanceref id="mercury" />
             <children>
                 <noderef id="planet" />
+            </children>
+        </node>
+		<node id="venus">
+            <transforms>
+                <scale factor="0.060518 0.060518 0.060518" />
+                <translate to="10.82 0 0"/>
+            </transforms>
+            <appearanceref id="venus" />
+            <children>
+                <noderef id="planet" />
+            </children>
+        </node>
+		<node id="mars">
+            <transforms>
+                <scale factor="0.039 0.039 0.039" />
+                <translate to="22.794 0 0"/>
+            </transforms>
+            <appearanceref id="mars" />
+            <children>
+                <noderef id="planet" />
+            </children>
+        </node>
+		<node id="jupiter">
+            <transforms>
+                <scale factor="0.69911 0.69911 0.69911" />
+                <translate to="77.833 0 0"/>
+            </transforms>
+            <appearanceref id="jupiter" />
+            <children>
+                <noderef id="planet" />
+            </children>
+        </node>
+		<node id="uranus">
+            <transforms>
+                <scale factor="0.25362 0.25362 0.25362" />
+                <translate to="287.099 0 0"/>
+            </transforms>
+            <children>
+                <noderef id="uranus_planet"/>
+				<noderef id="uranus_ring"/>
+            </children>
+        </node>
+		<node id="uranus_planet">
+            <transforms/>
+			<appearanceref id="uranus" />
+            <children>
+                <noderef id="planet"/>
+            </children>
+        </node>
+		<node id="uranus_ring">
+            <transforms/>
+			<appearanceref id="uranus_ring" />
+            <children>
+                <noderef id="planetring"/>
+            </children>
+        </node>
+		<node id="neptune">
+            <transforms>
+                <scale factor="0.24622 0.24622 0.24622" />
+                <translate to="450.43 0 0"/>
+            </transforms>
+			<appearanceref id="neptune" />
+            <children>
+                <noderef id="planet"/>
             </children>
         </node>
     </graph>

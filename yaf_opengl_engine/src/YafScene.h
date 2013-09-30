@@ -119,7 +119,7 @@ public:
 
         glPushMatrix();
 
-        axis.draw();
+        glColor3f(1.0f, 1.0f, 1.0f); // hack: fixes colors
 
         _rootNode->Draw(_rootNode->GetAppearance());
 
