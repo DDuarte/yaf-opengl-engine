@@ -51,6 +51,12 @@ YafLight* YafScene::GetLight(const std::string& id) const
     return l != _lights.end() ? l->second : nullptr;
 }
 
+YafCamera* YafScene::GetCamera(const std::string& id) const
+{
+    auto c = _cameras.find(id);
+    return c != _cameras.end() ? c->second : nullptr;
+}
+
 void YafScene::DoPostProcessing()
 {
     for (auto n = _nodes.begin(); n != _nodes.end(); ++n)

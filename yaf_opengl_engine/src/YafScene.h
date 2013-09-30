@@ -26,7 +26,7 @@ public:
     void DoPostProcessing();
 
     void SetInitialCamera(const std::string& id) { _initialCamera = _cameras[id]; }
-    void SetRootNode(const std::string& id) { _rootNode = _nodes[id]; }
+    void SetRootNode(YafNode* node) { _rootNode = node; }
 
     void AddCamera(YafCamera* camera);
     void AddLight(YafLight* light);
@@ -37,7 +37,14 @@ public:
     YafTexture* GetTexture(const std::string& id) const;
     YafAppearance* GetAppearance(const std::string& id) const;
     YafLight* GetLight(const std::string& id) const;
+    YafCamera* GetCamera(const std::string& id) const;
     YafNode* GetNode(const std::string& id) const;
+
+    std::map<std::string, YafTexture*>& GetTextures() { return _textures; }
+    std::map<std::string, YafAppearance*>& GetAppearances() { return _appearances; }
+    std::map<std::string, YafLight*>& GetLights() { return _lights; }
+    std::map<std::string, YafCamera*>& GetCameras() { return _cameras; }
+    std::map<std::string, YafNode*>& GetNodes() { return _nodes; }
 
     virtual void init() override;
     virtual void display() override;
