@@ -24,6 +24,7 @@ public:
     void SetLightOptions(bool doubleSided, bool local, bool enabled, YafRGBA ambient);
 
     YafDrawMode* GetDrawMode() { return &_drawMode; } // can be changed
+    int* GetActiveCamera() { return &_activeCamera; } // can be changed
 
     void DoPostProcessing();
 
@@ -64,6 +65,7 @@ private:
     // Cameras
     YafCamera* _initialCamera;
     std::map<std::string, YafCamera*> _cameras;
+    int _activeCamera;
 
     // Lighting
     bool _lightDoubleSided;

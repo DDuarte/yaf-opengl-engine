@@ -171,6 +171,7 @@ void YafScene::initCameras()
         i++;
     }
 
+    _activeCamera = initialCamera;
     activateCamera(initialCamera);
 }
 

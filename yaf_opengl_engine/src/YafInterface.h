@@ -5,6 +5,8 @@
 
 #include "YafScene.h"
 
+#define CAMERA_PANEL_ID 3
+
 class YafInterface : public CGFinterface
 {
 public:
@@ -21,15 +23,23 @@ public:
 
         auto visPanel = addPanel("Visualization");
 
+        auto i = 0;
+        auto camerasListBox = addListboxToPanel(visPanel, "Cameras: ", _scene->GetActiveCamera(), CAMERA_PANEL_ID);
+        for (auto camera = _scene->GetCameras().begin(); camera != _scene->GetCameras().end(); ++camera, ++i)
+            camerasListBox->add_item(i, camera->first.c_str());
+
         auto drawModeRadioGroup = addRadioGroupToPanel(visPanel, reinterpret_cast<int*>(_scene->GetDrawMode()));
         addRadioButtonToGroup(drawModeRadioGroup, "Fill"); // must match order of YafDrawMode (0, 1, 2)
         addRadioButtonToGroup(drawModeRadioGroup, "Line");
         addRadioButtonToGroup(drawModeRadioGroup, "Point");
+
+        addColumn();
     }
 
     virtual void processGUI(GLUI_Control *ctrl) override
     {
-       // throw std::logic_error("The method or operation is not implemented.");
+       if (ctrl->user_id == CAMERA_PANEL_ID)
+           _scene->activateCamera(ctrl->int_val);
     }
 
 private:
