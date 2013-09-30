@@ -7,8 +7,8 @@
 class YafLight : public YafElement, public CGFlight
 {
 public:
-    YafLight(const std::string& id, int i, YafXYZ pos) : YafElement(id), Location(pos), CGFlight(0x4000 + i, pos) { }
-    YafLight(const std::string& id, int i, YafXYZ pos, YafXYZ dir) : YafElement(id), Location(pos), CGFlight(0x4000 + i, pos, dir) { }
+    YafLight(const std::string& id, int i, YafXYZ pos) : YafElement(id), Location(pos), CGFlight(GL_LIGHT0 + i, pos) { }
+    YafLight(const std::string& id, int i, YafXYZ pos, YafXYZ dir) : YafElement(id), Location(pos), CGFlight(GL_LIGHT0 + i, pos, dir) { }
     bool Enabled;
     YafXYZ Location;
     YafRGBA Ambient;
