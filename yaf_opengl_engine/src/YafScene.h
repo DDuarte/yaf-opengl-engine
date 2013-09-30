@@ -18,6 +18,24 @@ class YafAppearance;
 class YafScene : public CGFscene
 {
 public:
+    ~YafScene()
+    {
+        for (auto x = _cameras.begin(); x != _cameras.end(); ++x)
+            delete x->second;
+
+        for (auto x = _lights.begin(); x != _lights.end(); ++x)
+            delete x->second;
+
+        for (auto x = _textures.begin(); x != _textures.end(); ++x)
+            delete x->second;
+
+        for (auto x = _appearances.begin(); x != _appearances.end(); ++x)
+            delete x->second;
+
+        for (auto x = _nodes.begin(); x != _nodes.end(); ++x)
+            delete x->second;
+    }
+
     void SetGlobals(YafRGBA bg, YafDrawMode dm, YafShading s, YafCullFace cf, YafCullOrder co)
     {
         _backgroundColor = bg;

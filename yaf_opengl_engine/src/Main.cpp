@@ -324,6 +324,8 @@ int main(int argc, char* argv[])
     }
     catch (GLexception& ex)
     {
+        delete scene;
+
         std::cerr << "GLexception: " << ex.what() << std::endl;
         std::cout << "Press ENTER key to continue." << std::endl;
         std::cin.get();
@@ -331,11 +333,15 @@ int main(int argc, char* argv[])
     }
     catch (std::exception& ex)
     {
+        delete scene;
+
         std::cerr << "Exception: " << ex.what() << std::endl;
         std::cout << "Press ENTER key to continue." << std::endl;
         std::cin.get();
         return EXIT_FAILURE;
     }
+
+    delete scene;
 
     std::cout << "Press ENTER key to continue." << std::endl;
     std::cin.get();
