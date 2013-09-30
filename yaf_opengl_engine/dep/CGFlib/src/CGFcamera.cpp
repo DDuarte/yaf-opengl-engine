@@ -3,7 +3,6 @@
 
 CGFcamera::CGFcamera()
 {
-	//float light0_pos[4] = {4.0, 6.0, 3.0, 1.0};
 	position[0] = 0;
 	position[1] = 0;
 	position[2] = -25;

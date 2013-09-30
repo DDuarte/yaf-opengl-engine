@@ -8,7 +8,7 @@ CGFscene::CGFscene() {
 	iface=NULL;
 	lastUpdate=CGFapplication::getTime();
 	setUpdatePeriod(0);
-	initCameras();
+	//initCameras();
 }
 
 CGFscene::~CGFscene() {

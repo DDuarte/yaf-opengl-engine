@@ -23,11 +23,17 @@ public:
 
     virtual void applyView() override
     {
-        glMatrixMode(GL_MODELVIEW);
+        /*glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
         gluLookAt(Position.X, Position.Y, Position.Z,
                   Target.X, Target.Y, Target.Z,
-                  0.0, 1.0, 0.0);
+                  0.0, 1.0, 0.0);*/
+
+        glTranslatef(position[0], position[1], position[2]);
+
+        glRotatef(rotation[0], 1.f, 0.f, 0.f);
+        glRotatef(rotation[1], 0.f, 1.f, 0.f);
+        glRotatef(rotation[2], 0.f, 0.f, 1.f);
     }
 
     virtual void updateProjectionMatrix(int width, int height) override

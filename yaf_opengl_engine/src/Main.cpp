@@ -319,6 +319,7 @@ int main(int argc, char* argv[])
 
         app.setScene(scene);
         app.setInterface(new YafInterface());
+        scene->initCameras();
 
         app.run();
     }
