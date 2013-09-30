@@ -1,7 +1,9 @@
 #include "YafNode.h"
 #include "YafScene.h"
+#include <glm/gtc/type_ptr.hpp>
 
-
+#define _USE_MATH_DEFINES // for M_PI
+#include <math.h>
 
 void YafNode::MoveRefNodesToChildren(YafScene* scene)
 {
