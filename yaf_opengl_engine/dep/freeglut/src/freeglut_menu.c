@@ -723,7 +723,8 @@ void fgDeactivateMenu( SFG_Window *window )
 
     /* Forget about having that menu active anymore, now: */
     menu->Window->ActiveMenu = NULL;
-    menu->ParentWindow->ActiveMenu = NULL;
+    if (menu->ParentWindow) // changed - DDuarte
+        menu->ParentWindow->ActiveMenu = NULL;
     fghSetMenuParentWindow ( NULL, menu );
     menu->IsActive = GL_FALSE;
     menu->ActiveEntry = NULL;
