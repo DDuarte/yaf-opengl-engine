@@ -137,9 +137,12 @@ void YafScene::display()
 
     CGFscene::activeCamera->applyView();
 
-    // TODO: disable or enable lights (check boxes in interface)
     for (auto l = _lights.begin(); l != _lights.end(); ++l)
     {
+        if (l->second->Enabled)
+            l->second->enable();
+        else
+            l->second->disable();
         l->second->update();
         l->second->draw();
     }

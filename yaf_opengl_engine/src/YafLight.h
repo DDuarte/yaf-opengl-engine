@@ -14,11 +14,9 @@ public:
     YafRGBA Ambient;
     YafRGBA Diffuse;
     YafRGBA Specular;
+
     virtual void InitLight()
     {
-        if (Enabled)
-            enable();
-
         setAmbient(Ambient);
         setDiffuse(Diffuse);
         setSpecular(Specular);
