@@ -46,11 +46,13 @@ YafScene* ParseYafFile(const std::string& file)
     for (auto cp = camerasPerspective.begin(); cp != camerasPerspective.end(); ++cp)
     {
         auto id = GetAttribute<std::string>(*cp, "id", "cameras perspective");
-        auto camera = new YafPerspectiveCamera(id);
+
+        auto position = GetAttribute<YafXYZ>(*cp, "pos", "cameras perspective");
+
+        auto camera = new YafPerspectiveCamera(id, position);
         camera->Near     = GetAttribute<float>(*cp, "near", "cameras perspective");
         camera->Far      = GetAttribute<float>(*cp, "far", "cameras perspective");
         camera->Angle    = GetAttribute<float>(*cp, "angle", "cameras perspective");
-        camera->Position = GetAttribute<YafXYZ>(*cp, "pos", "cameras perspective");
         camera->Target   = GetAttribute<YafXYZ>(*cp, "target", "cameras perspective");
         scene->AddCamera(camera);
     }
