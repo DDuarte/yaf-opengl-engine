@@ -1,6 +1,7 @@
 #include "YafNode.h"
 #include "YafScene.h"
 #include <glm/gtc/type_ptr.hpp>
+#include <iostream>
 
 #define _USE_MATH_DEFINES // for M_PI
 #include <math.h>
@@ -35,11 +36,32 @@ void YafNode::Draw(YafAppearance* app)
         _appearance->apply();
     else if (app)
         app->apply();
+
     glPushMatrix();
     glMultMatrixf(glm::value_ptr(_m));
+
     for (auto i = 0u; i < _children.size(); ++i)
         _children[i]->Draw(app);
+
     glPopMatrix();
+}
+
+bool YafNode::IsCyclic(std::string& which)
+{
+    if (_processing)
+    {
+        which = Id;
+        return true;
+    }
+
+    _processing = true;
+
+    for (auto i = 0u; i < _children.size(); ++i)
+        if (_children[i]->IsCyclic(which))
+            return true;
+
+    _processing = false;
+    return false;
 }
 
 YafTriangle::YafTriangle(YafXYZ p1, YafXYZ p2, YafXYZ p3) : Point1(p1), Point2(p2), Point3(p3)

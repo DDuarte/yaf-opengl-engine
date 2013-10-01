@@ -61,6 +61,10 @@ void YafScene::DoPostProcessing()
 {
     for (auto n = _nodes.begin(); n != _nodes.end(); ++n)
         n->second->DoPostProcessing(this);
+
+    std::string which;
+    if (_rootNode->IsCyclic(which))
+        throw YafParsingException("Cycle in node " + which + " detected.");
 }
 
 YafScene::~YafScene()

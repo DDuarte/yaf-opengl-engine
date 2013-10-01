@@ -19,6 +19,8 @@ class YafChild
 {
 public:
     virtual void Draw(YafAppearance* app = nullptr) = 0;
+
+    virtual bool IsCyclic(std::string& which) { return false; }
 };
 
 class YafPrimitive : public YafChild
@@ -101,7 +103,7 @@ public:
 class YafNode : public YafChild, public YafElement
 {
 public:
-    YafNode(const std::string& id) : YafElement(id) { }
+    YafNode(const std::string& id) : YafElement(id), _processing(false) { }
     void AddTransform(YafTransform* t) { _transforms.push_back(t); }
     void AddChild(YafChild* c) { _children.push_back(c); }
     void SetAppearance(YafAppearance* a) { _appearance = a; }
@@ -114,9 +116,13 @@ public:
 
     YafAppearance* GetAppearance() const { return _appearance; }
 
+    virtual bool IsCyclic(std::string& which);
+
 private:
     void MoveRefNodesToChildren(YafScene* scene);
     void CalculateTransformMatrix();
+
+    bool _processing;
 
     std::vector<YafTransform*> _transforms;
     YafAppearance* _appearance; // can be null

@@ -282,13 +282,13 @@ YafScene* ParseYafFile(const std::string& file)
         scene->AddNode(node);
     }
 
-    scene->DoPostProcessing();
-
     auto rootNode = scene->GetNode(graphRootId);
     if (rootNode)
         scene->SetRootNode(rootNode);
     else
         throw YafParsingException("Root node (" + graphRootId + ") not found.");
+
+    scene->DoPostProcessing();
 
     return scene;
 }
