@@ -85,7 +85,7 @@ YafScene::~YafScene()
         delete x->second;
 }
 
-void YafScene::SetGlobals( YafRGBA bg, YafDrawMode dm, YafShading s, YafCullFace cf, YafCullOrder co )
+void YafScene::SetGlobals(YafRGBA bg, YafDrawMode dm, YafShading s, YafCullFace cf, YafCullOrder co)
 {
     _backgroundColor = bg;
     _drawMode = dm;

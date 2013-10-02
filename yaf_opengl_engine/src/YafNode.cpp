@@ -32,16 +32,16 @@ void YafNode::CalculateTransformMatrix()
 
 void YafNode::Draw(YafAppearance* app)
 {
-    if (_appearance)
+    if (_appearance) // if we got appearance, override anything that was applied before
         _appearance->apply();
-    else if (app)
-        app->apply();
+    // else if (app) // not required because father or other ancestor already applied it
+    //     app->apply();
 
     glPushMatrix();
     glMultMatrixf(glm::value_ptr(_m));
 
     for (auto i = 0u; i < _children.size(); ++i)
-        _children[i]->Draw(app);
+        _children[i]->Draw(_appearance ? _appearance : app);
 
     glPopMatrix();
 }
@@ -50,7 +50,7 @@ bool YafNode::IsCyclic(std::string& which)
 {
     if (_processing)
     {
-        which = Id;
+        which = Id; // error reporting
         return true;
     }
 

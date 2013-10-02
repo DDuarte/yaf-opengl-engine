@@ -122,14 +122,14 @@ private:
     void MoveRefNodesToChildren(YafScene* scene);
     void CalculateTransformMatrix();
 
-    bool _processing;
+    bool _processing; // used in cycle detection
 
-    std::vector<YafTransform*> _transforms;
+    std::vector<YafTransform*> _transforms; // cache, cleared after parsing, stored in _m
     YafAppearance* _appearance; // can be null
 
     std::vector<YafChild*> _children;
 
-    std::vector<std::string> _refNodes;
+    std::vector<std::string> _refNodes; // cache, cleared after parsing, stored in _children
 
     glm::mat4 _m; // partial matrix
 };
