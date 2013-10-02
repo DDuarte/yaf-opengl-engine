@@ -49,10 +49,9 @@ public:
 
     virtual void updateProjectionMatrix(int width, int height) override
     {
-        double aspect = (double) width / (double) height;
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluPerspective(Angle, aspect, Near, Far);
+        gluPerspective(Angle, (double) width / (double) height, Near, Far);
     }
 
 private:

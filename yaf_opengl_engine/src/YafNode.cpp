@@ -179,7 +179,7 @@ void YafTorus::Draw(YafAppearance* /* app /* = nullptr */)
             vNormal.Y = y1 * c;
             vNormal.Z = z / Loops;
             vNormal.GetNormalized();
-            glNormal3f(vNormal.Z, vNormal.Y, vNormal.Z);
+            glNormal3f(vNormal.X, vNormal.Y, vNormal.Z);
             glVertex3f(x1 * r, y1 * r, z);
         }
         glEnd();

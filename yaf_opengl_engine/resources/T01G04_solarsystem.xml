@@ -1,13 +1,21 @@
 <yaf>
     <globals background="0 0 0 0" drawmode="fill" shading="gouraud" cullface="front" cullorder="CW" />
-    <cameras initial="cam1" >
-        <perspective id="cam1" near="0.1" far="500" angle="45" pos="0 0 -25" target="0 0 0" />
+    <cameras initial="cam_sun" >
+        <perspective id="cam_sun"     near="0.1" far="500" angle="50" pos= "-00.000 0 25" target= "00.000 0 0" />
+        <perspective id="cam_mercury" near="0.1" far="500" angle="50" pos= "-12.751 0 0.5" target= "12.751 0 0" />
+        <perspective id="cam_venus"   near="0.1" far="500" angle="50" pos= "-17.780 0 0.5" target= "17.780 0 0" />
+        <perspective id="cam_earth"   near="0.1" far="500" angle="50" pos= "-21.920 0 0.5" target= "21.920 0 0" />
+        <perspective id="cam_mars"    near="0.1" far="500" angle="50" pos= "-29.754 0 0.5" target= "29.754 0 0" />
+        <perspective id="cam_jupiter" near="0.1" far="500" angle="50" pos= "-84.793 0 2" target= "84.793 0 0" />
+        <perspective id="cam_saturn"  near="0.1" far="500" angle="50" pos="-149.900 0.5 3" target="149.900 0 0" />
+        <perspective id="cam_uranus"  near="0.1" far="500" angle="50" pos="-293.960 0.5 1.5" target="293.960 0 0" />
+        <perspective id="cam_neptune" near="0.1" far="500" angle="50" pos="-457.390 0 1" target="457.390 0 0" />
         <ortho id="cam2" near="6.9" far="8.6" left="4.3" right="6.2" top="8.5" bottom="2.4" />
     </cameras>
-    <lighting doublesided="true" local="false" enabled="true" ambient="0.5 0.5 0.5 1" >
+    <lighting doublesided="false" local="false" enabled="true" ambient="0.01 0.01 0.01 1" >
         <omni id="light1" enabled="true"
             location="0 0 0"
-            ambient="1 1 1 1"
+            ambient="0.01 0.01 0.01 1"
             diffuse="1 1 1 1"
             specular="1 1 1 1"
         />
@@ -28,7 +36,7 @@
     </textures>
     <appearances>
         <appearance id="sun"
-            emissive="0.5 0.5 0.5 1"
+            emissive="0.9 0.9 0.9 1"
             ambient="0.5 0.5 0.5 1"
             diffuse="0.5 0.5 0.5 1"
             specular="0.5 0.5 0.5 1"
@@ -138,7 +146,9 @@
     </appearances>
     <graph rootid="solarsystem">
         <node id="planet">
-            <transforms/>
+            <transforms>
+                <rotate axis="x" angle="-80"/>
+            </transforms>
             <children>
                 <sphere radius="1" slices="15" stacks="15" />
             </children>
@@ -201,7 +211,6 @@
         </node>
         <node id="earth">
             <transforms>
-                <rotate axis="x" angle="-80"/>
                 <scale factor="0.06371 0.06371 0.06371" />
             </transforms>
             <appearanceref id="earth" />
@@ -243,7 +252,6 @@
         <node id="saturn">
             <transforms>
 				<scale factor="0.58232 0.58232 0.58232" />
-				<rotate axis="x" angle="90" />
                 <translate to="149.9 0 0"/>
             </transforms>
             <children>
@@ -259,7 +267,9 @@
             </children>
         </node>
         <node id="saturn_ring">
-            <transforms />
+            <transforms>
+                <rotate axis="x" angle="90" />
+            </transforms>
             <appearanceref id="saturn_ring" />
             <children>
                 <noderef id="planet_ring" />

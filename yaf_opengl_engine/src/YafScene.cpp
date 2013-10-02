@@ -155,6 +155,7 @@ void YafScene::display()
     glPushMatrix();
 
     glColor3f(1.0f, 1.0f, 1.0f);
+    //axis.draw();
 
     _rootNode->Draw(_rootNode->GetAppearance());
 
