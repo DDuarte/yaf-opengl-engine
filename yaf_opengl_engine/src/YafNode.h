@@ -7,7 +7,6 @@
 #include <gl/GL.h>
 #include <gl/freeglut.h>
 #include <gl/glui.h>
-#include <glm/glm.hpp>
 
 #include "YafTransform.h"
 #include "YafAppearance.h"
@@ -111,7 +110,7 @@ public:
 
     void AddNodeRef(const std::string& id) { _refNodes.push_back(id); }
 
-    void DoPostProcessing(YafScene* scene) { MoveRefNodesToChildren(scene); CalculateTransformMatrix(); }
+    void DoPostProcessing(YafScene* scene) { MoveRefNodesToChildren(scene); }
 
     virtual void Draw(YafAppearance* app = nullptr) override;
 
@@ -119,9 +118,11 @@ public:
 
     virtual bool IsCyclic(std::string& which);
 
+    void CalculateTransformMatrix();
+
 private:
     void MoveRefNodesToChildren(YafScene* scene);
-    void CalculateTransformMatrix();
+
 
     bool _processing; // used in cycle detection
 
@@ -132,7 +133,7 @@ private:
 
     std::vector<std::string> _refNodes; // cache, cleared after parsing, stored in _children
 
-    glm::mat4 _m; // partial matrix
+    float _m[4][4]; // partial matrix
 };
 
 #endif // YafNode_h__

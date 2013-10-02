@@ -129,6 +129,9 @@ void YafScene::init()
     for (auto a = _appearances.begin(); a != _appearances.end(); ++a)
         a->second->InitAppearance();
 
+    for (auto n = _nodes.begin(); n != _nodes.end(); ++n)
+        n->second->CalculateTransformMatrix();
+
     setUpdatePeriod(100);
 }
 

@@ -1,6 +1,5 @@
 #include "YafNode.h"
 #include "YafScene.h"
-#include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 
 #define _USE_MATH_DEFINES // for M_PI
@@ -21,11 +20,15 @@ void YafNode::MoveRefNodesToChildren(YafScene* scene)
 
 void YafNode::CalculateTransformMatrix()
 {
+    glLoadIdentity();
+
     for (auto t = _transforms.begin(); t != _transforms.end(); ++t)
     {
-        (*t)->ApplyTransform(_m);
+        (*t)->ApplyTransform();
         delete (*t);
     }
+
+    glGetFloatv(GL_MODELVIEW_MATRIX, &_m[0][0]);
 
     _transforms.clear();
 }
@@ -38,7 +41,7 @@ void YafNode::Draw(YafAppearance* app)
     //     app->apply();
 
     glPushMatrix();
-    glMultMatrixf(glm::value_ptr(_m));
+    glMultMatrixf(&_m[0][0]);
 
     for (auto i = 0u; i < _children.size(); ++i)
         _children[i]->Draw(_appearance ? _appearance : app);
