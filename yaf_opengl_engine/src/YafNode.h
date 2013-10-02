@@ -70,6 +70,7 @@ public:
 
 private:
     GLUquadricObj* _quadric;
+    GLUquadricObj* _quadricD;
 };
 
 class YafSphere : public YafPrimitive
