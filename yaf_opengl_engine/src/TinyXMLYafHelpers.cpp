@@ -23,6 +23,29 @@ std::vector<TiXmlElement*> GetAllChildren(TiXmlElement* root, const std::string&
     return children;
 }
 
+std::vector<TiXmlElement*> GetAllChildren(TiXmlElement* root)
+{
+    std::vector<TiXmlElement*> children;
+
+    if (root)
+    {
+        if (TiXmlElement* first = root->FirstChildElement())
+        {
+            children.push_back(first);
+
+            TiXmlElement* next = first->NextSiblingElement();
+
+            while (next)
+            {
+                children.push_back(next);
+                next = next->NextSiblingElement();
+            }
+        }
+    }
+
+    return children;
+}
+
 TiXmlElement* GetChildren(TiXmlElement* root, const std::string& name, const std::string& prefix, bool required /*= true*/)
 {
     TiXmlElement* ele = root->FirstChildElement(name);

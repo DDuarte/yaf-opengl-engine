@@ -20,6 +20,7 @@ void YafNode::MoveRefNodesToChildren(YafScene* scene)
 
 void YafNode::CalculateTransformMatrix()
 {
+    glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
     for (auto t = _transforms.begin(); t != _transforms.end(); ++t)

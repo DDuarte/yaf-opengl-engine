@@ -178,30 +178,31 @@ YafScene* ParseYafFile(const std::string& file)
 
         auto transformsElement = GetChildren(*n, "transforms", "graph node");
 
-        auto translateTransforms = GetAllChildren(transformsElement, "translate");
-        auto rotateTransforms = GetAllChildren(transformsElement, "rotate");
-        auto scaleTransforms = GetAllChildren(transformsElement, "scale");
+        auto transforms = GetAllChildren(transformsElement);
 
-        for (auto t = translateTransforms.begin(); t != translateTransforms.end(); ++t)
+        for (auto t = transforms.begin(); t != transforms.end(); ++t)
         {
-            auto transform = new YafTranslateTransform;
-            transform->To = GetAttribute<YafXYZ>(*t, "to", "graph node transforms translate");
-            node->AddTransform(transform);
-        }
-
-        for (auto t = rotateTransforms.begin(); t != rotateTransforms.end(); ++t)
-        {
-            auto transform = new YafRotateTransform;
-            transform->Axis = YafAxisFromString(GetAttribute<std::string>(*t, "axis", "graph node transforms translate"));
-            transform->Angle = GetAttribute<float>(*t, "angle", "graph node transforms translate");
-            node->AddTransform(transform);
-        }
-
-        for (auto t = scaleTransforms.begin(); t != scaleTransforms.end(); ++t)
-        {
-            auto transform = new YafScaleTransform;
-            transform->Factor = GetAttribute<YafXYZ>(*t, "factor", "graph node transforms translate");
-            node->AddTransform(transform);
+            if ((*t)->ValueStr() == "translate")
+            {
+                auto transform = new YafTranslateTransform;
+                transform->To = GetAttribute<YafXYZ>(*t, "to", "graph node transforms translate");
+                node->AddTransform(transform);
+            }
+            else if ((*t)->ValueStr() == "rotate")
+            {
+                auto transform = new YafRotateTransform;
+                transform->Axis = YafAxisFromString(GetAttribute<std::string>(*t, "axis", "graph node transforms translate"));
+                transform->Angle = GetAttribute<float>(*t, "angle", "graph node transforms translate");
+                node->AddTransform(transform);
+            }
+            else if ((*t)->ValueStr() == "scale")
+            {
+                auto transform = new YafScaleTransform;
+                transform->Factor = GetAttribute<YafXYZ>(*t, "factor", "graph node transforms translate");
+                node->AddTransform(transform);
+            }
+            else
+                throw YafParsingException("Transform " + (*t)->ValueStr() + " is not recognized.");
         }
 
         if (auto appRefElement = GetChildren(*n, "appearanceref", "graph node", false))

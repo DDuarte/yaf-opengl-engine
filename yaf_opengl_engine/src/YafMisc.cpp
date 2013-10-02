@@ -24,7 +24,6 @@ YafXYZ YafXYZ::GetNormalized()
     return YafXYZ(X / length, Y / length, Z / length);
 }
 
-
 YafRGBA::YafRGBA(const std::string& s)
 {
     std::vector<float> RGBA = ParseFloats(s, 4);

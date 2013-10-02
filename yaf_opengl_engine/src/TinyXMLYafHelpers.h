@@ -8,6 +8,7 @@
 #include "YafEnums.h"
 
 std::vector<TiXmlElement*> GetAllChildren(TiXmlElement* root, const std::string& name);
+std::vector<TiXmlElement*> GetAllChildren(TiXmlElement* root);
 
 TiXmlElement* GetChildren(TiXmlElement* root, const std::string& name, const std::string& prefix, bool required = true);
 TiXmlElement* GetChildren(TiXmlDocument* root, const std::string& name, const std::string& prefix, bool required = true);
