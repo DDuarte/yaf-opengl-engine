@@ -173,7 +173,7 @@
         <node id="mercury">
             <transforms>
                 <scale factor="0.02576 0.02576 0.02576" />
-                <translate to="8.35 0 0"/>
+                <translate to="12.751 0 0"/>
             </transforms>
             <appearanceref id="mercury" />
             <children>
@@ -183,7 +183,7 @@
         <node id="venus">
             <transforms>
                 <scale factor="0.060518 0.060518 0.060518" />
-                <translate to="10.82 0 0"/>
+                <translate to="17.78 0 0"/>
             </transforms>
             <appearanceref id="venus" />
             <children>
@@ -192,7 +192,7 @@
         </node>
         <node id="earthsystem">
             <transforms>
-                <translate to="14.96 0 0"/>
+                <translate to="21.92 0 0"/>
             </transforms>
             <children>
                 <noderef id="earth" />
@@ -223,7 +223,7 @@
         <node id="mars">
             <transforms>
                 <scale factor="0.039 0.039 0.039" />
-                <translate to="22.794 0 0"/>
+                <translate to="29.754 0 0"/>
             </transforms>
             <appearanceref id="mars" />
             <children>
@@ -233,7 +233,7 @@
         <node id="jupiter">
             <transforms>
                 <scale factor="0.69911 0.69911 0.69911" />
-                <translate to="77.833 0 0"/>
+                <translate to="84.793 0 0"/>
             </transforms>
             <appearanceref id="jupiter" />
             <children>
@@ -242,9 +242,9 @@
         </node>
         <node id="saturn">
             <transforms>
-                <scale factor="0.58232 0.58232 0.58232" />
-                <translate to="142.94 0 0"/>
-                <rotate axis="x" angle="90" />
+				<scale factor="0.58232 0.58232 0.58232" />
+				<rotate axis="x" angle="90" />
+                <translate to="149.9 0 0"/>
             </transforms>
             <children>
                 <noderef id="saturn_planet" />
@@ -268,7 +268,7 @@
         <node id="uranus">
             <transforms>
                 <scale factor="0.25362 0.25362 0.25362" />
-                <translate to="287.099 0 0"/>
+                <translate to="293.96 0 0"/>
             </transforms>
             <children>
                 <noderef id="uranus_planet"/>
@@ -292,7 +292,7 @@
         <node id="neptune">
             <transforms>
                 <scale factor="0.24622 0.24622 0.24622" />
-                <translate to="450.43 0 0"/>
+                <translate to="457.39 0 0"/>
             </transforms>
             <appearanceref id="neptune" />
             <children>
