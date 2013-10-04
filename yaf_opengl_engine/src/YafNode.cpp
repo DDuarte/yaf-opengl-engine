@@ -111,13 +111,13 @@ void YafRectangle::Draw(YafAppearance* app /* = nullptr */)
         glTexCoord2f(0.0f, 0.0f);
     glVertex3f(Point1.X, Point1.Y, 0.0f);
     if (app && app->Texture)
-        glTexCoord2f(app->TexLengthS, 0.0f);
+        glTexCoord2f((Point2.X - Point1.X) / app->TexLengthS, 0.0f);
     glVertex3f(Point2.X, Point1.Y, 0.0f);
     if (app && app->Texture)
-        glTexCoord2f(app->TexLengthS, app->TexLengthT);
+        glTexCoord2f((Point2.X - Point1.X) / app->TexLengthS, (Point2.Y - Point1.Y) / app->TexLengthT);
     glVertex3f(Point2.X, Point2.Y, 0.0f);
     if (app && app->Texture)
-        glTexCoord2f(0.0f, app->TexLengthT);
+        glTexCoord2f(0.0f, (Point2.Y - Point1.Y) / app->TexLengthT);
     glVertex3f(Point1.X, Point2.Y, 0.0f);
     glEnd();
 }
