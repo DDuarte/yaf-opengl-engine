@@ -148,11 +148,16 @@ void YafScene::display()
     for (auto l = _lights.begin(); l != _lights.end(); ++l)
     {
         if (l->second->Enabled)
+        {
             l->second->enable();
+            l->second->update();
+            l->second->draw();
+        }
         else
+        {
             l->second->disable();
-        l->second->update();
-        l->second->draw();
+            l->second->update();
+        }
     }
 
     glPushMatrix();
@@ -183,7 +188,7 @@ void YafScene::initCameras()
     activateCamera(initialCamera);
 }
 
-void YafScene::update( unsigned long millis )
+void YafScene::update(unsigned long millis)
 {
     //throw std::logic_error("The method or operation is not implemented.");
 }
