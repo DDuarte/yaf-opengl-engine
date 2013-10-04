@@ -156,6 +156,9 @@ YafScene* ParseYafFile(const std::string& file)
             app->Texture = scene->GetTexture(texRef);
             app->TexLengthS = GetAttribute<float>(*a, "texlength_s", "appearances appearance");
             app->TexLengthT = GetAttribute<float>(*a, "texlength_t", "appearances appearance");
+
+            if (app->TexLengthS == 0 || app->TexLengthT == 0)
+                throw YafParsingException("appearances appearance texlength_s and texlength_t can't be 0."); // would mean division by 0 later
         }
 
         scene->AddAppearance(app);
@@ -227,7 +230,7 @@ YafScene* ParseYafFile(const std::string& file)
         if (childrenRectangle.empty() && childrenTriangle.empty() &&
             childrenCylinder.empty() && childrenSphere.empty() &&
             childrenTorus.empty() && childrenNodeRef.empty())
-            throw YafParsingException("<graph node children> needs at least one primitive or node");
+            throw YafParsingException("<graph node children> (" + node->Id + ") needs at least one primitive or node");
 
         for (auto r = childrenRectangle.begin(); r != childrenRectangle.end(); ++r)
         {
