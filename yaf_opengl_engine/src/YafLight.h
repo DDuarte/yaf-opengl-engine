@@ -39,7 +39,6 @@ public:
         YafLight::InitLight();
         setAngle(Angle);
         glLightf(id, GL_SPOT_EXPONENT, Exponent);
-        glLightfv(id, GL_SPOT_DIRECTION, Direction);
     }
 
     float Angle;
