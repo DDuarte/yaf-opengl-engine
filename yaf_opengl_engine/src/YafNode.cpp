@@ -130,10 +130,13 @@ void YafTriangle::Draw(YafAppearance* app /* = nullptr */)
         glTexCoord2f(0.0f, 0.0f);
     glVertex3f(Point1.X, Point1.Y, Point1.Z);
     if (app && app->Texture)
-        glTexCoord2f(app->TexLengthS, 0.0f);
+        glTexCoord2f((Point2.X - Point1.X) / app->TexLengthS, 0.0f);
     glVertex3f(Point2.X, Point2.Y, Point2.Z);
     if (app && app->Texture)
-        glTexCoord2f(0.5f * app->TexLengthS, app->TexLengthT);
+    {
+        float dist = sqrt(pow(Point3.X - Point1.X, 2.0f) + pow(Point3.Y - Point1.Y, 2.0f) + pow(Point3.Z - Point1.Z, 2.0f));
+        glTexCoord2f(dist / app->TexLengthS, dist / app->TexLengthT);
+    }
     glVertex3f(Point3.X, Point3.Y, Point3.Z);
     glEnd();
 }
