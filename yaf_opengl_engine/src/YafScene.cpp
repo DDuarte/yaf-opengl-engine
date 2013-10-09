@@ -132,7 +132,7 @@ void YafScene::init()
     for (auto n = _nodes.begin(); n != _nodes.end(); ++n)
         n->second->CalculateTransformMatrix();
 
-    setUpdatePeriod(100);
+    setUpdatePeriod(60);
 }
 
 void YafScene::display()
@@ -165,7 +165,7 @@ void YafScene::display()
     glColor3f(1.0f, 1.0f, 1.0f);
     //axis.draw();
 
-    _rootNode->Draw(_rootNode->GetAppearance());
+    _rootNode->Draw(&YafAppearance()); // Apply default appearance if none is defined
 
     glPopMatrix();
 

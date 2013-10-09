@@ -22,6 +22,7 @@ public:
 class YafAppearance : public YafElement, public CGFappearance
 {
 public:
+    YafAppearance() : YafElement("") { }
     YafAppearance(const std::string& id) : YafElement(id) { }
     YafRGBA Emissive;
     YafRGBA Ambient;
