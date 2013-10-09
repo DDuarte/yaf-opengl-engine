@@ -38,8 +38,8 @@ void YafNode::Draw(YafAppearance* app)
 {
     if (_appearance) // if we got appearance, override anything that was applied before
         _appearance->apply();
-    // else if (app) // not required because father or other ancestor already applied it
-    //     app->apply();
+    else if (app) // required (at least) for root node
+        app->apply();
 
     glPushMatrix();
     glMultMatrixf(&_m[0][0]);
@@ -110,19 +110,19 @@ YafSphere::~YafSphere()
 void YafRectangle::Draw(YafAppearance* app /* = nullptr */)
 {
     glNormal3f(0.0f, 0.0f, 1.0f);
-    glBegin(GL_QUADS);
+    glBegin(GL_POLYGON);
     if (app && app->Texture)
         glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(Point1.X, Point1.Y, 0.0f);
+    glVertex2f(Point1.X, Point1.Y);
     if (app && app->Texture)
         glTexCoord2f((Point2.X - Point1.X) / app->TexLengthS, 0.0f);
-    glVertex3f(Point2.X, Point1.Y, 0.0f);
+    glVertex2f(Point2.X, Point1.Y);
     if (app && app->Texture)
         glTexCoord2f((Point2.X - Point1.X) / app->TexLengthS, (Point2.Y - Point1.Y) / app->TexLengthT);
-    glVertex3f(Point2.X, Point2.Y, 0.0f);
+    glVertex2f(Point2.X, Point2.Y);
     if (app && app->Texture)
         glTexCoord2f(0.0f, (Point2.Y - Point1.Y) / app->TexLengthT);
-    glVertex3f(Point1.X, Point2.Y, 0.0f);
+    glVertex2f(Point1.X, Point2.Y);
     glEnd();
 }
 
