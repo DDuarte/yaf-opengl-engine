@@ -128,18 +128,22 @@ void YafRectangle::Draw(YafAppearance* app /* = nullptr */)
 
 void YafTriangle::Draw(YafAppearance* app /* = nullptr */)
 {
+    float a = YafXYZ::GetDistance(Point1, Point3);
+    float b = YafXYZ::GetDistance(Point2, Point1);
+    float c = YafXYZ::GetDistance(Point3, Point2);
+
     glNormal3d(_normal.X, _normal.Y, _normal.Z);
     glBegin(GL_TRIANGLES);
     if (app && app->Texture)
         glTexCoord2f(0.0f, 0.0f);
     glVertex3f(Point1.X, Point1.Y, Point1.Z);
     if (app && app->Texture)
-        glTexCoord2f((Point2.X - Point1.X) / app->TexLengthS, 0.0f);
+        glTexCoord2f(c / app->TexLengthS, 0.0f);
     glVertex3f(Point2.X, Point2.Y, Point2.Z);
     if (app && app->Texture)
     {
-        float dist = sqrt(pow(Point3.X - Point1.X, 2.0f) + pow(Point3.Y - Point1.Y, 2.0f) + pow(Point3.Z - Point1.Z, 2.0f));
-        glTexCoord2f(dist / app->TexLengthS, dist / app->TexLengthT);
+        float beta = acos((a*a - b*b + c*c) / (2 * a * c));
+        glTexCoord2f((c - a * cos(beta)) / app->TexLengthS, (a * sin(beta)) / app->TexLengthT);
     }
     glVertex3f(Point3.X, Point3.Y, Point3.Z);
     glEnd();

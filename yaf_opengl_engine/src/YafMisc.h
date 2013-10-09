@@ -48,7 +48,28 @@ public:
     float X;
     float Y;
     float Z;
+
     YafXYZ GetNormalized();
+    static float GetDistance(const YafXYZ& p1, const YafXYZ& p2);
+};
+
+class YafXYZW
+{
+public:
+    YafXYZW() : X(0.0f), Y(0.0f), Z(0.0f), W(0.0f) { }
+    YafXYZW(float x, float y, float z, float w) : X(x), Y(y), Z(z), W(w) { }
+    YafXYZW(const YafXYZ& p, float w) : X(p.X), Y(p.Y), Z(p.Z), W(w) { }
+    YafXYZW(const std::string& s);
+
+    operator float*()
+    {
+        return reinterpret_cast<float*>(this); // this won't work if class has virtual methods
+    }
+
+    float X;
+    float Y;
+    float Z;
+    float W;
 };
 
 class YafRGBA
