@@ -82,14 +82,18 @@ YafCylinder::YafCylinder()
     _quadric = gluNewQuadric();
     gluQuadricTexture(_quadric, true);
 
-    _quadricD = gluNewQuadric();
-    gluQuadricTexture(_quadricD, true);
+    _quadricD1 = gluNewQuadric();
+    gluQuadricTexture(_quadricD1, true);
+
+    _quadricD2 = gluNewQuadric();
+    gluQuadricTexture(_quadricD2, true);
 }
 
 YafCylinder::~YafCylinder()
 {
     gluDeleteQuadric(_quadric);
-    gluDeleteQuadric(_quadricD);
+    gluDeleteQuadric(_quadricD1);
+    gluDeleteQuadric(_quadricD2);
 }
 
 YafSphere::YafSphere()
@@ -145,14 +149,14 @@ void YafCylinder::Draw(YafAppearance* /* app /* = nullptr */)
 {
     glPushMatrix();
     glTranslatef(0.0f, 0.0f, Height);
-    gluDisk(_quadricD, 0, Top, Slices, Stacks);
+    gluDisk(_quadricD1, 0, Top, Slices, Stacks);
     glPopMatrix();
 
     gluCylinder(_quadric, Base, Top, Height, Slices, Stacks);
 
     glPushMatrix();
     glRotatef(180.0f, 1.0f, 0.0f, 0.0f);
-    gluDisk(_quadricD, 0, Base, Slices, Stacks);
+    gluDisk(_quadricD2, 0, Base, Slices, Stacks);
     glPopMatrix();
 }
 
