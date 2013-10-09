@@ -57,14 +57,13 @@ public:
     {
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
-        glOrtho(Left, Right, Bottom, Top, Near, Far);
     }
 
     virtual void updateProjectionMatrix(int /*width*/, int /*height*/) override
     {
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluOrtho2D(Left, Right, Bottom, Top);
+        glOrtho(Left, Right, Bottom, Top, Near, Far);
     }
 };
 
