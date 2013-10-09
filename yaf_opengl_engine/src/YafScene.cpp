@@ -150,8 +150,7 @@ void YafScene::display()
         if (l->second->Enabled)
         {
             l->second->enable();
-            l->second->update();
-            l->second->draw();
+            l->second->draw(); // draw calls update
         }
         else
         {
