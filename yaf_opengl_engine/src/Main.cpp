@@ -92,7 +92,7 @@ YafScene* ParseYafFile(const std::string& file)
     {
         auto id = GetAttribute<std::string>(*lo, "id", "lighting omni");
         auto location = GetAttribute<YafXYZ>(*lo, "location", "lighting omni");
-        auto light = new YafOmniLight(id, i++, location);
+        auto light = new YafOmniLight(id, i++, YafXYZW(location, 1.0f));
         light->Enabled = GetAttribute<bool>(*lo, "enabled", "lighting omni");
         light->Ambient = GetAttribute<YafRGBA>(*lo, "ambient", "lighting omni");
         light->Diffuse = GetAttribute<YafRGBA>(*lo, "diffuse", "lighting omni");
@@ -105,7 +105,7 @@ YafScene* ParseYafFile(const std::string& file)
         auto id = GetAttribute<std::string>(*ls, "id", "lighting spot");
         auto location = GetAttribute<YafXYZ>(*ls, "location", "lighting spot");
         auto direction = GetAttribute<YafXYZ>(*ls, "direction", "lighting spot");
-        YafSpotLight* light = new YafSpotLight(id, i++, location, direction);
+        YafSpotLight* light = new YafSpotLight(id, i++, YafXYZW(location, 1.0f), direction);
         light->Enabled = GetAttribute<bool>(*ls, "enabled", "lighting spot");
         light->Ambient = GetAttribute<YafRGBA>(*ls, "ambient", "lighting spot");
         light->Diffuse = GetAttribute<YafRGBA>(*ls, "diffuse", "lighting spot");
