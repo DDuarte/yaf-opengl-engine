@@ -128,9 +128,9 @@ void YafRectangle::Draw(YafAppearance* app /* = nullptr */)
 
 void YafTriangle::Draw(YafAppearance* app /* = nullptr */)
 {
-    float a = YafXYZ::GetDistance(Point1, Point3);
-    float b = YafXYZ::GetDistance(Point2, Point1);
-    float c = YafXYZ::GetDistance(Point3, Point2);
+    float a = YafXYZ::GetDistance(Point2, Point3);
+    float b = YafXYZ::GetDistance(Point1, Point3);
+    float c = YafXYZ::GetDistance(Point1, Point2);
 
     glNormal3d(_normal.X, _normal.Y, _normal.Z);
     glBegin(GL_TRIANGLES);
