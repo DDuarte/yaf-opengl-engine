@@ -50,7 +50,7 @@ TiXmlElement* GetChildren(TiXmlElement* root, const std::string& name, const std
 {
     TiXmlElement* ele = root->FirstChildElement(name);
     if (!ele && required)
-        throw YafParsingException("<" + prefix + " " + name + "> not found");
+        throw YafParsingException("<" + prefix + " " + name + "> not found: line: " + std::to_string(root->Row()) + " col: " + std::to_string(root->Column()));
 
     return ele;
 }
@@ -59,7 +59,7 @@ TiXmlElement* GetChildren(TiXmlDocument* root, const std::string& name, const st
 {
     TiXmlElement* ele = root->FirstChildElement(name);
     if (!ele && required)
-        throw YafParsingException("<" + prefix + " " + name + "> not found");
+        throw YafParsingException("<" + prefix + " " + name + "> not found: line: " + std::to_string(root->Row()) + " col: " + std::to_string(root->Column()));
 
     return ele;
 }

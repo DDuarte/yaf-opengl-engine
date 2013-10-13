@@ -19,7 +19,7 @@ inline T GetAttribute(const TiXmlElement* element, const std::string& name, cons
     T res;
     if (element->QueryValueAttribute(name, &res) != TIXML_SUCCESS)
         if (required)
-            throw YafParsingException("<" + prefix + " " + name + "> not found");
+            throw YafParsingException("<" + prefix + " " + name + "> not found: line: " + std::to_string(element->Row()) + " col: " + std::to_string(element->Column()));
         else
             return T();
     return res;

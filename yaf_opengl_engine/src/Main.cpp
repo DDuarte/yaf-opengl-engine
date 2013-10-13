@@ -205,7 +205,7 @@ YafScene* ParseYafFile(const std::string& file)
                 node->AddTransform(transform);
             }
             else
-                throw YafParsingException("Transform " + (*t)->ValueStr() + " is not recognized.");
+                throw YafParsingException("Transform " + (*t)->ValueStr() + " is not recognized: line: " + std::to_string((*t)->Row()) + " col: " + std::to_string((*t)->Column()));
         }
 
         if (auto appRefElement = GetChildren(*n, "appearanceref", "graph node", false))
