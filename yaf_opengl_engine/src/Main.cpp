@@ -1,5 +1,6 @@
 #include <tinyxml.h>
 #include <cstdlib>
+#include <string>
 
 #include "YafScene.h"
 #include "YafNode.h"
@@ -301,6 +302,14 @@ YafScene* ParseYafFile(const std::string& file)
 
 int main(int argc, char* argv[])
 {
+    if (argc != 2)
+    {
+        std::cout << "Usage: " + std::string(argv[0]) + " yaf_file_name" << std::endl;
+        std::cout << "Press ENTER key to continue." << std::endl;
+        std::cin.get();
+        return EXIT_SUCCESS;
+    }
+
     YafScene* scene = nullptr;
 
     try
