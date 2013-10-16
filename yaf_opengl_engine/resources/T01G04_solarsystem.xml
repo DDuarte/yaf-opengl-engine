@@ -10,7 +10,7 @@
         <perspective id="cam_saturn"  near="0.1" far="5000" angle="50" pos="149.900 0.5 3" target="149.900 0 0" />
         <perspective id="cam_uranus"  near="0.1" far="5000" angle="50" pos="293.960 0.5 1.5" target="293.960 0 0" />
         <perspective id="cam_neptune" near="0.1" far="5000" angle="50" pos="457.390 0 1" target="457.390 0 0" />
-        <ortho id="cam2" near="6.9" far="8.6" left="4.3" right="6.2" top="8.5" bottom="2.4" /> 
+        <ortho id="cam_overview" near="0.1" far="5000" left="300" right="-100" top="100" bottom="-100" /> 
     </cameras>
     <lighting doublesided="false" local="false" enabled="true" ambient="0.01 0.01 0.01 1" >
         <omni id="light1" enabled="true"
