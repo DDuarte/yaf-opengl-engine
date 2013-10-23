@@ -189,5 +189,5 @@ void YafScene::initCameras()
 
 void YafScene::update(unsigned long millis)
 {
-    //throw std::logic_error("The method or operation is not implemented.");
+    _rootNode.Update(millis);
 }

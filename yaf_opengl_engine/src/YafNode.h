@@ -11,6 +11,7 @@
 #include "YafTransform.h"
 #include "YafAppearance.h"
 #include "NewellsMethod.h"
+#include "Animation.h"
 
 class YafScene;
 
@@ -18,6 +19,8 @@ class YafChild
 {
 public:
     virtual void Draw(YafAppearance* app = nullptr) = 0;
+
+	virtual void Update(unsigned long millis) { }
 
     virtual bool IsCyclic(std::string& which) { return false; }
 };
@@ -120,6 +123,10 @@ public:
     virtual bool IsCyclic(std::string& which);
 
     void CalculateTransformMatrix();
+
+	Animation* _animation;
+
+	virtual void Update(unsigned long millis) override;
 
 private:
     void MoveRefNodesToChildren(YafScene* scene);

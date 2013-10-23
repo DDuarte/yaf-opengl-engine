@@ -213,3 +213,12 @@ void YafTorus::Draw(YafAppearance* /* app /* = nullptr */)
         glEnd();
     }
 }
+
+void YafNode::Update(unsigned long millis)
+{
+	if(_animation)
+		_animation->Update(millis);
+
+	 for (auto i = 0u; i < _children.size(); ++i)
+		 _children[i]->Update(millis);
+}
