@@ -18,6 +18,8 @@ class YafScene;
 class YafChild
 {
 public:
+    virtual void Init(YafAppearance* app = nullptr) { };
+
     virtual void Draw(YafAppearance* app = nullptr) = 0;
 
 	virtual void Update(unsigned long millis) { }
@@ -107,7 +109,8 @@ public:
 class YafNode : public YafChild, public YafElement
 {
 public:
-    YafNode(const std::string& id) : YafElement(id), _processing(false) { }
+    YafNode(const std::string& id) : YafElement(id), _processing(false), _displayListInitialized(false) { }
+
     void AddTransform(YafTransform* t) { _transforms.push_back(t); }
     void AddChild(YafChild* c) { _children.push_back(c); }
     void SetAppearance(YafAppearance* a) { _appearance = a; }
@@ -122,15 +125,18 @@ public:
 
     virtual bool IsCyclic(std::string& which);
 
+    virtual void Init(YafAppearance* app = nullptr) override;
+
     void CalculateTransformMatrix();
 
 	Animation* _animation;
 
 	virtual void Update(unsigned long millis) override;
 
+    bool UseDisplayList;
+
 private:
     void MoveRefNodesToChildren(YafScene* scene);
-
 
     bool _processing; // used in cycle detection
 
@@ -140,6 +146,9 @@ private:
     std::vector<YafChild*> _children;
 
     std::vector<std::string> _refNodes; // cache, cleared after parsing, stored in _children
+
+    bool _displayListInitialized;
+    GLuint _displayListId;
 
     float _m[4][4]; // partial matrix
 };

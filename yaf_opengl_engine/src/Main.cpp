@@ -184,6 +184,9 @@ YafScene* ParseYafFile(const std::string& file)
 
         auto transforms = GetAllChildren(transformsElement);
 
+        auto displayListStr = GetAttribute<std::string>(*n, "displaylist", "graph node", false);
+        node->UseDisplayList = !displayListStr.empty() && BoolFromString(displayListStr);
+
         for (auto t = transforms.begin(); t != transforms.end(); ++t)
         {
             if ((*t)->ValueStr() == "translate")

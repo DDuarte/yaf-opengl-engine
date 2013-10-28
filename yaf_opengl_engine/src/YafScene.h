@@ -29,7 +29,7 @@ public:
     void DoPostProcessing();
 
     void SetInitialCamera(const std::string& id) { _initialCamera = _cameras[id]; }
-    void SetRootNode(YafNode* node) { _rootNode = node; }
+    void SetRootNode(YafNode* node);
 
     void AddCamera(YafCamera* camera);
     void AddLight(YafLight* light);

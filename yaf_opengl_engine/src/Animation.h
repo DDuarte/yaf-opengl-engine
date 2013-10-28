@@ -39,4 +39,4 @@ private:
 	std::vector<float> _controlPointsDistance;
 };
 
-#endif 
+#endif

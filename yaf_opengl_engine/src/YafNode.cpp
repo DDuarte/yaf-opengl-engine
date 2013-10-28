@@ -36,18 +36,27 @@ void YafNode::CalculateTransformMatrix()
 
 void YafNode::Draw(YafAppearance* app)
 {
-    if (_appearance) // if we got appearance, override anything that was applied before
-        _appearance->apply();
-    else if (app) // required (at least) for root node
-        app->apply();
+    YafAppearance* appearance = _appearance ? _appearance : app;
 
-    glPushMatrix();
-    glMultMatrixf(&_m[0][0]);
+    if (UseDisplayList && _displayListInitialized)
+    {
+        if (appearance) appearance->apply();
+        glCallList(_displayListId);
+    }
+    else
+    {
+        if (!UseDisplayList && appearance) // if we got appearance, override anything that was applied before
+            appearance->apply();
 
-    for (auto i = 0u; i < _children.size(); ++i)
-        _children[i]->Draw(_appearance ? _appearance : app);
+        glPushMatrix();
+        glMultMatrixf(&_m[0][0]);
 
-    glPopMatrix();
+        for (auto i = 0u; i < _children.size(); ++i)
+            _children[i]->Draw(appearance);
+
+        glPopMatrix();
+    }
+
 }
 
 bool YafNode::IsCyclic(std::string& which)
@@ -221,4 +230,25 @@ void YafNode::Update(unsigned long millis)
 
 	 for (auto i = 0u; i < _children.size(); ++i)
 		 _children[i]->Update(millis);
+}
+
+void YafNode::Init(YafAppearance* app /*= nullptr*/)
+{
+    YafAppearance* appearance = _appearance ? _appearance : app;
+
+    if (appearance) // if we got appearance, override anything that was applied before
+        appearance->apply();
+
+    for (auto i = 0u; i < _children.size(); ++i)
+        _children[i]->Init(appearance);
+
+
+    if (UseDisplayList && !_displayListInitialized)
+    {
+        _displayListId = glGenLists(1);
+        glNewList(_displayListId, GL_COMPILE);
+        Draw(app);
+        glEndList();
+        _displayListInitialized = true;
+    }
 }
