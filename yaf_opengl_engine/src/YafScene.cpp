@@ -2,6 +2,8 @@
 #include "YafNode.h"
 #include "YafAppearance.h"
 
+#include <iostream>
+
 void YafScene::AddNode(YafNode* node)
 {
     _nodes[node->Id] = node;
@@ -94,7 +96,7 @@ void YafScene::SetGlobals(YafRGBA bg, YafDrawMode dm, YafShading s, YafCullFace 
     _cullOrder = co;
 }
 
-void YafScene::SetLightOptions( bool doubleSided, bool local, bool enabled, YafRGBA ambient )
+void YafScene::SetLightOptions(bool doubleSided, bool local, bool enabled, YafRGBA ambient)
 {
     _lightDoubleSided = doubleSided;
     _lightLocal = local;
@@ -106,6 +108,8 @@ void YafScene::init()
 {
     if (_lightEnabled)
         glEnable(GL_LIGHTING);
+
+    std::cout << reinterpret_cast<const char *>(glGetString(GL_VERSION)) << std::endl;
 
     glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, _lightDoubleSided);
     glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, _lightLocal);
@@ -131,6 +135,8 @@ void YafScene::init()
 
     for (auto n = _nodes.begin(); n != _nodes.end(); ++n)
         n->second->CalculateTransformMatrix();
+
+    _rootNode->Init(new YafAppearance());
 
     setUpdatePeriod(60);
 }
@@ -164,7 +170,7 @@ void YafScene::display()
     glColor3f(1.0f, 1.0f, 1.0f);
     //axis.draw();
 
-    _rootNode->Draw(&YafAppearance()); // Apply default appearance if none is defined
+    _rootNode->Draw();
 
     glPopMatrix();
 
@@ -189,5 +195,12 @@ void YafScene::initCameras()
 
 void YafScene::update(unsigned long millis)
 {
-    _rootNode.Update(millis);
+    _rootNode->Update(millis);
+}
+
+void YafScene::SetRootNode(YafNode* node)
+{
+    _rootNode = node;
+    if (!_rootNode->GetAppearance())
+        _rootNode->SetAppearance(new YafAppearance());
 }
