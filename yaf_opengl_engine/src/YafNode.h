@@ -114,6 +114,19 @@ public:
     virtual void Draw(YafAppearance* app = nullptr) override;
 };
 
+class YafPatch : public YafPrimitive
+{
+public:
+    int Order;
+    int PartsU;
+    int PartsV;
+    GLenum Compute;
+
+    std::vector<YafXYZ> ControlPoints;
+
+    virtual void Draw(YafAppearance* app = nullptr) override;
+};
+
 class YafNode : public YafChild, public YafElement
 {
 public:
@@ -137,8 +150,6 @@ public:
 
     void CalculateTransformMatrix();
 
-    Animation* animation;
-
     virtual void Update(unsigned long millis) override;
 
     bool UseDisplayList;
@@ -159,6 +170,8 @@ private:
     GLuint _displayListId;
 
     float _m[4][4]; // partial matrix
+
+    Animation* _animation;
 };
 
 #endif // YafNode_h__

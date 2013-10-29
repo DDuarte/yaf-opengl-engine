@@ -212,20 +212,6 @@ YafScene* ParseYafFile(const std::string& file)
                 throw YafParsingException("Transform " + (*t)->ValueStr() + " is not recognized: line: " + std::to_string((long long)(*t)->Row()) + " col: " + std::to_string((long long)(*t)->Column()));
         }
 
-        if(auto animation = GetChildren(*n, "animation", "graph node", false))
-        {
-            auto type = GetAttribute<std::string>(animation, "type","graph node");
-
-            if(type == "linear")
-            {
-                node->animation = new LinearAnimation(GetAttribute<unsigned long>(animation, "time", "graph node"), /*Control points*/);
-            }
-            else
-                node->animation = nullptr;
-        }
-        else
-            node->animation = nullptr;
-
         if (auto appRefElement = GetChildren(*n, "appearanceref", "graph node", false))
         {
             auto appRef = GetAttribute<std::string>(appRefElement, "id", "graph node appearanceref");
@@ -245,11 +231,12 @@ YafScene* ParseYafFile(const std::string& file)
         auto childrenTorus = GetAllChildren(childrenElement, "torus");
         auto childrenNodeRef = GetAllChildren(childrenElement, "noderef");
         auto childrenPlane = GetAllChildren(childrenElement, "plane");
+        auto childrenPatch = GetAllChildren(childrenElement, "patch");
 
         if (childrenRectangle.empty() && childrenTriangle.empty() &&
             childrenCylinder.empty() && childrenSphere.empty() &&
             childrenTorus.empty() && childrenNodeRef.empty() &&
-            childrenPlane.empty())
+            childrenPlane.empty() && childrenPatch.empty())
             throw YafParsingException("<graph node children> (" + node->Id + ") needs at least one primitive or node");
 
         for (auto r = childrenRectangle.begin(); r != childrenRectangle.end(); ++r)
@@ -310,6 +297,32 @@ YafScene* ParseYafFile(const std::string& file)
             auto pla = new YafPlane;
             pla->Parts = GetAttribute<int>(*p, "parts", "graph node children plane");
             node->AddChild(pla);
+        }
+
+        for (auto p = childrenPatch.begin(); p != childrenPatch.end(); ++p)
+        {
+            auto pat = new YafPatch;
+            pat->Order = GetAttribute<int>(*p, "order", "graph node children patch");
+            pat->PartsU = GetAttribute<int>(*p, "partsU", "graph node children patch");
+            pat->PartsV = GetAttribute<int>(*p, "partsV", "graph node children patch");
+            pat->Compute = YafToOpenGL(YafDrawModeFromString(GetAttribute<std::string>(*p, "compute", "graph node children patch")));
+
+            auto controlPoints = GetAllChildren(*p, "controlpoint");
+            for (auto cp = controlPoints.begin(); cp != controlPoints.end(); ++cp)
+            {
+                auto x = GetAttribute<float>(*cp, "x", "graph node children patch controlpoint");
+                auto y = GetAttribute<float>(*cp, "y", "graph node children patch controlpoint");
+                auto z = GetAttribute<float>(*cp, "z", "graph node children patch controlpoint");
+                pat->ControlPoints.push_back(YafXYZ(x, y, z));
+            }
+
+            long long expectedCount = (pat->Order+1) * (pat->Order+1);
+            long long actualCount = pat->ControlPoints.size();
+
+            if (expectedCount != actualCount)
+                throw YafParsingException("Expected " + std::to_string(expectedCount) + " controlpoints in patch but got " + std::to_string(actualCount));
+
+            node->AddChild(pat);
         }
 
         scene->AddNode(node);
