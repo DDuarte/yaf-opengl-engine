@@ -11,7 +11,7 @@
 #include "YafTransform.h"
 #include "YafAppearance.h"
 #include "NewellsMethod.h"
-#include "Animation.h"
+#include "YafAnimation.h"
 
 class YafScene;
 
@@ -171,7 +171,7 @@ private:
 
     float _m[4][4]; // partial matrix
 
-    Animation* _animation;
+    YafAnimation* _animation;
 };
 
 #endif // YafNode_h__

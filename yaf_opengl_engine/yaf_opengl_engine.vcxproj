@@ -16,7 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\Animation.cpp" />
+    <ClCompile Include="src\YafAnimation.cpp" />
     <ClCompile Include="src\TinyXMLYafHelpers.cpp" />
     <ClCompile Include="src\YafMisc.cpp" />
     <ClCompile Include="src\YafNode.cpp" />
@@ -24,7 +24,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\NewellsMethod.h" />
-    <ClInclude Include="src\Animation.h" />
+    <ClInclude Include="src\YafAnimation.h" />
     <ClInclude Include="src\TinyXMLYafHelpers.h" />
     <ClInclude Include="src\Utilities.h" />
     <ClInclude Include="src\YafAppearance.h" />

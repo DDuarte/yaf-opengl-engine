@@ -1,12 +1,12 @@
-#include "Animation.h"
+#include "YafAnimation.h"
 
-void LinearAnimation::ApplyAnimation()
+void YafLinearAnimation::ApplyAnimation()
 {
     glTranslatef(_currentPoint.X, _currentPoint.Y, _currentPoint.Z);
 
 }
 
-int LinearAnimation::Position(unsigned long diff, float& path)
+int YafLinearAnimation::Position(unsigned long diff, float& path)
 {
     float distance = _speed * diff;
 
@@ -24,7 +24,7 @@ int LinearAnimation::Position(unsigned long diff, float& path)
     return -1;
 }
 
-void LinearAnimation::Update(unsigned long millis)
+void YafLinearAnimation::Update(unsigned long millis)
 {
     if(_firstMillis == 0)
         _firstMillis = millis;

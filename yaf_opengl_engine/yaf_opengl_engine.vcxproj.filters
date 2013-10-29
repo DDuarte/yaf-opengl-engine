@@ -27,7 +27,7 @@
     <ClCompile Include="src\YafScene.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Animation.cpp">
+    <ClCompile Include="src\YafAnimation.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,7 +68,7 @@
     <ClInclude Include="src\YafInterface.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="src\Animation.h">
+    <ClInclude Include="src\YafAnimation.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
