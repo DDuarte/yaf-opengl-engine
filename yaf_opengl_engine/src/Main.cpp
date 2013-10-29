@@ -209,6 +209,20 @@ YafScene* ParseYafFile(const std::string& file)
                 throw YafParsingException("Transform " + (*t)->ValueStr() + " is not recognized: line: " + std::to_string((long long)(*t)->Row()) + " col: " + std::to_string((long long)(*t)->Column()));
         }
 
+		if(auto animation = GetChildren(*n, "animation", "graph node", false))
+		{
+			auto type = GetAttribute<std::string>(animation, "type","graph node");
+
+			if(type == "linear")
+			{
+				node->animation = new LinearAnimation(GetAttribute<unsigned long>(animation, "time", "graph node"), /*Control points*/); 
+			}
+			else
+				node->animation = nullptr;
+		}
+		else
+			node->animation = nullptr;
+
         if (auto appRefElement = GetChildren(*n, "appearanceref", "graph node", false))
         {
             auto appRef = GetAttribute<std::string>(appRefElement, "id", "graph node appearanceref");

@@ -124,7 +124,7 @@ public:
 
     void CalculateTransformMatrix();
 
-	Animation* _animation;
+	Animation* animation;
 
 	virtual void Update(unsigned long millis) override;
 
