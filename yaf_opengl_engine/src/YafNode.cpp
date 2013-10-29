@@ -223,13 +223,44 @@ void YafTorus::Draw(YafAppearance* /* app /* = nullptr */)
     }
 }
 
+GLfloat planeControlPoints[4][3] = { {  0.5f, 0.0f,  0.5f },
+                                     { -0.5f, 0.0f,  0.5f },
+                                     {  0.5f, 0.0f, -0.5f },
+                                     { -0.5f, 0.0f, -0.5f } };
+
+GLfloat planeTexPoints[4][2] = { { 1.0f, 0.0f },
+                                 { 0.0f, 0.0f },
+                                 { 1.0f, 1.0f },
+                                 { 0.0f, 1.0f } };
+
+GLfloat planeNormalPoints[4][3] = { { 0.0f, 1.0, 0.0 },
+                                    { 0.0f, 1.0, 0.0 },
+                                    { 0.0f, 1.0, 0.0 },
+                                    { 0.0f, 1.0, 0.0 } };
+
+void YafPlane::Draw(YafAppearance* app /*= nullptr*/)
+{
+    glMap2f(GL_MAP2_VERTEX_3, 0.0f, 1.0f, 3, 2, 0.0f, 1.0f, 6, 2, &planeControlPoints[0][0]);
+    glMap2f(GL_MAP2_NORMAL, 0.0f, 1.0f, 3, 2, 0.0f, 1.0f, 6, 2, &planeNormalPoints[0][0]);
+    glMap2f(GL_MAP2_TEXTURE_COORD_2, 0.0f, 1.0f, 2, 2, 0.0f, 1.0f, 4, 2, &planeTexPoints[0][0]);
+
+    glEnable(GL_AUTO_NORMAL);
+    glEnable(GL_MAP2_VERTEX_3);
+    glEnable(GL_MAP2_NORMAL);
+    glEnable(GL_MAP2_TEXTURE_COORD_2);
+
+    glMapGrid2f(Parts, 0.0f, 1.0f, Parts, 0.0f, 1.0f);
+
+    glEvalMesh2(GL_FILL, 0, Parts, 0, Parts);
+}
+
 void YafNode::Update(unsigned long millis)
 {
-	if(_animation)
-		_animation->Update(millis);
+    if(_animation)
+        _animation->Update(millis);
 
-	 for (auto i = 0u; i < _children.size(); ++i)
-		 _children[i]->Update(millis);
+     for (auto i = 0u; i < _children.size(); ++i)
+         _children[i]->Update(millis);
 }
 
 void YafNode::Init(YafAppearance* app /*= nullptr*/)

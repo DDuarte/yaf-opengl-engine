@@ -22,7 +22,7 @@ public:
 
     virtual void Draw(YafAppearance* app = nullptr) = 0;
 
-	virtual void Update(unsigned long millis) { }
+    virtual void Update(unsigned long millis) { }
 
     virtual bool IsCyclic(std::string& which) { return false; }
 };
@@ -106,6 +106,14 @@ public:
     virtual void Draw(YafAppearance* app = nullptr) override;
 };
 
+class YafPlane : public YafPrimitive
+{
+public:
+    int Parts;
+
+    virtual void Draw(YafAppearance* app = nullptr) override;
+};
+
 class YafNode : public YafChild, public YafElement
 {
 public:
@@ -129,9 +137,9 @@ public:
 
     void CalculateTransformMatrix();
 
-	Animation* animation;
+    Animation* animation;
 
-	virtual void Update(unsigned long millis) override;
+    virtual void Update(unsigned long millis) override;
 
     bool UseDisplayList;
 

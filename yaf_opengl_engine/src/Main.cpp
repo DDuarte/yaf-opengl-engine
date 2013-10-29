@@ -212,19 +212,19 @@ YafScene* ParseYafFile(const std::string& file)
                 throw YafParsingException("Transform " + (*t)->ValueStr() + " is not recognized: line: " + std::to_string((long long)(*t)->Row()) + " col: " + std::to_string((long long)(*t)->Column()));
         }
 
-		if(auto animation = GetChildren(*n, "animation", "graph node", false))
-		{
-			auto type = GetAttribute<std::string>(animation, "type","graph node");
+        if(auto animation = GetChildren(*n, "animation", "graph node", false))
+        {
+            auto type = GetAttribute<std::string>(animation, "type","graph node");
 
-			if(type == "linear")
-			{
-				node->animation = new LinearAnimation(GetAttribute<unsigned long>(animation, "time", "graph node"), /*Control points*/); 
-			}
-			else
-				node->animation = nullptr;
-		}
-		else
-			node->animation = nullptr;
+            if(type == "linear")
+            {
+                node->animation = new LinearAnimation(GetAttribute<unsigned long>(animation, "time", "graph node"), /*Control points*/);
+            }
+            else
+                node->animation = nullptr;
+        }
+        else
+            node->animation = nullptr;
 
         if (auto appRefElement = GetChildren(*n, "appearanceref", "graph node", false))
         {
@@ -244,10 +244,12 @@ YafScene* ParseYafFile(const std::string& file)
         auto childrenSphere = GetAllChildren(childrenElement, "sphere");
         auto childrenTorus = GetAllChildren(childrenElement, "torus");
         auto childrenNodeRef = GetAllChildren(childrenElement, "noderef");
+        auto childrenPlane = GetAllChildren(childrenElement, "plane");
 
         if (childrenRectangle.empty() && childrenTriangle.empty() &&
             childrenCylinder.empty() && childrenSphere.empty() &&
-            childrenTorus.empty() && childrenNodeRef.empty())
+            childrenTorus.empty() && childrenNodeRef.empty() &&
+            childrenPlane.empty())
             throw YafParsingException("<graph node children> (" + node->Id + ") needs at least one primitive or node");
 
         for (auto r = childrenRectangle.begin(); r != childrenRectangle.end(); ++r)
@@ -301,6 +303,13 @@ YafScene* ParseYafFile(const std::string& file)
         {
             auto nodeRef = GetAttribute<std::string>(*n, "id", "graph node children noderef");
             node->AddNodeRef(nodeRef);
+        }
+
+        for (auto p = childrenPlane.begin(); p != childrenPlane.end(); ++p)
+        {
+            auto pla = new YafPlane;
+            pla->Parts = GetAttribute<int>(*p, "parts", "graph node children plane");
+            node->AddChild(pla);
         }
 
         scene->AddNode(node);
