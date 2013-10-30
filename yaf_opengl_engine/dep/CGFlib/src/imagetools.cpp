@@ -1,6 +1,7 @@
 #include <time.h>
 
 #include <stdlib.h>
+#include <gl/glew.h>
 #include <GL/glut.h>
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION

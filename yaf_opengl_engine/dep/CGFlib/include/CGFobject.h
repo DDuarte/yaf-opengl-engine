@@ -8,6 +8,7 @@
  */
 
 #include <stdlib.h>
+#include <gl/glew.h>
 #include <GL/glut.h>
 
 class CGFobject 

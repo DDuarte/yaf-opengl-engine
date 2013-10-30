@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include <windows.h>
-#include <gl/GL.h>
+#include <gl/glew.h>
 #include <gl/freeglut.h>
 #include <gl/glui.h>
 #include <CGFshader.h>
@@ -131,17 +131,23 @@ public:
 class YafWaterline : public YafPrimitive
 {
 public:
+    ~YafWaterline();
     std::string HeightMap; // filename
     std::string TextureMap; // filename
     std::string FragmentShader; // filename
     std::string VertexShader; // filename
 
     virtual void Init(YafAppearance* app = nullptr) override;
-
-    virtual void Update(unsigned long millis) override { _shader.update(static_cast<float>(millis / 1000.0f)); } // in seconds
+    virtual void Update(unsigned long millis) override; // in seconds
     virtual void Draw(YafAppearance* app = nullptr) override;
 private:
     CGFshader _shader;
+    CGFtexture* _texture;
+    CGFtexture* _map;
+    YafTexture* _heightMap;
+    GLint _textureLoc;
+    GLint _mapLoc;
+    YafPlane _plane;
 };
 
 class YafNode : public YafChild, public YafElement
@@ -174,8 +180,6 @@ public:
     virtual void Update(unsigned long millis) override;
 
     bool UseDisplayList;
-
-
 
 private:
     void MoveRefNodesToChildren(YafScene* scene);

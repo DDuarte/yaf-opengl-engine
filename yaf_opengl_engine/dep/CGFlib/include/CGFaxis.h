@@ -9,6 +9,7 @@
  */
 
 #include "CGFobject.h"
+#include <gl/glew.h>
 #include <GL/glut.h>
 
 #define CG_CGFaxis_DEFAULT_RADBEG 0.1

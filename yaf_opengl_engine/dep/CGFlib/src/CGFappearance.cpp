@@ -22,6 +22,8 @@ CGFappearance::CGFappearance()
 	materialType = CG_GLMAT_COLOR;
 
 	texture=NULL;
+
+    setTextureWrap(GL_REPEAT, GL_REPEAT); // default
 }
 
 CGFappearance::CGFappearance(float* a, float* d, float* sp, float sh) 
@@ -46,6 +48,8 @@ CGFappearance::CGFappearance(float* a, float* d, float* sp, float sh)
 	materialType = CG_GLMAT_MATERIAL;
 
 	texture=NULL;
+
+    setTextureWrap(GL_REPEAT, GL_REPEAT); // default
 }
 
 CGFappearance::CGFappearance(float* c) 
@@ -59,6 +63,8 @@ CGFappearance::CGFappearance(float* c)
 
 	texture=NULL;
 	privateTexture=false;
+
+    setTextureWrap(GL_REPEAT, GL_REPEAT); // default
 }
 
 CGFappearance::~CGFappearance() 

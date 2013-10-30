@@ -4,7 +4,7 @@
 #include "YafMisc.h"
 #include "YafNode.h"
 #include <windows.h>
-#include <gl/GL.h>
+#include <gl/glew.h>
 #include <gl/freeglut.h>
 #include <gl/glui.h>
 

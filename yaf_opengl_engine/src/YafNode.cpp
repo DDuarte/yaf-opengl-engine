@@ -5,6 +5,8 @@
 #define _USE_MATH_DEFINES // for M_PI
 #include <math.h>
 
+#include <GL/glew.h>
+
 void YafNode::MoveRefNodesToChildren(YafScene* scene)
 {
     for (auto s = _refNodes.begin(); s != _refNodes.end(); ++s)
@@ -62,7 +64,6 @@ void YafNode::Draw(YafAppearance* app)
 
         glPopMatrix();
     }
-
 }
 
 bool YafNode::IsCyclic(std::string& which)
@@ -306,11 +307,48 @@ void YafNode::Init(YafAppearance* app /*= nullptr*/)
 void YafWaterline::Init(YafAppearance* app /*= nullptr*/)
 {
     _shader.init(VertexShader.c_str(), FragmentShader.c_str());
+
+    _shader.bind();
+
+    _texture = new CGFtexture(TextureMap);
+    _map = new CGFtexture(HeightMap);
+
+    _textureLoc = glGetUniformLocation(_shader.id(), "tex");
+    glUniform1i(_textureLoc, 0);
+
+    _mapLoc = glGetUniformLocation(_shader.id(), "map");
+    glUniform1i(_mapLoc, 1);
+
+    _shader.unbind();
+
+    _plane.Parts = 100;
 }
 
 void YafWaterline::Draw(YafAppearance* app /*= nullptr*/)
 {
     _shader.bind();
-    // ...
+
+    glActiveTexture(GL_TEXTURE0);
+    _texture->apply();
+
+    glActiveTexture(GL_TEXTURE1);
+    _map->apply();
+
+    glActiveTexture(GL_TEXTURE0);
+    _plane.Draw();
+
+    _shader.unbind();
+}
+
+YafWaterline::~YafWaterline()
+{
+    delete _texture;
+    delete _map;
+}
+
+void YafWaterline::Update(unsigned long millis)
+{
+    _shader.bind();
+    _shader.update((millis % 10000) / 10000.0f);
     _shader.unbind();
 }

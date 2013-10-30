@@ -1,6 +1,7 @@
 #include "CGFinterface.h"
 #include "CGFscene.h"
 #include "CGFapplication.h"
+#include <gl/glew.h>
 #include <GL/glui.h>
 
 #define MOUSE_ROTATE_FACTOR 0.5
