@@ -40,6 +40,9 @@ void YafNode::Draw(YafAppearance* app)
 
     if (UseDisplayList && _displayListInitialized)
     {
+        if (_animation) // TODO: test
+            _animation->ApplyAnimation();
+
         if (appearance) appearance->apply();
         glCallList(_displayListId);
     }
@@ -50,6 +53,9 @@ void YafNode::Draw(YafAppearance* app)
 
         glPushMatrix();
         glMultMatrixf(&_m[0][0]);
+
+        if (_animation)
+            _animation->ApplyAnimation();
 
         for (auto i = 0u; i < _children.size(); ++i)
             _children[i]->Draw(appearance);
@@ -269,7 +275,7 @@ void YafPatch::Draw(YafAppearance* app /*= nullptr*/)
 
 void YafNode::Update(unsigned long millis)
 {
-    if(_animation)
+    if (_animation)
         _animation->Update(millis);
 
      for (auto i = 0u; i < _children.size(); ++i)

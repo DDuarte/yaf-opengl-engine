@@ -165,6 +165,36 @@ YafScene* ParseYafFile(const std::string& file)
         scene->AddAppearance(app);
     }
 
+	// <animations>
+
+    auto animationsElement = GetChildren(yafElement, "animations", "yaf");
+
+    auto animations = GetAllChildren(animationsElement, "animation");
+
+    for (auto a = animations.begin(); a != animations.end(); ++a)
+    {
+        auto type = GetAttribute<std::string>(*a, "type", "animations animation");
+        if (type == "linear")
+        {
+            auto id = GetAttribute<std::string>(*a, "id", "animations animation");
+            auto time = GetAttribute<float>(*a, "span", "animations animation");
+            std::vector<YafXYZ> cps;
+            auto controlPoints = GetAllChildren(*a, "controlpoint");
+            for (auto cp = controlPoints.begin(); cp != controlPoints.end(); ++cp)
+            {
+                auto x = GetAttribute<float>(*cp, "x", "animations animation controlpoint");
+                auto y = GetAttribute<float>(*cp, "y", "animations animation controlpoint");
+                auto z = GetAttribute<float>(*cp, "z", "animations animation controlpoint");
+                cps.push_back(YafXYZ(x, y, z));
+            }
+
+             auto anim = new YafLinearAnimation(id, time, cps);
+             scene->AddAnimation(anim);
+        }
+        else
+            throw YafParsingException("Unknown animation type: " + type);        
+    }
+
     // <graph>
 
     auto graphElement = GetChildren(yafElement, "graph", "yaf");
@@ -219,6 +249,14 @@ YafScene* ParseYafFile(const std::string& file)
         }
         else
             node->SetAppearance(nullptr);
+
+        if (auto animationElement = GetChildren(*n, "animationref", "graph node", false))
+        {
+            auto anim = GetAttribute<std::string>(animationElement, "id", "graph node animation");
+            node->SetAnimation(scene->GetAnimation(anim));
+        }
+        else
+            node->SetAnimation(nullptr);
 
         auto childrenElement = (*n)->FirstChildElement("children");
         if (!childrenElement)

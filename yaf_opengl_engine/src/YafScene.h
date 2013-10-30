@@ -10,6 +10,7 @@
 #include "YafCamera.h"
 #include "YafLight.h"
 #include "YafNode.h"
+#include "YafAnimation.h"
 
 class YafNode;
 class YafTexture;
@@ -35,18 +36,21 @@ public:
     void AddLight(YafLight* light);
     void AddTexture(YafTexture* texture);
     void AddAppearance(YafAppearance* appearance);
+    void AddAnimation(YafAnimation* animation);
     void AddNode(YafNode* node);
 
     YafTexture* GetTexture(const std::string& id) const;
     YafAppearance* GetAppearance(const std::string& id) const;
     YafLight* GetLight(const std::string& id) const;
     YafCamera* GetCamera(const std::string& id) const;
+    YafAnimation* GetAnimation(const std::string& id) const;
     YafNode* GetNode(const std::string& id) const;
 
     std::map<std::string, YafTexture*>& GetTextures() { return _textures; }
     std::map<std::string, YafAppearance*>& GetAppearances() { return _appearances; }
     std::map<std::string, YafLight*>& GetLights() { return _lights; }
     std::map<std::string, YafCamera*>& GetCameras() { return _cameras; }
+    std::map<std::string, YafAnimation*>& GetAnimations() { return _animations; }
     std::map<std::string, YafNode*>& GetNodes() { return _nodes; }
 
     virtual void init() override;
@@ -79,6 +83,9 @@ private:
 
     // Appearances
     std::map<std::string, YafAppearance*> _appearances;
+
+    //Animations
+    std::map<std::string, YafAnimation*> _animations;
 
     // Graph
     YafNode* _rootNode;

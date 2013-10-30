@@ -11,9 +11,10 @@
 #include "YafTransform.h"
 #include "YafAppearance.h"
 #include "NewellsMethod.h"
-#include "YafAnimation.h"
+
 
 class YafScene;
+class YafAnimation;
 
 class YafChild
 {
@@ -136,6 +137,8 @@ public:
     void AddChild(YafChild* c) { _children.push_back(c); }
     void SetAppearance(YafAppearance* a) { _appearance = a; }
 
+    void SetAnimation(YafAnimation* a) { _animation = a; }
+
     void AddNodeRef(const std::string& id) { _refNodes.push_back(id); }
 
     void DoPostProcessing(YafScene* scene) { MoveRefNodesToChildren(scene); }
@@ -143,6 +146,8 @@ public:
     virtual void Draw(YafAppearance* app = nullptr) override;
 
     YafAppearance* GetAppearance() const { return _appearance; }
+
+     YafAnimation* GetAnimation() const { return _animation; }
 
     virtual bool IsCyclic(std::string& which);
 
@@ -153,6 +158,8 @@ public:
     virtual void Update(unsigned long millis) override;
 
     bool UseDisplayList;
+
+
 
 private:
     void MoveRefNodesToChildren(YafScene* scene);

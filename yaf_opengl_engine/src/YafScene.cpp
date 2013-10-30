@@ -2,6 +2,7 @@
 #include "YafNode.h"
 #include "YafAppearance.h"
 
+
 #include <iostream>
 
 void YafScene::AddNode(YafNode* node)
@@ -81,6 +82,9 @@ YafScene::~YafScene()
         delete x->second;
 
     for (auto x = _appearances.begin(); x != _appearances.end(); ++x)
+        delete x->second;
+
+    for (auto x = _animations.begin(); x != _animations.end(); ++x)
         delete x->second;
 
     for (auto x = _nodes.begin(); x != _nodes.end(); ++x)
@@ -204,3 +208,14 @@ void YafScene::SetRootNode(YafNode* node)
     if (!_rootNode->GetAppearance())
         _rootNode->SetAppearance(new YafAppearance());
 }
+
+void YafScene::AddAnimation(YafAnimation* animation)
+{
+    _animations[animation->Id] = animation;
+}
+
+ YafAnimation* YafScene::GetAnimation(const std::string& id) const
+ {
+    auto a = _animations.find(id);
+    return a != _animations.end() ? a->second : nullptr;
+ }

@@ -2,14 +2,16 @@
 #define ANIMATION_H_
 
 #include "YafMisc.h"
+#include "YafNode.h"
 #include <windows.h>
 #include <gl/GL.h>
 #include <gl/freeglut.h>
 #include <gl/glui.h>
 
-class YafAnimation
+class YafAnimation : public YafElement
 {
 public:
+    YafAnimation(const std::string& id) : YafElement(id) { }
     virtual void ApplyAnimation() = 0;
     virtual void Update(unsigned long millis) = 0;
 };
@@ -18,8 +20,7 @@ class YafLinearAnimation : public YafAnimation
 {
 public:
     virtual void ApplyAnimation() override;
-    YafLinearAnimation() : _time(0), _firstMillis(0) { }
-    YafLinearAnimation(unsigned long time, const std::vector<YafXYZ>& controlPoints) : _time(time), _controlPoints(controlPoints), _firstMillis(0), _currentPoint(controlPoints[0])
+    YafLinearAnimation(const std::string& id, float time, const std::vector<YafXYZ>& controlPoints) : YafAnimation(id), _time(static_cast<unsigned long>(time * 1000)), _controlPoints(controlPoints), _firstMillis(0), _currentPoint(controlPoints[0])
     {
         float distance = 0;
         for(int i = 0 ; i < _controlPoints.size() - 1 ; ++i){
