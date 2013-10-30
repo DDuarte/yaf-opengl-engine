@@ -20,10 +20,11 @@ class YafLinearAnimation : public YafAnimation
 {
 public:
     virtual void ApplyAnimation() override;
-    YafLinearAnimation(const std::string& id, float time, const std::vector<YafXYZ>& controlPoints) : YafAnimation(id), _time(static_cast<unsigned long>(time * 1000)), _controlPoints(controlPoints), _firstMillis(0), _currentPoint(controlPoints[0])
+    YafLinearAnimation(const std::string& id, float time, const std::vector<YafXYZ>& controlPoints) : YafAnimation(id), _time(static_cast<unsigned long>(time * 1000)), _controlPoints(controlPoints), _firstMillis(0), _currentPoint(controlPoints[0]), _currentAngle(0)
     {
         float distance = 0;
-        for(int i = 0 ; i < _controlPoints.size() - 1 ; ++i){
+        for (int i = 0; i < _controlPoints.size() - 1; ++i)
+        {
             distance += YafXYZ::GetDistance(_controlPoints[i], _controlPoints[i + 1]);
             _controlPointsDistance.push_back(YafXYZ::GetDistance(_controlPoints[i], _controlPoints[i + 1]));
         }
@@ -38,6 +39,7 @@ private:
     YafXYZ _currentPoint;
     float _speed;
     std::vector<float> _controlPointsDistance;
+    float _currentAngle;
 };
 
 #endif

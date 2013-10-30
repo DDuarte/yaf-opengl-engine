@@ -1,9 +1,14 @@
 #include "YafAnimation.h"
 
+#define _USE_MATH_DEFINES // for M_PI
+#include <math.h>
+
+#include <iostream>
+
 void YafLinearAnimation::ApplyAnimation()
 {
     glTranslatef(_currentPoint.X, _currentPoint.Y, _currentPoint.Z);
-    // TODO: rotation
+    glRotatef(_currentAngle, 0.0f, 1.0f, 0.0f);
 }
 
 int YafLinearAnimation::Position(unsigned long diff, float& path)
@@ -45,5 +50,15 @@ void YafLinearAnimation::Update(unsigned long millis)
         _currentPoint.X += vector.X  * path;
         _currentPoint.Y += vector.Y  * path;
         _currentPoint.Z += vector.Z  * path;
+
+        if (vector.Z != 0.0f)
+        {
+            _currentAngle = atan(vector.X / vector.Z) * 180.0f / M_PI;
+
+            if (_currentAngle == 0.0f && vector.Z < 0.0f)
+                _currentAngle = 180.0f;
+        }
+        else if (vector.X != 0.0f)
+            _currentAngle = 90.0f * vector.X / abs(vector.X);
     }
 }
