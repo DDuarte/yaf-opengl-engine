@@ -74,11 +74,17 @@
     <Image Include="resources\venus.jpg">
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
     </Image>
+    <Image Include="resources\water.jpg" />
+    <Image Include="resources\watermap.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="resources\T01G04_solarsystem.xml">
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
     </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\water.frag" />
+    <None Include="resources\water.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E025CA71-C6C5-491D-8CD9-77241CFB850A}</ProjectGuid>

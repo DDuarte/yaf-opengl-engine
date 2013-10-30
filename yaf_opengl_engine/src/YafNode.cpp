@@ -302,3 +302,15 @@ void YafNode::Init(YafAppearance* app /*= nullptr*/)
         _displayListInitialized = true;
     }
 }
+
+void YafWaterline::Init(YafAppearance* app /*= nullptr*/)
+{
+    _shader.init(VertexShader.c_str(), FragmentShader.c_str());
+}
+
+void YafWaterline::Draw(YafAppearance* app /*= nullptr*/)
+{
+    _shader.bind();
+    // ...
+    _shader.unbind();
+}

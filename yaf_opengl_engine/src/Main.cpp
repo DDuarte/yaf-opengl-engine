@@ -270,11 +270,13 @@ YafScene* ParseYafFile(const std::string& file)
         auto childrenNodeRef = GetAllChildren(childrenElement, "noderef");
         auto childrenPlane = GetAllChildren(childrenElement, "plane");
         auto childrenPatch = GetAllChildren(childrenElement, "patch");
+        auto childrenWaterline = GetAllChildren(childrenElement, "waterline");
 
         if (childrenRectangle.empty() && childrenTriangle.empty() &&
             childrenCylinder.empty() && childrenSphere.empty() &&
             childrenTorus.empty() && childrenNodeRef.empty() &&
-            childrenPlane.empty() && childrenPatch.empty())
+            childrenPlane.empty() && childrenPatch.empty() &&
+            childrenWaterline.empty())
             throw YafParsingException("<graph node children> (" + node->Id + ") needs at least one primitive or node");
 
         for (auto r = childrenRectangle.begin(); r != childrenRectangle.end(); ++r)
@@ -361,6 +363,16 @@ YafScene* ParseYafFile(const std::string& file)
                 throw YafParsingException("Expected " + std::to_string(expectedCount) + " controlpoints in patch but got " + std::to_string(actualCount));
 
             node->AddChild(pat);
+        }
+
+        for (auto w = childrenWaterline.begin(); w != childrenWaterline.end(); ++w)
+        {
+            auto wat = new YafWaterline;
+            wat->HeightMap = GetAttribute<std::string>(*w, "heightmap", "graph node children waterline");
+            wat->TextureMap = GetAttribute<std::string>(*w, "texturemap", "graph node children waterline");
+            wat->FragmentShader = GetAttribute<std::string>(*w, "fragmentshader", "graph node children waterline");
+            wat->VertexShader = GetAttribute<std::string>(*w, "vertexshader", "graph node children waterline");
+            node->AddChild(wat);
         }
 
         scene->AddNode(node);

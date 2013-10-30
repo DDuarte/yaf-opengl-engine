@@ -7,6 +7,7 @@
 #include <gl/GL.h>
 #include <gl/freeglut.h>
 #include <gl/glui.h>
+#include <CGFshader.h>
 
 #include "YafTransform.h"
 #include "YafAppearance.h"
@@ -93,7 +94,6 @@ public:
 
 private:
     GLUquadricObj* _quadric;
-
 };
 
 class YafTorus : public YafPrimitive
@@ -126,6 +126,22 @@ public:
     std::vector<YafXYZ> ControlPoints;
 
     virtual void Draw(YafAppearance* app = nullptr) override;
+};
+
+class YafWaterline : public YafPrimitive
+{
+public:
+    std::string HeightMap; // filename
+    std::string TextureMap; // filename
+    std::string FragmentShader; // filename
+    std::string VertexShader; // filename
+
+    virtual void Init(YafAppearance* app = nullptr) override;
+
+    virtual void Update(unsigned long millis) override { _shader.update(static_cast<float>(millis / 1000.0f)); } // in seconds
+    virtual void Draw(YafAppearance* app = nullptr) override;
+private:
+    CGFshader _shader;
 };
 
 class YafNode : public YafChild, public YafElement

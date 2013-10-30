@@ -109,10 +109,24 @@
     <Image Include="resources\mercury.jpg">
       <Filter>resources</Filter>
     </Image>
+    <Image Include="resources\water.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\watermap.jpg">
+      <Filter>resources</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="resources\T01G04_solarsystem.xml">
       <Filter>resources</Filter>
     </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\water.frag">
+      <Filter>resources</Filter>
+    </None>
+    <None Include="resources\water.vert">
+      <Filter>resources</Filter>
+    </None>
   </ItemGroup>
 </Project>
