@@ -9,6 +9,7 @@
 
 #include "CGFobject.h"
 #include "CGFappearance.h"
+#include <gl/glew.h>
 #include <GL/glut.h>
 
 

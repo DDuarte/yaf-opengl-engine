@@ -2,6 +2,7 @@
 #include <GL/glew.h>
 #endif
 #include "CGFapplication.h"
+#include <gl/glew.h>
 #include <GL/glut.h>
 #include <GL/glui.h>
 

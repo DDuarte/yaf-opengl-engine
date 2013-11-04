@@ -7,6 +7,7 @@
  * 
  */
 
+#include <gl/glew.h>
 #include <GL/glui.h>
 
 // forward declaration of scene

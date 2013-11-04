@@ -1,5 +1,6 @@
 #include "CGFscene.h"
 
+#include <gl/glew.h>
 #include <GL/glut.h>
 #include "CGFapplication.h"
 #include "CGFaxis.h"

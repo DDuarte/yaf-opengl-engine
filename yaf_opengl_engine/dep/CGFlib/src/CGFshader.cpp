@@ -6,7 +6,6 @@
 
 #ifndef CGF_NO_SHADERS
 #include <GL/glew.h>
-#include <GL/gl.h>
 #include <GL/glut.h>
 
 #include "CGFapplication.h"
@@ -45,7 +44,7 @@ static void validateShader(GLuint shader, const char* file = 0) {
     
 	glGetShaderInfoLog(shader, BUFFER_SIZE, &length, buffer);
 	if (length > 0) {
-		cerr << "Shader " << shader << " (" << (file?file:"") << ") compile error: " << buffer << endl;
+		cerr << "Shader " << shader << " (" << (file?file:"") << ") log: " << buffer << endl;
 	}
 }
 
@@ -58,7 +57,7 @@ static void validateProgram(GLuint program) {
 	memset(buffer, 0, BUFFER_SIZE);
 	glGetProgramInfoLog(program, BUFFER_SIZE, &length, buffer);
 	if (length > 0)
-		cerr << "Program " << program << " link error: " << buffer << endl;
+		cerr << "Program " << program << " link log: " << buffer << endl;
     
 	glValidateProgram(program);
 	GLint status;

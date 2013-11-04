@@ -192,7 +192,7 @@ YafScene* ParseYafFile(const std::string& file)
              scene->AddAnimation(anim);
         }
         else
-            throw YafParsingException("Unknown animation type: " + type);        
+            throw YafParsingException("Unknown animation type: " + type);
     }
 
     // <graph>
