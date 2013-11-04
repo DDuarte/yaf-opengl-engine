@@ -154,179 +154,54 @@
             texlength_s="1"
             texlength_t="1" />
     </appearances>
+	<animations>
+		<animation id="teste" span="15" type = "linear">
+			<controlpoint x="0.0" y="0.0" z="0.0"/>
+			<controlpoint x="20.0" y="10.0" z="0.0"/>
+			<controlpoint x="20.0" y="0.0" z="10.0"/>
+			<controlpoint x="0.0" y="10.0" z="10.0"/>
+			<controlpoint x="0.0" y="0.0" z="0.0"/>
+		</animation>
+	</animations>
     <graph rootid="solarsystem">
-        <node id="planet">
-            <transforms>
-                <rotate axis="x" angle="-80"/>
-            </transforms>
-            <children>
-                <sphere radius="1" slices="15" stacks="15" />
-            </children>
-        </node>
-        <node id="planet_ring">
-            <transforms />
-            <children>
-                <torus inner="0.015" outer="1.4" slices="50" loops="50" />
-            </children>
-        </node>
         <node id="solarsystem">
             <transforms />
             <children>
                 <noderef id="sun" />
-                <noderef id="mercury" />
-                <noderef id="venus" />
-                <noderef id="earthsystem" />
-                <noderef id="mars" />
-                <noderef id="jupiter" />
-                <noderef id="saturn" /> <!-- with ring -->
-                <noderef id="uranus" /> <!-- with ring -->
-                <noderef id="neptune" />
-                <noderef id="spherebg" />
+				<noderef id="vehicle" />
             </children>
-        </node>
-        <node id="spherebg">
-            <transforms>
-                <scale factor="-1.0 -1.0 -1.0" />
-            </transforms>
-            <appearanceref id="stars" />
-            <children> 
-                <sphere radius="500" slices="20" stacks="20" />
-            </children>
-        </node>
+		</node>
         <node id="sun">
             <transforms />
             <appearanceref id="sun" />
+			<animationref id="teste" />
             <children>
-                <sphere radius="6.96" slices="20" stacks="20" />
+                <sphere radius="1" slices="20" stacks="20"/>
             </children>
         </node>
-        <node id="mercury">
+		<node id="vehicle">
             <transforms>
-                <translate to="12.751 0 0"/>
-                <scale factor="0.02576 0.02576 0.02576" />
-            </transforms>
-            <appearanceref id="mercury" />
+				<scale factor="2 1 1"/>
+			</transforms>
+			<appearanceref id="earth" />
             <children>
-                <noderef id="planet" />
-            </children>
-        </node>
-        <node id="venus">
-            <transforms>
-                <translate to="17.78 0 0"/>
-                <scale factor="0.060518 0.060518 0.060518" />
-            </transforms>
-            <appearanceref id="venus" />
-            <children>
-                <noderef id="planet" />
-            </children>
-        </node>
-        <node id="earthsystem">
-            <transforms>
-                <translate to="21.92 0 0"/>
-            </transforms>
-            <children>
-                <noderef id="earth" />
-                <noderef id="moon" />
-            </children>
-        </node>
-        <node id="earth">
-            <transforms>
-                <scale factor="0.06371 0.06371 0.06371" />
-            </transforms>
-            <appearanceref id="earth" />
-            <children>
-                <noderef id="planet" />
-            </children>
-        </node>
-        <node id="moon">
-            <transforms>
-                <translate to="0 0.095 0.095"/>
-                <scale factor="0.017371 0.017371 0.017371" />
-                <rotate axis="z" angle="45" />
-            </transforms>
-            <appearanceref id="moon" />
-            <children>
-                <noderef id="planet" />
-            </children>
-        </node>
-        <node id="mars">
-            <transforms>
-                <translate to="29.754 0 0"/>
-                <scale factor="0.039 0.039 0.039" />
-            </transforms>
-            <appearanceref id="mars" />
-            <children>
-                <noderef id="planet" />
-            </children>
-        </node>
-        <node id="jupiter">
-            <transforms>
-                <translate to="84.793 0 0"/>
-                <scale factor="0.69911 0.69911 0.69911" />
-            </transforms>
-            <appearanceref id="jupiter" />
-            <children>
-                <noderef id="planet" />
-            </children>
-        </node>
-        <node id="saturn">
-            <transforms>
-                <translate to="149.9 0 0"/>
-				<scale factor="0.58232 0.58232 0.58232" />
-            </transforms>
-            <children>
-                <noderef id="saturn_planet" />
-                <noderef id="saturn_ring" />
-            </children>
-        </node>
-        <node id="saturn_planet">
-            <transforms />
-            <appearanceref id="saturn" />
-            <children>
-                <noderef id="planet" />
-            </children>
-        </node>
-        <node id="saturn_ring">
-            <transforms>
-                <rotate axis="x" angle="90" />
-            </transforms>
-            <appearanceref id="saturn_ring" />
-            <children>
-                <noderef id="planet_ring" />
-            </children>
-        </node>
-        <node id="uranus">
-            <transforms>
-                <translate to="293.96 0 0"/>
-                <scale factor="0.25362 0.25362 0.25362" />
-            </transforms>
-            <children>
-                <noderef id="uranus_planet"/>
-                <noderef id="uranus_ring"/>
-            </children>
-        </node>
-        <node id="uranus_planet">
-            <transforms/>
-            <appearanceref id="uranus" />
-            <children>
-                <noderef id="planet"/>
-            </children>
-        </node>
-        <node id="uranus_ring">
-            <transforms/>
-            <appearanceref id="uranus_ring" />
-            <children>
-                <noderef id="planet_ring"/>
-            </children>
-        </node>
-        <node id="neptune">
-            <transforms>
-                <translate to="457.39 0 0"/>
-                <scale factor="0.24622 0.24622 0.24622" />
-            </transforms>
-            <appearanceref id="neptune" />
-            <children>
-                <noderef id="planet"/>
+				<patch order="1" partsU="20" partsV="20" compute="fill">
+					<controlpoint x="0" y="2" z="0" /> <controlpoint x="5" y="2" z="0" />
+					<controlpoint x="5" y="-2" z="0" />	<controlpoint x="0" y="-2" z="0" />	
+				</patch>
+				<patch order="1" partsU="20" partsV="20" compute="fill">
+					<controlpoint x="5" y="-2" z="0" />	<controlpoint x="0" y="-2" z="0" />	
+					<controlpoint x="0" y="2" z="0" /> <controlpoint x="5" y="2" z="0" />
+				</patch>
+				<patch order="1" partsU="20" partsV="20" compute="fill">
+					<controlpoint x="5" y="0" z="-2" />	<controlpoint x="0" y="0" z="-2" />	
+					<controlpoint x="0" y="0" z="2" /> <controlpoint x="5" y="0" z="2" />
+				</patch>
+				<patch order="1" partsU="20" partsV="20" compute="fill">
+					<controlpoint x="0" y="0" z="2" /> <controlpoint x="5" y="0" z="2" />
+					<controlpoint x="5" y="0" z="-2" />	<controlpoint x="0" y="0" z="-2" />						
+				</patch>
+				 <sphere radius="2" slices="20" stacks="20"/>
             </children>
         </node>
     </graph>
