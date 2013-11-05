@@ -46,7 +46,7 @@ class YafPlanetAnimation : public YafAnimation
 {
 public:
     virtual void ApplyAnimation() override;
-    YafPlanetAnimation(const std::string& id, float rtime, float ttime, YafXYZ position) : Id(id), _rTime(rtime * 1000),
+    YafPlanetAnimation(const std::string& id, float rtime, float ttime, YafXYZ position) : YafAnimation(id), _rTime(rtime * 1000),
     _tTime(ttime * 1000), _firstMillis(0), _rotationAngle(0), _translateAngle(0), _position(position) { }
     virtual void Update(unsigned long millis) override;
 private:
@@ -56,4 +56,6 @@ private:
     unsigned long _tTime;
     float _rotationAngle;
     float _translateAngle;
+};
+
 #endif
