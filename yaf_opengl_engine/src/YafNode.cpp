@@ -263,11 +263,11 @@ void YafPlane::Draw(YafAppearance* app /*= nullptr*/)
 void YafPatch::Draw(YafAppearance* app /*= nullptr*/)
 {
     glMap2f(GL_MAP2_VERTEX_3, 0.0f, 1.0f, 3, Order + 1, 0.0f, 1.0f, 3 * (Order + 1), Order + 1, &ControlPoints[0][0]);
-    //glMap2f(GL_MAP2_TEXTURE_COORD_2, 0.0f, 1.0f, 2, 2, 0.0f, 1.0f, 4, 2, &planeTexPoints[0][0]);
+    glMap2f(GL_MAP2_TEXTURE_COORD_2, 0.0f, 1.0f, 2, 2, 0.0f, 1.0f, 4, 2, &planeTexPoints[0][0]);
 
     glEnable(GL_MAP2_VERTEX_3);
     glEnable(GL_AUTO_NORMAL);
-    //glEnable(GL_MAP2_TEXTURE_COORD_2);
+    glEnable(GL_MAP2_TEXTURE_COORD_2);
 
     glMapGrid2f(PartsU, 0.0f, 1.0f, PartsV, 0.0f, 1.0f);
 
