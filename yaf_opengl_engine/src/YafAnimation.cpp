@@ -11,6 +11,13 @@ void YafLinearAnimation::ApplyAnimation()
     glRotatef(_currentAngle, 0.0f, 1.0f, 0.0f);
 }
 
+void YafPlanetAnimation::ApplyAnimation()
+{
+    glRotatef(_translateAngle, 0.0f, 1.0f, 0.0f);
+    glTranslatef(_position.X, _position.Y, _position.Z);
+    glRotatef(_rotationAngle, 0.0f, 1.0f, 0.0f);
+}
+
 int YafLinearAnimation::Position(unsigned long diff, float& path)
 {
     float distance = _speed * diff;
@@ -61,4 +68,20 @@ void YafLinearAnimation::Update(unsigned long millis)
         else if (vector.X != 0.0f)
             _currentAngle = 90.0f * vector.X / abs(vector.X);
     }
+}
+
+void YafPlanetAnimation::Update(unsigned long millis)
+{
+    if(_firstMillis == 0)
+    {
+        _firstMillis = millis;
+    }
+
+    unsigned long diff = millis - _firstMillis;
+    unsigned long rDiff = diff % _rTime;
+    unsigned long tDiff = diff % _tTime;
+
+  _rotationAngle = 360 / _rTime * rDiff;
+  _translateAngle = 360 / _tTime * tDiff;
+
 }

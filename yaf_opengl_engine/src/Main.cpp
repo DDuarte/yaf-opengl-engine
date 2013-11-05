@@ -191,6 +191,16 @@ YafScene* ParseYafFile(const std::string& file)
              auto anim = new YafLinearAnimation(id, time, cps);
              scene->AddAnimation(anim);
         }
+        else if (type == "planet")
+        {
+            auto id = GetAttribute<std::string>(*a, "id", "animations animation");
+            auto rtime = GetAttribute<float>(*a, "rtime", "animations animation");
+            auto ttime = GetAttribute<float>(*a, "ttime", "animations animation");
+            auto position = GetAttribute<YafXYZ>(*a, "position", "animations animation");
+           
+            auto anim = new YafPlanetAnimation(id, rtime, ttime, position);
+            scene->AddAnimation(anim);
+        }
         else
             throw YafParsingException("Unknown animation type: " + type);
     }
