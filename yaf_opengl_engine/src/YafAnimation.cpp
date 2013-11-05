@@ -73,15 +73,11 @@ void YafLinearAnimation::Update(unsigned long millis)
 void YafPlanetAnimation::Update(unsigned long millis)
 {
     if(_firstMillis == 0)
-    {
         _firstMillis = millis;
-    }
 
     unsigned long diff = millis - _firstMillis;
-    unsigned long rDiff = diff % _rTime;
-    unsigned long tDiff = diff % _tTime;
-
-  _rotationAngle = 360 / _rTime * rDiff;
-  _translateAngle = 360 / _tTime * tDiff;
+    
+  _rotationAngle = 360  * diff / _rTime;
+  _translateAngle = 360  * diff / _tTime;
 
 }
