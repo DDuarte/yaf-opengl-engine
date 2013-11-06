@@ -60,7 +60,7 @@ void YafLinearAnimation::Update(unsigned long millis)
 
         if (vector.Z != 0.0f)
         {
-            _currentAngle = atan(vector.X / vector.Z) * 180.0f / M_PI;
+            _currentAngle = atan(vector.X / vector.Z) * 180.0f / static_cast<float>(M_PI);
 
             if (_currentAngle == 0.0f && vector.Z < 0.0f)
                 _currentAngle = 180.0f;
@@ -70,14 +70,30 @@ void YafLinearAnimation::Update(unsigned long millis)
     }
 }
 
+YafLinearAnimation::YafLinearAnimation(const std::string& id, float time, const std::vector<YafXYZ>& controlPoints) : YafAnimation(id), _time(static_cast<unsigned long>(time * 1000)), _controlPoints(controlPoints), _firstMillis(0), _currentPoint(controlPoints[0]), _currentAngle(0)
+{
+    float distance = 0;
+    for (int i = 0; i < _controlPoints.size() - 1; ++i)
+    {
+        distance += YafXYZ::GetDistance(_controlPoints[i], _controlPoints[i + 1]);
+        _controlPointsDistance.push_back(YafXYZ::GetDistance(_controlPoints[i], _controlPoints[i + 1]));
+    }
+    _speed = distance / _time;
+}
+
 void YafPlanetAnimation::Update(unsigned long millis)
 {
-    if(_firstMillis == 0)
+    if (_firstMillis == 0)
         _firstMillis = millis;
 
     unsigned long diff = millis - _firstMillis;
-    
-  _rotationAngle = 360  * diff / _rTime;
-  _translateAngle = 360  * diff / _tTime;
+
+    _rotationAngle = 360.0f * diff / static_cast<float>(_rTime);
+    _translateAngle = 360.0f * diff / static_cast<float>(_tTime);
+}
+
+YafPlanetAnimation::YafPlanetAnimation(const std::string& id, float rtime, float ttime, YafXYZ position) : YafAnimation(id), _rTime(static_cast<unsigned long>(rtime) * 1000u),
+_tTime(static_cast<unsigned long>(ttime) * 1000u), _firstMillis(0u), _rotationAngle(0.0f), _translateAngle(0.0f), _position(position)
+{
 
 }

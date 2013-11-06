@@ -46,7 +46,7 @@ void YafNode::Draw(YafAppearance* app)
             _animation->ApplyAnimation();
 
         if (appearance) appearance->apply();
-        glCallList(_displayListId);
+            glCallList(_displayListId);
     }
     else
     {
@@ -292,7 +292,6 @@ void YafNode::Init(YafAppearance* app /*= nullptr*/)
 
     for (auto i = 0u; i < _children.size(); ++i)
         _children[i]->Init(appearance);
-
 
     if (UseDisplayList && !_displayListInitialized)
     {

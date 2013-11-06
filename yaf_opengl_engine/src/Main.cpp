@@ -165,7 +165,7 @@ YafScene* ParseYafFile(const std::string& file)
         scene->AddAppearance(app);
     }
 
-	// <animations>
+    // <animations>
 
     auto animationsElement = GetChildren(yafElement, "animations", "yaf");
 
@@ -197,7 +197,7 @@ YafScene* ParseYafFile(const std::string& file)
             auto rtime = GetAttribute<float>(*a, "rtime", "animations animation");
             auto ttime = GetAttribute<float>(*a, "ttime", "animations animation");
             auto position = GetAttribute<YafXYZ>(*a, "position", "animations animation");
-           
+
             auto anim = new YafPlanetAnimation(id, rtime, ttime, position);
             scene->AddAnimation(anim);
         }
