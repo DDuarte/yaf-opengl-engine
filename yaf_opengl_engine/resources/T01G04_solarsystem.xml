@@ -1,7 +1,7 @@
 <yaf>
     <globals background="0 0 0 0" drawmode="fill" shading="gouraud" cullface="front" cullorder="CW" />
     <cameras initial="cam_sun" >
-        <perspective id="cam_sun"     near="0.1" far="5000" angle="50" pos= "00.000 0 25"    target= "00.000 0 0" />
+        <free        id="cam_sun"     near="0.1" far="5000" angle="50" pos= "00.000 0 25"    target= "00.000 0 0" />
         <perspective id="cam_mercury" near="0.1" far="5000" angle="50" pos= "12.751 0 0.5"   target= "12.751 0 0" />
         <perspective id="cam_venus"   near="0.1" far="5000" angle="50" pos= "17.780 0 0.5"   target= "17.780 0 0" />
         <perspective id="cam_earth"   near="0.1" far="5000" angle="50" pos= "21.920 0 -0.5"  target= "21.920 0 0" />
@@ -34,6 +34,7 @@
         <texture id="uranus_ring" file="uranus_ring.jpg" />
         <texture id="neptune" file="neptune.jpg" />
         <texture id="stars" file="stars.jpg" />
+        <texture id="meteor" file="meteor.jpg" />
     </textures>
     <appearances>
         <appearance id="sun"
@@ -153,16 +154,25 @@
             textureref="stars"
             texlength_s="1"
             texlength_t="1" />
+        <appearance id="meteor"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="meteor"
+            texlength_s="1"
+            texlength_t="1" />
     </appearances>
     <animations>
-        <animation id="mercury" type="planet" rtime="293"  ttime="439.85"    position="12.751 0 0" />
-        <animation id="venus"   type="planet" rtime="1215" ttime="1123.5"    position="17.78 0 0" />
         <animation id="earth"   type="planet" rtime="4.95" ttime="1826.3"    position="21.92 0 0" />
-        <animation id="mars"    type="planet" rtime="5.15" ttime="3431"      position="29.754 0 0" />
-        <animation id="jupiter" type="planet" rtime="2.05" ttime="21644.5"   position="84.793 0 0" />
-        <animation id="saturn"  type="planet" rtime="2.25" ttime="53764.5"   position="149.9 0 0" />
-        <animation id="uranus"  type="planet" rtime="3.6"  ttime="153318.25" position="293.96 0 0" />
-        <animation id="neptun"  type="planet" rtime="3.35" ttime="300741.75" position="457.39 0 0" />
+        <animation id="vehicle" type="linear" span="20">
+            <controlpoint x="0" y="0" z="0" />
+            <controlpoint x="20" y="0" z="0" />
+            <controlpoint x="20" y="0" z="20" />
+            <controlpoint x="0" y="0" z="20" />
+            <controlpoint x="0" y="0" z="0" />
+        </animation>
     </animations>
     <graph rootid="solarsystem">
         <node id="planet">
@@ -192,6 +202,8 @@
                 <noderef id="uranus" /> <!-- with ring -->
                 <noderef id="neptune" />
                 <noderef id="spherebg" />
+                <noderef id="vehicle" />
+                <noderef id="water" />
             </children>
         </node>
         <node id="spherebg">
@@ -214,7 +226,6 @@
             <transforms>
                 <scale factor="0.02576 0.02576 0.02576" />
             </transforms>
-            <animationref id="mercury" />
             <appearanceref id="mercury" />
             <children>
                 <noderef id="planet" />
@@ -224,7 +235,6 @@
             <transforms>
                 <scale factor="0.060518 0.060518 0.060518" />
             </transforms>
-            <animationref id="venus" />
             <appearanceref id="venus" />
             <children>
                 <noderef id="planet" />
@@ -262,7 +272,6 @@
             <transforms>
                 <scale factor="0.039 0.039 0.039" />
             </transforms>
-            <animationref id="mars" />
             <appearanceref id="mars" />
             <children>
                 <noderef id="planet" />
@@ -272,17 +281,15 @@
             <transforms>
                 <scale factor="0.69911 0.69911 0.69911" />
             </transforms>
-            <animationref id="jupiter" />
             <appearanceref id="jupiter" />
             <children>
                 <noderef id="planet" />
             </children>
         </node>
-        <node id="saturn">
+        <node id="saturn" displaylist="true">
             <transforms>
                 <scale factor="0.58232 0.58232 0.58232" />
             </transforms>
-            <animationref id="saturn" />
             <children>
                 <noderef id="saturn_planet" />
                 <noderef id="saturn_ring" />
@@ -308,7 +315,6 @@
             <transforms>
                 <scale factor="0.25362 0.25362 0.25362" />
             </transforms>
-            <animationref id="uranus" />
             <children>
                 <noderef id="uranus_planet"/>
                 <noderef id="uranus_ring"/>
@@ -332,10 +338,61 @@
             <transforms>
                 <scale factor="0.24622 0.24622 0.24622" />
             </transforms>
-            <animationref id="neptune" />
             <appearanceref id="neptune" />
             <children>
                 <noderef id="planet"/>
+            </children>
+        </node>
+        <node id="vehicle">
+            <transforms>
+                <translate to="21 21 0"/>
+            </transforms>
+            <appearanceref id="meteor" />
+            <animationref id="vehicle" />
+            <children>
+                <patch order="1" partsU="20" partsV="20" compute="fill">
+                    <controlpoint x="0" y="2" z="0" /> <controlpoint x="5" y="2" z="0" />
+                    <controlpoint x="5" y="-2" z="0" /> <controlpoint x="0" y="-2" z="0" />
+                </patch>
+                <patch order="1" partsU="20" partsV="20" compute="fill">
+                    <controlpoint x="5" y="-2" z="0" /> <controlpoint x="0" y="-2" z="0" />
+                    <controlpoint x="0" y="2" z="0" /> <controlpoint x="5" y="2" z="0" />
+                </patch>
+                <patch order="1" partsU="20" partsV="20" compute="fill">
+                    <controlpoint x="5" y="0" z="-2" /> <controlpoint x="0" y="0" z="-2" />
+                    <controlpoint x="0" y="0" z="2" /> <controlpoint x="5" y="0" z="2" />
+                </patch>
+                <patch order="1" partsU="20" partsV="20" compute="fill">
+                    <controlpoint x="0" y="0" z="2" /> <controlpoint x="5" y="0" z="2" />
+                    <controlpoint x="5" y="0" z="-2" /> <controlpoint x="0" y="0" z="-2" />
+                </patch>
+                
+                <patch order="1" partsU="20" partsV="20" compute="fill">
+                    <controlpoint x="0" y="-2" z="0" /> <controlpoint x="-5" y="-2" z="0" />
+                    <controlpoint x="-5" y="2" z="0" /> <controlpoint x="0" y="2" z="0" />
+                </patch>
+                <patch order="1" partsU="20" partsV="20" compute="fill">
+                    <controlpoint x="-5" y="2" z="0" /> <controlpoint x="0" y="2" z="0" />
+                    <controlpoint x="0" y="-2" z="0" /> <controlpoint x="-5" y="-2" z="0" />
+                </patch>
+                <patch order="1" partsU="20" partsV="20" compute="fill">
+                    <controlpoint x="-5" y="0" z="2" /> <controlpoint x="0" y="0" z="2" />
+                    <controlpoint x="0" y="0" z="-2" /> <controlpoint x="-5" y="0" z="-2" />
+                </patch>
+                <patch order="1" partsU="20" partsV="20" compute="fill">
+                    <controlpoint x="0" y="0" z="-2" /> <controlpoint x="-5" y="0" z="-2" />
+                    <controlpoint x="-5" y="0" z="2" /> <controlpoint x="0" y="0" z="2" />
+                </patch>
+                <sphere radius="2" slices="20" stacks="20"/>
+            </children>
+        </node>
+        <node id="water">
+            <transforms>
+                <translate to="21 0 21" />
+                <scale factor="2 1 5" />
+            </transforms>
+            <children>
+                <waterline heightmap="watermap.jpg" texturemap="water.jpg" fragmentshader="water.frag" vertexshader="water.vert" />
             </children>
         </node>
     </graph>

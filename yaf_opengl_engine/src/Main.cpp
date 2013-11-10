@@ -40,8 +40,9 @@ YafScene* ParseYafFile(const std::string& file)
 
     auto camerasPerspective = GetAllChildren(camerasElement, "perspective");
     auto camerasOrtho = GetAllChildren(camerasElement, "ortho");
+    auto camerasFree = GetAllChildren(camerasElement, "free");
 
-    if (camerasPerspective.empty() && camerasOrtho.empty())
+    if (camerasPerspective.empty() && camerasOrtho.empty() && camerasFree.empty())
         throw YafParsingException("<yaf cameras> needs at least one camera");
 
     for (auto cp = camerasPerspective.begin(); cp != camerasPerspective.end(); ++cp)
@@ -69,6 +70,20 @@ YafScene* ParseYafFile(const std::string& file)
         camera->Top    = GetAttribute<float>(*op, "top", "cameras ortho");
         camera->Bottom = GetAttribute<float>(*op, "bottom", "cameras ortho");
 
+        scene->AddCamera(camera);
+    }
+
+    for (auto cf = camerasFree.begin(); cf != camerasFree.end(); ++cf)
+    {
+        auto id = GetAttribute<std::string>(*cf, "id", "cameras free");
+
+        auto position = GetAttribute<YafXYZ>(*cf, "pos", "cameras free");
+
+        auto camera = new YafFreePersCamera(id, position);
+        camera->Near = GetAttribute<float>(*cf, "near", "cameras free");
+        camera->Far = GetAttribute<float>(*cf, "far", "cameras free");
+        camera->Angle = GetAttribute<float>(*cf, "angle", "cameras free");
+        camera->Target = GetAttribute<YafXYZ>(*cf, "target", "cameras free");
         scene->AddCamera(camera);
     }
 
@@ -262,7 +277,7 @@ YafScene* ParseYafFile(const std::string& file)
 
         if (auto animationElement = GetChildren(*n, "animationref", "graph node", false))
         {
-            auto anim = GetAttribute<std::string>(animationElement, "id", "graph node animation");
+            auto anim = GetAttribute<std::string>(animationElement, "id", "graph node animationref");
             node->SetAnimation(scene->GetAnimation(anim));
         }
         else

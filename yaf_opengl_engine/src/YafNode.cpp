@@ -42,11 +42,22 @@ void YafNode::Draw(YafAppearance* app)
 
     if (UseDisplayList && _displayListInitialized)
     {
-        if (_animation) // TODO: test
+        glPushMatrix();
+        glMultMatrixf(&_m[0][0]);
+
+        if (_animation)
+        {
+            glPushMatrix();
             _animation->ApplyAnimation();
+        }
 
         if (appearance) appearance->apply();
-            glCallList(_displayListId);
+        glCallList(_displayListId);
+
+        if (_animation)
+            glPopMatrix();
+
+        glPopMatrix();
     }
     else
     {
@@ -57,10 +68,16 @@ void YafNode::Draw(YafAppearance* app)
         glMultMatrixf(&_m[0][0]);
 
         if (_animation)
+        {
+            glPushMatrix();
             _animation->ApplyAnimation();
+        }
 
         for (auto i = 0u; i < _children.size(); ++i)
             _children[i]->Draw(appearance);
+
+        if (_animation)
+            glPopMatrix();
 
         glPopMatrix();
     }
@@ -247,6 +264,10 @@ GLfloat planeNormalPoints[4][3] = { { 0.0f, 1.0, 0.0 },
 
 void YafPlane::Draw(YafAppearance* app /*= nullptr*/)
 {
+    int oldFF;
+    glGetIntegerv(GL_FRONT_FACE, &oldFF);
+    glFrontFace(GL_CW);
+
     glMap2f(GL_MAP2_VERTEX_3, 0.0f, 1.0f, 3, 2, 0.0f, 1.0f, 6, 2, &planeControlPoints[0][0]);
     glMap2f(GL_MAP2_NORMAL, 0.0f, 1.0f, 3, 2, 0.0f, 1.0f, 6, 2, &planeNormalPoints[0][0]);
     glMap2f(GL_MAP2_TEXTURE_COORD_2, 0.0f, 1.0f, 2, 2, 0.0f, 1.0f, 4, 2, &planeTexPoints[0][0]);
@@ -258,10 +279,16 @@ void YafPlane::Draw(YafAppearance* app /*= nullptr*/)
     glMapGrid2f(Parts, 0.0f, 1.0f, Parts, 0.0f, 1.0f);
 
     glEvalMesh2(GL_FILL, 0, Parts, 0, Parts);
+
+    glFrontFace(oldFF);
 }
 
 void YafPatch::Draw(YafAppearance* app /*= nullptr*/)
 {
+    int oldFF;
+    glGetIntegerv(GL_FRONT_FACE, &oldFF);
+    glFrontFace(GL_CW);
+
     glMap2f(GL_MAP2_VERTEX_3, 0.0f, 1.0f, 3, Order + 1, 0.0f, 1.0f, 3 * (Order + 1), Order + 1, &ControlPoints[0][0]);
     glMap2f(GL_MAP2_TEXTURE_COORD_2, 0.0f, 1.0f, 2, 2, 0.0f, 1.0f, 4, 2, &planeTexPoints[0][0]);
 
@@ -272,6 +299,8 @@ void YafPatch::Draw(YafAppearance* app /*= nullptr*/)
     glMapGrid2f(PartsU, 0.0f, 1.0f, PartsV, 0.0f, 1.0f);
 
     glEvalMesh2(Compute, 0, PartsU, 0, PartsV);
+
+    glFrontFace(oldFF);
 }
 
 void YafNode::Update(unsigned long millis)
