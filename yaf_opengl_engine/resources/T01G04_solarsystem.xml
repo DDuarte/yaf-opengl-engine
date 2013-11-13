@@ -282,6 +282,7 @@
         </node>
         <node id="mercury">
             <transforms>
+                <translate to="12.751 0 0"/>
                 <scale factor="0.02576 0.02576 0.02576" />
             </transforms>
             <appearanceref id="mercury" />
@@ -291,6 +292,7 @@
         </node>
         <node id="venus">
             <transforms>
+                <translate to="17.78 0 0"/>
                 <scale factor="0.060518 0.060518 0.060518" />
             </transforms>
             <appearanceref id="venus" />
@@ -328,6 +330,7 @@
         </node>
         <node id="mars">
             <transforms>
+                <translate to="29.754 0 0"/>
                 <scale factor="0.039 0.039 0.039" />
             </transforms>
             <appearanceref id="mars" />
@@ -335,8 +338,9 @@
                 <noderef id="planet" />
             </children>
         </node>
-        <node id="jupiter">
+        <node id="jupiter" displaylist="true">
             <transforms>
+                <translate to="84.793 0 0"/>
                 <scale factor="0.69911 0.69911 0.69911" />
             </transforms>
             <appearanceref id="jupiter" />
@@ -344,8 +348,9 @@
                 <noderef id="planet" />
             </children>
         </node>
-        <node id="saturn" displaylist="true">
+        <node id="saturn">
             <transforms>
+                <translate to="149.9 0 0"/>
                 <scale factor="0.58232 0.58232 0.58232" />
             </transforms>
             <children>
@@ -371,6 +376,7 @@
         </node>
         <node id="uranus">
             <transforms>
+                <translate to="293.96 0 0"/>
                 <scale factor="0.25362 0.25362 0.25362" />
             </transforms>
             <children>
@@ -394,6 +400,7 @@
         </node>
         <node id="neptune">
             <transforms>
+                <translate to="457.39 0 0"/>
                 <scale factor="0.24622 0.24622 0.24622" />
             </transforms>
             <appearanceref id="neptune" />
