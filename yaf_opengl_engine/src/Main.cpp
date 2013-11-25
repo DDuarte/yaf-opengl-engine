@@ -242,6 +242,9 @@ YafScene* ParseYafFile(const std::string& file)
         auto displayListStr = GetAttribute<std::string>(*n, "displaylist", "graph node", false);
         node->UseDisplayList = !displayListStr.empty() && BoolFromString(displayListStr);
 
+        auto pickableStr = GetAttribute<std::string>(*n, "pickable", "graph node", false);
+        node->Pickable = !pickableStr.empty() && BoolFromString(pickableStr);
+
         for (auto t = transforms.begin(); t != transforms.end(); ++t)
         {
             if ((*t)->ValueStr() == "translate")

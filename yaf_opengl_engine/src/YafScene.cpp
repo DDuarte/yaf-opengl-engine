@@ -170,6 +170,7 @@ void YafScene::display()
     }
 
     glPushMatrix();
+    glPushName(-1); // default name
 
     glColor3f(1.0f, 1.0f, 1.0f);
     //axis.draw();

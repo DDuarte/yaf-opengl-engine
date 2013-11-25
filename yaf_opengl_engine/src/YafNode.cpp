@@ -1,6 +1,7 @@
 #include "YafNode.h"
 #include "YafScene.h"
 #include <iostream>
+#include <functional>
 
 #define _USE_MATH_DEFINES // for M_PI
 #include <math.h>
@@ -66,6 +67,8 @@ void YafNode::Draw(YafAppearance* app)
 
         glPushMatrix();
         glMultMatrixf(&_m[0][0]);
+        if (Pickable)
+            glPushName(std::hash<std::string>()(Id));
 
         if (_animation)
         {
@@ -79,6 +82,8 @@ void YafNode::Draw(YafAppearance* app)
         if (_animation)
             glPopMatrix();
 
+        if (Pickable)
+            glPopName();
         glPopMatrix();
     }
 }

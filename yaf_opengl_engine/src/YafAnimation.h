@@ -18,8 +18,8 @@ public:
     virtual void ApplyAnimation() override;
     YafLinearAnimation(const std::string& id, float time, const std::vector<YafXYZ>& controlPoints);
     virtual void Update(unsigned long millis) override;
-    int Position(unsigned long millis, float& path);
 private:
+    int Position(unsigned long millis, float& path);
     unsigned long _time;
     std::vector<YafXYZ> _controlPoints;
     unsigned long _firstMillis;

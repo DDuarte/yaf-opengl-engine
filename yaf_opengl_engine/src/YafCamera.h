@@ -94,6 +94,7 @@ public:
         }
         else
         {
+            glLoadIdentity();
             glTranslatef(position[0], position[1], position[2]);
             glRotatef(rotation[0], 1.f, 0.f, 0.f);
             glRotatef(rotation[1], 0.f, 1.f, 0.f);

@@ -180,6 +180,7 @@ public:
     virtual void Update(unsigned long millis) override;
 
     bool UseDisplayList;
+    bool Pickable;
 
 private:
     void MoveRefNodesToChildren(YafScene* scene);
