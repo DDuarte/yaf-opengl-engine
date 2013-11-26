@@ -171,7 +171,7 @@
                 <cylinder base="2" top="0.5" height="10" slices="4" stacks="20" />
             </children>
         </node>
-        <node id="bPieces" pickable="true">
+        <node id="bPieces">
 			<transforms>
             </transforms>
 			<appearanceref id="charmander" />
@@ -205,8 +205,9 @@
 				 <noderef id="piece" />
 			</children>
 		</node>
-        <node id="wPieces" pickable="true">
-			<transforms/>
+        <node id="wPieces">
+			<transforms>
+            </transforms>
 			<appearanceref id="squirtle" />
 			<children>
 				 <noderef id="wPiece1" />
@@ -247,7 +248,7 @@
 				 <noderef id="piece" />
 			</children>
 		</node>
-		<node id="piece" pickable="true">
+		<node id="piece">
 			<transforms>
                 <rotate axis="z" angle="90" />
             </transforms>
@@ -255,7 +256,7 @@
 				<cylinder base="1" top="1" height="0.25" slices="20" stacks="20" />
 			</children>
 		</node>
-		<node id="board" pickable="true">
+		<node id="board">
             <transforms>
                 <translate to="-9.45 7.05 0.25" />
             </transforms>
@@ -270,98 +271,114 @@
                 <noderef id="col6" />
 			</children>
 		</node>
-        <node id="coltype1" pickable="true">
+        <node id="col6">
             <transforms/>
 			<children>
-				<noderef id="cell00" />
-                <noderef id="cell01" />
-                <noderef id="cell02" />
-                <noderef id="cell03" />
-                <noderef id="cell04" />
-                <noderef id="cell05" />
-                <noderef id="cell06" />
-                <noderef id="cell07" />
-			</children>
-		</node>
-        <node id="coltype2" pickable="true">
-            <transforms/>
-			<children>
-				<noderef id="cell10" />
-                <noderef id="cell11" />
-                <noderef id="cell12" />
-                <noderef id="cell13" />
-                <noderef id="cell14" />
-                <noderef id="cell15" />
+				<noderef id="cell03" />
                 <noderef id="cell16" />
+                <noderef id="cell26" />
+                <noderef id="cell36" />
+                <noderef id="cell46" />
+                <noderef id="cell56" />
+                <noderef id="cell66" />
+                <noderef id="cell76" />
 			</children>
 		</node>
-        <node id="col0" pickable="true">
-            <transforms/>
-			<children>
-				<noderef id="coltype1" />
-			</children>
-		</node>
-        <node id="col1" pickable="true">
+        <node id="col5">
             <transforms>
                 <translate to="0 -2.35 0" />
             </transforms>
 			<children>
-				<noderef id="coltype2" />
+				<noderef id="cell15" />
+                <noderef id="cell25" />
+                <noderef id="cell35" />
+                <noderef id="cell45" />
+                <noderef id="cell55" />
+                <noderef id="cell65" />
+                <noderef id="cell75" />
 			</children>
 		</node>
-        <node id="col2" pickable="true">
+        <node id="col4">
             <transforms>
                 <translate to="0 -4.7 0" />
             </transforms>
 			<children>
-				<noderef id="coltype1" />
+				<noderef id="cell02" />
+                <noderef id="cell14" />
+                <noderef id="cell24" />
+                <noderef id="cell34" />
+                <noderef id="cell44" />
+                <noderef id="cell54" />
+                <noderef id="cell64" />
+                <noderef id="cell74" />
 			</children>
 		</node>
-        <node id="col3" pickable="true">
+        <node id="col3">
             <transforms>
                 <translate to="0 -7.05 0" />
             </transforms>
 			<children>
-				<noderef id="coltype2" />
+				<noderef id="cell13" />
+                <noderef id="cell23" />
+                <noderef id="cell33" />
+                <noderef id="cell43" />
+                <noderef id="cell53" />
+                <noderef id="cell63" />
+                <noderef id="cell73" />
 			</children>
 		</node>
-        <node id="col4" pickable="true">
+        <node id="col2">
             <transforms>
                 <translate to="0 -9.4 0" />
             </transforms>
 			<children>
-				<noderef id="coltype1" />
+				<noderef id="cell01" />
+                <noderef id="cell12" />
+                <noderef id="cell22" />
+                <noderef id="cell32" />
+                <noderef id="cell42" />
+                <noderef id="cell52" />
+                <noderef id="cell62" />
+                <noderef id="cell72" />
 			</children>
 		</node>
-        <node id="col5" pickable="true">
+        <node id="col1">
             <transforms>
                 <translate to="0 -11.75 0" />
             </transforms>
 			<children>
-				<noderef id="coltype2" />
+				<noderef id="cell11" />
+                <noderef id="cell21" />
+                <noderef id="cell31" />
+                <noderef id="cell41" />
+                <noderef id="cell51" />
+                <noderef id="cell61" />
+                <noderef id="cell71" />
 			</children>
 		</node>
-        <node id="col6" pickable="true">
+        <node id="col0">
             <transforms>
                 <translate to="0 -14.1 0" />
             </transforms>
 			<children>
-				<noderef id="coltype1" />
+				<noderef id="cell00" />
+                <noderef id="cell10" />
+                <noderef id="cell20" />
+                <noderef id="cell30" />
+                <noderef id="cell40" />
+                <noderef id="cell50" />
+                <noderef id="cell60" />
+                <noderef id="cell70" />
 			</children>
 		</node>
-        <node id="cell" pickable="true">
-            <transforms/>
-			<children>
-				<cylinder base="1.5" top="1.5" height="0.25" slices="6" stacks="20" />
-			</children>
-		</node>
-		<node id="cell00" pickable="true">
+
+        <node id="cell76" pickable="true">
 		    <transforms/>
             <children>
                 <noderef id="cell" />
             </children>
 		</node>
-		<node id="cell01" pickable="true">
+		<node id="cell66" pickable="true">
             <transforms>
                 <translate to="2.7 0 0" />
             </transforms>
@@ -369,7 +386,7 @@
                 <noderef id="cell" />
             </children>
 		</node>
-        <node id="cell02" pickable="true">
+        <node id="cell56" pickable="true">
             <transforms>
                 <translate to="5.4 0 0" />
             </transforms>
@@ -377,7 +394,7 @@
                 <noderef id="cell" />
             </children>
 		</node>
-		<node id="cell03" pickable="true">
+		<node id="cell46" pickable="true">
             <transforms>
                 <translate to="8.1 0 0" />
             </transforms>
@@ -385,7 +402,7 @@
 				<noderef id="cell" />
 			</children>
 		</node>
-        <node id="cell04" pickable="true">
+        <node id="cell36" pickable="true">
             <transforms>
                 <translate to="10.8 0 0" />
             </transforms>
@@ -393,7 +410,7 @@
 				<noderef id="cell" />
 			</children>
 		</node>
-        <node id="cell05" pickable="true">
+        <node id="cell26" pickable="true">
             <transforms>
                 <translate to="13.5 0 0" />
             </transforms>
@@ -401,7 +418,7 @@
 				<noderef id="cell" />
 			</children>
 		</node>
-        <node id="cell06" pickable="true">
+        <node id="cell16" pickable="true">
             <transforms>
                 <translate to="16.2 0 0" />
             </transforms>
@@ -409,15 +426,16 @@
 				<noderef id="cell" />
 			</children>
 		</node>
-        <node id="cell07" pickable="true">
+        <node id="cell03" pickable="true">
             <transforms>
                 <translate to="18.9 0 0" />
             </transforms>
 			<children>
 				<noderef id="cell" />
 			</children>
-		</node>     
-        <node id="cell10" pickable="true">
+		</node>   
+        
+        <node id="cell75" pickable="true">
             <transforms>
                 <translate to="1.35 0 0" />
             </transforms>
@@ -425,7 +443,7 @@
 				<noderef id="cell" />
 			</children>
 		</node>
-        <node id="cell11" pickable="true">
+        <node id="cell65" pickable="true">
             <transforms>
                 <translate to="4.05 0 0" />
             </transforms>
@@ -433,7 +451,7 @@
 				<noderef id="cell" />
 			</children>
 		</node>
-        <node id="cell12" pickable="true">
+        <node id="cell55" pickable="true">
             <transforms>
                 <translate to="6.75 0 0" />
             </transforms>
@@ -441,7 +459,7 @@
 				<noderef id="cell" />
 			</children>
 		</node>
-        <node id="cell13" pickable="true">
+        <node id="cell45" pickable="true">
             <transforms>
                 <translate to="9.45 0 0" />
             </transforms>
@@ -449,7 +467,7 @@
 				<noderef id="cell" />
 			</children>
 		</node>
-        <node id="cell14" pickable="true">
+        <node id="cell35" pickable="true">
             <transforms>
                 <translate to="12.15  0 0" />
             </transforms>
@@ -457,7 +475,7 @@
 				<noderef id="cell" />
 			</children>
 		</node>
-        <node id="cell15" pickable="true">
+        <node id="cell25" pickable="true">
             <transforms>
                 <translate to="14.85 0 0" />
             </transforms>
@@ -465,12 +483,323 @@
 				<noderef id="cell" />
 			</children>
 		</node>
-        <node id="cell16" pickable="true">
+        <node id="cell15" pickable="true">
             <transforms>
                 <translate to="17.55 0 0" />
             </transforms>
 			<children>
 				<noderef id="cell" />
+			</children>
+		</node>
+        
+        <node id="cell74" pickable="true">
+		    <transforms/>
+            <children>
+                <noderef id="cell" />
+            </children>
+		</node>
+		<node id="cell64" pickable="true">
+            <transforms>
+                <translate to="2.7 0 0" />
+            </transforms>
+            <children>
+                <noderef id="cell" />
+            </children>
+		</node>
+        <node id="cell54" pickable="true">
+            <transforms>
+                <translate to="5.4 0 0" />
+            </transforms>
+            <children>
+                <noderef id="cell" />
+            </children>
+		</node>
+		<node id="cell44" pickable="true">
+            <transforms>
+                <translate to="8.1 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell34" pickable="true">
+            <transforms>
+                <translate to="10.8 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell24" pickable="true">
+            <transforms>
+                <translate to="13.5 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell14" pickable="true">
+            <transforms>
+                <translate to="16.2 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell02" pickable="true">
+            <transforms>
+                <translate to="18.9 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        
+		
+        <node id="cell73" pickable="true">
+            <transforms>
+                <translate to="1.35 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell63" pickable="true">
+            <transforms>
+                <translate to="4.05 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell53" pickable="true">
+            <transforms>
+                <translate to="6.75 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell43" pickable="true">
+            <transforms>
+                <translate to="9.45 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell33" pickable="true">
+            <transforms>
+                <translate to="12.15  0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell23" pickable="true">
+            <transforms>
+                <translate to="14.85 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell13" pickable="true">
+            <transforms>
+                <translate to="17.55 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        
+        <node id="cell72" pickable="true">
+		    <transforms/>
+            <children>
+                <noderef id="cell" />
+            </children>
+		</node>
+		<node id="cell62" pickable="true">
+            <transforms>
+                <translate to="2.7 0 0" />
+            </transforms>
+            <children>
+                <noderef id="cell" />
+            </children>
+		</node>
+        <node id="cell52" pickable="true">
+            <transforms>
+                <translate to="5.4 0 0" />
+            </transforms>
+            <children>
+                <noderef id="cell" />
+            </children>
+		</node>
+		<node id="cell42" pickable="true">
+            <transforms>
+                <translate to="8.1 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell32" pickable="true">
+            <transforms>
+                <translate to="10.8 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell22" pickable="true">
+            <transforms>
+                <translate to="13.5 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell12" pickable="true">
+            <transforms>
+                <translate to="16.2 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell01" pickable="true">
+            <transforms>
+                <translate to="18.9 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        
+        <node id="cell71" pickable="true">
+            <transforms>
+                <translate to="1.35 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell61" pickable="true">
+            <transforms>
+                <translate to="4.05 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell51" pickable="true">
+            <transforms>
+                <translate to="6.75 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell41" pickable="true">
+            <transforms>
+                <translate to="9.45 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell31" pickable="true">
+            <transforms>
+                <translate to="12.15  0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell21" pickable="true">
+            <transforms>
+                <translate to="14.85 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell11" pickable="true">
+            <transforms>
+                <translate to="17.55 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+  
+        <node id="cell70" pickable="true">
+		    <transforms/>
+            <children>
+                <noderef id="cell" />
+            </children>
+		</node>
+		<node id="cell60" pickable="true">
+            <transforms>
+                <translate to="2.7 0 0" />
+            </transforms>
+            <children>
+                <noderef id="cell" />
+            </children>
+		</node>
+        <node id="cell50" pickable="true">
+            <transforms>
+                <translate to="5.4 0 0" />
+            </transforms>
+            <children>
+                <noderef id="cell" />
+            </children>
+		</node>
+		<node id="cell40" pickable="true">
+            <transforms>
+                <translate to="8.1 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell30" pickable="true">
+            <transforms>
+                <translate to="10.8 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell20" pickable="true">
+            <transforms>
+                <translate to="13.5 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell10" pickable="true">
+            <transforms>
+                <translate to="16.2 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+        <node id="cell00" pickable="true">
+            <transforms>
+                <translate to="18.9 0 0" />
+            </transforms>
+			<children>
+				<noderef id="cell" />
+			</children>
+		</node>
+    
+        <node id="cell">
+            <transforms/>
+			<children>
+				<cylinder base="1.5" top="1.5" height="0.25" slices="6" stacks="20" />
 			</children>
 		</node>
     </graph>
