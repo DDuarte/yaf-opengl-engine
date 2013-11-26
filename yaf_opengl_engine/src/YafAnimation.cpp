@@ -18,6 +18,11 @@ void YafPlanetAnimation::ApplyAnimation()
     glRotatef(_rotationAngle, 0.0f, 1.0f, 0.0f);
 }
 
+void YafPieceAnimation::ApplyAnimation()
+  {
+    glTranslatef(Animation->getCurrentPoint().X, Animation->getCurrentPoint().Y, 0.0f);
+  }
+
 int YafLinearAnimation::Position(unsigned long diff, float& path)
 {
     float distance = _speed * diff;
@@ -96,4 +101,37 @@ YafPlanetAnimation::YafPlanetAnimation(const std::string& id, float rtime, float
 _tTime(static_cast<unsigned long>(ttime) * 1000u), _firstMillis(0u), _rotationAngle(0.0f), _translateAngle(0.0f), _position(position)
 {
 
+}
+  
+YafPieceAnimation::YafPieceAnimation(const std::string& id, YafXYZ position) : YafAnimation(id)
+{
+    std::vector<YafXYZ> points;
+    points.push_back(position);
+    points.push_back(position);
+    Animation = new YafLinearAnimation(id, 5, points);
+}
+
+void YafPieceAnimation::Update(unsigned long millis)
+{
+    Animation->Update(millis);
+}
+
+void YafPieceAnimation::moveTo(unsigned int X, unsigned int Y)
+{
+    if(X <= 7 && X >= 0 && Y <= 6 && Y >= 0)
+    {
+        YafXYZ moveTo; 
+        moveTo.Z = 0;
+        moveTo.Y = (6 - Y) * -2.35;
+        if(X == 0)
+            Y *= 2;
+        if(Y % 2 == 0)
+             moveTo.X = (7 - X) * 2.7;
+        else
+           moveTo.X = (7 - (X-1)) * 2.7 - 1.35;
+        std::vector<YafXYZ> points;
+        points.push_back(Animation->getCurrentPoint());
+        points.push_back(moveTo);
+        Animation = new YafLinearAnimation(Id, 5, points);
+    }
 }

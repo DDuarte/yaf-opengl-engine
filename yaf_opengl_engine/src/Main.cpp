@@ -218,7 +218,14 @@ YafScene* ParseYafFile(const std::string& file)
         }
         else
             throw YafParsingException("Unknown animation type: " + type);
+
+        
     }
+
+    //TO DELETE
+        YafXYZ pos(0,0,0);
+        auto anim = new YafPieceAnimation("test", pos);
+        scene->AddAnimation(anim);
 
     // <graph>
 
@@ -404,6 +411,7 @@ YafScene* ParseYafFile(const std::string& file)
         }
 
         scene->AddNode(node);
+
     }
 
     auto rootNode = scene->GetNode(graphRootId);
@@ -411,6 +419,13 @@ YafScene* ParseYafFile(const std::string& file)
         scene->SetRootNode(rootNode);
     else
         throw YafParsingException("Root node (" + graphRootId + ") not found.");
+
+    //TO DELETE
+    auto node = scene->GetNode("oPiece");
+    node->SetAnimation(scene->GetAnimation("test"));
+    ((YafPieceAnimation*)node->GetAnimation())->moveTo(0,0);
+    
+    ((YafPieceAnimation*)node->GetAnimation())->moveTo(6,6);
 
     scene->DoPostProcessing();
 

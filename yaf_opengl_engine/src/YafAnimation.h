@@ -18,6 +18,9 @@ public:
     virtual void ApplyAnimation() override;
     YafLinearAnimation(const std::string& id, float time, const std::vector<YafXYZ>& controlPoints);
     virtual void Update(unsigned long millis) override;
+    YafXYZ getCurrentPoint(){
+        return _currentPoint;
+    }
 private:
     int Position(unsigned long millis, float& path);
     unsigned long _time;
@@ -42,6 +45,18 @@ private:
     unsigned long _tTime;
     float _rotationAngle;
     float _translateAngle;
+};
+
+class YafPieceAnimation : public YafAnimation
+{
+public:
+    virtual void ApplyAnimation() override;
+    YafPieceAnimation(const std::string& id, YafXYZ position);
+    virtual void Update(unsigned long millis) override;
+    void moveTo(unsigned int X, unsigned int Y);
+private:
+    YafLinearAnimation* Animation;
+    unsigned long _time;
 };
 
 #endif
