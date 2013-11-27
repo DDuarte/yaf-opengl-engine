@@ -31,6 +31,12 @@ class CGFappearance
 		void setSpecular(float*);						///< Sets the Specular component of the material (4-float vector)
 		void setShininess(float);						///< Sets the Shininess coefficient of the material
 
+        float* getAmbient() { return ambient; }
+        float* getDiffuse() { return diffuse; }
+        float* getSpecular() { return specular; }
+        float* getEmissive() { return emissive; }
+        float getShininess() { return shininess; }
+
         void setEmissive(float*); // addition
 
 		void setTexture(string);						///< Loads the texture specified by filename and stores it
