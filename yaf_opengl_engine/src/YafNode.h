@@ -21,7 +21,7 @@ class YafChild
 public:
     virtual void Init(YafAppearance* app = nullptr) { };
 
-    virtual void Draw(YafAppearance* app = nullptr) = 0;
+    virtual void Draw(YafAppearance* app = nullptr, YafAppearance* appSel = nullptr) = 0;
 
     virtual void Update(unsigned long millis) { }
 
@@ -39,7 +39,7 @@ public:
     YafXY Point1;
     YafXY Point2;
 
-    virtual void Draw(YafAppearance* app = nullptr) override;
+    virtual void Draw(YafAppearance* app = nullptr, YafAppearance* appSel = nullptr) override;
 
 };
 
@@ -52,7 +52,7 @@ public:
     YafXYZ Point2;
     YafXYZ Point3;
 
-    virtual void Draw(YafAppearance* app = nullptr) override;
+    virtual void Draw(YafAppearance* app = nullptr, YafAppearance* appSel = nullptr) override;
 
 private:
     YafXYZ _normal;
@@ -71,12 +71,10 @@ public:
     int Slices;
     int Stacks;
 
-    virtual void Draw(YafAppearance* app = nullptr) override;
+    virtual void Draw(YafAppearance* app = nullptr, YafAppearance* appSel = nullptr) override;
 
 private:
     GLUquadricObj* _quadric;
-    GLUquadricObj* _quadricD1;
-    GLUquadricObj* _quadricD2;
 };
 
 class YafSphere : public YafPrimitive
@@ -89,7 +87,7 @@ public:
     int Slices;
     int Stacks;
 
-    virtual void Draw(YafAppearance* app = nullptr) override;
+    virtual void Draw(YafAppearance* app = nullptr, YafAppearance* appSel = nullptr) override;
 
 private:
     GLUquadricObj* _quadric;
@@ -103,7 +101,7 @@ public:
     int Slices;
     int Loops;
 
-    virtual void Draw(YafAppearance* app = nullptr) override;
+    virtual void Draw(YafAppearance* app = nullptr, YafAppearance* appSel = nullptr) override;
 };
 
 class YafPlane : public YafPrimitive
@@ -111,7 +109,7 @@ class YafPlane : public YafPrimitive
 public:
     int Parts;
 
-    virtual void Draw(YafAppearance* app = nullptr) override;
+    virtual void Draw(YafAppearance* app = nullptr, YafAppearance* appSel = nullptr) override;
 };
 
 class YafPatch : public YafPrimitive
@@ -124,7 +122,7 @@ public:
 
     std::vector<YafXYZ> ControlPoints;
 
-    virtual void Draw(YafAppearance* app = nullptr) override;
+    virtual void Draw(YafAppearance* app = nullptr, YafAppearance* appSel = nullptr) override;
 };
 
 class YafWaterline : public YafPrimitive
@@ -136,9 +134,9 @@ public:
     std::string FragmentShader; // filename
     std::string VertexShader; // filename
 
-    virtual void Init(YafAppearance* app = nullptr) override;
     virtual void Update(unsigned long millis) override; // in seconds
-    virtual void Draw(YafAppearance* app = nullptr) override;
+    virtual void Draw(YafAppearance* app = nullptr, YafAppearance* appSel = nullptr) override;
+    virtual void Init(YafAppearance* app /*= nullptr*/) override;
 private:
     CGFshader _shader;
     CGFtexture* _texture;
@@ -156,6 +154,7 @@ public:
 
     void AddChild(YafChild* c) { _children.push_back(c); }
     void SetAppearance(YafAppearance* a) { _appearance = a; }
+    void SetAppearanceSelected(YafAppearance* a) { _appearanceSelected = a; }
 
     void SetAnimation(YafAnimation* a) { _animation = a; }
 
@@ -163,9 +162,10 @@ public:
 
     void DoPostProcessing(YafScene* scene) { MoveRefNodesToChildren(scene); }
 
-    virtual void Draw(YafAppearance* app = nullptr) override;
+    virtual void Draw(YafAppearance* app = nullptr, YafAppearance* appSel = nullptr) override;
 
     YafAppearance* GetAppearance() const { return _appearance; }
+    YafAppearance* GetAppearanceSelected() const { return _appearanceSelected; }
 
     YafAnimation* GetAnimation() const { return _animation; }
 
@@ -187,6 +187,7 @@ private:
     bool _processing; // used in cycle detection
 
     YafAppearance* _appearance; // can be null
+    YafAppearance* _appearanceSelected; // can be null
 
     std::vector<YafChild*> _children;
 

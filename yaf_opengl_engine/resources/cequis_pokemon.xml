@@ -7,9 +7,9 @@
     <lighting doublesided="false" local="false" enabled="true" ambient="0.01 0.01 0.01 1" >
         <omni id="light1" enabled="true"
             location="0 10 0"
-            ambient="0.01 0.01 0.01 1"
-            diffuse="1 1 1 1"
-            specular="1 1 1 1"
+            ambient="0.5 0.5 0.5 0.5"
+            diffuse="0.5 0.5 0.5 0.5"
+            specular="0 0 0 0.5"
         />
     </lighting>
     <textures>
@@ -20,6 +20,7 @@
         <texture id="steel" file="steel.jpg" />
         <texture id="wood_light" file="wood_light.jpg" />
         <texture id="grass" file="grass.jpg" />
+        <texture id="grass2" file="grass2.jpg" />
         <texture id="charmander" file="charmander.png" />
         <texture id="dorae" file="dorae.png" />
         <texture id="mosaic_green" file="mosaic_green.png" />
@@ -90,12 +91,30 @@
             textureref="grass"
             texlength_s="1"
             texlength_t="1" />
+        <appearance id="grass2"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="grass2"
+            texlength_s="1"
+            texlength_t="1" />
         <appearance id="charmander"
             emissive="0.5 0.5 0.5 1"
             ambient="0.5 0.5 0.5 1"
             diffuse="0.5 0.5 0.5 1"
             specular="0.5 0.5 0.5 1"
             shininess="0.5"
+            textureref="charmander"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="charmander_tint"
+            emissive="0.1 0 0 0.5"
+            ambient="1 0.5 0.5 0.5"
+            diffuse="1 0.5 0.5 0.5"
+            specular="1 0.5 0.5 0.5"
+            shininess="1"
             textureref="charmander"
             texlength_s="1"
             texlength_t="1" />
@@ -135,6 +154,15 @@
             textureref="squirtle"
             texlength_s="1"
             texlength_t="1" />
+        <appearance id="squirtle_tint"
+            emissive="0 0 0.1 0.5"
+            ambient="0.5 0.5 1 0.5"
+            diffuse="0.5 0.5 1 0.5"
+            specular="0.5 0.5 1 0.5"
+            shininess="1"
+            textureref="squirtle"
+            texlength_s="1"
+            texlength_t="1" />
     </appearances>
     <graph rootid="game">
         <node id="game" position="0 0 0" pitch="90" yaw="0" roll="0" scale="1 1 1">
@@ -162,6 +190,7 @@
         </node>
         <node id="bPieces" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
             <appearanceref id="charmander" />
+            <appearanceselectedref id="charmander_tint" />
             <children>
                  <noderef id="bPiece1" />
                  <noderef id="bPiece2" />
@@ -185,6 +214,7 @@
         </node>
         <node id="wPieces" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
             <appearanceref id="squirtle" />
+            <appearanceselectedref id="squirtle_tint" />
             <children>
                  <noderef id="wPiece1" />
                  <noderef id="wPiece2" />
@@ -206,7 +236,7 @@
                  <noderef id="piece" />
             </children>
         </node>
-        <node id="oPiece" position="0 0 0" pitch="0" yaw="0" roll="0" scale="0.8 0.8 1" pickable="true">
+        <node id="oPiece" position="0 0 0" pitch="0" yaw="0" roll="0" scale="0.8 0.8 1">
             <appearanceref id="pokeball" />
             <children>
                  <noderef id="piece" />
@@ -214,6 +244,7 @@
         </node>
         <node id="board" position="-9.45 7.05 0.25" pitch="0" yaw="0" roll="0" scale="1 1 1">
             <appearanceref id="grass" />
+            <appearanceselectedref id="grass2" />
             <children>
                 <noderef id="cell03" /><!-- col 6 -->
                 <noderef id="cell16" />

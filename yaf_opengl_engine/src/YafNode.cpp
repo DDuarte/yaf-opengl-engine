@@ -23,12 +23,12 @@ void YafNode::MoveRefNodesToChildren(YafScene* scene)
 
 void YafNode::Update(unsigned long millis)
 {
-    if (Selected)
+    /*if (Selected)
     {
         Scale.X = 1.1f;
         Scale.Y = 1.1f;
         Scale.Z = 1.1f;
-    }
+    }*/
 
     if (_animation)
     {
@@ -40,11 +40,18 @@ void YafNode::Update(unsigned long millis)
         _children[i]->Update(millis);
 }
 
-void YafNode::Draw(YafAppearance* app)
+void YafNode::Draw(YafAppearance* app, YafAppearance* appSel)
 {
     YafAppearance* appearance = _appearance ? _appearance : app;
+    YafAppearance* appearanceSelected = _appearanceSelected ? _appearanceSelected : appSel;
 
-    appearance->apply();
+    if (Selected && appearanceSelected)
+    {
+        appearanceSelected->apply();
+        appearance = nullptr;
+    }
+    else if (appearance)
+        appearance->apply();
 
     glPushMatrix();
     
@@ -57,11 +64,8 @@ void YafNode::Draw(YafAppearance* app)
     if (Pickable)
         glPushName(static_cast<GLuint>(std::hash<std::string>()(Id)));
 
-    if (Selected)
-        glScalef(1.1f, 1.1f, 1.1f);
-
     for (auto i = 0u; i < _children.size(); ++i)
-        _children[i]->Draw(appearance);
+        _children[i]->Draw(appearance, appearanceSelected);
 
     if (Pickable)
         glPopName();
@@ -100,18 +104,10 @@ YafCylinder::YafCylinder()
     _quadric = gluNewQuadric();
     gluQuadricTexture(_quadric, true);
 
-    _quadricD1 = gluNewQuadric();
-    gluQuadricTexture(_quadricD1, true);
-
-    _quadricD2 = gluNewQuadric();
-    gluQuadricTexture(_quadricD2, true);
 }
-
 YafCylinder::~YafCylinder()
 {
     gluDeleteQuadric(_quadric);
-    gluDeleteQuadric(_quadricD1);
-    gluDeleteQuadric(_quadricD2);
 }
 
 YafSphere::YafSphere()
@@ -125,7 +121,7 @@ YafSphere::~YafSphere()
     gluDeleteQuadric(_quadric);
 }
 
-void YafRectangle::Draw(YafAppearance* app /* = nullptr */)
+void YafRectangle::Draw(YafAppearance* app /* = nullptr */, YafAppearance* appSel /* = nullptr */)
 {
     glNormal3f(0.0f, 0.0f, 1.0f);
     glBegin(GL_POLYGON);
@@ -144,7 +140,7 @@ void YafRectangle::Draw(YafAppearance* app /* = nullptr */)
     glEnd();
 }
 
-void YafTriangle::Draw(YafAppearance* app /* = nullptr */)
+void YafTriangle::Draw(YafAppearance* app /* = nullptr */, YafAppearance* appSel /* = nullptr */)
 {
     float a = YafXYZ::GetDistance(Point2, Point3);
     float b = YafXYZ::GetDistance(Point1, Point3);
@@ -167,27 +163,27 @@ void YafTriangle::Draw(YafAppearance* app /* = nullptr */)
     glEnd();
 }
 
-void YafCylinder::Draw(YafAppearance* /* app /* = nullptr */)
+void YafCylinder::Draw(YafAppearance* /* app /* = nullptr */, YafAppearance* appSel /* = nullptr */)
 {
     glPushMatrix();
     glTranslatef(0.0f, 0.0f, Height);
-    gluDisk(_quadricD1, 0, Top, Slices, Stacks);
+    gluDisk(_quadric, 0, Top, Slices, Stacks);
     glPopMatrix();
 
     gluCylinder(_quadric, Base, Top, Height, Slices, Stacks);
 
     glPushMatrix();
     glRotatef(180.0f, 1.0f, 0.0f, 0.0f);
-    gluDisk(_quadricD2, 0, Base, Slices, Stacks);
+    gluDisk(_quadric, 0, Base, Slices, Stacks);
     glPopMatrix();
 }
 
-void YafSphere::Draw(YafAppearance* /* app /* = nullptr */)
+void YafSphere::Draw(YafAppearance* /* app /* = nullptr */, YafAppearance* appSel /* = nullptr */)
 {
     gluSphere(_quadric, Radius, Slices, Stacks);
 }
 
-void YafTorus::Draw(YafAppearance* /* app /* = nullptr */)
+void YafTorus::Draw(YafAppearance* /* app /* = nullptr */, YafAppearance* appSel /* = nullptr */)
 {
     YafXYZ vNormal;
     double majorStep = 2.0f * M_PI / Slices;
@@ -247,7 +243,7 @@ GLfloat planeNormalPoints[4][3] = { { 0.0f, 1.0, 0.0 },
                                     { 0.0f, 1.0, 0.0 },
                                     { 0.0f, 1.0, 0.0 } };
 
-void YafPlane::Draw(YafAppearance* app /*= nullptr*/)
+void YafPlane::Draw(YafAppearance* app /*= nullptr*/, YafAppearance* appSel /* = nullptr */)
 {
     int oldFF;
     glGetIntegerv(GL_FRONT_FACE, &oldFF);
@@ -268,7 +264,7 @@ void YafPlane::Draw(YafAppearance* app /*= nullptr*/)
     glFrontFace(oldFF);
 }
 
-void YafPatch::Draw(YafAppearance* app /*= nullptr*/)
+void YafPatch::Draw(YafAppearance* app /*= nullptr*/, YafAppearance* appSel /* = nullptr */)
 {
     int oldFF;
     glGetIntegerv(GL_FRONT_FACE, &oldFF);
@@ -308,7 +304,7 @@ void YafWaterline::Init(YafAppearance* app /*= nullptr*/)
     _plane.Parts = 100;
 }
 
-void YafWaterline::Draw(YafAppearance* app /*= nullptr*/)
+void YafWaterline::Draw(YafAppearance* app /*= nullptr*/, YafAppearance* appSel /* = nullptr */)
 {
     _shader.bind();
 

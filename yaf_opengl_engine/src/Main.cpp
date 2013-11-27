@@ -212,6 +212,14 @@ YafScene* ParseYafFile(const std::string& file)
         else
             node->SetAppearance(nullptr);
 
+        if (auto appSelectedRefElement = GetChildren(*n, "appearanceselectedref", "graph node", false))
+        {
+            auto appSelectedRef = GetAttribute<std::string>(appSelectedRefElement, "id", "graph node appearanceselectedref");
+            node->SetAppearanceSelected(scene->GetAppearance(appSelectedRef));
+        }
+        else
+            node->SetAppearanceSelected(nullptr);
+
         if (auto animationElement = GetChildren(*n, "animationref", "graph node", false))
         {
             auto anim = GetAttribute<std::string>(animationElement, "id", "graph node animationref");

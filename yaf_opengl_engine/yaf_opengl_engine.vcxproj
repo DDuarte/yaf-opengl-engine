@@ -15,6 +15,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\YafAnimation.cpp" />
     <ClCompile Include="src\TinyXMLYafHelpers.cpp" />
@@ -23,6 +24,7 @@
     <ClCompile Include="src\YafScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\NewellsMethod.h" />
     <ClInclude Include="src\YafAnimation.h" />
     <ClInclude Include="src\TinyXMLYafHelpers.h" />
@@ -37,30 +39,43 @@
     <ClInclude Include="src\YafScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="resources\black.jpg" />
+    <Image Include="resources\charmander.png" />
+    <Image Include="resources\dorae.png" />
     <Image Include="resources\earth.jpg">
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
     </Image>
+    <Image Include="resources\grass.jpg" />
+    <Image Include="resources\grass2.jpg" />
     <Image Include="resources\jupiter.jpg">
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
     </Image>
+    <Image Include="resources\kitty.jpg" />
     <Image Include="resources\mars.jpg">
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
     </Image>
     <Image Include="resources\mercury.jpg">
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
     </Image>
+    <Image Include="resources\meteor.jpg" />
     <Image Include="resources\moon.jpg">
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
     </Image>
+    <Image Include="resources\mosaic_green.png" />
     <Image Include="resources\neptune.jpg">
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
     </Image>
+    <Image Include="resources\pika.jpg" />
+    <Image Include="resources\pokeball.png" />
     <Image Include="resources\saturn.jpg">
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
     </Image>
     <Image Include="resources\saturn_ring.jpg">
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
     </Image>
+    <Image Include="resources\squirtle.png" />
+    <Image Include="resources\stars.jpg" />
+    <Image Include="resources\steel.jpg" />
     <Image Include="resources\sun.jpg">
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
     </Image>
@@ -75,8 +90,13 @@
     </Image>
     <Image Include="resources\water.jpg" />
     <Image Include="resources\watermap.jpg" />
+    <Image Include="resources\white.jpg" />
+    <Image Include="resources\wood_light.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="resources\cequis_pokemon.xml">
+      <SubType>Designer</SubType>
+    </Xml>
     <Xml Include="resources\T01G04_solarsystem.xml">
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
       <SubType>Designer</SubType>

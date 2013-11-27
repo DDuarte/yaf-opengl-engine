@@ -15,7 +15,7 @@ void YafPieceAnimation::ApplyAnimation()
 {
     Node->Position.X = _animation->GetCurrentPoint().X;
     Node->Position.Y = _animation->GetCurrentPoint().Y;
-    Node->Position.Z = _animation->GetCurrentPoint().Z;
+    // Node->Position.Z = _animation->GetCurrentPoint().Z;
 }
 
 int YafLinearAnimation::Position(unsigned long diff, float& path)

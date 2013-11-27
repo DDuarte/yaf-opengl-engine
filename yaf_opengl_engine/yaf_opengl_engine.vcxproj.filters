@@ -30,6 +30,7 @@
     <ClCompile Include="src\YafAnimation.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\YafLight.h">
@@ -66,6 +67,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="src\YafAnimation.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
@@ -112,9 +116,57 @@
     <Image Include="resources\watermap.jpg">
       <Filter>resources</Filter>
     </Image>
+    <Image Include="resources\black.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\grass.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\kitty.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\meteor.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\pika.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\stars.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\steel.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\white.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\wood_light.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\charmander.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\dorae.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\mosaic_green.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\pokeball.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\squirtle.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\grass2.jpg">
+      <Filter>resources</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="resources\T01G04_solarsystem.xml">
+      <Filter>resources</Filter>
+    </Xml>
+    <Xml Include="resources\cequis_pokemon.xml">
       <Filter>resources</Filter>
     </Xml>
   </ItemGroup>
