@@ -317,26 +317,6 @@ void YafNode::Update(unsigned long millis)
          _children[i]->Update(millis);
 }
 
-void YafNode::Init(YafAppearance* app /*= nullptr*/)
-{
-    YafAppearance* appearance = _appearance ? _appearance : app;
-
-    if (appearance) // if we got appearance, override anything that was applied before
-        appearance->apply();
-
-    for (auto i = 0u; i < _children.size(); ++i)
-        _children[i]->Init(appearance);
-
-    if (UseDisplayList && !_displayListInitialized)
-    {
-        _displayListId = glGenLists(1);
-        glNewList(_displayListId, GL_COMPILE);
-        Draw(app);
-        glEndList();
-        _displayListInitialized = true;
-    }
-}
-
 void YafWaterline::Init(YafAppearance* app /*= nullptr*/)
 {
     _shader.init(VertexShader.c_str(), FragmentShader.c_str());

@@ -153,7 +153,7 @@ private:
 class YafNode : public YafChild, public YafElement
 {
 public:
-    YafNode(const std::string& id) : YafElement(id), _processing(false), _displayListInitialized(false) { }
+    YafNode(const std::string& id) : YafElement(id), _processing(false), Selected(false) { }
 
     void AddTransform(YafTransform* t) { _transforms.push_back(t); }
     void AddChild(YafChild* c) { _children.push_back(c); }
@@ -169,18 +169,16 @@ public:
 
     YafAppearance* GetAppearance() const { return _appearance; }
 
-     YafAnimation* GetAnimation() const { return _animation; }
+    YafAnimation* GetAnimation() const { return _animation; }
 
     virtual bool IsCyclic(std::string& which);
-
-    virtual void Init(YafAppearance* app = nullptr) override;
 
     void CalculateTransformMatrix();
 
     virtual void Update(unsigned long millis) override;
 
-    bool UseDisplayList;
     bool Pickable;
+    bool Selected;
 
 private:
     void MoveRefNodesToChildren(YafScene* scene);
@@ -193,9 +191,6 @@ private:
     std::vector<YafChild*> _children;
 
     std::vector<std::string> _refNodes; // cache, cleared after parsing, stored in _children
-
-    bool _displayListInitialized;
-    GLuint _displayListId;
 
     float _m[4][4]; // partial matrix
 

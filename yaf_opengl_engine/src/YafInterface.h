@@ -113,13 +113,18 @@ public:
         // if there were hits, the one selected is in "selected", and it consist of nselected "names" (integer ID's)
         if (selected != NULL)
         {
-            // this should be replaced by code handling the picked object's ID's (stored in "selected"), 
+            // this should be replaced by code handling the picked object's ID's (stored in "selected"),
             // possibly invoking a method on the scene class and passing "selected" and "nselected"
             printf("Picked ID's: ");
             for (auto i = 0u; i < nselected; i++)
                 for (auto n : _scene->GetNodes())
-                    if ((GLuint)std::hash<std::string>()(n.first) == selected[i])
+                    if ((GLuint) std::hash<std::string>()(n.first) == selected[i])
+                    {
                         printf("%s ", n.first.c_str());
+                        n.second->Selected = !n.second->Selected;
+                        break;
+                    }
+
             printf("\n");
         }
         else
