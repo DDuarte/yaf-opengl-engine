@@ -21,71 +21,51 @@ void YafNode::MoveRefNodesToChildren(YafScene* scene)
     _refNodes.clear();
 }
 
-void YafNode::CalculateTransformMatrix()
+void YafNode::Update(unsigned long millis)
 {
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-
-    for (auto t = _transforms.begin(); t != _transforms.end(); ++t)
+    if (Selected)
     {
-        (*t)->ApplyTransform();
-        delete (*t);
+        Scale.X = 1.1f;
+        Scale.Y = 1.1f;
+        Scale.Z = 1.1f;
     }
 
-    glGetFloatv(GL_MODELVIEW_MATRIX, &_m[0][0]);
+    if (_animation)
+    {
+        _animation->Update(millis);
+        _animation->ApplyAnimation();
+    }
 
-    _transforms.clear();
+    for (auto i = 0u; i < _children.size(); ++i)
+        _children[i]->Update(millis);
 }
 
 void YafNode::Draw(YafAppearance* app)
 {
     YafAppearance* appearance = _appearance ? _appearance : app;
 
-    if (UseDisplayList && _displayListInitialized)
-    {
-        glPushMatrix();
-        glMultMatrixf(&_m[0][0]);
+    appearance->apply();
 
-        if (_animation)
-        {
-            glPushMatrix();
-            _animation->ApplyAnimation();
-        }
+    glPushMatrix();
+    
+    glTranslatef(Position.X, Position.Y, Position.Z);
+    glRotatef(Pitch, 1.0f, 0.0f, 0.0f);
+    glRotatef(Yaw, 0.0f, 1.0f, 0.0f);
+    glRotatef(Roll, 0.0f, 0.0f, 1.0f);
+    glScalef(Scale.X, Scale.Y, Scale.Z);
 
-        if (appearance) appearance->apply();
-        glCallList(_displayListId);
+    if (Pickable)
+        glPushName(static_cast<GLuint>(std::hash<std::string>()(Id)));
 
-        if (_animation)
-            glPopMatrix();
+    if (Selected)
+        glScalef(1.1f, 1.1f, 1.1f);
 
-        glPopMatrix();
-    }
-    else
-    {
-        if (!UseDisplayList && appearance) // if we got appearance, override anything that was applied before
-            appearance->apply();
+    for (auto i = 0u; i < _children.size(); ++i)
+        _children[i]->Draw(appearance);
 
-        glPushMatrix();
-        glMultMatrixf(&_m[0][0]);
-        if (Pickable)
-            glPushName(std::hash<std::string>()(Id));
-
-        if (_animation)
-        {
-            glPushMatrix();
-            _animation->ApplyAnimation();
-        }
-
-        for (auto i = 0u; i < _children.size(); ++i)
-            _children[i]->Draw(appearance);
-
-        if (_animation)
-            glPopMatrix();
-
-        if (Pickable)
-            glPopName();
-        glPopMatrix();
-    }
+    if (Pickable)
+        glPopName();
+    glPopMatrix();
 }
 
 bool YafNode::IsCyclic(std::string& which)
@@ -235,7 +215,7 @@ void YafTorus::Draw(YafAppearance* /* app /* = nullptr */)
             vNormal.X = x0 * c;
             vNormal.Y = y0 * c;
             vNormal.Z = z / Loops;
-            vNormal.GetNormalized();
+            vNormal = vNormal.GetNormalized();
 
             glNormal3f(vNormal.X, vNormal.Y, vNormal.Z);
             glVertex3f(x0 * r, y0 * r, z);
@@ -244,7 +224,7 @@ void YafTorus::Draw(YafAppearance* /* app /* = nullptr */)
             vNormal.X = x1 * c;
             vNormal.Y = y1 * c;
             vNormal.Z = z / Loops;
-            vNormal.GetNormalized();
+            vNormal = vNormal.GetNormalized();
             glNormal3f(vNormal.X, vNormal.Y, vNormal.Z);
             glVertex3f(x1 * r, y1 * r, z);
         }
@@ -306,15 +286,6 @@ void YafPatch::Draw(YafAppearance* app /*= nullptr*/)
     glEvalMesh2(Compute, 0, PartsU, 0, PartsV);
 
     glFrontFace(oldFF);
-}
-
-void YafNode::Update(unsigned long millis)
-{
-    if (_animation)
-        _animation->Update(millis);
-
-     for (auto i = 0u; i < _children.size(); ++i)
-         _children[i]->Update(millis);
 }
 
 void YafWaterline::Init(YafAppearance* app /*= nullptr*/)

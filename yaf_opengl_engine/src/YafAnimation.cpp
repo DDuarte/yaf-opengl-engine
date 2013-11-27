@@ -2,34 +2,29 @@
 
 #define _USE_MATH_DEFINES // for M_PI
 #include <math.h>
-
+#include <cassert>
 #include <iostream>
 
-void YafLinearAnimation::ApplyAnimation()
+void YafLinearAnimation::ApplyAnimation() 
 {
-    glTranslatef(_currentPoint.X, _currentPoint.Y, _currentPoint.Z);
-    glRotatef(_currentAngle, 0.0f, 1.0f, 0.0f);
-}
-
-void YafPlanetAnimation::ApplyAnimation()
-{
-    glRotatef(_translateAngle, 0.0f, 1.0f, 0.0f);
-    glTranslatef(_position.X, _position.Y, _position.Z);
-    glRotatef(_rotationAngle, 0.0f, 1.0f, 0.0f);
+    Node->Position = _currentPoint;
+    Node->Yaw = _currentAngle;
 }
 
 void YafPieceAnimation::ApplyAnimation()
-  {
-    glTranslatef(Animation->getCurrentPoint().X, Animation->getCurrentPoint().Y, 0.0f);
-  }
+{
+    Node->Position.X = _animation->GetCurrentPoint().X;
+    Node->Position.Y = _animation->GetCurrentPoint().Y;
+    Node->Position.Z = _animation->GetCurrentPoint().Z;
+}
 
 int YafLinearAnimation::Position(unsigned long diff, float& path)
 {
     float distance = _speed * diff;
-    for(int i = 0 ; i < _controlPointsDistance.size() ; ++i)
+    for(int i = 0; i < _controlPointsDistance.size(); ++i)
     {
         float compare = 0;
-        for (int j = i ; j >= 0 ; --j)
+        for (int j = i; j >= 0; --j)
             compare += _controlPointsDistance[j];
         if (distance <= compare)
         {
@@ -75,7 +70,7 @@ void YafLinearAnimation::Update(unsigned long millis)
     }
 }
 
-YafLinearAnimation::YafLinearAnimation(const std::string& id, float time, const std::vector<YafXYZ>& controlPoints) : YafAnimation(id), _time(static_cast<unsigned long>(time * 1000)), _controlPoints(controlPoints), _firstMillis(0), _currentPoint(controlPoints[0]), _currentAngle(0)
+YafLinearAnimation::YafLinearAnimation(const std::string& id, YafNode* node, float time, const std::vector<YafXYZ>& controlPoints) : YafAnimation(id, node), _time(static_cast<unsigned long>(time * 1000)), _controlPoints(controlPoints), _firstMillis(0), _currentPoint(controlPoints[0]), _currentAngle(0)
 {
     float distance = 0;
     for (int i = 0; i < _controlPoints.size() - 1; ++i)
@@ -86,52 +81,38 @@ YafLinearAnimation::YafLinearAnimation(const std::string& id, float time, const 
     _speed = distance / _time;
 }
 
-void YafPlanetAnimation::Update(unsigned long millis)
+YafPieceAnimation::YafPieceAnimation(const std::string& id, YafNode* node, int x1, int y1, int x2, int y2) : YafAnimation(id, node)
 {
-    if (_firstMillis == 0)
-        _firstMillis = millis;
-
-    unsigned long diff = millis - _firstMillis;
-
-    _rotationAngle = 360.0f * diff / static_cast<float>(_rTime);
-    _translateAngle = 360.0f * diff / static_cast<float>(_tTime);
-}
-
-YafPlanetAnimation::YafPlanetAnimation(const std::string& id, float rtime, float ttime, YafXYZ position) : YafAnimation(id), _rTime(static_cast<unsigned long>(rtime) * 1000u),
-_tTime(static_cast<unsigned long>(ttime) * 1000u), _firstMillis(0u), _rotationAngle(0.0f), _translateAngle(0.0f), _position(position)
-{
-
-}
-  
-YafPieceAnimation::YafPieceAnimation(const std::string& id, YafXYZ position) : YafAnimation(id)
-{
-    std::vector<YafXYZ> points;
-    points.push_back(position);
-    points.push_back(position);
-    Animation = new YafLinearAnimation(id, 5, points);
+    MoveTo(x1, y1, x2, y2);
 }
 
 void YafPieceAnimation::Update(unsigned long millis)
 {
-    Animation->Update(millis);
+    _animation->Update(millis);
 }
 
-void YafPieceAnimation::moveTo(unsigned int X, unsigned int Y)
+void YafPieceAnimation::MoveTo(int x1, int y1, int x2, int y2)
 {
-    if(X <= 7 && X >= 0 && Y <= 6 && Y >= 0)
-    {
-        YafXYZ moveTo; 
-        moveTo.Z = 0;
-        moveTo.Y = (6 - Y) * -2.35;
-        if(X == 0)
-            Y *= 2;
-        if(Y % 2 == 0)
-             moveTo.X = (7 - X) * 2.7;
-        else
-           moveTo.X = (7 - (X-1)) * 2.7 - 1.35;
-        std::vector<YafXYZ> points;
-        points.push_back(Animation->getCurrentPoint());
-        points.push_back(moveTo);
-        Animation = new YafLinearAnimation(Id, 5, points);
-    }
+    assert(x1 <= 7 && x1 >= 0 && y1 <= 6 && y1 >= 0 && "Invalid src coordinates in MoveTo");
+    assert(x2 <= 7 && x2 >= 0 && y2 <= 6 && y2 >= 0 && "Invalid dest coordinates in MoveTo");
+
+    if (x2 == 0)
+        y2 *= 2;
+
+    YafXYZ moveTo;
+    moveTo.Z = 0.0f;
+    moveTo.Y = (6.0f - y2) * -2.35f;
+    
+    if (y2 % 2 == 0)
+        moveTo.X = (7.0f - x2) * 2.7f;
+    else
+        moveTo.X = (7.0f - (x2 - 1.0f)) * 2.7f - 1.35f;
+
+    moveTo.X += -9.45f;
+    moveTo.Y += 7.05f;
+
+    std::vector<YafXYZ> points(2);
+    points[0] = YafXYZ(0.0f, 0.0f, 0.0f); // TODO: Get coordinates from (x1, y1)
+    points[1] = moveTo;
+    _animation = new YafLinearAnimation(Id + "In", Node, 5, points);
 }

@@ -137,9 +137,6 @@ void YafScene::init()
     for (auto a = _appearances.begin(); a != _appearances.end(); ++a)
         a->second->InitAppearance();
 
-    for (auto n = _nodes.begin(); n != _nodes.end(); ++n)
-        n->second->CalculateTransformMatrix();
-
     _rootNode->Init(new YafAppearance());
 
     setUpdatePeriod(60);
@@ -173,7 +170,7 @@ void YafScene::display()
     glPushName(-1); // default name
 
     glColor3f(1.0f, 1.0f, 1.0f);
-    //axis.draw();
+    axis.draw();
 
     _rootNode->Draw();
 

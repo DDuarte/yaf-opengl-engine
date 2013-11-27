@@ -7,20 +7,20 @@
 class YafAnimation : public YafElement
 {
 public:
-    YafAnimation(const std::string& id) : YafElement(id) { }
+    YafAnimation(const std::string& id, YafNode* node) : YafElement(id), Node(node) { }
     virtual void ApplyAnimation() = 0;
     virtual void Update(unsigned long millis) = 0;
+protected:
+    YafNode* Node;
 };
 
 class YafLinearAnimation : public YafAnimation
 {
 public:
     virtual void ApplyAnimation() override;
-    YafLinearAnimation(const std::string& id, float time, const std::vector<YafXYZ>& controlPoints);
+    YafLinearAnimation(const std::string& id, YafNode* node, float time, const std::vector<YafXYZ>& controlPoints);
     virtual void Update(unsigned long millis) override;
-    YafXYZ getCurrentPoint(){
-        return _currentPoint;
-    }
+    YafXYZ GetCurrentPoint() const { return _currentPoint; }
 private:
     int Position(unsigned long millis, float& path);
     unsigned long _time;
@@ -32,31 +32,15 @@ private:
     float _currentAngle;
 };
 
-class YafPlanetAnimation : public YafAnimation
-{
-public:
-    virtual void ApplyAnimation() override;
-    YafPlanetAnimation(const std::string& id, float rtime, float ttime, YafXYZ position);
-    virtual void Update(unsigned long millis) override;
-private:
-    unsigned long _firstMillis;
-    YafXYZ _position;
-    unsigned long _rTime;
-    unsigned long _tTime;
-    float _rotationAngle;
-    float _translateAngle;
-};
-
 class YafPieceAnimation : public YafAnimation
 {
 public:
     virtual void ApplyAnimation() override;
-    YafPieceAnimation(const std::string& id, YafXYZ position);
+    YafPieceAnimation(const std::string& id, YafNode* node, int x1, int y1, int x2, int y2);
     virtual void Update(unsigned long millis) override;
-    void moveTo(unsigned int X, unsigned int Y);
 private:
-    YafLinearAnimation* Animation;
-    unsigned long _time;
+    YafLinearAnimation* _animation;
+    void MoveTo(int x1, int y1, int x2, int y2);
 };
 
 #endif

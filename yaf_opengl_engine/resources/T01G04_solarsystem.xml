@@ -35,8 +35,8 @@
         <texture id="neptune" file="neptune.jpg" />
         <texture id="stars" file="stars.jpg" />
         <texture id="meteor" file="meteor.jpg" />
-		<texture id="branco" file="branco.png" />
-		<texture id="preto" file="preto.png" />
+        <texture id="branco" file="branco.png" />
+        <texture id="preto" file="preto.png" />
     </textures>
     <appearances>
         <appearance id="sun"
@@ -165,7 +165,7 @@
             textureref="meteor"
             texlength_s="1"
             texlength_t="1" />
-			<appearance id="branco"
+            <appearance id="branco"
             emissive="0.5 0.5 0.5 1"
             ambient="0.5 0.5 0.5 1"
             diffuse="0.5 0.5 0.5 1"
@@ -174,7 +174,7 @@
             textureref="branco"
             texlength_s="1"
             texlength_t="1" />
-			<appearance id="preto"
+            <appearance id="preto"
             emissive="0.5 0.5 0.5 1"
             ambient="0.5 0.5 0.5 1"
             diffuse="0.5 0.5 0.5 1"
@@ -224,46 +224,46 @@
                 <noderef id="spherebg" />
                 <noderef id="vehicle" />
                 <noderef id="water" />
-				<!--<noderef id="pedra" />
-				<noderef id="tabuleiro" />-->
+                <!--<noderef id="pedra" />
+                <noderef id="tabuleiro" />-->
             </children>
         </node>
-		<!-- <node id="pedra">
-			<transforms>
+        <!-- <node id="pedra">
+            <transforms>
                 <translate to="10 0 0" />
-				<rotate axis="x" angle="90" />
+                <rotate axis="x" angle="90" />
             </transforms>
-			<appearenceref id="earth" />
-			<children>
-				<cylinder base="1" top="1" height="0.25" slices="20" stacks="20" />
-			</children>
-		</node>
-		<node id="tabuleiro">
-		<transforms>
+            <appearenceref id="earth" />
+            <children>
+                <cylinder base="1" top="1" height="0.25" slices="20" stacks="20" />
+            </children>
+        </node>
+        <node id="tabuleiro">
+        <transforms>
                 <translate to="10 -0.25 0" />
-				<rotate axis="x" angle="90" />
+                <rotate axis="x" angle="90" />
             </transforms>
-			<appearanceref id="branco" />
-			<children>
-				<noderef id="casa1" />
-				<noderef id="casa2" />
-			</children>
-		</node>
-		<node id="casa1">
-		<transforms/>
-			<children>
-				<cylinder base="1.5" top="1.5" height="0.25" slices="6" stacks="20" />
-			</children>
-		</node>
-		<node id="casa2">
-		<transforms>
-			<translate to="2.6 0 0" />
-		</transforms>
-			<children>
-				<cylinder base="1.5" top="1.5" height="0.25" slices="6" stacks="20" />
-			</children>
-		</node>
-		-->
+            <appearanceref id="branco" />
+            <children>
+                <noderef id="casa1" />
+                <noderef id="casa2" />
+            </children>
+        </node>
+        <node id="casa1">
+        <transforms/>
+            <children>
+                <cylinder base="1.5" top="1.5" height="0.25" slices="6" stacks="20" />
+            </children>
+        </node>
+        <node id="casa2">
+        <transforms>
+            <translate to="2.6 0 0" />
+        </transforms>
+            <children>
+                <cylinder base="1.5" top="1.5" height="0.25" slices="6" stacks="20" />
+            </children>
+        </node>
+        -->
         <node id="spherebg">
             <transforms>
                 <scale factor="-1.0 -1.0 -1.0" />
@@ -431,7 +431,7 @@
                     <controlpoint x="0" y="0" z="2" /> <controlpoint x="5" y="0" z="2" />
                     <controlpoint x="5" y="0" z="-2" /> <controlpoint x="0" y="0" z="-2" />
                 </patch>
-                
+
                 <patch order="1" partsU="20" partsV="20" compute="fill">
                     <controlpoint x="0" y="-2" z="0" /> <controlpoint x="-5" y="-2" z="0" />
                     <controlpoint x="-5" y="2" z="0" /> <controlpoint x="0" y="2" z="0" />

@@ -35,7 +35,6 @@
     <ClInclude Include="src\YafMisc.h" />
     <ClInclude Include="src\YafNode.h" />
     <ClInclude Include="src\YafScene.h" />
-    <ClInclude Include="src\YafTransform.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\earth.jpg">
@@ -80,6 +79,7 @@
   <ItemGroup>
     <Xml Include="resources\T01G04_solarsystem.xml">
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+      <SubType>Designer</SubType>
     </Xml>
   </ItemGroup>
   <ItemGroup>

@@ -12,7 +12,7 @@
         />
     </lighting>
     <textures>
-		<texture id="white" file="white.jpg" />
+        <texture id="white" file="white.jpg" />
         <texture id="black" file="black.jpg" />
         <texture id="kitty" file="kitty.jpg" />
         <texture id="pika" file="pika.jpg" />
@@ -135,146 +135,86 @@
             texlength_s="1"
             texlength_t="1" />
     </appearances>
-    <animations/>
     <graph rootid="game">
-        <node id="game">
-            <transforms>
-				<rotate axis="x" angle="90" />
-            </transforms>
+        <node id="game" position="0 0 0" pitch="90" yaw="0" roll="0" scale="1 1 1">
             <children>
-				<noderef id="wPieces" />
-				<noderef id="bPieces" />
-				<noderef id="oPiece" />
-				<noderef id="board" />
+                <noderef id="wPieces" />
+                <noderef id="bPieces" />
+                <noderef id="oPiece" />
+                <noderef id="board" />
                 <noderef id="table" />
                 <noderef id="floor" />
             </children>
         </node>
-        <node id="floor">
-            <transforms>
-                <translate to="0 0 10.5"/>
-                <rotate angle="45" axis="z"/>
-            </transforms>
+        <node id="floor" position="0 0 10.5" pitch="0" yaw="0" roll="45" scale="1 1 1">
             <appearanceref id="floor"/>
             <children>
                 <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
             </children>
         </node>
-        <node id="table">
-            <transforms>
-                <translate to="0 0 0.5"/>
-                <rotate angle="45" axis="z"/>
-            </transforms>
+        <node id="table" position="0 0 0.5" pitch="0" yaw="0" roll="45" scale="1 1 1">
             <appearanceref id="steel"/>
             <children>
                 <cylinder base="20" top="20" height="1" slices="4" stacks="20" />
                 <cylinder base="2" top="0.5" height="10" slices="4" stacks="20" />
             </children>
         </node>
-        <node id="bPieces">
-			<transforms>
-            </transforms>
-			<appearanceref id="charmander" />
-			<children>
-				 <noderef id="bPiece1" />
+        <node id="bPieces" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
+            <appearanceref id="charmander" />
+            <children>
+                 <noderef id="bPiece1" />
                  <noderef id="bPiece2" />
                  <noderef id="bPiece3" />
-			</children>
-		</node>
-        <node id="bPiece1" pickable="true">
-			<transforms>
-                <translate to="2.7 0 0" />
-            </transforms>
-			<children>
-				 <noderef id="piece" />
-			</children>
-		</node>
-        <node id="bPiece2" pickable="true">
-			<transforms>
-                <translate to="1.35 2.35 0" />
-            </transforms>
-			<children>
-				 <noderef id="piece" />
-			</children>
-		</node>
-        <node id="bPiece3" pickable="true">
-			<transforms>
-                <translate to="1.35 -2.35 0" />
-            </transforms>
-			<children>
-				 <noderef id="piece" />
-			</children>
-		</node>
-        <node id="wPieces">
-			<transforms>
-            </transforms>
-			<appearanceref id="squirtle" />
-			<children>
-				 <noderef id="wPiece1" />
+            </children>
+        </node>
+        <node id="bPiece1" position="2.7 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                 <noderef id="piece" />
+            </children>
+        </node>
+        <node id="bPiece2" position="1.35 2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                 <noderef id="piece" />
+            </children>
+        </node>
+        <node id="bPiece3" position="1.35 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                 <noderef id="piece" />
+            </children>
+        </node>
+        <node id="wPieces" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
+            <appearanceref id="squirtle" />
+            <children>
+                 <noderef id="wPiece1" />
                  <noderef id="wPiece2" />
                  <noderef id="wPiece3" />
-			</children>
-		</node>
-        <node id="wPiece1" pickable="true">
-			<transforms>
-                <translate to="-2.7 0 0" />
-            </transforms>
-			<children>
-				 <noderef id="piece" />
-			</children>
-		</node>
-        <node id="wPiece2" pickable="true">
-			<transforms>
-                <translate to="-1.35 2.35 0" />
-            </transforms>
-			<children>
-				 <noderef id="piece" />
-			</children>
-		</node>
-        <node id="wPiece3" pickable="true">
-			<transforms>
-                <translate to="-1.35 -2.35 0" />
-            </transforms>
-			<children>
-				 <noderef id="piece" />
-			</children>
-		</node>
-        <node id="oPiece" pickable="true">
-			<transforms>
-                <scale factor="0.8 0.8 1" />
-            </transforms>
+            </children>
+        </node>
+        <node id="wPiece1" position="-2.7 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                 <noderef id="piece" />
+            </children>
+        </node>
+        <node id="wPiece2" position="-1.35 2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                 <noderef id="piece" />
+            </children>
+        </node>
+        <node id="wPiece3" position="-1.35 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                 <noderef id="piece" />
+            </children>
+        </node>
+        <node id="oPiece" position="0 0 0" pitch="0" yaw="0" roll="0" scale="0.8 0.8 1" pickable="true">
             <appearanceref id="pokeball" />
-			<children>
-				 <noderef id="piece" />
-			</children>
-		</node>
-		<node id="piece">
-			<transforms>
-                <rotate axis="z" angle="90" />
-            </transforms>
-			<children>
-				<cylinder base="1" top="1" height="0.25" slices="20" stacks="20" />
-			</children>
-		</node>
-		<node id="board">
-            <transforms>
-                <translate to="-9.45 7.05 0.25" />
-            </transforms>
-			<appearanceref id="grass" />
-			<children>
-				<noderef id="col0" /> 
-                <noderef id="col1" />
-                <noderef id="col2" /> 
-                <noderef id="col3" /> 
-                <noderef id="col4" />  
-                <noderef id="col5" />
-                <noderef id="col6" />
-			</children>
-		</node>
-        <node id="col6">
-            <transforms/>
-			<children>
-				<noderef id="cell03" />
+            <children>
+                 <noderef id="piece" />
+            </children>
+        </node>
+        <node id="board" position="-9.45 7.05 0.25" pitch="0" yaw="0" roll="0" scale="1 1 1">
+            <appearanceref id="grass" />
+            <children>
+                <noderef id="cell03" /><!-- col 6 -->
                 <noderef id="cell16" />
                 <noderef id="cell26" />
                 <noderef id="cell36" />
@@ -282,28 +222,14 @@
                 <noderef id="cell56" />
                 <noderef id="cell66" />
                 <noderef id="cell76" />
-			</children>
-		</node>
-        <node id="col5">
-            <transforms>
-                <translate to="0 -2.35 0" />
-            </transforms>
-			<children>
-				<noderef id="cell15" />
+                <noderef id="cell15" /><!-- col 5 -->
                 <noderef id="cell25" />
                 <noderef id="cell35" />
                 <noderef id="cell45" />
                 <noderef id="cell55" />
                 <noderef id="cell65" />
                 <noderef id="cell75" />
-			</children>
-		</node>
-        <node id="col4">
-            <transforms>
-                <translate to="0 -4.7 0" />
-            </transforms>
-			<children>
-				<noderef id="cell02" />
+                <noderef id="cell02" /><!-- col 4 -->
                 <noderef id="cell14" />
                 <noderef id="cell24" />
                 <noderef id="cell34" />
@@ -311,28 +237,14 @@
                 <noderef id="cell54" />
                 <noderef id="cell64" />
                 <noderef id="cell74" />
-			</children>
-		</node>
-        <node id="col3">
-            <transforms>
-                <translate to="0 -7.05 0" />
-            </transforms>
-			<children>
-				<noderef id="cell13" />
+                <noderef id="cell13" /><!-- col 3 -->
                 <noderef id="cell23" />
                 <noderef id="cell33" />
                 <noderef id="cell43" />
                 <noderef id="cell53" />
                 <noderef id="cell63" />
                 <noderef id="cell73" />
-			</children>
-		</node>
-        <node id="col2">
-            <transforms>
-                <translate to="0 -9.4 0" />
-            </transforms>
-			<children>
-				<noderef id="cell01" />
+                <noderef id="cell01" /><!-- col 2 -->
                 <noderef id="cell12" />
                 <noderef id="cell22" />
                 <noderef id="cell32" />
@@ -340,28 +252,14 @@
                 <noderef id="cell52" />
                 <noderef id="cell62" />
                 <noderef id="cell72" />
-			</children>
-		</node>
-        <node id="col1">
-            <transforms>
-                <translate to="0 -11.75 0" />
-            </transforms>
-			<children>
-				<noderef id="cell11" />
+                <noderef id="cell11" /><!-- col 1 -->
                 <noderef id="cell21" />
                 <noderef id="cell31" />
                 <noderef id="cell41" />
                 <noderef id="cell51" />
                 <noderef id="cell61" />
                 <noderef id="cell71" />
-			</children>
-		</node>
-        <node id="col0">
-            <transforms>
-                <translate to="0 -14.1 0" />
-            </transforms>
-			<children>
-				<noderef id="cell00" />
+                <noderef id="cell00" /><!-- col 0 -->
                 <noderef id="cell10" />
                 <noderef id="cell20" />
                 <noderef id="cell30" />
@@ -369,438 +267,282 @@
                 <noderef id="cell50" />
                 <noderef id="cell60" />
                 <noderef id="cell70" />
-			</children>
-		</node>
-
-        <node id="cell76" pickable="true">
-		    <transforms/>
+            </children>
+        </node>
+        <node id="cell76" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                 <noderef id="cell" />
             </children>
-		</node>
-		<node id="cell66" pickable="true">
-            <transforms>
-                <translate to="2.7 0 0" />
-            </transforms>
+        </node>
+        <node id="cell66" position="2.7 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                 <noderef id="cell" />
             </children>
-		</node>
-        <node id="cell56" pickable="true">
-            <transforms>
-                <translate to="5.4 0 0" />
-            </transforms>
+        </node>
+        <node id="cell56" position="5.4 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                 <noderef id="cell" />
             </children>
-		</node>
-		<node id="cell46" pickable="true">
-            <transforms>
-                <translate to="8.1 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell36" pickable="true">
-            <transforms>
-                <translate to="10.8 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell26" pickable="true">
-            <transforms>
-                <translate to="13.5 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell16" pickable="true">
-            <transforms>
-                <translate to="16.2 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell03" pickable="true">
-            <transforms>
-                <translate to="18.9 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>   
-        
-        <node id="cell75" pickable="true">
-            <transforms>
-                <translate to="1.35 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell65" pickable="true">
-            <transforms>
-                <translate to="4.05 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell55" pickable="true">
-            <transforms>
-                <translate to="6.75 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell45" pickable="true">
-            <transforms>
-                <translate to="9.45 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell35" pickable="true">
-            <transforms>
-                <translate to="12.15  0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell25" pickable="true">
-            <transforms>
-                <translate to="14.85 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell15" pickable="true">
-            <transforms>
-                <translate to="17.55 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        
-        <node id="cell74" pickable="true">
-		    <transforms/>
+        </node>
+        <node id="cell46" position="8.1 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                 <noderef id="cell" />
             </children>
-		</node>
-		<node id="cell64" pickable="true">
-            <transforms>
-                <translate to="2.7 0 0" />
-            </transforms>
+        </node>
+        <node id="cell36" position="10.8 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                 <noderef id="cell" />
             </children>
-		</node>
-        <node id="cell54" pickable="true">
-            <transforms>
-                <translate to="5.4 0 0" />
-            </transforms>
+        </node>
+        <node id="cell26" position="13.5 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                 <noderef id="cell" />
             </children>
-		</node>
-		<node id="cell44" pickable="true">
-            <transforms>
-                <translate to="8.1 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell34" pickable="true">
-            <transforms>
-                <translate to="10.8 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell24" pickable="true">
-            <transforms>
-                <translate to="13.5 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell14" pickable="true">
-            <transforms>
-                <translate to="16.2 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell02" pickable="true">
-            <transforms>
-                <translate to="18.9 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        
-		
-        <node id="cell73" pickable="true">
-            <transforms>
-                <translate to="1.35 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell63" pickable="true">
-            <transforms>
-                <translate to="4.05 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell53" pickable="true">
-            <transforms>
-                <translate to="6.75 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell43" pickable="true">
-            <transforms>
-                <translate to="9.45 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell33" pickable="true">
-            <transforms>
-                <translate to="12.15  0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell23" pickable="true">
-            <transforms>
-                <translate to="14.85 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell13" pickable="true">
-            <transforms>
-                <translate to="17.55 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        
-        <node id="cell72" pickable="true">
-		    <transforms/>
+        </node>
+        <node id="cell16" position="16.2 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                 <noderef id="cell" />
             </children>
-		</node>
-		<node id="cell62" pickable="true">
-            <transforms>
-                <translate to="2.7 0 0" />
-            </transforms>
+        </node>
+        <node id="cell03" position="18.9 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                 <noderef id="cell" />
             </children>
-		</node>
-        <node id="cell52" pickable="true">
-            <transforms>
-                <translate to="5.4 0 0" />
-            </transforms>
+        </node>
+        <node id="cell75" position="1.35 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                 <noderef id="cell" />
             </children>
-		</node>
-		<node id="cell42" pickable="true">
-            <transforms>
-                <translate to="8.1 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell32" pickable="true">
-            <transforms>
-                <translate to="10.8 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell22" pickable="true">
-            <transforms>
-                <translate to="13.5 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell12" pickable="true">
-            <transforms>
-                <translate to="16.2 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell01" pickable="true">
-            <transforms>
-                <translate to="18.9 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        
-        <node id="cell71" pickable="true">
-            <transforms>
-                <translate to="1.35 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell61" pickable="true">
-            <transforms>
-                <translate to="4.05 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell51" pickable="true">
-            <transforms>
-                <translate to="6.75 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell41" pickable="true">
-            <transforms>
-                <translate to="9.45 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell31" pickable="true">
-            <transforms>
-                <translate to="12.15  0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell21" pickable="true">
-            <transforms>
-                <translate to="14.85 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell11" pickable="true">
-            <transforms>
-                <translate to="17.55 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-  
-        <node id="cell70" pickable="true">
-		    <transforms/>
+        </node>
+        <node id="cell65" position="4.05 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                 <noderef id="cell" />
             </children>
-		</node>
-		<node id="cell60" pickable="true">
-            <transforms>
-                <translate to="2.7 0 0" />
-            </transforms>
+        </node>
+        <node id="cell55" position="6.75 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                 <noderef id="cell" />
             </children>
-		</node>
-        <node id="cell50" pickable="true">
-            <transforms>
-                <translate to="5.4 0 0" />
-            </transforms>
+        </node>
+        <node id="cell45" position="9.45 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                 <noderef id="cell" />
             </children>
-		</node>
-		<node id="cell40" pickable="true">
-            <transforms>
-                <translate to="8.1 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell30" pickable="true">
-            <transforms>
-                <translate to="10.8 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell20" pickable="true">
-            <transforms>
-                <translate to="13.5 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell10" pickable="true">
-            <transforms>
-                <translate to="16.2 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-        <node id="cell00" pickable="true">
-            <transforms>
-                <translate to="18.9 0 0" />
-            </transforms>
-			<children>
-				<noderef id="cell" />
-			</children>
-		</node>
-    
-        <node id="cell">
-            <transforms/>
-			<children>
-				<cylinder base="1.5" top="1.5" height="0.25" slices="6" stacks="20" />
-			</children>
-		</node>
+        </node>
+        <node id="cell35" position="12.15 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell25" position="14.85 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell15" position="17.55 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell74" position="0 -4.7 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell64" position="2.7 -4.7 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell54" position="5.4 -4.7 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell44" position="8.1 -4.7 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell34" position="10.8 -4.7 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell24" position="13.5 -4.7 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell14" position="16.2 -4.7 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell02" position="18.9 -4.7 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell73" position="1.35 -7.05 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell63" position="4.05 -7.05 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell53" position="6.75 -7.05 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell43" position="9.45 -7.05 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell33" position="12.15 -7.05 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell23" position="14.85 -7.05 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell13" position="17.55 -7.05 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell72" position="0 -9.4 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell62" position="2.7 -9.4 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell52" position="5.4 -9.4 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell42" position="8.1 -9.4 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell32" position="10.8 -9.4 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell22" position="13.5 -9.4 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell12" position="16.2 -9.4 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell01" position="18.9 -9.4 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell71" position="1.35 -11.75 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell61" position="4.05 -11.75 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell51" position="6.75 -11.75 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell41" position="9.45 -11.75 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell31" position="12.15 -11.75 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell21" position="14.85 -11.75 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell11" position="17.55 -11.75 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell70" position="0 -14.1 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell60" position="2.7 -14.1 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell50" position="5.4 -14.1 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell40" position="8.1 -14.1 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell30" position="10.8 -14.1 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell20" position="13.5 -14.1 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell10" position="16.2 -14.1 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell00" position="18.9 -14.1 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
+            <children>
+                <cylinder base="1.5" top="1.5" height="0.25" slices="6" stacks="15" />
+            </children>
+        </node>
+        <node id="piece" position="0 0 0" pitch="0" yaw="0" roll="90" scale="1 1 1">
+            <children>
+                <cylinder base="1" top="1" height="0.25" slices="15" stacks="15" />
+            </children>
+        </node>
     </graph>
 </yaf>

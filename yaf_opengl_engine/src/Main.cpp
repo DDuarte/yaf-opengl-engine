@@ -180,53 +180,6 @@ YafScene* ParseYafFile(const std::string& file)
         scene->AddAppearance(app);
     }
 
-    // <animations>
-
-    auto animationsElement = GetChildren(yafElement, "animations", "yaf");
-
-    auto animations = GetAllChildren(animationsElement, "animation");
-
-    for (auto a = animations.begin(); a != animations.end(); ++a)
-    {
-        auto type = GetAttribute<std::string>(*a, "type", "animations animation");
-        if (type == "linear")
-        {
-            auto id = GetAttribute<std::string>(*a, "id", "animations animation");
-            auto time = GetAttribute<float>(*a, "span", "animations animation");
-            std::vector<YafXYZ> cps;
-            auto controlPoints = GetAllChildren(*a, "controlpoint");
-            for (auto cp = controlPoints.begin(); cp != controlPoints.end(); ++cp)
-            {
-                auto x = GetAttribute<float>(*cp, "x", "animations animation controlpoint");
-                auto y = GetAttribute<float>(*cp, "y", "animations animation controlpoint");
-                auto z = GetAttribute<float>(*cp, "z", "animations animation controlpoint");
-                cps.push_back(YafXYZ(x, y, z));
-            }
-
-             auto anim = new YafLinearAnimation(id, time, cps);
-             scene->AddAnimation(anim);
-        }
-        else if (type == "planet")
-        {
-            auto id = GetAttribute<std::string>(*a, "id", "animations animation");
-            auto rtime = GetAttribute<float>(*a, "rtime", "animations animation");
-            auto ttime = GetAttribute<float>(*a, "ttime", "animations animation");
-            auto position = GetAttribute<YafXYZ>(*a, "position", "animations animation");
-
-            auto anim = new YafPlanetAnimation(id, rtime, ttime, position);
-            scene->AddAnimation(anim);
-        }
-        else
-            throw YafParsingException("Unknown animation type: " + type);
-
-        
-    }
-
-    //TO DELETE
-        YafXYZ pos(0,0,0);
-        auto anim = new YafPieceAnimation("test", pos);
-        scene->AddAnimation(anim);
-
     // <graph>
 
     auto graphElement = GetChildren(yafElement, "graph", "yaf");
@@ -242,40 +195,14 @@ YafScene* ParseYafFile(const std::string& file)
     {
         auto node = new YafNode(GetAttribute<std::string>(*n, "id", "graph node"));
 
-        auto transformsElement = GetChildren(*n, "transforms", "graph node");
-
-        auto transforms = GetAllChildren(transformsElement);
-
-        auto displayListStr = GetAttribute<std::string>(*n, "displaylist", "graph node", false);
-        node->UseDisplayList = !displayListStr.empty() && BoolFromString(displayListStr);
-
         auto pickableStr = GetAttribute<std::string>(*n, "pickable", "graph node", false);
         node->Pickable = !pickableStr.empty() && BoolFromString(pickableStr);
 
-        for (auto t = transforms.begin(); t != transforms.end(); ++t)
-        {
-            if ((*t)->ValueStr() == "translate")
-            {
-                auto transform = new YafTranslateTransform;
-                transform->To = GetAttribute<YafXYZ>(*t, "to", "graph node transforms translate");
-                node->AddTransform(transform);
-            }
-            else if ((*t)->ValueStr() == "rotate")
-            {
-                auto transform = new YafRotateTransform;
-                transform->Axis = YafAxisFromString(GetAttribute<std::string>(*t, "axis", "graph node transforms translate"));
-                transform->Angle = GetAttribute<float>(*t, "angle", "graph node transforms translate");
-                node->AddTransform(transform);
-            }
-            else if ((*t)->ValueStr() == "scale")
-            {
-                auto transform = new YafScaleTransform;
-                transform->Factor = GetAttribute<YafXYZ>(*t, "factor", "graph node transforms translate");
-                node->AddTransform(transform);
-            }
-            else
-                throw YafParsingException("Transform " + (*t)->ValueStr() + " is not recognized: line: " + std::to_string((long long)(*t)->Row()) + " col: " + std::to_string((long long)(*t)->Column()));
-        }
+        node->Position = GetAttribute<YafXYZ>(*n, "position", "graph node");
+        node->Pitch = GetAttribute<float>(*n, "pitch", "graph node");
+        node->Yaw = GetAttribute<float>(*n, "yaw", "graph node");
+        node->Roll = GetAttribute<float>(*n, "roll", "graph node");
+        node->Scale = GetAttribute<YafXYZ>(*n, "scale", "graph node");
 
         if (auto appRefElement = GetChildren(*n, "appearanceref", "graph node", false))
         {
@@ -422,10 +349,9 @@ YafScene* ParseYafFile(const std::string& file)
 
     //TO DELETE
     auto node = scene->GetNode("oPiece");
-    node->SetAnimation(scene->GetAnimation("test"));
-    ((YafPieceAnimation*)node->GetAnimation())->moveTo(0,0);
-    
-    ((YafPieceAnimation*)node->GetAnimation())->moveTo(6,6);
+    auto anim = new YafPieceAnimation("test", node, 0, 0, 6, 6);
+    scene->AddAnimation(anim);
+    node->SetAnimation(anim);
 
     scene->DoPostProcessing();
 

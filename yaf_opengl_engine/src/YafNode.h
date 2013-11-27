@@ -9,7 +9,6 @@
 #include <gl/glui.h>
 #include <CGFshader.h>
 
-#include "YafTransform.h"
 #include "YafAppearance.h"
 #include "NewellsMethod.h"
 
@@ -155,7 +154,6 @@ class YafNode : public YafChild, public YafElement
 public:
     YafNode(const std::string& id) : YafElement(id), _processing(false), Selected(false) { }
 
-    void AddTransform(YafTransform* t) { _transforms.push_back(t); }
     void AddChild(YafChild* c) { _children.push_back(c); }
     void SetAppearance(YafAppearance* a) { _appearance = a; }
 
@@ -173,26 +171,26 @@ public:
 
     virtual bool IsCyclic(std::string& which);
 
-    void CalculateTransformMatrix();
-
     virtual void Update(unsigned long millis) override;
 
     bool Pickable;
     bool Selected;
 
+    YafXYZ Position;
+    float Pitch;
+    float Yaw;
+    float Roll;
+    YafXYZ Scale;
 private:
     void MoveRefNodesToChildren(YafScene* scene);
 
     bool _processing; // used in cycle detection
 
-    std::vector<YafTransform*> _transforms; // cache, cleared after parsing, stored in _m
     YafAppearance* _appearance; // can be null
 
     std::vector<YafChild*> _children;
 
     std::vector<std::string> _refNodes; // cache, cleared after parsing, stored in _children
-
-    float _m[4][4]; // partial matrix
 
     YafAnimation* _animation;
 };

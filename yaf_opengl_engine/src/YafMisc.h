@@ -45,6 +45,14 @@ public:
         return reinterpret_cast<float*>(this); // this won't work if class has virtual methods
     }
 
+    YafXYZ& operator +=(const YafXYZ& other)
+    {
+        X += other.X;
+        Y += other.Y;
+        Z += other.Z;
+        return *this;
+    }
+
     float X;
     float Y;
     float Z;
