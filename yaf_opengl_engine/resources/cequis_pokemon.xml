@@ -1,7 +1,8 @@
 <yaf>
     <globals background="0 0 0 0" drawmode="fill" shading="gouraud" cullface="front" cullorder="CW" />
     <cameras initial="free_cam" >
-        <free        id="free_cam"     near="0.1" far="5000" angle="50" pos= "00.000 0 25"    target= "00.000 0 0" />
+        <free id="free_cam" near="0.1" far="5000" angle="50" pos="-10 23 0" target="0 0 0" />
+        <!-- todo: add non-movable perspective cameras (at least two) -->
     </cameras>
     <lighting doublesided="false" local="false" enabled="true" ambient="0.01 0.01 0.01 1" >
         <omni id="light1" enabled="true"
