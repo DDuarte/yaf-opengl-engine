@@ -26,6 +26,7 @@
         <texture id="mosaic_green" file="mosaic_green.png" />
         <texture id="pokeball" file="pokeball.png" />
         <texture id="squirtle" file="squirtle.png" />
+        <texture id="score" file="score.jpg" />
     </textures>
     <appearances>
         <appearance id="white"
@@ -163,6 +164,15 @@
             textureref="squirtle"
             texlength_s="1"
             texlength_t="1" />
+            <appearance id="score"
+            emissive="0 0 0.1 0.5"
+            ambient="0.5 0.5 1 0.5"
+            diffuse="0.5 0.5 1 0.5"
+            specular="0.5 0.5 1 0.5"
+            shininess="1"
+            textureref="score"
+            texlength_s="1"
+            texlength_t="1" />
     </appearances>
     <graph rootid="game">
         <node id="game" position="0 0 0" pitch="90" yaw="0" roll="0" scale="1 1 1">
@@ -173,6 +183,38 @@
                 <noderef id="board" />
                 <noderef id="table" />
                 <noderef id="floor" />
+                <noderef id="score" />
+            </children>
+        </node>
+         <node id="score" position="0 0 -20" pitch="90" yaw="90" roll="0" scale="1 1 1">
+            <appearanceref id="score"/>
+            <children>
+                <noderef id="home" />
+                <noderef id="away" />
+                <noderef id="time" />
+            </children>
+        </node>
+        
+        <node id="home" position="-12 0 0" pitch="0" yaw="0" roll="45" scale="1 1 1">
+            <children>
+                <cylinder base="5" top="5" height="1" slices="4" stacks="20" />
+            </children>
+        </node>
+        
+        <node id="away" position="12 0 0" pitch="0" yaw="0" roll="45" scale="1 1 1">
+            <children>
+                <cylinder base="5" top="5" height="1" slices="4" stacks="20" />
+            </children>
+        </node>
+        
+        <node id="time" position="0 0 0" pitch="0" yaw="0" roll="0" scale="2 1 1">
+            <children>
+                <noderef id="timeaux" />
+            </children>
+        </node>
+        <node id="timeaux" position="0 0 0" pitch="0" yaw="0" roll="45" scale="1 1 1">
+            <children>
+                <cylinder base="5" top="5" height="1" slices="4" stacks="20" />
             </children>
         </node>
         <node id="floor" position="0 0 10.5" pitch="0" yaw="0" roll="45" scale="1 1 1">
