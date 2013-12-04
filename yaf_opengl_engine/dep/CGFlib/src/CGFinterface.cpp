@@ -48,22 +48,22 @@ void CGFinterface::initGUI()
 };
 
 
-GLUI_Checkbox* CGFinterface::addCheckbox(char* name, int* value, int id )
+GLUI_Checkbox* CGFinterface::addCheckbox(const char* name, int* value, int id )
 {
 	return glui_window->add_checkbox(name, value, id, CGFinterface::preprocessGUI);
 }
 
-GLUI_Checkbox* CGFinterface::addCheckboxToPanel(GLUI_Panel *p,char* name, int* value,int id )
+GLUI_Checkbox* CGFinterface::addCheckboxToPanel(GLUI_Panel *p, const char* name, int* value,int id )
 {
 	return glui_window->add_checkbox_to_panel(p,name, value,id,CGFinterface::preprocessGUI);
 }
 
-GLUI_Button* CGFinterface::addButton(char* name,int id)
+GLUI_Button* CGFinterface::addButton(const char* name, int id)
 {
 	return glui_window->add_button(name, id, CGFinterface::preprocessGUI);
 }
 
-GLUI_Button* CGFinterface::addButtonToPanel(GLUI_Panel *p,char* name, int id  )
+GLUI_Button* CGFinterface::addButtonToPanel(GLUI_Panel *p, const char* name, int id  )
 {
 	return glui_window->add_button_to_panel(p,name, id, CGFinterface::preprocessGUI);
 }
@@ -78,57 +78,57 @@ void CGFinterface::addColumnToPanel(GLUI_Panel *p)
 	glui_window->add_column_to_panel(p);
 }
 
-GLUI_EditText* CGFinterface::addEditText(char* name, char* var, int id )
+GLUI_EditText* CGFinterface::addEditText(const char* name, char* var, int id )
 {
 	return glui_window->add_edittext(name,GLUI_EDITTEXT_STRING, var,id,CGFinterface::preprocessGUI);
 }
 
-GLUI_EditText* CGFinterface::addEditText(char* name, int* var, int id  )
+GLUI_EditText* CGFinterface::addEditText(const char* name, int* var, int id  )
 {
 	return glui_window->add_edittext(name,GLUI_EDITTEXT_INT, var,id,CGFinterface::preprocessGUI);
 }
 
-GLUI_EditText* CGFinterface::addEditText(char* name, float* var, int id  )
+GLUI_EditText* CGFinterface::addEditText(const char* name, float* var, int id  )
 {
 	return glui_window->add_edittext(name,GLUI_EDITTEXT_FLOAT, var,id,CGFinterface::preprocessGUI);
 }
 
-GLUI_EditText* CGFinterface::addEditTextToPanel(GLUI_Panel *p,char* name, char* var, int id  )
+GLUI_EditText* CGFinterface::addEditTextToPanel(GLUI_Panel *p, const char* name, char* var, int id  )
 {
 	return glui_window->add_edittext_to_panel(p,name,GLUI_EDITTEXT_FLOAT, var,id,CGFinterface::preprocessGUI);
 }
 
-GLUI_EditText* CGFinterface::addEditTextToPanel(GLUI_Panel *p,char* name, int* var, int id )
+GLUI_EditText* CGFinterface::addEditTextToPanel(GLUI_Panel *p, const char* name, int* var, int id )
 {
 	return glui_window->add_edittext_to_panel(p,name,GLUI_EDITTEXT_FLOAT, var,id,CGFinterface::preprocessGUI);
 }
 
-GLUI_EditText* CGFinterface::addEditTextToPanel(GLUI_Panel *p,char* name, float* var, int id  )
+GLUI_EditText* CGFinterface::addEditTextToPanel(GLUI_Panel *p, const char* name, float* var, int id  )
 {
 	return glui_window->add_edittext_to_panel(p,name,GLUI_EDITTEXT_FLOAT, var,id,CGFinterface::preprocessGUI);
 }
 
-GLUI_Listbox* CGFinterface::addListbox(char* name, int* var, int id )
+GLUI_Listbox* CGFinterface::addListbox(const char* name, int* var, int id )
 {
 	return glui_window->add_listbox(name,var,id,CGFinterface::preprocessGUI);
 }
 
-GLUI_Listbox* CGFinterface::addListboxToPanel(GLUI_Panel *p,char* name, int* var, int id)
+GLUI_Listbox* CGFinterface::addListboxToPanel(GLUI_Panel *p, const char* name, int* var, int id)
 {
 	return glui_window->add_listbox_to_panel(p,name,var,id,CGFinterface::preprocessGUI);
 }
 
-GLUI_Panel* CGFinterface::addPanel(char* name, int type )
+GLUI_Panel* CGFinterface::addPanel(const char* name, int type )
 {
 	return glui_window->add_panel(name,type);
 }
 
-GLUI_Panel* CGFinterface::addPanelToPanel(GLUI_Panel *p,char* name, int type)
+GLUI_Panel* CGFinterface::addPanelToPanel(GLUI_Panel *p, const char* name, int type)
 {
 	return glui_window->add_panel_to_panel(p,name,type);
 }
 
-GLUI_RadioButton* CGFinterface::addRadioButtonToGroup(GLUI_RadioGroup * group, char * name)
+GLUI_RadioButton* CGFinterface::addRadioButtonToGroup(GLUI_RadioGroup * group, const char * name)
 {
 	return glui_window->add_radiobutton_to_group(group,name);
 }
@@ -145,12 +145,12 @@ GLUI_RadioGroup* CGFinterface::addRadioGroupToPanel(GLUI_Panel *p,int *var, int 
 
 }
 
-GLUI_Rollout* CGFinterface::addRollout(char *name, int open, int type )
+GLUI_Rollout* CGFinterface::addRollout(const char *name, int open, int type )
 {
 	return glui_window->add_rollout(name,open,type);
 }
 
-GLUI_Rollout* CGFinterface::addRolloutToPanel(GLUI_Panel* p,char *name, int open, int type )
+GLUI_Rollout* CGFinterface::addRolloutToPanel(GLUI_Panel* p, const char *name, int open, int type )
 {
 	return glui_window->add_rollout_to_panel(p,name,open,type);
 }
@@ -165,43 +165,43 @@ void CGFinterface::addSeparatorToPanel(GLUI_Panel *p)
 	return glui_window->add_separator_to_panel(p);
 }
 
-GLUI_Rotation* CGFinterface::addRotation(char* name, float* var, int id)
+GLUI_Rotation* CGFinterface::addRotation(const char* name, float* var, int id)
 {
-	return glui_window->add_rotation(name,var,id,CGFinterface::preprocessGUI);
+	return glui_window->add_rotation(name, var, id, CGFinterface::preprocessGUI);
 }
 
-GLUI_Rotation* CGFinterface::addRotationToPanel(GLUI_Panel *p,char* name, float* var, int id)
+GLUI_Rotation* CGFinterface::addRotationToPanel(GLUI_Panel *p,const char* name, float* var, int id)
 {
 	return glui_window->add_rotation_to_panel(p,name,var,id,CGFinterface::preprocessGUI);
 }
 
 
-GLUI_Spinner* CGFinterface::addSpinner(char* name, int type, int* var, int id)
+GLUI_Spinner* CGFinterface::addSpinner(const char* name, int type, int* var, int id)
 {
 	return glui_window->add_spinner(name,type,var,id,CGFinterface::preprocessGUI);
 }
 
-GLUI_Spinner* CGFinterface::addSpinnerToPanel(GLUI_Panel* p,char* name, int type, int* var, int id )
+GLUI_Spinner* CGFinterface::addSpinnerToPanel(GLUI_Panel* p, const char* name, int type, int* var, int id )
 {
 	return glui_window->add_spinner_to_panel(p,name,type,var,id,CGFinterface::preprocessGUI);
 }
 
-GLUI_StaticText* CGFinterface::addStaticText(char* name)
+GLUI_StaticText* CGFinterface::addStaticText(const char* name)
 {
 	return glui_window->add_statictext(name);
 }
 
-GLUI_StaticText* CGFinterface::addStaticTextToPanel(GLUI_Panel *p,char* name)
+GLUI_StaticText* CGFinterface::addStaticTextToPanel(GLUI_Panel *p, const char* name)
 {
 	return glui_window->add_statictext_to_panel(p,name);
 }
 
-GLUI_Translation* CGFinterface::addTranslationToPanel(GLUI_Panel* p,char* name, int type, float* var, int id)
+GLUI_Translation* CGFinterface::addTranslationToPanel(GLUI_Panel* p, const char* name, int type, float* var, int id)
 {
 	return glui_window->add_translation_to_panel(p,name,type,var,id,CGFinterface::preprocessGUI);
 }
 
-GLUI_Translation* CGFinterface::addTranslation(char* name, int type, float* var, int id)
+GLUI_Translation* CGFinterface::addTranslation(const char* name, int type, float* var, int id)
 {
 	return glui_window->add_translation(name,type,var,id,CGFinterface::preprocessGUI);
 }

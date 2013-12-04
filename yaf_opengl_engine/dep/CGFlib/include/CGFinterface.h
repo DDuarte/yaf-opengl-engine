@@ -66,50 +66,50 @@ class CGFinterface
 		 * Please see the \gluidocs for details.
 		 */
 		//@{
-		GLUI_Checkbox* addCheckbox(char* name, int* value = (int*) 0, int id = -1);
-		GLUI_Checkbox* addCheckboxToPanel(GLUI_Panel *p,char* name, int* value= (int*) 0,int id = -1);
+		GLUI_Checkbox* addCheckbox(const char* name, int* value = (int*) 0, int id = -1);
+		GLUI_Checkbox* addCheckboxToPanel(GLUI_Panel *p, const char* name, int* value= (int*) 0,int id = -1);
 
-		GLUI_Button* addButton(char* name,int id = -1);
-		GLUI_Button* addButtonToPanel(GLUI_Panel *p,char* name,int id = -1);
+		GLUI_Button* addButton(const char* name,int id = -1);
+		GLUI_Button* addButtonToPanel(GLUI_Panel *p, const char* name,int id = -1);
 
 		void addColumn();
 		void addColumnToPanel(GLUI_Panel *p);
 
-		GLUI_EditText* addEditText(char* name, char* var = (char*) 0,int id = -1);
-		GLUI_EditText* addEditText(char* name, int* var = (int*) 0,int id = -1);
-		GLUI_EditText* addEditText(char* name, float* var = (float*) 0,int id = -1);
-		GLUI_EditText* addEditTextToPanel(GLUI_Panel *p,char* name, char* var = (char*) 0,int id = -1);
-		GLUI_EditText* addEditTextToPanel(GLUI_Panel *p,char* name, int* var= (int*) 0,int id = -1);
-		GLUI_EditText* addEditTextToPanel(GLUI_Panel *p,char* name, float* var= (float*) 0,int id = -1);
+		GLUI_EditText* addEditText(const char* name, char* var = (char*) 0,int id = -1);
+		GLUI_EditText* addEditText(const char* name, int* var = (int*) 0,int id = -1);
+		GLUI_EditText* addEditText(const char* name, float* var = (float*) 0,int id = -1);
+		GLUI_EditText* addEditTextToPanel(GLUI_Panel *p, const char* name, char* var = (char*) 0,int id = -1);
+		GLUI_EditText* addEditTextToPanel(GLUI_Panel *p, const char* name, int* var= (int*) 0,int id = -1);
+		GLUI_EditText* addEditTextToPanel(GLUI_Panel *p, const char* name, float* var= (float*) 0,int id = -1);
 
-		GLUI_Listbox* addListbox(char* name, int* var= (int*) 0, int id = -1);
-		GLUI_Listbox* addListboxToPanel(GLUI_Panel *p,char* name, int* var= (int*) 0, int id = -1);
+		GLUI_Listbox* addListbox(const char* name, int* var= (int*) 0, int id = -1);
+		GLUI_Listbox* addListboxToPanel(GLUI_Panel *p, const char* name, int* var= (int*) 0, int id = -1);
 
-		GLUI_Panel* addPanel(char* name, int type = 1);
-		GLUI_Panel* addPanelToPanel(GLUI_Panel *p,char* name, int type = 1);
+		GLUI_Panel* addPanel(const char* name, int type = 1);
+		GLUI_Panel* addPanelToPanel(GLUI_Panel *p, const char* name, int type = 1);
 
-		GLUI_RadioButton* addRadioButtonToGroup(GLUI_RadioGroup * group, char * name);
+		GLUI_RadioButton* addRadioButtonToGroup(GLUI_RadioGroup * group, const char* name);
 
 		GLUI_RadioGroup* addRadioGroup(int *var, int id=-1);
 		GLUI_RadioGroup* addRadioGroupToPanel(GLUI_Panel* p,int *var= (int*) 0, int id=-1);
 
-		GLUI_Rollout* addRollout(char *name, int open=1, int type =1);
-		GLUI_Rollout* addRolloutToPanel(GLUI_Panel* p,char *name, int open=1, int type =1);
+		GLUI_Rollout* addRollout(const char* name, int open=1, int type =1);
+		GLUI_Rollout* addRolloutToPanel(GLUI_Panel* p, const char* name, int open=1, int type =1);
 
-		GLUI_Rotation* addRotation(char* name, float* var= (float*) 0, int id=-1);
-		GLUI_Rotation* addRotationToPanel(GLUI_Panel* p,char* name, float* var= (float*) 0, int id=-1);
+		GLUI_Rotation* addRotation(const char* name, float* var= (float*) 0, int id=-1);
+		GLUI_Rotation* addRotationToPanel(GLUI_Panel* p, const char* name, float* var= (float*) 0, int id=-1);
 
 		void addSeparator();
 		void addSeparatorToPanel(GLUI_Panel * p);
 
-		GLUI_Spinner* addSpinner(char* name, int type = 2, int* var= (int*)0, int id=-1);
-		GLUI_Spinner* addSpinnerToPanel(GLUI_Panel* p,char* name, int type = 2, int* var= (int*)0, int id=-1);
+		GLUI_Spinner* addSpinner(const char* name, int type = 2, int* var= (int*)0, int id=-1);
+		GLUI_Spinner* addSpinnerToPanel(GLUI_Panel* p, const char* name, int type = 2, int* var= (int*)0, int id=-1);
 
-		GLUI_StaticText* addStaticText(char* name);
-		GLUI_StaticText* addStaticTextToPanel(GLUI_Panel *p,char* name);
+		GLUI_StaticText* addStaticText(const char* name);
+		GLUI_StaticText* addStaticTextToPanel(GLUI_Panel *p, const char* name);
 
-		GLUI_Translation* addTranslation(char* name, int type = GLUI_TRANSLATION_X, float* var = (float*) 0, int id=-1);
-		GLUI_Translation* addTranslationToPanel(GLUI_Panel* p,char* name, int type = GLUI_TRANSLATION_X, float* var= (float*) 0, int id=-1);
+		GLUI_Translation* addTranslation(const char* name, int type = GLUI_TRANSLATION_X, float* var = (float*) 0, int id=-1);
+		GLUI_Translation* addTranslationToPanel(GLUI_Panel* p, const char* name, int type = GLUI_TRANSLATION_X, float* var= (float*) 0, int id=-1);
 		//@}
 
 	protected:
