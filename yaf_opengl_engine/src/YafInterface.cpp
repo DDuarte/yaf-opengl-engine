@@ -13,8 +13,8 @@
 #define BUFSIZE 256
 GLuint selectBuf[BUFSIZE];
 
-#define NTHEMES 2
-const char* THEMES[NTHEMES] = { "cequis_pokemon.xml", "ceq.xml" };
+#define NTHEMES 1
+const char* THEMES[NTHEMES] = { "cequis_pokemon.xml" };
 
 void ReloadYaf(YafScene* scene, const std::string& file)
 {
