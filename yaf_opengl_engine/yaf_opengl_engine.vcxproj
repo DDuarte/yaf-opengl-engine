@@ -25,6 +25,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\Main.h" />
     <ClInclude Include="src\NewellsMethod.h" />
     <ClInclude Include="src\YafAnimation.h" />
     <ClInclude Include="src\TinyXMLYafHelpers.h" />

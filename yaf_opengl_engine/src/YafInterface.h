@@ -6,6 +6,7 @@
 #include <functional>
 
 #include "YafScene.h"
+#include "Main.h"
 
 #define CAMERA_PANEL_ID 3
 
@@ -53,6 +54,35 @@ public:
 
         if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
             Pick(x, y);
+    }
+
+    virtual void processKeyboard(unsigned char key, int x, int y) override
+    {
+        if (key == 'r')
+        {
+            auto scene = ParseYafFile(_scene->GetYafName());
+            _scene->_backgroundColor = scene->_backgroundColor;
+            _scene->_drawMode = scene->_drawMode;
+            _scene->_shading = scene->_shading;
+            _scene->_cullFace = scene->_cullFace;
+            _scene->_cullOrder = scene->_cullOrder;
+            _scene->_initialCamera = scene->_initialCamera;
+            _scene->_cameras = scene->_cameras;
+            _scene->_activeCamera = scene->_activeCamera;
+            _scene->_lightDoubleSided = scene->_lightDoubleSided;
+            _scene->_lightLocal = scene->_lightLocal;
+            _scene->_lightEnabled = scene->_lightEnabled;
+            _scene->_lightAmbient = scene->_lightAmbient;
+            _scene->_lights = scene->_lights;
+            _scene->_textures = scene->_textures;
+            _scene->_appearances = scene->_appearances;
+            _scene->_animations = scene->_animations;
+            _scene->_rootNode = scene->_rootNode;
+            _scene->_nodes = scene->_nodes;
+
+            scene->initCameras();
+            scene->init();
+        }
     }
 
     void Pick(int x, int y)

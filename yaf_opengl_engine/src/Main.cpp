@@ -1,18 +1,18 @@
 #include <tinyxml.h>
 #include <cstdlib>
 #include <string>
-
+#include <CGFapplication.h>
+#include "Main.h"
 #include "YafScene.h"
 #include "YafNode.h"
 #include "TinyXMLYafHelpers.h"
 #include "YafInterface.h"
 #include "YafAppearance.h"
 
-#include <CGFapplication.h>
-
 YafScene* ParseYafFile(const std::string& file)
 {
     auto scene = new YafScene;
+    scene->SetYafName(file);
 
     auto document = new TiXmlDocument(file);
     if (!document->LoadFile())

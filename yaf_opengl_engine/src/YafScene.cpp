@@ -2,7 +2,6 @@
 #include "YafNode.h"
 #include "YafAppearance.h"
 
-
 #include <iostream>
 
 void YafScene::AddNode(YafNode* node)
@@ -139,7 +138,7 @@ void YafScene::init()
 
     _rootNode->Init(new YafAppearance());
 
-    setUpdatePeriod(60);
+    setUpdatePeriod(100);
 }
 
 void YafScene::display()

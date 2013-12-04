@@ -19,7 +19,12 @@ class YafAppearance;
 class YafScene : public CGFscene
 {
 public:
+    friend class YafInterface;
+
     ~YafScene();
+
+    void SetYafName(const std::string& yaf) { _yafName = yaf; }
+    const std::string& GetYafName() const { return _yafName; }
 
     void SetGlobals(YafRGBA bg, YafDrawMode dm, YafShading s, YafCullFace cf, YafCullOrder co);
     void SetLightOptions(bool doubleSided, bool local, bool enabled, YafRGBA ambient);
@@ -59,6 +64,8 @@ public:
     virtual void initCameras() override;
 
 private:
+    std::string _yafName;
+
     // Globals
     YafRGBA _backgroundColor;
     YafDrawMode _drawMode;

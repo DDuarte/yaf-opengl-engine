@@ -72,6 +72,9 @@
     <ClInclude Include="src\Game.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="src\Main.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\earth.jpg">
