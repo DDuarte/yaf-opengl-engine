@@ -357,7 +357,7 @@ YafScene* ParseYafFile(const std::string& file)
 
     //TO DELETE
     auto node = scene->GetNode("oPiece");
-    auto anim = new YafPieceAnimation("test", node, 0, 0, 6, 6);
+    auto anim = new YafPieceAnimation("test", node, 6, 6);
     scene->AddAnimation(anim);
     node->SetAnimation(anim);
 

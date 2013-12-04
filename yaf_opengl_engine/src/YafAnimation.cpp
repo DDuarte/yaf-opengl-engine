@@ -81,9 +81,9 @@ YafLinearAnimation::YafLinearAnimation(const std::string& id, YafNode* node, flo
     _speed = distance / _time;
 }
 
-YafPieceAnimation::YafPieceAnimation(const std::string& id, YafNode* node, int x1, int y1, int x2, int y2) : YafAnimation(id, node)
+YafPieceAnimation::YafPieceAnimation(const std::string& id, YafNode* node, int x2, int y2) : YafAnimation(id, node)
 {
-    MoveTo(x1, y1, x2, y2);
+    MoveTo(x2, y2);
 }
 
 void YafPieceAnimation::Update(unsigned long millis)
@@ -91,9 +91,8 @@ void YafPieceAnimation::Update(unsigned long millis)
     _animation->Update(millis);
 }
 
-void YafPieceAnimation::MoveTo(int x1, int y1, int x2, int y2)
+void YafPieceAnimation::MoveTo(int x2, int y2)
 {
-    assert(x1 <= 7 && x1 >= 0 && y1 <= 6 && y1 >= 0 && "Invalid src coordinates in MoveTo");
     assert(x2 <= 7 && x2 >= 0 && y2 <= 6 && y2 >= 0 && "Invalid dest coordinates in MoveTo");
 
     if (x2 == 0)

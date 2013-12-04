@@ -36,11 +36,11 @@ class YafPieceAnimation : public YafAnimation
 {
 public:
     virtual void ApplyAnimation() override;
-    YafPieceAnimation(const std::string& id, YafNode* node, int x1, int y1, int x2, int y2);
+    YafPieceAnimation(const std::string& id, YafNode* node, int x2, int y2);
     virtual void Update(unsigned long millis) override;
 private:
     YafLinearAnimation* _animation;
-    void MoveTo(int x1, int y1, int x2, int y2);
+    void MoveTo(int x2, int y2);
 };
 
 #endif
