@@ -216,3 +216,47 @@ void YafScene::AddAnimation(YafAnimation* animation)
     auto a = _animations.find(id);
     return a != _animations.end() ? a->second : nullptr;
  }
+
+ void YafScene::OverwriteScene(YafScene* newScene)
+ {
+     /*
+     for (auto x = _cameras.begin(); x != _cameras.end(); ++x)
+         delete x->second;
+
+     for (auto x = _lights.begin(); x != _lights.end(); ++x)
+         delete x->second;
+
+     for (auto x = _textures.begin(); x != _textures.end(); ++x)
+         delete x->second;
+
+     for (auto x = _appearances.begin(); x != _appearances.end(); ++x)
+         delete x->second;
+
+     for (auto x = _animations.begin(); x != _animations.end(); ++x)
+         delete x->second;
+
+     for (auto x = _nodes.begin(); x != _nodes.end(); ++x)
+         delete x->second; */
+
+     _backgroundColor = newScene->_backgroundColor;
+     _drawMode = newScene->_drawMode;
+     _shading = newScene->_shading;
+     _cullFace = newScene->_cullFace;
+     _cullOrder = newScene->_cullOrder;
+     _initialCamera = newScene->_initialCamera;
+     _cameras = newScene->_cameras;
+     _activeCamera = newScene->_activeCamera;
+     _lightDoubleSided = newScene->_lightDoubleSided;
+     _lightLocal = newScene->_lightLocal;
+     _lightEnabled = newScene->_lightEnabled;
+     _lightAmbient = newScene->_lightAmbient;
+     _lights = newScene->_lights;
+     _textures = newScene->_textures;
+     _appearances = newScene->_appearances;
+     _animations = newScene->_animations;
+     _rootNode = newScene->_rootNode;
+     _nodes = newScene->_nodes;
+
+     newScene->initCameras();
+     newScene->init();
+ }

@@ -31,6 +31,10 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Game.cpp" />
+    </ClCompile>
+    <ClCompile Include="src\YafInterface.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\YafLight.h">

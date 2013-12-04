@@ -19,8 +19,7 @@ class YafAppearance;
 class YafScene : public CGFscene
 {
 public:
-    friend class YafInterface;
-
+    void OverwriteScene(YafScene* newScene);
     ~YafScene();
 
     void SetYafName(const std::string& yaf) { _yafName = yaf; }
