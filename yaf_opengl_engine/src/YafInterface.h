@@ -15,10 +15,10 @@ public:
     virtual void processMouse(int button, int state, int x, int y) override;
     virtual void processKeyboard(unsigned char key, int x, int y) override;
 private:
-    uint _currentTheme;
     void Pick(int x, int y);
     void ProcessHits(GLint hits, GLuint* buffer);
     YafScene* _scene;
+    uint _currentTheme;
 };
 
 #endif // YafInterface_h__

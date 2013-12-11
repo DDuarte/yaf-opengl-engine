@@ -15,6 +15,7 @@
 class YafNode;
 class YafTexture;
 class YafAppearance;
+class Board;
 
 class YafScene : public CGFscene
 {
@@ -62,6 +63,8 @@ public:
     virtual void update(unsigned long millis) override;
     virtual void initCameras() override;
 
+    void SetBoard(Board* board) { _board = board; }
+
 private:
     std::string _yafName;
 
@@ -96,6 +99,9 @@ private:
     // Graph
     YafNode* _rootNode;
     std::map<std::string, YafNode*> _nodes;
+
+    // Game related
+    Board* _board;
 };
 
 #endif // YafScene_h__

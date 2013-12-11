@@ -1,6 +1,7 @@
 #include "YafScene.h"
 #include "YafNode.h"
 #include "YafAppearance.h"
+#include "Game.h"
 
 #include <iostream>
 
@@ -174,6 +175,8 @@ void YafScene::display()
 
     _rootNode->Draw();
 
+    _board->Draw();
+
     glPopMatrix();
 
     glutSwapBuffers();
@@ -198,6 +201,7 @@ void YafScene::initCameras()
 void YafScene::update(unsigned long millis)
 {
     _rootNode->Update(millis);
+    _board->Update(millis);
 }
 
 void YafScene::SetRootNode(YafNode* node)

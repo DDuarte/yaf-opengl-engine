@@ -12,7 +12,6 @@
 #include "YafAppearance.h"
 #include "NewellsMethod.h"
 
-
 class YafScene;
 class YafAnimation;
 

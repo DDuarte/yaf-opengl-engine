@@ -13,8 +13,8 @@
 #define BUFSIZE 256
 GLuint selectBuf[BUFSIZE];
 
-#define NTHEMES 1
-const char* THEMES[NTHEMES] = { "cequis_pokemon.xml" };
+#define NTHEMES 2
+const char* THEMES[NTHEMES] = { "cequis_pokemon.xml", "cequis_pokemon_2.xml" };
 
 void ReloadYaf(YafScene* scene, const std::string& file)
 {
@@ -148,13 +148,13 @@ void YafInterface::ProcessHits(GLint hits, GLuint* buffer)
         // possibly invoking a method on the scene class and passing "selected" and "nselected"
         printf("Picked ID's: ");
         for (auto i = 0u; i < nselected; i++)
-        for (auto n : _scene->GetNodes())
-        if ((GLuint) std::hash<std::string>()(n.first) == selected[i])
-        {
-            printf("%s ", n.first.c_str());
-            n.second->Selected = !n.second->Selected;
-            break;
-        }
+            for (auto n : _scene->GetNodes())
+                if ((GLuint) std::hash<std::string>()(n.first) == selected[i])
+                {
+                    printf("%s ", n.first.c_str());
+                    n.second->Selected = !n.second->Selected;
+                    break;
+                }
 
         printf("\n");
     }

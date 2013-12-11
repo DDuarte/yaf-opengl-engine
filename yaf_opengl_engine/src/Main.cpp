@@ -8,6 +8,7 @@
 #include "TinyXMLYafHelpers.h"
 #include "YafInterface.h"
 #include "YafAppearance.h"
+#include "Game.h"
 
 YafScene* ParseYafFile(const std::string& file)
 {
@@ -346,7 +347,6 @@ YafScene* ParseYafFile(const std::string& file)
         }
 
         scene->AddNode(node);
-
     }
 
     auto rootNode = scene->GetNode(graphRootId);
@@ -354,12 +354,6 @@ YafScene* ParseYafFile(const std::string& file)
         scene->SetRootNode(rootNode);
     else
         throw YafParsingException("Root node (" + graphRootId + ") not found.");
-
-    //TO DELETE
-    auto node = scene->GetNode("oPiece");
-    auto anim = new YafPieceAnimation("test", node, 6, 6);
-    scene->AddAnimation(anim);
-    node->SetAnimation(anim);
 
     scene->DoPostProcessing();
 
@@ -396,6 +390,17 @@ int main(int argc, char* argv[])
         std::cin.get();
         return EXIT_FAILURE;
     }
+
+    auto board = new Board(scene);
+    board->FillCells();
+
+    board->AddPiece(Piece(Player::First, scene->GetNode("wPiece1"), YafXY(5, 3)));
+    board->AddPiece(Piece(Player::First, scene->GetNode("wPiece2"), YafXY(4, 4)));
+    board->AddPiece(Piece(Player::First, scene->GetNode("wPiece3"), YafXY(4, 2)));
+
+    board->AddPiece(Piece(Player::Second, scene->GetNode("bPiece1"), YafXY(3, 3)));
+    board->AddPiece(Piece(Player::Second, scene->GetNode("bPiece2"), YafXY(3, 4)));
+    board->AddPiece(Piece(Player::Second, scene->GetNode("bPiece3"), YafXY(3, 2)));
 
     CGFapplication app;
 

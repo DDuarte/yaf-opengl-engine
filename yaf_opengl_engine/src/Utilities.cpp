@@ -45,8 +45,7 @@ std::vector<float> ParseFloats(const std::string& s, int n)
 }
 
 template<typename T>
-std::vector<T>
-ConcatenateVectors(std::vector<T>& v1, std::vector<T>& v2)
+std::vector<T> ConcatenateVectors(std::vector<T>& v1, std::vector<T>& v2)
 {
     std::vector<T> result = v1;
     result.insert(result.end(), v2.begin(), v2.end());

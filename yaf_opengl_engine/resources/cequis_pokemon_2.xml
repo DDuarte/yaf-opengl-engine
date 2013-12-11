@@ -1,0 +1,660 @@
+<yaf>
+    <globals background="0 0 0 0" drawmode="fill" shading="gouraud" cullface="front" cullorder="CW" />
+    <cameras initial="free_cam" >
+        <free id="free_cam" near="0.1" far="5000" angle="50" pos="-10 23 0" target="0 0 0" />
+        <!-- todo: add non-movable perspective cameras (at least two) -->
+    </cameras>
+    <lighting doublesided="false" local="false" enabled="true" ambient="0.01 0.01 0.01 1" >
+        <omni id="light1" enabled="true"
+            location="0 10 0"
+            ambient="0.5 0.5 0.5 0.5"
+            diffuse="0.5 0.5 0.5 0.5"
+            specular="0 0 0 0.5"
+        />
+    </lighting>
+    <textures>
+        <texture id="white" file="white.jpg" />
+        <texture id="black" file="black.jpg" />
+        <texture id="kitty" file="kitty.jpg" />
+        <texture id="pika" file="pika.jpg" />
+        <texture id="steel" file="stars.jpg" />
+        <texture id="wood_light" file="wood_light.jpg" />
+        <texture id="grass" file="sun.jpg" />
+        <texture id="grass2" file="saturn.jpg" />
+        <texture id="charmander" file="charmander.png" />
+        <texture id="dorae" file="dorae.png" />
+        <texture id="mosaic_green" file="mosaic_green.png" />
+        <texture id="pokeball" file="pokeball.png" />
+        <texture id="squirtle" file="squirtle.png" />
+        <texture id="score" file="score.jpg" />
+    </textures>
+    <appearances>
+        <appearance id="white"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="white"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="black"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="black"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="kitty"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="kitty"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="pika"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="pika"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="steel"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="steel"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="wood_light"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="wood_light"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="grass"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="grass"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="grass2"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="grass2"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="charmander"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="charmander"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="charmander_tint"
+            emissive="0.1 0 0 0.5"
+            ambient="1 0.5 0.5 0.5"
+            diffuse="1 0.5 0.5 0.5"
+            specular="1 0.5 0.5 0.5"
+            shininess="1"
+            textureref="charmander"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="dorae"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="dorae"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="mosaic_green"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="mosaic_green"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="pokeball"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="pokeball"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="squirtle"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="squirtle"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="squirtle_tint"
+            emissive="0 0 0.1 0.5"
+            ambient="0.5 0.5 1 0.5"
+            diffuse="0.5 0.5 1 0.5"
+            specular="0.5 0.5 1 0.5"
+            shininess="1"
+            textureref="squirtle"
+            texlength_s="1"
+            texlength_t="1" />
+            <appearance id="score"
+            emissive="0 0 0.1 0.5"
+            ambient="0.5 0.5 1 0.5"
+            diffuse="0.5 0.5 1 0.5"
+            specular="0.5 0.5 1 0.5"
+            shininess="1"
+            textureref="score"
+            texlength_s="1"
+            texlength_t="1" />
+    </appearances>
+    <graph rootid="game">
+        <node id="game" position="0 0 0" pitch="90" yaw="0" roll="0" scale="1 1 1">
+            <children>
+                <noderef id="wPieces" />
+                <noderef id="bPieces" />
+                <noderef id="oPiece" />
+                <noderef id="board" />
+                <noderef id="table" />
+                <noderef id="score" />
+                <noderef id= "background" />
+            </children>
+        </node>
+         <node id="score" position="13.14 0 -3.03 " pitch="90" yaw="90" roll="0" scale="0.5 0.5 0.5">
+            <appearanceref id="score"/>
+            <children>
+                <noderef id="home" />
+                <noderef id="away" />
+                <noderef id="time" />
+            </children>
+        </node>
+        
+        <node id="home" position="-12 0 0" pitch="0" yaw="0" roll="45" scale="1 1 1">
+            <children>
+                <cylinder base="5" top="5" height="1" slices="4" stacks="20" />
+            </children>
+        </node>
+        
+        <node id="away" position="12 0 0" pitch="0" yaw="0" roll="45" scale="1 1 1">
+            <children>
+                <cylinder base="5" top="5" height="1" slices="4" stacks="20" />
+            </children>
+        </node>
+        
+        <node id="time" position="0 0 0" pitch="0" yaw="0" roll="0" scale="2 1 1">
+            <children>
+                <noderef id="timeaux" />
+            </children>
+        </node>
+        <node id="timeaux" position="0 0 0" pitch="0" yaw="0" roll="45" scale="1 1 1">
+            <children>
+                <cylinder base="5" top="5" height="1" slices="4" stacks="20" />
+            </children>
+        </node>
+        
+        <node id="background" position="0 0 -10.55" pitch="0" yaw="0" roll="0" scale="2 2 2">
+            <children>
+                <noderef id="floor" />
+                <noderef id="wall1" />
+                <noderef id="wall2" />
+                <noderef id="wall3" />
+                <noderef id="wall4" />
+                <noderef id="rooftop" />
+            </children>
+        </node>
+                
+        
+        <node id="wall1" position="34.35 0 -24.35" pitch="0" yaw="90" roll="45" scale="1 1 1">
+            <children>
+                <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
+            </children>
+        </node>
+        <node id="wall2" position="0 35.35 -24.35" pitch="90" yaw="0" roll="45" scale="1 1 1">
+            <children>
+                <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
+            </children>
+        </node>
+        <node id="wall3" position="0 -34.35 -24.35" pitch="90" yaw="0" roll="45" scale="1 1 1">
+            <children>
+                <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
+            </children>
+        </node>
+        <node id="wall4" position="-35.35 0 -24.35" pitch="90" yaw="90" roll="45" scale="1 1 1">
+            <children>
+                <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
+            </children>
+        </node>
+        <node id="rooftop" position="0 0 -59.7" pitch="0" yaw="0" roll="45" scale="1 1 1">
+            <children>
+                <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
+            </children>
+        </node>
+        <node id="floor" position="0 0 10.5" pitch="0" yaw="0" roll="45" scale="1 1 1">
+            <appearanceref id="floor"/>
+            <children>
+                <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
+            </children>
+        </node>
+        <node id="table" position="0 0 0.5" pitch="0" yaw="0" roll="45" scale="1 1 1">
+            <appearanceref id="steel"/>
+            <children>
+                <cylinder base="20" top="20" height="1" slices="4" stacks="20" />
+                <cylinder base="2" top="0.5" height="10" slices="4" stacks="20" />
+            </children>
+        </node>
+        <node id="bPieces" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
+            <appearanceref id="charmander" />
+            <appearanceselectedref id="charmander_tint" />
+            <children>
+                 <noderef id="bPiece1" />
+                 <noderef id="bPiece2" />
+                 <noderef id="bPiece3" />
+            </children>
+        </node>
+        <node id="bPiece1" position="2.7 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                 <noderef id="piece" />
+            </children>
+        </node>
+        <node id="bPiece2" position="1.35 2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                 <noderef id="piece" />
+            </children>
+        </node>
+        <node id="bPiece3" position="1.35 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                 <noderef id="piece" />
+            </children>
+        </node>
+        <node id="wPieces" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
+            <appearanceref id="squirtle" />
+            <appearanceselectedref id="squirtle_tint" />
+            <children>
+                 <noderef id="wPiece1" />
+                 <noderef id="wPiece2" />
+                 <noderef id="wPiece3" />
+            </children>
+        </node>
+        <node id="wPiece1" position="-2.7 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                 <noderef id="piece" />
+            </children>
+        </node>
+        <node id="wPiece2" position="-1.35 2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                 <noderef id="piece" />
+            </children>
+        </node>
+        <node id="wPiece3" position="-1.35 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                 <noderef id="piece" />
+            </children>
+        </node>
+        <node id="oPiece" position="0 0 0" pitch="0" yaw="0" roll="0" scale="0.8 0.8 1">
+            <appearanceref id="pokeball" />
+            <children>
+                 <noderef id="piece" />
+            </children>
+        </node>
+        <node id="board" position="-9.45 7.05 0.25" pitch="0" yaw="0" roll="0" scale="1 1 1">
+            <appearanceref id="grass" />
+            <appearanceselectedref id="grass2" />
+            <children>
+                <noderef id="cell03" /><!-- col 6 -->
+                <noderef id="cell16" />
+                <noderef id="cell26" />
+                <noderef id="cell36" />
+                <noderef id="cell46" />
+                <noderef id="cell56" />
+                <noderef id="cell66" />
+                <noderef id="cell76" />
+                <noderef id="cell15" /><!-- col 5 -->
+                <noderef id="cell25" />
+                <noderef id="cell35" />
+                <noderef id="cell45" />
+                <noderef id="cell55" />
+                <noderef id="cell65" />
+                <noderef id="cell75" />
+                <noderef id="cell02" /><!-- col 4 -->
+                <noderef id="cell14" />
+                <noderef id="cell24" />
+                <noderef id="cell34" />
+                <noderef id="cell44" />
+                <noderef id="cell54" />
+                <noderef id="cell64" />
+                <noderef id="cell74" />
+                <noderef id="cell13" /><!-- col 3 -->
+                <noderef id="cell23" />
+                <noderef id="cell33" />
+                <noderef id="cell43" />
+                <noderef id="cell53" />
+                <noderef id="cell63" />
+                <noderef id="cell73" />
+                <noderef id="cell01" /><!-- col 2 -->
+                <noderef id="cell12" />
+                <noderef id="cell22" />
+                <noderef id="cell32" />
+                <noderef id="cell42" />
+                <noderef id="cell52" />
+                <noderef id="cell62" />
+                <noderef id="cell72" />
+                <noderef id="cell11" /><!-- col 1 -->
+                <noderef id="cell21" />
+                <noderef id="cell31" />
+                <noderef id="cell41" />
+                <noderef id="cell51" />
+                <noderef id="cell61" />
+                <noderef id="cell71" />
+                <noderef id="cell00" /><!-- col 0 -->
+                <noderef id="cell10" />
+                <noderef id="cell20" />
+                <noderef id="cell30" />
+                <noderef id="cell40" />
+                <noderef id="cell50" />
+                <noderef id="cell60" />
+                <noderef id="cell70" />
+            </children>
+        </node>
+        <node id="cell76" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell66" position="2.7 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell56" position="5.4 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell46" position="8.1 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell36" position="10.8 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell26" position="13.5 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell16" position="16.2 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell03" position="18.9 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell75" position="1.35 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell65" position="4.05 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell55" position="6.75 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell45" position="9.45 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell35" position="12.15 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell25" position="14.85 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell15" position="17.55 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell74" position="0 -4.7 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell64" position="2.7 -4.7 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell54" position="5.4 -4.7 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell44" position="8.1 -4.7 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell34" position="10.8 -4.7 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell24" position="13.5 -4.7 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell14" position="16.2 -4.7 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell02" position="18.9 -4.7 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell73" position="1.35 -7.05 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell63" position="4.05 -7.05 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell53" position="6.75 -7.05 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell43" position="9.45 -7.05 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell33" position="12.15 -7.05 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell23" position="14.85 -7.05 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell13" position="17.55 -7.05 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell72" position="0 -9.4 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell62" position="2.7 -9.4 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell52" position="5.4 -9.4 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell42" position="8.1 -9.4 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell32" position="10.8 -9.4 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell22" position="13.5 -9.4 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell12" position="16.2 -9.4 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell01" position="18.9 -9.4 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell71" position="1.35 -11.75 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell61" position="4.05 -11.75 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell51" position="6.75 -11.75 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell41" position="9.45 -11.75 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell31" position="12.15 -11.75 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell21" position="14.85 -11.75 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell11" position="17.55 -11.75 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell70" position="0 -14.1 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell60" position="2.7 -14.1 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell50" position="5.4 -14.1 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell40" position="8.1 -14.1 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell30" position="10.8 -14.1 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell20" position="13.5 -14.1 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell10" position="16.2 -14.1 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell00" position="18.9 -14.1 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+            <children>
+                <noderef id="cell" />
+            </children>
+        </node>
+        <node id="cell" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
+            <children>
+                <cylinder base="1.5" top="1.5" height="0.25" slices="6" stacks="15" />
+            </children>
+        </node>
+        <node id="piece" position="0 0 0" pitch="0" yaw="0" roll="90" scale="1 1 1">
+            <children>
+                <cylinder base="1" top="1" height="0.25" slices="15" stacks="15" />
+            </children>
+        </node>
+    </graph>
+</yaf>

@@ -81,9 +81,9 @@ YafLinearAnimation::YafLinearAnimation(const std::string& id, YafNode* node, flo
     _speed = distance / _time;
 }
 
-YafPieceAnimation::YafPieceAnimation(const std::string& id, YafNode* node, int x2, int y2) : YafAnimation(id, node)
+YafPieceAnimation::YafPieceAnimation(const std::string& id, YafNode* node, int x1, int y1, int x2, int y2) : YafAnimation(id, node)
 {
-    MoveTo(x2, y2);
+    MoveTo(x1, y1, x2, y2);
 }
 
 void YafPieceAnimation::Update(unsigned long millis)
@@ -91,27 +91,40 @@ void YafPieceAnimation::Update(unsigned long millis)
     _animation->Update(millis);
 }
 
-void YafPieceAnimation::MoveTo(int x2, int y2)
+void YafPieceAnimation::MoveTo(int x1, int y1, int x2, int y2)
 {
+    assert(x1 <= 7 && x1 >= 0 && y1 <= 6 && y1 >= 0 && "Invalid src coordinates in MoveTo");
     assert(x2 <= 7 && x2 >= 0 && y2 <= 6 && y2 >= 0 && "Invalid dest coordinates in MoveTo");
 
-    if (x2 == 0)
-        y2 *= 2;
-
-    YafXYZ moveTo;
-    moveTo.Z = 0.0f;
-    moveTo.Y = (6.0f - y2) * -2.35f;
-    
-    if (y2 % 2 == 0)
-        moveTo.X = (7.0f - x2) * 2.7f;
-    else
-        moveTo.X = (7.0f - (x2 - 1.0f)) * 2.7f - 1.35f;
-
-    moveTo.X += -9.45f;
-    moveTo.Y += 7.05f;
+    auto moveFrom = BoardIndexesToXY(x1, y1);
+    auto moveTo = BoardIndexesToXY(x2, y2);
 
     std::vector<YafXYZ> points(2);
-    points[0] = YafXYZ(0.0f, 0.0f, 0.0f); // TODO: Get coordinates from (x1, y1)
-    points[1] = moveTo;
+    points[0] = YafXYZ(moveFrom.X, moveFrom.Y, 0.0f);
+    points[1] = YafXYZ(moveTo.X, moveTo.Y, 0.0f);
     _animation = new YafLinearAnimation(Id + "In", Node, 5, points);
+}
+
+YafPieceAnimation::~YafPieceAnimation()
+{
+    delete _animation;
+}
+
+YafXY YafPieceAnimation::BoardIndexesToXY(int xi, int yi)
+{
+    if (xi == 0)
+        yi *= 2;
+
+    YafXY move;
+    move.Y = (6.0f - yi) * -2.35f;
+
+    if (yi % 2 == 0)
+        move.X = (7.0f - xi) * 2.7f;
+    else
+        move.X = (7.0f - (xi - 1.0f)) * 2.7f - 1.35f;
+
+    move.X += -9.45f;
+    move.Y += 7.05f;
+
+    return move;
 }
