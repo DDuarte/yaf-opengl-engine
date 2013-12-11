@@ -67,6 +67,7 @@ void Board::MovePiece(Piece* piece, uint x, uint y) const
 
 void Board::Update(uint millis)
 {
+    _scoreboard.Update(millis);
     for (auto& p : _pieces)
     {
         if (p.GetNode()->Selected)

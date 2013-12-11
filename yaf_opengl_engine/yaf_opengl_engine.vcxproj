@@ -17,6 +17,7 @@
   <ItemGroup>
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Scoreboard.cpp" />
     <ClCompile Include="src\Utilities.cpp" />
     <ClCompile Include="src\YafAnimation.cpp" />
     <ClCompile Include="src\TinyXMLYafHelpers.cpp" />
@@ -29,6 +30,7 @@
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\Main.h" />
     <ClInclude Include="src\NewellsMethod.h" />
+    <ClInclude Include="src\Scoreboard.h" />
     <ClInclude Include="src\YafAnimation.h" />
     <ClInclude Include="src\TinyXMLYafHelpers.h" />
     <ClInclude Include="src\Utilities.h" />

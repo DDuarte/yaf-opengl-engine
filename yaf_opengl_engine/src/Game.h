@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "YafMisc.h"
+#include "Scoreboard.h"
 
 enum class Player
 {
@@ -48,13 +49,14 @@ public:
     void MovePiece(Piece* piece, uint x, uint y) const;
 
     void Update(uint millis);
-    void Draw() { };
+    void Draw() {_scoreboard.Draw(); };
 private:
     std::vector<Piece> _pieces;
     YafScene* _scene;
     uint _lines;
     uint _columns;
     YafNode*** _cells;
+    Scoreboard _scoreboard;
 };
 
 #endif
