@@ -182,8 +182,8 @@
                 <noderef id="oPiece" />
                 <noderef id="board" />
                 <noderef id="table" />
-                <noderef id="floor" />
                 <noderef id="score" />
+                <noderef id= "background" />
             </children>
         </node>
          <node id="score" position="13.14 0 -3.03 " pitch="90" yaw="90" roll="0" scale="0.5 0.5 0.5">
@@ -215,6 +215,44 @@
         <node id="timeaux" position="0 0 0" pitch="0" yaw="0" roll="45" scale="1 1 1">
             <children>
                 <cylinder base="5" top="5" height="1" slices="4" stacks="20" />
+            </children>
+        </node>
+        
+        <node id="background" position="0 0 -10.55" pitch="0" yaw="0" roll="0" scale="2 2 2">
+            <children>
+                <noderef id="floor" />
+                <noderef id="wall1" />
+                <noderef id="wall2" />
+                <noderef id="wall3" />
+                <noderef id="wall4" />
+                <noderef id="rooftop" />
+            </children>
+        </node>
+                
+        
+        <node id="wall1" position="34.35 0 -24.35" pitch="0" yaw="90" roll="45" scale="1 1 1">
+            <children>
+                <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
+            </children>
+        </node>
+        <node id="wall2" position="0 35.35 -24.35" pitch="90" yaw="0" roll="45" scale="1 1 1">
+            <children>
+                <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
+            </children>
+        </node>
+        <node id="wall3" position="0 -34.35 -24.35" pitch="90" yaw="0" roll="45" scale="1 1 1">
+            <children>
+                <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
+            </children>
+        </node>
+        <node id="wall4" position="-35.35 0 -24.35" pitch="90" yaw="90" roll="45" scale="1 1 1">
+            <children>
+                <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
+            </children>
+        </node>
+        <node id="rooftop" position="0 0 -59.7" pitch="0" yaw="0" roll="45" scale="1 1 1">
+            <children>
+                <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
             </children>
         </node>
         <node id="floor" position="0 0 10.5" pitch="0" yaw="0" roll="45" scale="1 1 1">
