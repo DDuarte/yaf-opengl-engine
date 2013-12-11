@@ -5,6 +5,8 @@
 #include <stdexcept>
 #include <vector>
 
+typedef unsigned int uint;
+
 class YafParsingException : public std::runtime_error
 {
 public:
@@ -22,6 +24,7 @@ class YafXY
 {
 public:
     YafXY() : X(0.0f), Y(0.0f) { }
+    YafXY(float x, float y) : X(x), Y(y) { }
     YafXY(const std::string& s);
 
     operator float*()

@@ -30,7 +30,11 @@
     <ClCompile Include="src\YafAnimation.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\Utilities.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game.cpp">
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\YafInterface.cpp">
       <Filter>src</Filter>

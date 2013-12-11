@@ -17,6 +17,7 @@
   <ItemGroup>
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Utilities.cpp" />
     <ClCompile Include="src\YafAnimation.cpp" />
     <ClCompile Include="src\TinyXMLYafHelpers.cpp" />
     <ClCompile Include="src\YafInterface.cpp" />

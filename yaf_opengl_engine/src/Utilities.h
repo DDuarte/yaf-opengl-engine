@@ -8,32 +8,13 @@
 #include "YafMisc.h"
 
 template<typename T>
-std::vector<T> ConcatenateVectors(std::vector<T>& v1, std::vector<T>& v2)
-{
-    std::vector<T> result = v1;
-    result.insert(result.end(), v2.begin(), v2.end());
-    return result;
-}
+std::vector<T> ConcatenateVectors(std::vector<T>& v1, std::vector<T>& v2);
 
-std::vector<float> ParseFloats(const std::string& s, int n)
-{
-    std::vector<float> floats;
+std::vector<float> ParseFloats(const std::string& s, int n);
 
-    char* str = const_cast<char*>(s.c_str());
-    char* pch;
-    char* context = nullptr;
-
-    pch = strtok_s(str, " ", &context);
-    while (pch)
-    {
-        floats.push_back(static_cast<float>(atof(pch)));
-        pch = strtok_s(nullptr, " ", &context);
-    }
-
-    if (floats.size() != n)
-        throw YafParsingException("Incorrect number of arguments: " + s);
-
-    return floats;
-}
+bool starts_with(const std::string& str, const std::string& prefix); ///< Returns true if str starts with prefix
+bool ends_with(const std::string& str, const std::string& suffix); ///< Returns true if str ends with suffix
+bool contains(const std::string& str, const std::string fix); ///< Returns true if str contains fix
+std::string to_lower(std::string str); // Converts a string to all lower case
 
 #endif // Utilities_h__
