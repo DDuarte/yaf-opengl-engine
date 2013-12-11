@@ -156,7 +156,8 @@ void YafScene::display()
         if (l->second->Enabled)
         {
             l->second->enable();
-            l->second->draw(); // draw calls update
+            // l->second->draw(); // draw calls update
+            l->second->update();
         }
         else
         {
@@ -169,7 +170,7 @@ void YafScene::display()
     glPushName(-1); // default name
 
     glColor3f(1.0f, 1.0f, 1.0f);
-    axis.draw();
+    // axis.draw();
 
     _rootNode->Draw();
 
