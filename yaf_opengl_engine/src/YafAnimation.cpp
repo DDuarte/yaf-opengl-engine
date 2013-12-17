@@ -1,7 +1,7 @@
 #include "YafAnimation.h"
 
 #define _USE_MATH_DEFINES // for M_PI
-#define SPEED 5
+#define SPEED 5.0f
 #include <math.h>
 #include <cassert>
 #include <iostream>
@@ -103,8 +103,8 @@ void YafPieceAnimation::MoveTo(int x1, int y1, int x2, int y2)
     std::vector<YafXYZ> points(2);
     points[0] = YafXYZ(moveFrom.X, moveFrom.Y, 0.0f);
     points[1] = YafXYZ(moveTo.X, moveTo.Y, 0.0f);
-    auto dist = sqrt(pow (moveTo.X - moveFrom.X, 2.0) + pow (moveTo.Y - moveFrom.Y, 2.0) );
-    _animation = new YafLinearAnimation(Id + "In", Node, dist / SPEED /*Distancia / Velocidade*/, points);
+    auto dist = sqrt(pow(moveTo.X - moveFrom.X, 2.0f) + pow(moveTo.Y - moveFrom.Y, 2.0f));
+    _animation = new YafLinearAnimation(Id + "In", Node, dist / SPEED, points);
 }
 
 YafPieceAnimation::~YafPieceAnimation()
