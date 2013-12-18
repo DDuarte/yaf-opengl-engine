@@ -72,19 +72,19 @@
 
 /********** Do some basic defines *******/
 
-#ifndef Byte
-#define Byte unsigned char
+#ifndef glui_Byte
+#define glui_Byte unsigned char
 #endif
 
 #ifndef _RGBC_
 class RGBc {
 public:
-  Byte r, g, b;
+  glui_Byte r, g, b;
     
-  void set(Byte r,Byte g,Byte b) {this->r=r;this->g=g;this->b=b;}
+  void set(glui_Byte r,glui_Byte g,glui_Byte b) {this->r=r;this->g=g;this->b=b;}
     
   RGBc( void ) {}
-  RGBc( Byte r, Byte g, Byte b ) { set( r, g, b ); }
+  RGBc( glui_Byte r, glui_Byte g, glui_Byte b ) { set( r, g, b ); }
 };
 #define _RGBC_
 #endif

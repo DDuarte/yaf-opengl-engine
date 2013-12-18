@@ -2,11 +2,6 @@
 #define SCOREBOARD_H_
 
 #include <string>
-#include <windows.h>
-#include <gl/glew.h>
-#include <gl/freeglut.h>
-#include <gl/glui.h>
-
 #include "YafMisc.h"
 
 class Scoreboard
