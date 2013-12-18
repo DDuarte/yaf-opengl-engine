@@ -151,7 +151,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)dep\tinyxml\;$(SolutionDir)dep\CGFlib\include\;$(SolutionDir)dep\freeglut\include\;$(SolutionDir)dep\glui\include\;$(SolutionDir)dep\glew\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)dep\tinyxml\;$(SolutionDir)dep\CGFlib\include\;$(SolutionDir)dep\freeglut\include\;$(SolutionDir)dep\glui\include\;$(SolutionDir)dep\glew\include\;$(SolutionDir)dep\asio\include\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)dep\tinyxml\bin\;$(SolutionDir)dep\CGFlib\bin\;$(SolutionDir)dep\glui\bin\;$(SolutionDir)dep\freeglut\VisualStudio\2012\bin\;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)bin\</OutDir>
     <IntDir>$(ProjectDir)temp\</IntDir>
@@ -179,7 +179,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;TIXML_USE_STL;FREEGLUT_STATIC;GLUI_FREEGLUT;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;TIXML_USE_STL;FREEGLUT_STATIC;GLUI_FREEGLUT;GLEW_STATIC;ASIO_STANDALONE;BOOST_DATE_TIME_NO_LIB;BOOST_REGEX_NO_LIB;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
