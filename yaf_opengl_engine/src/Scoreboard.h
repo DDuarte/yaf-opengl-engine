@@ -13,11 +13,16 @@ public:
     void IncAway();
     void Reset();
     void Draw();
+    void SetCountDown(uint count){ _countDown = count; }
+    int GetCurrentCountDown() const { return _currentCountDown; }
 private:
+    int _countDown;
+    uint _lastCountDown;
     uint _home;
     uint _away;
     uint _firstMillis;
     std::string _currentTime;
+    int _currentCountDown;
 };
 
 #endif
