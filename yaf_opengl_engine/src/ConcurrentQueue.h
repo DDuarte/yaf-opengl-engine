@@ -55,20 +55,20 @@ public:
 
     bool empty() const
     {
-        std::unique_lock<std::mutex> mlock(_mutex);
+        std::lock_guard<std::mutex> mlock(_mutex);
         return _queue.empty();
     }
 
     typename std::queue<T>::size_type size() const
     {
-        std::unique_lock<std::mutex> mlock(_mutex);
+        std::lock_guard<std::mutex> mlock(_mutex);
         return _queue.size();
     }
 
 private:
     std::queue<T> _queue;
-    std::mutex _mutex;
-    std::condition_variable _cond;
+    mutable std::mutex _mutex;
+    mutable std::condition_variable _cond;
 };
 
 #endif
