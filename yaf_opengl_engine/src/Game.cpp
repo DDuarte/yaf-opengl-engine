@@ -2,11 +2,12 @@
 
 #include "YafScene.h"
 #include "Utilities.h"
+#include "NetworkProlog.h"
 
 #include <tuple>
 #include <algorithm>
 
-Board::Board(YafScene* scene) : _scene(scene), _cells(nullptr), _lines(0), _columns(0)
+Board::Board(YafScene* scene, NetworkProlog* network) : _scene(scene), _network(network), _cells(nullptr), _lines(0), _columns(0)
 {
     _scene->SetBoard(this);
 }
@@ -63,6 +64,8 @@ void Board::MovePiece(Piece* piece, uint x, uint y) const
     _scene->AddAnimation(anim);
     piece->GetNode()->SetAnimation(anim);
     piece->SetPosition(x, y);
+
+    _network->EnqueueMessage(PrologPredicateBuilder::Build("move", x, y));
 }
 
 void Board::Update(uint millis)

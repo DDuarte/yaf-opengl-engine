@@ -92,6 +92,9 @@
     <ClInclude Include="src\ConcurrentQueue.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="src\NetworkProlog.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\earth.jpg">

@@ -23,13 +23,6 @@ void YafNode::MoveRefNodesToChildren(YafScene* scene)
 
 void YafNode::Update(unsigned long millis)
 {
-    /*if (Selected)
-    {
-        Scale.X = 1.1f;
-        Scale.Y = 1.1f;
-        Scale.Z = 1.1f;
-    }*/
-
     if (_animation)
     {
         _animation->Update(millis);

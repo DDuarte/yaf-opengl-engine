@@ -9,6 +9,9 @@
 #include "YafInterface.h"
 #include "YafAppearance.h"
 #include "Game.h"
+#include "NetworkProlog.h"
+
+#include "ConcurrentQueue.h"
 
 YafScene* ParseYafFile(const std::string& file)
 {
@@ -385,13 +388,16 @@ int main(int argc, char* argv[])
     }
     catch (GLexception& ex)
     {
-        std::cerr << "Glexception while parsing caught: " << ex.what() << std::endl;
+        std::cerr << "GLexception while parsing caught: " << ex.what() << std::endl;
         std::cout << "Press ENTER key to continue." << std::endl;
         std::cin.get();
         return EXIT_FAILURE;
     }
 
-    auto board = new Board(scene);
+    NetworkProlog net;
+    net.Startup();
+
+    auto board = new Board(scene, &net);
     board->FillCells();
 
     board->AddPiece(Piece(Player::First, scene->GetNode("wPiece1"), YafXY(5, 3)));

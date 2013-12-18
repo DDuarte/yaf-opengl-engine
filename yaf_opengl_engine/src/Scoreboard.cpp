@@ -1,5 +1,8 @@
 #include "Scoreboard.h"
 
+#include <gl/glew.h>
+#include <gl/freeglut.h>
+
 Scoreboard::Scoreboard()
 {
     _home = 0;

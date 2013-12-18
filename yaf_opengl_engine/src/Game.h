@@ -15,6 +15,7 @@ enum class Player
 
 class YafNode;
 class YafScene;
+class NetworkProlog;
 
 class Piece
 {
@@ -39,7 +40,7 @@ private:
 class Board
 {
 public:
-    Board(YafScene* scene);
+    Board(YafScene* scene, NetworkProlog* network);
     ~Board() { for (auto i = 0u; i < _lines; ++i) delete[] _cells[i]; delete[] _cells; }
 
     void FillCells();
@@ -53,6 +54,7 @@ public:
 private:
     std::vector<Piece> _pieces;
     YafScene* _scene;
+    NetworkProlog* _network;
     uint _lines;
     uint _columns;
     YafNode*** _cells;
