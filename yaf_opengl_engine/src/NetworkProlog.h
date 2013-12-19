@@ -11,7 +11,7 @@
 
 using asio::ip::tcp;
 
-class PrologPredicateBuilder
+class PrologPredicate
 {
 public:
     template<typename... Args>

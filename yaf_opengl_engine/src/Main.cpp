@@ -365,19 +365,11 @@ YafScene* ParseYafFile(const std::string& file)
 
 int main(int argc, char* argv[])
 {
-    if (argc != 2)
-    {
-        std::cout << "Usage: " + std::string(argv[0]) + " yaf_file_name" << std::endl;
-        std::cout << "Press ENTER key to continue." << std::endl;
-        std::cin.get();
-        return EXIT_SUCCESS;
-    }
-
     YafScene* scene = nullptr;
 
     try
     {
-        scene = ParseYafFile(argv[1]);
+        scene = ParseYafFile(argc == 2 ? argv[1] : THEMES[0]);
     }
     catch (YafParsingException& ex)
     {

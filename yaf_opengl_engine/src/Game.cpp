@@ -65,7 +65,7 @@ void Board::MovePiece(Piece* piece, uint x, uint y) const
     piece->GetNode()->SetAnimation(anim);
     piece->SetPosition(x, y);
 
-    _network->EnqueueMessage(PrologPredicateBuilder::Build("move", x, y));
+    _network->EnqueueMessage(PrologPredicate::Build("move", x, y));
 }
 
 void Board::Update(uint millis)
