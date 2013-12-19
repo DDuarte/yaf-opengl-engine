@@ -9,15 +9,14 @@
             location="0 10 0"
             ambient="0.5 0.5 0.5 0.5"
             diffuse="0.5 0.5 0.5 0.5"
-            specular="0 0 0 0.5"
-        />
+            specular="0 0 0 0.5" />
     </lighting>
     <textures>
         <texture id="white" file="white.jpg" />
         <texture id="black" file="black.jpg" />
         <texture id="steel" file="steel.jpg" />
         <texture id="wood_light" file="wood_light.jpg" />
-       <texture id="score" file="score.jpg" />
+        <texture id="score" file="score.jpg" />
         <texture id="wall" file="wall.jpg" />
         <texture id="roof" file="roof.jpg" />
         <texture id="floor" file="floor.jpg" />

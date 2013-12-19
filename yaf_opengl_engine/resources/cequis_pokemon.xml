@@ -15,18 +15,18 @@
     <textures>
         <texture id="white" file="white.jpg" />
         <texture id="black" file="black.jpg" />
-        <texture id="kitty" file="kitty.jpg" />
         <texture id="pika" file="pika.jpg" />
         <texture id="steel" file="steel.jpg" />
         <texture id="wood_light" file="wood_light.jpg" />
         <texture id="grass" file="grass.jpg" />
         <texture id="grass2" file="grass2.jpg" />
         <texture id="charmander" file="charmander.png" />
-        <texture id="dorae" file="dorae.png" />
-        <texture id="mosaic_green" file="mosaic_green.png" />
         <texture id="pokeball" file="pokeball.png" />
         <texture id="squirtle" file="squirtle.png" />
         <texture id="score" file="score.jpg" />
+        <texture id="wall" file="wall.jpg" />
+        <texture id="roof" file="roof.jpg" />
+        <texture id="floor" file="floor.jpg" />
     </textures>
     <appearances>
         <appearance id="white"
@@ -119,24 +119,42 @@
             textureref="charmander"
             texlength_s="1"
             texlength_t="1" />
-        <appearance id="dorae"
-            emissive="0.5 0.5 0.5 1"
-            ambient="0.5 0.5 0.5 1"
-            diffuse="0.5 0.5 0.5 1"
-            specular="0.5 0.5 0.5 1"
-            shininess="0.5"
-            textureref="dorae"
+        <appearance id="score"
+            emissive="0 0 0.1 0.5"
+            ambient="0.5 0.5 1 0.5"
+            diffuse="0.5 0.5 1 0.5"
+            specular="0.5 0.5 1 0.5"
+            shininess="1"
+            textureref="score"
             texlength_s="1"
             texlength_t="1" />
-        <appearance id="mosaic_green"
-            emissive="0.5 0.5 0.5 1"
-            ambient="0.5 0.5 0.5 1"
-            diffuse="0.5 0.5 0.5 1"
-            specular="0.5 0.5 0.5 1"
-            shininess="0.5"
-            textureref="mosaic_green"
-            texlength_s="1"
-            texlength_t="1" />
+        <appearance id="wall"
+            emissive="0.5 0.5 0.5 0.5"
+            ambient="0.5 0.5 0.5 0.5"
+            diffuse="0.5 0.5 0.5 0.5"
+            specular="0.5 0.5 0.5 0.5"
+            shininess="1"
+            textureref="wall"
+            texlength_s="35.35"
+            texlength_t="35.35" />
+        <appearance id="floor"
+            emissive="0.5 0.5 0.5 0.5"
+            ambient="0.5 0.5 0.5 0.5"
+            diffuse="0.5 0.5 0.5 0.5"
+            specular="0.5 0.5 0.5 0.5"
+            shininess="1"
+            textureref="floor"
+            texlength_s="5"
+            texlength_t="5" />
+        <appearance id="roof"
+            emissive="0.5 0.5 0.5 0.5"
+            ambient="0.5 0.5 0.5 0.5"
+            diffuse="0.5 0.5 0.5 0.5"
+            specular="0.5 0.5 0.5 0.5"
+            shininess="1"
+            textureref="roof"
+            texlength_s="35.35"
+            texlength_t="35.35" />
         <appearance id="pokeball"
             emissive="0.5 0.5 0.5 1"
             ambient="0.5 0.5 0.5 1"
@@ -164,15 +182,6 @@
             textureref="squirtle"
             texlength_s="1"
             texlength_t="1" />
-            <appearance id="score"
-            emissive="0 0 0.1 0.5"
-            ambient="0.5 0.5 1 0.5"
-            diffuse="0.5 0.5 1 0.5"
-            specular="0.5 0.5 1 0.5"
-            shininess="1"
-            textureref="score"
-            texlength_s="1"
-            texlength_t="1" />
     </appearances>
     <graph rootid="game">
         <node id="game" position="0 0 0" pitch="90" yaw="0" roll="0" scale="1 1 1">
@@ -192,32 +201,33 @@
                 <noderef id="home" />
                 <noderef id="away" />
                 <noderef id="time" />
+                <noderef id="count" />
             </children>
         </node>
-        
         <node id="home" position="-12 0 0" pitch="0" yaw="0" roll="45" scale="1 1 1">
             <children>
                 <cylinder base="5" top="5" height="1" slices="4" stacks="20" />
             </children>
         </node>
-        
         <node id="away" position="12 0 0" pitch="0" yaw="0" roll="45" scale="1 1 1">
             <children>
                 <cylinder base="5" top="5" height="1" slices="4" stacks="20" />
             </children>
         </node>
-        
         <node id="time" position="0 0 0" pitch="0" yaw="0" roll="0" scale="2 1 1">
             <children>
                 <noderef id="timeaux" />
             </children>
+        <node id="count" position="0 -7.07 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
+            <children>
+                <noderef id="timeaux" />
+            </children>
         </node>
-        <node id="timeaux" position="0 0 0" pitch="0" yaw="0" roll="45" scale="1 1 1">
+        </node><node id="timeaux" position="0 0 0" pitch="0" yaw="0" roll="45" scale="1 1 1">
             <children>
                 <cylinder base="5" top="5" height="1" slices="4" stacks="20" />
             </children>
         </node>
-        
         <node id="background" position="0 0 -10.55" pitch="0" yaw="0" roll="0" scale="2 2 2">
             <children>
                 <noderef id="floor" />
@@ -228,37 +238,45 @@
                 <noderef id="rooftop" />
             </children>
         </node>
-                
-        
-        <node id="wall1" position="34.35 0 -24.35" pitch="0" yaw="90" roll="45" scale="1 1 1">
+         <node id="wall1" position="34.35 0 -24.35" pitch="0" yaw="90" roll="0" scale="1 1 1">
+            <appearanceref id="wall" />
             <children>
-                <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
+                <noderef id="rect" />
             </children>
         </node>
-        <node id="wall2" position="0 35.35 -24.35" pitch="90" yaw="0" roll="45" scale="1 1 1">
+        <node id="wall2" position="0 35.35 -24.35" pitch="90" yaw="180" roll="0" scale="1 1 1">
+            <appearanceref id="wall" />
             <children>
-                <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
+                <noderef id="rect" />
             </children>
         </node>
-        <node id="wall3" position="0 -34.35 -24.35" pitch="90" yaw="0" roll="45" scale="1 1 1">
+        <node id="wall3" position="0 -34.35 -24.35" pitch="90" yaw="0" roll="0" scale="1 1 1">
+            <appearanceref id="wall" />
             <children>
-                <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
+                <noderef id="rect" />
             </children>
         </node>
-        <node id="wall4" position="-35.35 0 -24.35" pitch="90" yaw="90" roll="45" scale="1 1 1">
+        <node id="wall4" position="-35.35 0 -24.35" pitch="90" yaw="270" roll="0" scale="1 1 1">
+            <appearanceref id="wall" />
             <children>
-                <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
+               <noderef id="rect" />
             </children>
         </node>
-        <node id="rooftop" position="0 0 -59.7" pitch="0" yaw="0" roll="45" scale="1 1 1">
+        <node id="rooftop" position="0 0 -59.7" pitch="180" yaw="0" roll="0" scale="1 1 1">
+            <appearanceref id="roof" />
             <children>
-                <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
+                <noderef id="rect" />
             </children>
         </node>
-        <node id="floor" position="0 0 10.5" pitch="0" yaw="0" roll="45" scale="1 1 1">
-            <appearanceref id="floor"/>
+        <node id="floor" position="0 0 10.5" pitch="0" yaw="0" roll="0" scale="1 1 1">
+            <appearanceref id="floor" />
             <children>
-                <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
+                <noderef id="rect" />
+            </children>
+        </node>
+        <node id="rect" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
+            <children>
+                <rectangle xy1="-35.35 35.35" xy2="35.35 -35.35" />
             </children>
         </node>
         <node id="table" position="0 0 0.5" pitch="0" yaw="0" roll="45" scale="1 1 1">

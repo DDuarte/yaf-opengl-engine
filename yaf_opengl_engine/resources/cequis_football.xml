@@ -13,20 +13,17 @@
         />
     </lighting>
     <textures>
-        <texture id="white" file="white.jpg" />
-        <texture id="black" file="black.jpg" />
-        <texture id="kitty" file="kitty.jpg" />
-        <texture id="pika" file="pika.jpg" />
-        <texture id="steel" file="stars.jpg" />
+        <texture id="steel" file="steel.jpg" />
         <texture id="wood_light" file="wood_light.jpg" />
-        <texture id="grass" file="sun.jpg" />
-        <texture id="grass2" file="saturn.jpg" />
-        <texture id="charmander" file="charmander.png" />
-        <texture id="dorae" file="dorae.png" />
-        <texture id="mosaic_green" file="mosaic_green.png" />
-        <texture id="pokeball" file="pokeball.png" />
-        <texture id="squirtle" file="squirtle.png" />
+        <texture id="grass" file="grass.jpg" />
+        <texture id="grass2" file="grass2.jpg" />
+        <texture id="cristiano" file="cristiano.png" />
+        <texture id="ball" file="ball.jpg" />
+        <texture id="messi" file="messi.png" />
         <texture id="score" file="score.jpg" />
+        <texture id="wall" file="wall.jpg" />
+        <texture id="roof" file="roof.jpg" />
+        <texture id="floor" file="floor.jpg" />
     </textures>
     <appearances>
         <appearance id="white"
@@ -54,15 +51,6 @@
             specular="0.5 0.5 0.5 1"
             shininess="0.5"
             textureref="kitty"
-            texlength_s="1"
-            texlength_t="1" />
-        <appearance id="pika"
-            emissive="0.5 0.5 0.5 1"
-            ambient="0.5 0.5 0.5 1"
-            diffuse="0.5 0.5 0.5 1"
-            specular="0.5 0.5 0.5 1"
-            shininess="0.5"
-            textureref="pika"
             texlength_s="1"
             texlength_t="1" />
         <appearance id="steel"
@@ -101,76 +89,85 @@
             textureref="grass2"
             texlength_s="1"
             texlength_t="1" />
-        <appearance id="charmander"
+        <appearance id="cristiano"
             emissive="0.5 0.5 0.5 1"
             ambient="0.5 0.5 0.5 1"
             diffuse="0.5 0.5 0.5 1"
             specular="0.5 0.5 0.5 1"
             shininess="0.5"
-            textureref="charmander"
+            textureref="cristiano"
             texlength_s="1"
             texlength_t="1" />
-        <appearance id="charmander_tint"
+        <appearance id="cristiano_tint"
             emissive="0.1 0 0 0.5"
             ambient="1 0.5 0.5 0.5"
             diffuse="1 0.5 0.5 0.5"
             specular="1 0.5 0.5 0.5"
             shininess="1"
-            textureref="charmander"
+            textureref="cristiano"
             texlength_s="1"
             texlength_t="1" />
-        <appearance id="dorae"
-            emissive="0.5 0.5 0.5 1"
-            ambient="0.5 0.5 0.5 1"
-            diffuse="0.5 0.5 0.5 1"
-            specular="0.5 0.5 0.5 1"
-            shininess="0.5"
-            textureref="dorae"
-            texlength_s="1"
-            texlength_t="1" />
-        <appearance id="mosaic_green"
-            emissive="0.5 0.5 0.5 1"
-            ambient="0.5 0.5 0.5 1"
-            diffuse="0.5 0.5 0.5 1"
-            specular="0.5 0.5 0.5 1"
-            shininess="0.5"
-            textureref="mosaic_green"
-            texlength_s="1"
-            texlength_t="1" />
-        <appearance id="pokeball"
-            emissive="0.5 0.5 0.5 1"
-            ambient="0.5 0.5 0.5 1"
-            diffuse="0.5 0.5 0.5 1"
-            specular="0.5 0.5 0.5 1"
-            shininess="0.5"
-            textureref="pokeball"
-            texlength_s="1"
-            texlength_t="1" />
-        <appearance id="squirtle"
-            emissive="0.5 0.5 0.5 1"
-            ambient="0.5 0.5 0.5 1"
-            diffuse="0.5 0.5 0.5 1"
-            specular="0.5 0.5 0.5 1"
-            shininess="0.5"
-            textureref="squirtle"
-            texlength_s="1"
-            texlength_t="1" />
-        <appearance id="squirtle_tint"
-            emissive="0 0 0.1 0.5"
-            ambient="0.5 0.5 1 0.5"
-            diffuse="0.5 0.5 1 0.5"
-            specular="0.5 0.5 1 0.5"
-            shininess="1"
-            textureref="squirtle"
-            texlength_s="1"
-            texlength_t="1" />
-            <appearance id="score"
+        <appearance id="score"
             emissive="0 0 0.1 0.5"
             ambient="0.5 0.5 1 0.5"
             diffuse="0.5 0.5 1 0.5"
             specular="0.5 0.5 1 0.5"
             shininess="1"
             textureref="score"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="wall"
+            emissive="0.5 0.5 0.5 0.5"
+            ambient="0.5 0.5 0.5 0.5"
+            diffuse="0.5 0.5 0.5 0.5"
+            specular="0.5 0.5 0.5 0.5"
+            shininess="1"
+            textureref="wall"
+            texlength_s="35.35"
+            texlength_t="35.35" />
+        <appearance id="floor"
+            emissive="0.5 0.5 0.5 0.5"
+            ambient="0.5 0.5 0.5 0.5"
+            diffuse="0.5 0.5 0.5 0.5"
+            specular="0.5 0.5 0.5 0.5"
+            shininess="1"
+            textureref="floor"
+            texlength_s="5"
+            texlength_t="5" />
+        <appearance id="roof"
+            emissive="0.5 0.5 0.5 0.5"
+            ambient="0.5 0.5 0.5 0.5"
+            diffuse="0.5 0.5 0.5 0.5"
+            specular="0.5 0.5 0.5 0.5"
+            shininess="1"
+            textureref="roof"
+            texlength_s="35.35"
+            texlength_t="35.35" />
+        <appearance id="ball"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="ball"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="messi"
+            emissive="0.5 0.5 0.5 1"
+            ambient="0.5 0.5 0.5 1"
+            diffuse="0.5 0.5 0.5 1"
+            specular="0.5 0.5 0.5 1"
+            shininess="0.5"
+            textureref="messi"
+            texlength_s="1"
+            texlength_t="1" />
+        <appearance id="messi_tint"
+            emissive="0 0 0.1 0.5"
+            ambient="0.5 0.5 1 0.5"
+            diffuse="0.5 0.5 1 0.5"
+            specular="0.5 0.5 1 0.5"
+            shininess="1"
+            textureref="messi"
             texlength_s="1"
             texlength_t="1" />
     </appearances>
@@ -192,22 +189,25 @@
                 <noderef id="home" />
                 <noderef id="away" />
                 <noderef id="time" />
+                <noderef id="count" />
             </children>
         </node>
-        
         <node id="home" position="-12 0 0" pitch="0" yaw="0" roll="45" scale="1 1 1">
             <children>
                 <cylinder base="5" top="5" height="1" slices="4" stacks="20" />
             </children>
         </node>
-        
         <node id="away" position="12 0 0" pitch="0" yaw="0" roll="45" scale="1 1 1">
             <children>
                 <cylinder base="5" top="5" height="1" slices="4" stacks="20" />
             </children>
         </node>
-        
         <node id="time" position="0 0 0" pitch="0" yaw="0" roll="0" scale="2 1 1">
+            <children>
+                <noderef id="timeaux" />
+            </children>
+        </node>
+        <node id="count" position="0 -7.07 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
             <children>
                 <noderef id="timeaux" />
             </children>
@@ -217,7 +217,6 @@
                 <cylinder base="5" top="5" height="1" slices="4" stacks="20" />
             </children>
         </node>
-        
         <node id="background" position="0 0 -10.55" pitch="0" yaw="0" roll="0" scale="2 2 2">
             <children>
                 <noderef id="floor" />
@@ -228,37 +227,45 @@
                 <noderef id="rooftop" />
             </children>
         </node>
-                
-        
-        <node id="wall1" position="34.35 0 -24.35" pitch="0" yaw="90" roll="45" scale="1 1 1">
+         <node id="wall1" position="34.35 0 -24.35" pitch="0" yaw="90" roll="0" scale="1 1 1">
+            <appearanceref id="wall" />
             <children>
-                <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
+                <noderef id="rect" />
             </children>
         </node>
-        <node id="wall2" position="0 35.35 -24.35" pitch="90" yaw="0" roll="45" scale="1 1 1">
+        <node id="wall2" position="0 35.35 -24.35" pitch="90" yaw="180" roll="0" scale="1 1 1">
+            <appearanceref id="wall" />
             <children>
-                <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
+                <noderef id="rect" />
             </children>
         </node>
-        <node id="wall3" position="0 -34.35 -24.35" pitch="90" yaw="0" roll="45" scale="1 1 1">
+        <node id="wall3" position="0 -34.35 -24.35" pitch="90" yaw="0" roll="0" scale="1 1 1">
+            <appearanceref id="wall" />
             <children>
-                <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
+                <noderef id="rect" />
             </children>
         </node>
-        <node id="wall4" position="-35.35 0 -24.35" pitch="90" yaw="90" roll="45" scale="1 1 1">
+        <node id="wall4" position="-35.35 0 -24.35" pitch="90" yaw="270" roll="0" scale="1 1 1">
+            <appearanceref id="wall" />
             <children>
-                <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
+               <noderef id="rect" />
             </children>
         </node>
-        <node id="rooftop" position="0 0 -59.7" pitch="0" yaw="0" roll="45" scale="1 1 1">
+        <node id="rooftop" position="0 0 -59.7" pitch="180" yaw="0" roll="0" scale="1 1 1">
+            <appearanceref id="roof" />
             <children>
-                <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
+                <noderef id="rect" />
             </children>
         </node>
-        <node id="floor" position="0 0 10.5" pitch="0" yaw="0" roll="45" scale="1 1 1">
-            <appearanceref id="floor"/>
+        <node id="floor" position="0 0 10.5" pitch="0" yaw="0" roll="0" scale="1 1 1">
+            <appearanceref id="floor" />
             <children>
-                <cylinder base="50" top="50" height="1" slices="4" stacks="20" />
+                <noderef id="rect" />
+            </children>
+        </node>
+        <node id="rect" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
+            <children>
+                <rectangle xy1="-35.35 35.35" xy2="35.35 -35.35" />
             </children>
         </node>
         <node id="table" position="0 0 0.5" pitch="0" yaw="0" roll="45" scale="1 1 1">
@@ -269,8 +276,8 @@
             </children>
         </node>
         <node id="bPieces" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
-            <appearanceref id="charmander" />
-            <appearanceselectedref id="charmander_tint" />
+            <appearanceref id="cristiano" />
+            <appearanceselectedref id="cristiano_tint" />
             <children>
                  <noderef id="bPiece1" />
                  <noderef id="bPiece2" />
@@ -293,8 +300,8 @@
             </children>
         </node>
         <node id="wPieces" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
-            <appearanceref id="squirtle" />
-            <appearanceselectedref id="squirtle_tint" />
+            <appearanceref id="messi" />
+            <appearanceselectedref id="messi_tint" />
             <children>
                  <noderef id="wPiece1" />
                  <noderef id="wPiece2" />
@@ -317,7 +324,7 @@
             </children>
         </node>
         <node id="oPiece" position="0 0 0" pitch="0" yaw="0" roll="0" scale="0.8 0.8 1">
-            <appearanceref id="pokeball" />
+            <appearanceref id="ball" />
             <children>
                  <noderef id="piece" />
             </children>
