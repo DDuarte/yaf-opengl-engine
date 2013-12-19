@@ -9,7 +9,8 @@
             location="0 10 0"
             ambient="0.5 0.5 0.5 0.5"
             diffuse="0.5 0.5 0.5 0.5"
-            specular="0 0 0 0.5" />
+            specular="0 0 0 0.5"
+        />
     </lighting>
     <textures>
         <texture id="white" file="white.jpg" />
@@ -19,9 +20,9 @@
         <texture id="wood_light" file="wood_light.jpg" />
         <texture id="grass" file="grass.jpg" />
         <texture id="grass2" file="grass2.jpg" />
-        <texture id="charmander" file="charmander.png" />
-        <texture id="pokeball" file="pokeball.png" />
-        <texture id="squirtle" file="squirtle.png" />
+        <texture id="portugal" file="portugal.jpg" />
+        <texture id="copa" file="copa.png" />
+        <texture id="brasil" file="brasil.jpg" />
         <texture id="score" file="score.jpg" />
         <texture id="wall" file="wall.jpg" />
         <texture id="roof" file="roof.jpg" />
@@ -100,22 +101,22 @@
             textureref="grass2"
             texlength_s="1"
             texlength_t="1" />
-        <appearance id="charmander"
+        <appearance id="portugal"
             emissive="0.5 0.5 0.5 1"
             ambient="0.5 0.5 0.5 1"
             diffuse="0.5 0.5 0.5 1"
             specular="0.5 0.5 0.5 1"
             shininess="0.5"
-            textureref="charmander"
+            textureref="portugal"
             texlength_s="1"
             texlength_t="1" />
-        <appearance id="charmander_tint"
+        <appearance id="portugal_tint"
             emissive="0.1 0 0 0.5"
             ambient="1 0.5 0.5 0.5"
             diffuse="1 0.5 0.5 0.5"
             specular="1 0.5 0.5 0.5"
             shininess="1"
-            textureref="charmander"
+            textureref="portugal"
             texlength_s="1"
             texlength_t="1" />
         <appearance id="score"
@@ -154,31 +155,31 @@
             textureref="roof"
             texlength_s="35.35"
             texlength_t="35.35" />
-        <appearance id="pokeball"
+        <appearance id="copa"
             emissive="0.5 0.5 0.5 1"
             ambient="0.5 0.5 0.5 1"
             diffuse="0.5 0.5 0.5 1"
             specular="0.5 0.5 0.5 1"
             shininess="0.5"
-            textureref="pokeball"
+            textureref="copa"
             texlength_s="1"
             texlength_t="1" />
-        <appearance id="squirtle"
+        <appearance id="brasil"
             emissive="0.5 0.5 0.5 1"
             ambient="0.5 0.5 0.5 1"
             diffuse="0.5 0.5 0.5 1"
             specular="0.5 0.5 0.5 1"
             shininess="0.5"
-            textureref="squirtle"
+            textureref="brasil"
             texlength_s="1"
             texlength_t="1" />
-        <appearance id="squirtle_tint"
+        <appearance id="brasil_tint"
             emissive="0 0 0.1 0.5"
             ambient="0.5 0.5 1 0.5"
             diffuse="0.5 0.5 1 0.5"
             specular="0.5 0.5 1 0.5"
             shininess="1"
-            textureref="squirtle"
+            textureref="brasil"
             texlength_s="1"
             texlength_t="1" />
     </appearances>
@@ -287,8 +288,8 @@
             </children>
         </node>
         <node id="bPieces" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
-            <appearanceref id="charmander" />
-            <appearanceselectedref id="charmander_tint" />
+            <appearanceref id="portugal" />
+            <appearanceselectedref id="portugal_tint" />
             <children>
                  <noderef id="bPiece1" />
                  <noderef id="bPiece2" />
@@ -311,8 +312,8 @@
             </children>
         </node>
         <node id="wPieces" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
-            <appearanceref id="squirtle" />
-            <appearanceselectedref id="squirtle_tint" />
+            <appearanceref id="brasil" />
+            <appearanceselectedref id="brasil_tint" />
             <children>
                  <noderef id="wPiece1" />
                  <noderef id="wPiece2" />
@@ -335,7 +336,7 @@
             </children>
         </node>
         <node id="oPiece" position="0 0 0" pitch="0" yaw="0" roll="0" scale="0.8 0.8 1">
-            <appearanceref id="pokeball" />
+            <appearanceref id="copa" />
             <children>
                  <noderef id="piece" />
             </children>
