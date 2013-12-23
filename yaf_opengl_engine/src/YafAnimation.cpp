@@ -76,8 +76,9 @@ YafLinearAnimation::YafLinearAnimation(const std::string& id, YafNode* node, flo
     float distance = 0;
     for (int i = 0; i < _controlPoints.size() - 1; ++i)
     {
-        distance += YafXYZ::GetDistance(_controlPoints[i], _controlPoints[i + 1]);
-        _controlPointsDistance.push_back(YafXYZ::GetDistance(_controlPoints[i], _controlPoints[i + 1]));
+        auto dist = YafXYZ::GetDistance(_controlPoints[i], _controlPoints[i + 1]);
+        distance += dist;
+        _controlPointsDistance.push_back(dist);
     }
     _speed = distance / _time;
 }

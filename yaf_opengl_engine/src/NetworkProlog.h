@@ -35,10 +35,10 @@ private:
     template<typename T>
     static std::string stringify(const T& val) { return std::to_string(val); }
 
-    template<>
+    template<> // std::string overload
     static std::string stringify<>(const std::string& val) { return val; }
 
-    template<>
+    template<> // const char* overload
     static std::string stringify<>(const char* const& val) { return std::string(val); }
 };
 
