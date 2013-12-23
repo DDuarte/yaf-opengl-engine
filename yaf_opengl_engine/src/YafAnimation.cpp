@@ -6,7 +6,7 @@
 #include <cassert>
 #include <iostream>
 
-void YafLinearAnimation::ApplyAnimation() 
+void YafLinearAnimation::ApplyAnimation()
 {
     Node->Position = _currentPoint;
     Node->Yaw = _currentAngle;

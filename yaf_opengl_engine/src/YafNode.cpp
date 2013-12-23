@@ -47,7 +47,7 @@ void YafNode::Draw(YafAppearance* app, YafAppearance* appSel)
         appearance->apply();
 
     glPushMatrix();
-    
+
     glTranslatef(Position.X, Position.Y, Position.Z);
     glRotatef(Pitch, 1.0f, 0.0f, 0.0f);
     glRotatef(Yaw, 0.0f, 1.0f, 0.0f);

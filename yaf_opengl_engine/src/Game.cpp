@@ -25,7 +25,7 @@ void Board::FillCells()
             int line = n.first[n.first.size() - 2] - '0';
             int col = n.first[n.first.size() - 1] - '0';
             cells.push_back(std::make_tuple(n.second, line, col));
-            
+
             if (line > maxLine)
                 maxLine = line;
             if (col > maxCol)

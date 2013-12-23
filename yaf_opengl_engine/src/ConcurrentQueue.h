@@ -1,7 +1,7 @@
 #ifndef CONCURRENT_QUEUE_H
 #define CONCURRENT_QUEUE_H
 
-// C++11 implementation of a thread queue. Based on Juan Palacios impl. 
+// C++11 implementation of a thread queue. Based on Juan Palacios impl.
 
 #include <queue>
 #include <thread>

@@ -16,7 +16,7 @@ void Scoreboard::Update(uint millis)
 {
    if (_firstMillis == 0)
        _firstMillis = millis;
-   
+
    if (!_currentTime.empty() && std::to_string(millis / 1000).back() == _currentTime.back())
        return;
 
@@ -24,12 +24,12 @@ void Scoreboard::Update(uint millis)
    uint minutes = currentTime / 60;
    uint seconds = currentTime - minutes * 60;
    std::string strMinutes = std::to_string(minutes), strSeconds = std::to_string(seconds);
-   
+
    if (minutes < 10)
        strMinutes = '0' + strMinutes;
    if (seconds < 10)
        strSeconds = '0' + strSeconds;
-   
+
    _currentTime = strMinutes + ':' + strSeconds;
 
    if (_countDown == -1)
@@ -82,7 +82,7 @@ void Scoreboard::Draw()
         glScalef(0.02f, 0.02f, 0.02f);
         glRotatef(90.0f, 0.0f, -1.0f, 0.0f);
         glColor3f(1.0f, 1.0f, 1.0f);        // branco
-        if (away.size() == 1) 
+        if (away.size() == 1)
             away = "0" + away;
         for (uint i = 0 ; i < away.size() ; ++i)
             glutStrokeCharacter(GLUT_STROKE_ROMAN, away[i]);
@@ -90,7 +90,7 @@ void Scoreboard::Draw()
 
     // TIME
     glPushMatrix();
-        glTranslatef(13.1f, 2.0f, -3.25f); 
+        glTranslatef(13.1f, 2.0f, -3.25f);
         glScalef(0.02f, 0.02f, 0.02f);
         glRotatef(90.0f, 0.0f, -1.0f, 0.0f);
         glColor3f(1.0f, 1.0f, 1.0f);        // branco
@@ -114,7 +114,7 @@ void Scoreboard::Draw()
                 countDownStr = "0";
 
             countDownStr += std::to_string(_currentCountDown);
-            for (uint i = 0 ; i < countDownStr.size(); ++i) 
+            for (uint i = 0 ; i < countDownStr.size(); ++i)
                 glutStrokeCharacter(GLUT_STROKE_ROMAN, countDownStr[i]);
         glPopMatrix();
     }
@@ -129,7 +129,7 @@ void Scoreboard::Draw()
                 glColor3f(1.0,1.0,1.0);        // branco
 
                 std::string test = "HAPPY NEW YEAR!";
-                for(uint i = 0 ; i < test.size() ; ++i) 
+                for(uint i = 0 ; i < test.size() ; ++i)
                     glutStrokeCharacter(GLUT_STROKE_ROMAN,test[i] );
             glPopMatrix();
         }
