@@ -74,7 +74,7 @@ void YafInterface::processKeyboard(unsigned char key, int x, int y)
 {
     if (key == 'r')
     {
-        ReloadYaf(_scene, _scene->GetYafName());
+        ReloadYaf(_scene, THEMES[_currentTheme]);
     }
     else if (key == 't')
     {

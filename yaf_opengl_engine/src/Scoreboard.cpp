@@ -21,9 +21,8 @@ void Scoreboard::Update(uint millis)
        return;
 
    uint currentTime = (millis - _firstMillis) / 1000;
-   uint minutes, seconds;
-   minutes = currentTime / 60;
-   seconds = currentTime - minutes * 60;
+   uint minutes = currentTime / 60;
+   uint seconds = currentTime - minutes * 60;
    std::string strMinutes = std::to_string(minutes), strSeconds = std::to_string(seconds);
    
    if (minutes < 10)

@@ -46,72 +46,53 @@
     <ClInclude Include="src\YafScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="resources\ball.jpg" />
     <Image Include="resources\black.jpg" />
+    <Image Include="resources\blue.jpg" />
+    <Image Include="resources\brasil.jpg" />
     <Image Include="resources\charmander.png" />
+    <Image Include="resources\copa.png" />
+    <Image Include="resources\cristiano.png" />
     <Image Include="resources\dorae.png" />
-    <Image Include="resources\earth.jpg">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-    </Image>
+    <Image Include="resources\earth.jpg" />
+    <Image Include="resources\floor.JPG" />
     <Image Include="resources\grass.jpg" />
     <Image Include="resources\grass2.jpg" />
-    <Image Include="resources\jupiter.jpg">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-    </Image>
+    <Image Include="resources\jupiter.jpg" />
     <Image Include="resources\kitty.jpg" />
-    <Image Include="resources\mars.jpg">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-    </Image>
-    <Image Include="resources\mercury.jpg">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-    </Image>
+    <Image Include="resources\mars.jpg" />
+    <Image Include="resources\mercury.jpg" />
+    <Image Include="resources\messi.png" />
     <Image Include="resources\meteor.jpg" />
-    <Image Include="resources\moon.jpg">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-    </Image>
+    <Image Include="resources\moon.jpg" />
     <Image Include="resources\mosaic_green.png" />
-    <Image Include="resources\neptune.jpg">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-    </Image>
+    <Image Include="resources\neptune.jpg" />
     <Image Include="resources\pika.jpg" />
     <Image Include="resources\pokeball.png" />
-    <Image Include="resources\saturn.jpg">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-    </Image>
-    <Image Include="resources\saturn_ring.jpg">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-    </Image>
+    <Image Include="resources\portugal.jpg" />
+    <Image Include="resources\roof.JPG" />
+    <Image Include="resources\saturn.jpg" />
+    <Image Include="resources\saturn_ring.jpg" />
+    <Image Include="resources\score.jpg" />
     <Image Include="resources\squirtle.png" />
     <Image Include="resources\stars.jpg" />
     <Image Include="resources\steel.jpg" />
-    <Image Include="resources\sun.jpg">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-    </Image>
-    <Image Include="resources\uranus.jpg">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-    </Image>
-    <Image Include="resources\uranus_ring.jpg">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-    </Image>
-    <Image Include="resources\venus.jpg">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-    </Image>
+    <Image Include="resources\sun.jpg" />
+    <Image Include="resources\uranus.jpg" />
+    <Image Include="resources\uranus_ring.jpg" />
+    <Image Include="resources\venus.jpg" />
+    <Image Include="resources\wall.jpg" />
     <Image Include="resources\water.jpg" />
     <Image Include="resources\watermap.jpg" />
     <Image Include="resources\white.jpg" />
+    <Image Include="resources\wood_dark.jpg" />
     <Image Include="resources\wood_light.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="resources\cequis_pokemon.xml">
-      <SubType>Designer</SubType>
-    </Xml>
-    <Xml Include="resources\T01G04_solarsystem.xml">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-      <SubType>Designer</SubType>
-    </Xml>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="resources\water.frag" />
-    <None Include="resources\water.vert" />
+    <Xml Include="resources\cequis_default.xml" />
+    <Xml Include="resources\cequis_football.xml" />
+    <Xml Include="resources\cequis_pokemon.xml" />
+    <Xml Include="resources\cequis_world_cup.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E025CA71-C6C5-491D-8CD9-77241CFB850A}</ProjectGuid>

@@ -97,13 +97,43 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="resources\ball.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\black.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\blue.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\brasil.jpg">
+      <Filter>resources</Filter>
+    </Image>
     <Image Include="resources\earth.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\floor.JPG">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\grass.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\grass2.jpg">
       <Filter>resources</Filter>
     </Image>
     <Image Include="resources\jupiter.jpg">
       <Filter>resources</Filter>
     </Image>
+    <Image Include="resources\kitty.jpg">
+      <Filter>resources</Filter>
+    </Image>
     <Image Include="resources\mars.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\mercury.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\meteor.jpg">
       <Filter>resources</Filter>
     </Image>
     <Image Include="resources\moon.jpg">
@@ -112,10 +142,28 @@
     <Image Include="resources\neptune.jpg">
       <Filter>resources</Filter>
     </Image>
+    <Image Include="resources\pika.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\portugal.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\roof.JPG">
+      <Filter>resources</Filter>
+    </Image>
     <Image Include="resources\saturn.jpg">
       <Filter>resources</Filter>
     </Image>
     <Image Include="resources\saturn_ring.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\score.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\stars.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\steel.jpg">
       <Filter>resources</Filter>
     </Image>
     <Image Include="resources\sun.jpg">
@@ -130,7 +178,7 @@
     <Image Include="resources\venus.jpg">
       <Filter>resources</Filter>
     </Image>
-    <Image Include="resources\mercury.jpg">
+    <Image Include="resources\wall.jpg">
       <Filter>resources</Filter>
     </Image>
     <Image Include="resources\water.jpg">
@@ -139,28 +187,10 @@
     <Image Include="resources\watermap.jpg">
       <Filter>resources</Filter>
     </Image>
-    <Image Include="resources\black.jpg">
-      <Filter>resources</Filter>
-    </Image>
-    <Image Include="resources\grass.jpg">
-      <Filter>resources</Filter>
-    </Image>
-    <Image Include="resources\kitty.jpg">
-      <Filter>resources</Filter>
-    </Image>
-    <Image Include="resources\meteor.jpg">
-      <Filter>resources</Filter>
-    </Image>
-    <Image Include="resources\pika.jpg">
-      <Filter>resources</Filter>
-    </Image>
-    <Image Include="resources\stars.jpg">
-      <Filter>resources</Filter>
-    </Image>
-    <Image Include="resources\steel.jpg">
-      <Filter>resources</Filter>
-    </Image>
     <Image Include="resources\white.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\wood_dark.jpg">
       <Filter>resources</Filter>
     </Image>
     <Image Include="resources\wood_light.jpg">
@@ -169,7 +199,16 @@
     <Image Include="resources\charmander.png">
       <Filter>resources</Filter>
     </Image>
+    <Image Include="resources\copa.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\cristiano.png">
+      <Filter>resources</Filter>
+    </Image>
     <Image Include="resources\dorae.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\messi.png">
       <Filter>resources</Filter>
     </Image>
     <Image Include="resources\mosaic_green.png">
@@ -181,24 +220,19 @@
     <Image Include="resources\squirtle.png">
       <Filter>resources</Filter>
     </Image>
-    <Image Include="resources\grass2.jpg">
-      <Filter>resources</Filter>
-    </Image>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="resources\T01G04_solarsystem.xml">
+    <Xml Include="resources\cequis_default.xml">
+      <Filter>resources</Filter>
+    </Xml>
+    <Xml Include="resources\cequis_football.xml">
       <Filter>resources</Filter>
     </Xml>
     <Xml Include="resources\cequis_pokemon.xml">
       <Filter>resources</Filter>
     </Xml>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="resources\water.frag">
+    <Xml Include="resources\cequis_world_cup.xml">
       <Filter>resources</Filter>
-    </None>
-    <None Include="resources\water.vert">
-      <Filter>resources</Filter>
-    </None>
+    </Xml>
   </ItemGroup>
 </Project>

@@ -16,7 +16,6 @@
 YafScene* ParseYafFile(const std::string& file)
 {
     auto scene = new YafScene;
-    scene->SetYafName(file);
 
     auto document = new TiXmlDocument(file);
     if (!document->LoadFile())
