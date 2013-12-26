@@ -9,6 +9,8 @@
 
 #include "ConcurrentQueue.h"
 
+#define MESSAGE_MAX_SIZE 256
+
 using asio::ip::tcp;
 
 class PrologPredicate
@@ -107,7 +109,7 @@ private:
             std::string msg;
             asio::error_code error;
 
-            std::array<char, 128> buf;
+            std::array<char, MESSAGE_MAX_SIZE> buf;
 
             auto len = _socket.read_some(asio::buffer(buf), error);
             if (error == asio::error::eof)
@@ -115,7 +117,7 @@ private:
             else if (error)
                 throw asio::system_error(error);
 
-            msg = from_array<char, 128, std::string>(buf, len);
+            msg = from_array<char, MESSAGE_MAX_SIZE, std::string>(buf, len);
 
             _receiveQueue.push(msg);
             std::cout << "NETDEBUG: received: " << msg << std::endl;
@@ -132,7 +134,7 @@ private:
             asio::error_code error;
             _sendQueue.pop(msg);
 
-            std::array<char, 128> buf = to_array<char, 128, std::string>(msg);
+            std::array<char, MESSAGE_MAX_SIZE> buf = to_array<char, MESSAGE_MAX_SIZE, std::string>(msg);
 
             auto len = _socket.write_some(asio::buffer(buf), error);
             if (error == asio::error::eof)
