@@ -1,6 +1,7 @@
 #include <tinyxml.h>
 #include <cstdlib>
 #include <string>
+#include <algorithm>
 #include <CGFapplication.h>
 #include "Main.h"
 #include "YafScene.h"
@@ -10,7 +11,7 @@
 #include "YafAppearance.h"
 #include "Game.h"
 #include "NetworkProlog.h"
-
+#include "Utilities.h"
 #include "ConcurrentQueue.h"
 
 YafScene* ParseYafFile(const std::string& file)
@@ -391,13 +392,80 @@ int main(int argc, char* argv[])
     auto board = new Board(scene, &net);
     board->FillCells();
 
-    board->AddPiece(Piece(Player::First, scene->GetNode("wPiece1"), YafXY(5, 3)));
-    board->AddPiece(Piece(Player::First, scene->GetNode("wPiece2"), YafXY(4, 4)));
-    board->AddPiece(Piece(Player::First, scene->GetNode("wPiece3"), YafXY(4, 2)));
+    board->GetNetwork()->EnqueueMessage(PrologPredicate::Build("init", "pVSp", "normal"));
 
-    board->AddPiece(Piece(Player::Second, scene->GetNode("bPiece1"), YafXY(3, 3)));
-    board->AddPiece(Piece(Player::Second, scene->GetNode("bPiece2"), YafXY(3, 4)));
-    board->AddPiece(Piece(Player::Second, scene->GetNode("bPiece3"), YafXY(3, 2)));
+	auto response = board->GetNetwork()->GetMessage();
+
+    if (starts_with(response, "init_invalid"))
+    {
+        std::cerr << "Received (inv) " << response << ". Aborting." << std::endl;
+        std::cout << "Press ENTER key to continue." << std::endl;
+        std::cin.get();
+        return EXIT_FAILURE;
+    }
+    else if (starts_with(response, "init_ok"))
+    {
+        // init_ok([[e, e, e, e], [e, e, e, e, e, e, e], [e, e, e, e, e, e, e], [e, e, w, w, w, e, e], [e, e, b, o, b, e,
+        //    e], [e, e, e, b, e, e, e], [e, e, e, e, e, e, e], [e, e, e, e, e, e, e]], player1).
+        //        board->AddPiece(Piece(Player::First, scene->GetNode("wPiece1"), YafXY(5, 3)));
+        //        board->AddPiece(Piece(Player::First, scene->GetNode("wPiece2"), YafXY(4, 4)));
+        //        board->AddPiece(Piece(Player::First, scene->GetNode("wPiece3"), YafXY(4, 2)));
+        //        board->AddPiece(Piece(Player::None,  scene->GetNode("oPiece"), YafXY(,.)));
+        //        board->AddPiece(Piece(Player::Second, scene->GetNode("bPiece1"), YafXY(3, 3)));
+        //        board->AddPiece(Piece(Player::Second, scene->GetNode("bPiece2"), YafXY(3, 4)));
+        //        board->AddPiece(Piece(Player::Second, scene->GetNode("bPiece3"), YafXY(3, 2)));
+
+        auto firstBracket = response.find_first_of('[');
+        auto lastBracket = response.find_last_of(']');
+
+		auto boardBlock = response.substr(firstBracket + 1, lastBracket - firstBracket - 1);
+
+        auto boardSplit = split_string(boardBlock, '[');
+        for (auto& str : boardSplit)
+        {
+            str.erase(std::remove_if(str.begin(), str.end(), [](char c) { return c == ',' || c == '[' || c == ']'; }), str.end());
+        }
+
+        for (auto x = 0u; x < boardSplit.size(); ++x)
+        {
+            for (auto y = 0u; y < boardSplit[x].size(); ++y)
+            {
+                if (boardSplit[x][y] == 'w')
+                {
+                    std::string nodeName = "wPiece";
+                    if (x == 3 && y == 2)
+                        nodeName += "1";
+                    else if (x == 3 && y == 4)
+                        nodeName += "2";
+                    else if (x == 3 && y == 5)
+                        nodeName += "3";
+
+                    board->AddPiece(Piece(Player::First, scene->GetNode(nodeName), YafXY(x, y)));
+                }
+                else if (boardSplit[x][y] == 'b')
+                {
+                    std::string nodeName = "bPiece";
+                    if (x == 3 && y == 3)
+                        nodeName += "1";
+                    else if (x == 3 && y == 4)
+                        nodeName += "2";
+                    else if (x == 3 && y == 2)
+                        nodeName += "3";
+
+                    board->AddPiece(Piece(Player::Second, scene->GetNode(nodeName), YafXY(x, y)));
+                }
+                else if (boardSplit[x][y] == 'o')
+                {
+                    board->AddPiece(Piece(Player::None, scene->GetNode("oPiece"), YafXY(x, y)));
+                }
+            }
+        }
+
+        system("PAUSE");
+    }
+
+    // init_ok(Board).
+    // init_invalid.
 
     CGFapplication app;
 

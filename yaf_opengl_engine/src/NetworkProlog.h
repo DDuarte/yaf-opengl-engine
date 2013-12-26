@@ -35,13 +35,34 @@ public:
 
 private:
     template<typename T>
-    static std::string stringify(const T& val) { return std::to_string(val); }
+    static std::string stringify(const T& val) { return std::string(val); }
 
     template<> // std::string overload
     static std::string stringify<>(const std::string& val) { return val; }
 
-    template<> // const char* overload
-    static std::string stringify<>(const char* const& val) { return std::string(val); }
+    template<> // float overload
+    static std::string stringify<>(const float& val) { return std::to_string(val); }
+
+    template<> // double overload
+    static std::string stringify<>(const double& val) { return std::to_string(val); }
+
+    template<> // long double overload
+    static std::string stringify<>(const long double& val) { return std::to_string(val); }
+
+    template<> // unsigned long long overload
+    static std::string stringify<>(const unsigned long long& val) { return std::to_string(val); }
+
+    template<> // long long overload
+    static std::string stringify<>(const long long& val) { return std::to_string(val); }
+
+    template<> // unsigned long overload
+    static std::string stringify<>(const unsigned long& val) { return std::to_string(val); }
+
+	template<> // int overload
+	static std::string stringify<>(const int& val) { return std::to_string(val); }
+
+	template<> // unsigned int overload
+	static std::string stringify<>(const unsigned int& val) { return std::to_string(val); }
 };
 
 class NetworkProlog
@@ -81,6 +102,7 @@ public:
 
     std::string GetMessage()
     {
+        while (IsReceiveEmpty()) ;
         return _receiveQueue.pop();
     }
 

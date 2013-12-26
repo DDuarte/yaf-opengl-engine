@@ -51,3 +51,19 @@ std::vector<T> ConcatenateVectors(std::vector<T>& v1, std::vector<T>& v2)
     result.insert(result.end(), v2.begin(), v2.end());
     return result;
 }
+
+std::vector<std::string> split_string(std::string str, const char c)
+{
+    std::vector<std::string> vec;
+    auto i = str.find_last_of(c);
+    while (i != std::string::npos)
+    {
+        vec.insert(vec.begin(), str.substr(i));
+        //vec.push_back(str.substr(i));
+        str = str.erase(i);
+
+        i = str.find_last_of(c);
+    }
+
+    return vec;
+}

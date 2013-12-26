@@ -45,6 +45,8 @@ public:
 
     void FillCells();
 
+    NetworkProlog* GetNetwork() const { return _network; }
+
     void AddPiece(Piece& piece) { _pieces.push_back(piece); }
     const Piece* GetPiece(uint x, uint y) const;
     void MovePiece(Piece* piece, uint x, uint y) const;

@@ -16,5 +16,6 @@ bool starts_with(const std::string& str, const std::string& prefix); ///< Return
 bool ends_with(const std::string& str, const std::string& suffix); ///< Returns true if str ends with suffix
 bool contains(const std::string& str, const std::string fix); ///< Returns true if str contains fix
 std::string to_lower(std::string str); // Converts a string to all lower case
+std::vector<std::string> split_string(std::string str, const char c);
 
 #endif // Utilities_h__

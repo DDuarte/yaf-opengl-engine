@@ -33,9 +33,7 @@ server:-
     socket_server_open(Port, Socket, [reuseaddr(true)]),
     socket_server_accept(Socket, _Client, Stream, [type(text)]),
     write('Accepted connection'), nl,
-    first_player(Mode, FirstPlayer),
-    create_board(Size, Game),
-    serverLoop(Stream, Game, FirstPlayer, pVSp, normal, _),
+    serverLoop(Stream, _, _, _, _, _),
     socket_server_close(Socket).
 
 % wait for commands
@@ -44,18 +42,17 @@ serverLoop(Stream, Game, Player, Mode, Diff, Result) :-
     read(Stream, ClientMsg),
     write('Received: '), write(ClientMsg), nl,
     parse_input(ClientMsg, Reply, Game, Player, Mode, Diff, Result),
-    format(Stream, '~q~n', [Reply]),
+    format(Stream, '~q.~n', [Reply]),
     write('Sent: '), write(Reply), nl,
     flush_output(Stream),
     (ClientMsg == quit; ClientMsg == end_of_file), !.
 
-parse_input(hello, Answer, Game, Player, Mode, Diff, Result) :-
-    Answer = Game.
+parse_input(init(Mode, Diff), Reply, Game, Player, Mode, Diff, _) :-
+    first_player(Mode, Player),
+    create_board(8, Game),
+    Reply = init_ok(Game, Player).
 
-parse_input(move(Arg1, Arg2), Answer, Game, Player, Mode, Diff, Result) :-
-    move(Arg1, Arg2, Answer).
-
-parse_input(quit, ok-bye) :- !.
+parse_input(quit, _, _, _, _, _, _) :- !.
 
 %% board creation - main method is create_board(N, B) - N has to be even %%
 
