@@ -14,13 +14,13 @@
     <textures>
         <texture id="white" file="white.jpg" />
         <texture id="black" file="black.jpg" />
+        <texture id="blue" file="blue.jpg" />
         <texture id="steel" file="steel.jpg" />
         <texture id="wood_light" file="wood_light.jpg" />
         <texture id="score" file="score.jpg" />
         <texture id="wall" file="wall.jpg" />
         <texture id="roof" file="roof.jpg" />
         <texture id="floor" file="floor.jpg" />
-        <texture id="blue" file="blue.jpg" />
         <texture id="wood_dark" file="wood_dark.jpg" />
     </textures>
     <appearances>
@@ -40,6 +40,24 @@
             specular="0.5 0.5 0.5 1"
             shininess="0.5"
             textureref="black"
+            texlength_s="1"
+            texlength_t="1" />
+            <appearance id="black2"
+            emissive="0 0 0.1 0.5"
+            ambient="0.5 0.5 1 0.5"
+            diffuse="0.5 0.5 1 0.5"
+            specular="0.5 0.5 1 0.5"
+            shininess="1"
+            textureref="black"
+            texlength_s="1"
+            texlength_t="1" />
+            <appearance id="white2"
+            emissive="0 0 0.1 0.5"
+            ambient="0.5 0.5 1 0.5"
+            diffuse="0.5 0.5 1 0.5"
+            specular="0.5 0.5 1 0.5"
+            shininess="1"
+            textureref="white"
             texlength_s="1"
             texlength_t="1" />
         <appearance id="steel"
@@ -96,24 +114,6 @@
             textureref="roof"
             texlength_s="35.35"
             texlength_t="35.35" />
-            <appearance id="black2"
-            emissive="0 0 0.1 0.5"
-            ambient="0.5 0.5 1 0.5"
-            diffuse="0.5 0.5 1 0.5"
-            specular="0.5 0.5 1 0.5"
-            shininess="1"
-            textureref="black"
-            texlength_s="1"
-            texlength_t="1" />
-            <appearance id="white2"
-            emissive="0 0 0.1 0.5"
-            ambient="0.5 0.5 1 0.5"
-            diffuse="0.5 0.5 1 0.5"
-            specular="0.5 0.5 1 0.5"
-            shininess="1"
-            textureref="white"
-            texlength_s="1"
-            texlength_t="1" />
             <appearance id="blue"
             emissive="0.5 0.5 0.5 0.5"
             ambient="0.5 0.5 0.5 0.5"
@@ -136,8 +136,8 @@
     <graph rootid="game">
         <node id="game" position="0 0 0" pitch="90" yaw="0" roll="0" scale="1 1 1">
             <children>
-                <noderef id="bpieces" />
-                <noderef id="wpieces" />
+                <noderef id="bPieces" />
+                <noderef id="wPieces" />
                 <noderef id="oPiece" />
                 <noderef id="board" />
                 <noderef id="table" />
@@ -243,7 +243,7 @@
                 <cylinder base="2" top="0.5" height="10" slices="4" stacks="20" />
             </children>
         </node>
-        <node id="wpieces" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
+        <node id="wPieces" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
             <appearanceref id="black" />
             <appearanceselectedref id="black2" />
             <children>
@@ -252,22 +252,22 @@
                  <noderef id="wpiece3" />
             </children>
         </node>
-        <node id="wpiece1" position="2.7 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+        <node id="wPiece1" position="2.7 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                  <noderef id="piece" />
             </children>
         </node>
-        <node id="wpiece2" position="1.35 2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+        <node id="wPiece2" position="1.35 2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                  <noderef id="piece" />
             </children>
         </node>
-        <node id="wpiece3" position="1.35 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+        <node id="wPiece3" position="1.35 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                  <noderef id="piece" />
             </children>
         </node>
-        <node id="bpieces" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
+        <node id="bPieces" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
             <appearanceref id="white" />
             <appearanceselectedref id="white2" />
             <children>
@@ -276,17 +276,17 @@
                  <noderef id="bpiece3" />
             </children>
         </node>
-        <node id="bpiece1" position="-2.7 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+        <node id="bPiece1" position="-2.7 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                  <noderef id="piece" />
             </children>
         </node>
-        <node id="bpiece2" position="-1.35 2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+        <node id="bPiece2" position="-1.35 2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                  <noderef id="piece" />
             </children>
         </node>
-        <node id="bpiece3" position="-1.35 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+        <node id="bPiece3" position="-1.35 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                  <noderef id="piece" />
             </children>
