@@ -247,9 +247,9 @@
             <appearanceref id="black" />
             <appearanceselectedref id="black2" />
             <children>
-                 <noderef id="wpiece1" />
-                 <noderef id="wpiece2" />
-                 <noderef id="wpiece3" />
+                 <noderef id="wPiece1" />
+                 <noderef id="wPiece2" />
+                 <noderef id="wPiece3" />
             </children>
         </node>
         <node id="wPiece1" position="2.7 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
@@ -271,9 +271,9 @@
             <appearanceref id="white" />
             <appearanceselectedref id="white2" />
             <children>
-                 <noderef id="bpiece1" />
-                 <noderef id="bpiece2" />
-                 <noderef id="bpiece3" />
+                 <noderef id="bPiece1" />
+                 <noderef id="bPiece2" />
+                 <noderef id="bPiece3" />
             </children>
         </node>
         <node id="bPiece1" position="-2.7 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
