@@ -174,8 +174,8 @@
     <graph rootid="game">
         <node id="game" position="0 0 0" pitch="90" yaw="0" roll="0" scale="1 1 1">
             <children>
-                <noderef id="wPieces" />
-                <noderef id="bPieces" />
+                <noderef id="bpieces" />
+                <noderef id="wpieces" />
                 <noderef id="oPiece" />
                 <noderef id="board" />
                 <noderef id="table" />
@@ -275,50 +275,50 @@
                 <cylinder base="2" top="0.5" height="10" slices="4" stacks="20" />
             </children>
         </node>
-        <node id="bPieces" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
+        <node id="wpieces" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
             <appearanceref id="cristiano" />
             <appearanceselectedref id="cristiano_tint" />
             <children>
-                 <noderef id="bPiece1" />
-                 <noderef id="bPiece2" />
-                 <noderef id="bPiece3" />
+                 <noderef id="wpiece1" />
+                 <noderef id="wpiece2" />
+                 <noderef id="wpiece3" />
             </children>
         </node>
-        <node id="bPiece1" position="2.7 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+        <node id="wpiece1" position="2.7 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                  <noderef id="piece" />
             </children>
         </node>
-        <node id="bPiece2" position="1.35 2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+        <node id="wpiece2" position="1.35 2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                  <noderef id="piece" />
             </children>
         </node>
-        <node id="bPiece3" position="1.35 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+        <node id="wpiece3" position="1.35 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                  <noderef id="piece" />
             </children>
         </node>
-        <node id="wPieces" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
+        <node id="bpieces" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
             <appearanceref id="messi" />
             <appearanceselectedref id="messi_tint" />
             <children>
-                 <noderef id="wPiece1" />
-                 <noderef id="wPiece2" />
-                 <noderef id="wPiece3" />
+                 <noderef id="bpiece1" />
+                 <noderef id="bpiece2" />
+                 <noderef id="bpiece3" />
             </children>
         </node>
-        <node id="wPiece1" position="-2.7 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+        <node id="bpiece1" position="-2.7 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                  <noderef id="piece" />
             </children>
         </node>
-        <node id="wPiece2" position="-1.35 2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+        <node id="bpiece2" position="-1.35 2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                  <noderef id="piece" />
             </children>
         </node>
-        <node id="wPiece3" position="-1.35 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
+        <node id="bpiece3" position="-1.35 -2.35 0" pitch="0" yaw="0" roll="0" scale="1 1 1" pickable="true">
             <children>
                  <noderef id="piece" />
             </children>
