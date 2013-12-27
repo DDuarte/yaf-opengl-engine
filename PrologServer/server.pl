@@ -28,7 +28,7 @@ gmode(cVSc). %% computer vs computer %%
 letters([a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z]).
 
 % launch me in sockets mode
-server:-
+user:runtime_entry(start) :-
     port(Port),
     socket_server_open(Port, Socket, [reuseaddr(true)]),
     socket_server_accept(Socket, _Client, Stream, [type(text)]),
