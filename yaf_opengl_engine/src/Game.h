@@ -2,6 +2,8 @@
 #define GAME_H
 
 #include <vector>
+#include <queue>
+#include <stack>
 
 #include "YafMisc.h"
 #include "Scoreboard.h"
@@ -13,6 +15,13 @@ enum class Player
     Second
 };
 
+enum class GameState
+{
+    None,
+    PickSourcePiece,
+    PickDestinationCell,
+};
+
 class YafNode;
 class YafScene;
 class NetworkProlog;
@@ -20,20 +29,20 @@ class NetworkProlog;
 class Piece
 {
 public:
-    Piece(Player owner, YafNode* node, YafXY position) : _owner(owner), _node(node), _position(position), _selected(false) {}
+    Piece(Player owner, YafXY<uint> position) : _owner(owner), _node(nullptr), _position(position), _selected(false) {}
 
     Player GetOwner() const { return _owner; }
     YafNode* GetNode() const { return _node; }
-    YafXY GetPosition() const { return _position; }
+    YafXY<uint> GetPosition() const { return _position; }
     bool IsSelected() const { return _selected; }
 
     void SetSelected(bool value) { _selected = _selected; }
-    void SetPosition(uint x, uint y) { _position.X = static_cast<float>(x), _position.Y = static_cast<float>(y); }
-
+    void SetPosition(uint x, uint y) { _position.X = x, _position.Y = y; }
+    void SetNode(YafNode* node) { _node = node; }
 private:
     Player _owner;
     YafNode* _node;
-    YafXY _position;
+    YafXY<uint> _position;
     bool _selected;
 };
 
@@ -47,12 +56,27 @@ public:
 
     NetworkProlog* GetNetwork() const { return _network; }
 
-    void AddPiece(Piece& piece) { _pieces.push_back(piece); }
+    void AddPiece(Piece& piece) { AssignNodeForPiece(piece); _pieces.push_back(piece); }
     const Piece* GetPiece(uint x, uint y) const;
     void MovePiece(Piece* piece, uint x, uint y) const;
 
     void Update(uint millis);
-    void Draw() {_scoreboard.Draw(); };
+    void Draw() { _scoreboard.Draw(); }
+
+    void ParsePrologBoard(const std::string& boardStr);
+
+    void SetCurrentPlayer(Player plr) { _currentPlayer = plr; }
+    Player GetCurrentPlayer() const { return _currentPlayer; }
+
+    void SetCurrentState(GameState gs) { _currentState = gs; }
+    GameState GetCurrentState() const { return _currentState; }
+
+    const std::stack<std::string>& GetBoardStack() const { return _boardStrings; }
+    const std::vector<Piece>& GetPieces() const { return _pieces; }
+
+    static Player PlayerFromProlog(const std::string& str);
+    static std::string PlayerToProlog(Player player);
+    static Player PlayerFromNode(const std::string& id);
 private:
     std::vector<Piece> _pieces;
     YafScene* _scene;
@@ -61,6 +85,17 @@ private:
     uint _columns;
     YafNode*** _cells;
     Scoreboard _scoreboard;
+
+    Player _currentPlayer;
+    GameState _currentState;
+
+    std::queue<std::string> _whitePieces;
+    std::queue<std::string> _blackPieces;
+
+    std::stack<std::string> _boardStrings;
+
+    void AssignNodeForPiece(Piece& piece);
+    void DeassignNodes();
 };
 
 #endif

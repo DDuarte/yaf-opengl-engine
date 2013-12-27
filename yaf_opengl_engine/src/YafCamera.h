@@ -16,7 +16,7 @@ public:
 class YafPerspectiveCamera : public YafCamera
 {
 public:
-    YafPerspectiveCamera(const std::string& id, YafXYZ pos) : YafCamera(id)
+    YafPerspectiveCamera(const std::string& id, YafXYZ<> pos) : YafCamera(id)
     {
         position[0] = pos.X;
         position[1] = pos.Y;
@@ -24,7 +24,7 @@ public:
     }
 
     float Angle;
-    YafXYZ Target;
+    YafXYZ<> Target;
 
     virtual void applyView() override
     {
@@ -70,7 +70,7 @@ public:
 class YafFreePersCamera : public YafCamera
 {
 public:
-    YafFreePersCamera(const std::string& id, YafXYZ pos) : YafCamera(id), _firstTime(true)
+    YafFreePersCamera(const std::string& id, YafXYZ<> pos) : YafCamera(id), _firstTime(true)
     {
         position[0] = pos.X;
         position[1] = pos.Y;
@@ -78,7 +78,7 @@ public:
     }
 
     float Angle;
-    YafXYZ Target;
+    YafXYZ<> Target;
 
     virtual void applyView() override
     {

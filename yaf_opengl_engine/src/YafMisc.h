@@ -5,6 +5,8 @@
 #include <stdexcept>
 #include <vector>
 
+#include "Utilities.h"
+
 typedef unsigned int uint;
 
 class YafParsingException : public std::runtime_error
@@ -20,32 +22,47 @@ public:
     std::string Id;
 };
 
+template<typename T = float>
 class YafXY
 {
 public:
-    YafXY() : X(0.0f), Y(0.0f) { }
-    YafXY(float x, float y) : X(x), Y(y) { }
-    YafXY(const std::string& s);
-
-    operator float*()
+    YafXY() : X(static_cast<T>(0)), Y(static_cast<T>(0)) { }
+    YafXY(T x, T y) : X(x), Y(y) { }
+    YafXY(const std::string& s)
     {
-        return reinterpret_cast<float*>(this); // this won't work if class has virtual methods
+        std::vector<float> XY = ParseNumbers<2>(s);
+
+        X = XY[0];
+        Y = XY[1];
     }
 
-    float X;
-    float Y;
+    operator T*()
+    {
+        return reinterpret_cast<T*>(this); // this won't work if class has virtual methods
+    }
+
+    T X;
+    T Y;
 };
 
+template<typename T = float>
 class YafXYZ
 {
 public:
-    YafXYZ() : X(0.0f), Y(0.0f), Z(0.0f) { }
-    YafXYZ(float x, float y, float z) : X(x), Y(y), Z(z) { }
-    YafXYZ(const std::string& s);
-
-    operator float*()
+    YafXYZ() : X(static_cast<T>(0)), Y(static_cast<T>(0)), Z(static_cast<T>(0)) { }
+    YafXYZ(T x, T y, T z) : X(x), Y(y), Z(z) { }
+    YafXYZ(const std::string& s)
     {
-        return reinterpret_cast<float*>(this); // this won't work if class has virtual methods
+        std::vector<float> XYZ = ParseNumbers<3>(s);
+
+        X = XYZ[0];
+        Y = XYZ[1];
+        Z = XYZ[2];
+    }
+
+    operator T*()
+    {
+        return reinterpret_cast<T*>(this); // this won't work if class has virtual methods
     }
 
     YafXYZ& operator +=(const YafXYZ& other)
@@ -56,48 +73,48 @@ public:
         return *this;
     }
 
-    float X;
-    float Y;
-    float Z;
+    T X;
+    T Y;
+    T Z;
 
-    YafXYZ GetNormalized();
-    static float GetDistance(const YafXYZ& p1, const YafXYZ& p2);
+    YafXYZ<> GetNormalized()
+    {
+        T length = sqrt(X * X + Y * Y + Z * Z);
+        return YafXYZ(X / length, Y / length, Z / length);
+    }
+
+    static T GetDistance(const YafXYZ& p1, const YafXYZ& p2)
+    {
+        return static_cast<T>(sqrt(pow(p2.X - p1.X, static_cast<T>(2)) + pow(p2.Y - p1.Y, static_cast<T>(2)) + pow(p2.Z - p1.Z, static_cast<T>(2))));
+    }
 };
 
+template<typename T = float>
 class YafXYZW
 {
 public:
-    YafXYZW() : X(0.0f), Y(0.0f), Z(0.0f), W(0.0f) { }
-    YafXYZW(float x, float y, float z, float w) : X(x), Y(y), Z(z), W(w) { }
-    YafXYZW(const YafXYZ& p, float w) : X(p.X), Y(p.Y), Z(p.Z), W(w) { }
-    YafXYZW(const std::string& s);
-
-    operator float*()
+    YafXYZW() : X(static_cast<T>(0)), Y(static_cast<T>(0)), Z(static_cast<T>(0)), W(static_cast<T>(0)) { }
+    YafXYZW(T x, T y, T z, T w) : X(x), Y(y), Z(z), W(w) { }
+    YafXYZW(const YafXYZ<T>& p, T w) : X(p.X), Y(p.Y), Z(p.Z), W(w) { }
+    YafXYZW(const std::string& s)
     {
-        return reinterpret_cast<float*>(this); // this won't work if class has virtual methods
+        std::vector<float> XYZW = ParseNumbers<4>(s);
+
+        X = XYZW[0];
+        Y = XYZW[1];
+        Z = XYZW[2];
+        W = XYZW[3];
     }
 
-    float X;
-    float Y;
-    float Z;
-    float W;
-};
-
-class YafRGBA
-{
-public:
-    YafRGBA() : R(0.0f), G(0.0f), B(0.0f), A(0.0f) { }
-    YafRGBA(const std::string& s);
-
-    operator float*()
+    operator T*()
     {
-        return reinterpret_cast<float*>(this); // this won't work if class has virtual methods
+        return reinterpret_cast<T*>(this); // this won't work if class has virtual methods
     }
 
-    float R;
-    float G;
-    float B;
-    float A;
+    T X;
+    T Y;
+    T Z;
+    T W;
 };
 
 #endif // YafMisc_h__

@@ -30,7 +30,7 @@ YafScene* ParseYafFile(const std::string& file)
 
     auto globalsElement = GetChildren(yafElement, "globals", "yaf");
 
-    auto background = GetAttribute<YafRGBA>(globalsElement, "background", "globals");
+    auto background = GetAttribute<YafXYZW<>>(globalsElement, "background", "globals");
     auto drawMode = YafDrawModeFromString(GetAttribute<std::string>(globalsElement, "drawmode", "globals"));
     auto shading = YafShadingFromString(GetAttribute<std::string>(globalsElement, "shading", "globals"));
     auto cullFace = YafCullFaceFromString(GetAttribute<std::string>(globalsElement, "cullface", "globals"));
@@ -53,13 +53,13 @@ YafScene* ParseYafFile(const std::string& file)
     {
         auto id = GetAttribute<std::string>(*cp, "id", "cameras perspective");
 
-        auto position = GetAttribute<YafXYZ>(*cp, "pos", "cameras perspective");
+        auto position = GetAttribute<YafXYZ<>>(*cp, "pos", "cameras perspective");
 
         auto camera = new YafPerspectiveCamera(id, position);
         camera->Near     = GetAttribute<float>(*cp, "near", "cameras perspective");
         camera->Far      = GetAttribute<float>(*cp, "far", "cameras perspective");
         camera->Angle    = GetAttribute<float>(*cp, "angle", "cameras perspective");
-        camera->Target   = GetAttribute<YafXYZ>(*cp, "target", "cameras perspective");
+        camera->Target   = GetAttribute<YafXYZ<>>(*cp, "target", "cameras perspective");
         scene->AddCamera(camera);
     }
 
@@ -81,13 +81,13 @@ YafScene* ParseYafFile(const std::string& file)
     {
         auto id = GetAttribute<std::string>(*cf, "id", "cameras free");
 
-        auto position = GetAttribute<YafXYZ>(*cf, "pos", "cameras free");
+        auto position = GetAttribute<YafXYZ<>>(*cf, "pos", "cameras free");
 
         auto camera = new YafFreePersCamera(id, position);
         camera->Near = GetAttribute<float>(*cf, "near", "cameras free");
         camera->Far = GetAttribute<float>(*cf, "far", "cameras free");
         camera->Angle = GetAttribute<float>(*cf, "angle", "cameras free");
-        camera->Target = GetAttribute<YafXYZ>(*cf, "target", "cameras free");
+        camera->Target = GetAttribute<YafXYZ<>>(*cf, "target", "cameras free");
         scene->AddCamera(camera);
     }
 
@@ -100,7 +100,7 @@ YafScene* ParseYafFile(const std::string& file)
     auto doubleSided = GetAttribute<bool>(lightingElement, "doublesided", "lighting");
     auto local = GetAttribute<bool>(lightingElement, "local", "lighting");
     auto enabled = GetAttribute<bool>(lightingElement, "enabled", "lighting");
-    auto ambient = GetAttribute<YafRGBA>(lightingElement, "ambient", "lighting");
+    auto ambient = GetAttribute<YafXYZW<>>(lightingElement, "ambient", "lighting");
 
     scene->SetLightOptions(doubleSided, local, enabled, ambient);
 
@@ -111,25 +111,25 @@ YafScene* ParseYafFile(const std::string& file)
     for (auto lo = lightsOmni.begin(); lo != lightsOmni.end(); ++lo)
     {
         auto id = GetAttribute<std::string>(*lo, "id", "lighting omni");
-        auto location = GetAttribute<YafXYZ>(*lo, "location", "lighting omni");
-        auto light = new YafOmniLight(id, i++, YafXYZW(location, 1.0f));
+        auto location = GetAttribute<YafXYZ<>>(*lo, "location", "lighting omni");
+        auto light = new YafOmniLight(id, i++, YafXYZW<>(location, 1.0f));
         light->Enabled = GetAttribute<bool>(*lo, "enabled", "lighting omni");
-        light->Ambient = GetAttribute<YafRGBA>(*lo, "ambient", "lighting omni");
-        light->Diffuse = GetAttribute<YafRGBA>(*lo, "diffuse", "lighting omni");
-        light->Specular = GetAttribute<YafRGBA>(*lo, "specular", "lighting omni");
+        light->Ambient = GetAttribute<YafXYZW<>>(*lo, "ambient", "lighting omni");
+        light->Diffuse = GetAttribute<YafXYZW<>>(*lo, "diffuse", "lighting omni");
+        light->Specular = GetAttribute<YafXYZW<>>(*lo, "specular", "lighting omni");
         scene->AddLight(light);
     }
 
     for (auto ls = lightsSpot.begin(); ls != lightsSpot.end(); ++ls)
     {
         auto id = GetAttribute<std::string>(*ls, "id", "lighting spot");
-        auto location = GetAttribute<YafXYZ>(*ls, "location", "lighting spot");
-        auto direction = GetAttribute<YafXYZ>(*ls, "direction", "lighting spot");
-        YafSpotLight* light = new YafSpotLight(id, i++, YafXYZW(location, 1.0f), direction);
+        auto location = GetAttribute<YafXYZ<>>(*ls, "location", "lighting spot");
+        auto direction = GetAttribute<YafXYZ<>>(*ls, "direction", "lighting spot");
+        YafSpotLight* light = new YafSpotLight(id, i++, YafXYZW<>(location, 1.0f), direction);
         light->Enabled = GetAttribute<bool>(*ls, "enabled", "lighting spot");
-        light->Ambient = GetAttribute<YafRGBA>(*ls, "ambient", "lighting spot");
-        light->Diffuse = GetAttribute<YafRGBA>(*ls, "diffuse", "lighting spot");
-        light->Specular = GetAttribute<YafRGBA>(*ls, "specular", "lighting spot");
+        light->Ambient = GetAttribute<YafXYZW<>>(*ls, "ambient", "lighting spot");
+        light->Diffuse = GetAttribute<YafXYZW<>>(*ls, "diffuse", "lighting spot");
+        light->Specular = GetAttribute<YafXYZW<>>(*ls, "specular", "lighting spot");
         light->Angle = GetAttribute<float>(*ls, "angle", "lighting spot");
         light->Exponent = GetAttribute<float>(*ls, "exponent", "lighting spot");
         scene->AddLight(light);
@@ -158,10 +158,10 @@ YafScene* ParseYafFile(const std::string& file)
     for (auto a = appearances.begin(); a != appearances.end(); ++a)
     {
         auto app = new YafAppearance(GetAttribute<std::string>(*a, "id", "appearances appearance"));
-        app->Emissive = GetAttribute<YafRGBA>(*a, "emissive", "appearances appearance");
-        app->Ambient = GetAttribute<YafRGBA>(*a, "ambient", "appearances appearance");
-        app->Diffuse = GetAttribute<YafRGBA>(*a, "diffuse", "appearances appearance");
-        app->Specular = GetAttribute<YafRGBA>(*a, "specular", "appearances appearance");
+        app->Emissive = GetAttribute<YafXYZW<>>(*a, "emissive", "appearances appearance");
+        app->Ambient = GetAttribute<YafXYZW<>>(*a, "ambient", "appearances appearance");
+        app->Diffuse = GetAttribute<YafXYZW<>>(*a, "diffuse", "appearances appearance");
+        app->Specular = GetAttribute<YafXYZW<>>(*a, "specular", "appearances appearance");
         app->Shininess = GetAttribute<float>(*a, "shininess", "appearances appearance");
 
         auto texRef = GetAttribute<std::string>(*a, "textureref", "appearances appearance", false);
@@ -202,11 +202,11 @@ YafScene* ParseYafFile(const std::string& file)
         auto pickableStr = GetAttribute<std::string>(*n, "pickable", "graph node", false);
         node->Pickable = !pickableStr.empty() && BoolFromString(pickableStr);
 
-        node->Position = GetAttribute<YafXYZ>(*n, "position", "graph node");
+        node->Position = GetAttribute<YafXYZ<>>(*n, "position", "graph node");
         node->Pitch = GetAttribute<float>(*n, "pitch", "graph node");
         node->Yaw = GetAttribute<float>(*n, "yaw", "graph node");
         node->Roll = GetAttribute<float>(*n, "roll", "graph node");
-        node->Scale = GetAttribute<YafXYZ>(*n, "scale", "graph node");
+        node->Scale = GetAttribute<YafXYZ<>>(*n, "scale", "graph node");
 
         if (auto appRefElement = GetChildren(*n, "appearanceref", "graph node", false))
         {
@@ -256,16 +256,16 @@ YafScene* ParseYafFile(const std::string& file)
         for (auto r = childrenRectangle.begin(); r != childrenRectangle.end(); ++r)
         {
             auto rect = new YafRectangle;
-            rect->Point1 = GetAttribute<YafXY>(*r, "xy1", "graph node children rectangle");
-            rect->Point2 = GetAttribute<YafXY>(*r, "xy2", "graph node children rectangle");
+            rect->Point1 = GetAttribute<YafXY<>>(*r, "xy1", "graph node children rectangle");
+            rect->Point2 = GetAttribute<YafXY<>>(*r, "xy2", "graph node children rectangle");
             node->AddChild(rect);
         }
 
         for (auto t = childrenTriangle.begin(); t != childrenTriangle.end(); ++t)
         {
-            auto p1 = GetAttribute<YafXYZ>(*t, "xyz1", "graph node children triangle");
-            auto p2 = GetAttribute<YafXYZ>(*t, "xyz2", "graph node children triangle");
-            auto p3 = GetAttribute<YafXYZ>(*t, "xyz3", "graph node children triangle");
+            auto p1 = GetAttribute<YafXYZ<>>(*t, "xyz1", "graph node children triangle");
+            auto p2 = GetAttribute<YafXYZ<>>(*t, "xyz2", "graph node children triangle");
+            auto p3 = GetAttribute<YafXYZ<>>(*t, "xyz3", "graph node children triangle");
             auto tri = new YafTriangle(p1, p2, p3);
             node->AddChild(tri);
         }
@@ -327,7 +327,7 @@ YafScene* ParseYafFile(const std::string& file)
                 auto x = GetAttribute<float>(*cp, "x", "graph node children patch controlpoint");
                 auto y = GetAttribute<float>(*cp, "y", "graph node children patch controlpoint");
                 auto z = GetAttribute<float>(*cp, "z", "graph node children patch controlpoint");
-                pat->ControlPoints.push_back(YafXYZ(x, y, z));
+                pat->ControlPoints.push_back(YafXYZ<>(x, y, z));
             }
 
             long long expectedCount = (pat->Order+1) * (pat->Order+1);
@@ -392,7 +392,7 @@ int main(int argc, char* argv[])
     auto board = new Board(scene, &net);
     board->FillCells();
 
-    board->GetNetwork()->EnqueueMessage(PrologPredicate::Build("init", "pVSp", "normal"));
+    board->GetNetwork()->EnqueueMessage(PrologPredicate::Build("init", "pVSp", "normal")); // TODO: Add customization options for difficulty and mode
 
 	auto response = board->GetNetwork()->GetMessage();
 
@@ -405,67 +405,20 @@ int main(int argc, char* argv[])
     }
     else if (starts_with(response, "init_ok"))
     {
-        // init_ok([[e, e, e, e], [e, e, e, e, e, e, e], [e, e, e, e, e, e, e], [e, e, w, w, w, e, e], [e, e, b, o, b, e,
-        //    e], [e, e, e, b, e, e, e], [e, e, e, e, e, e, e], [e, e, e, e, e, e, e]], player1).
-        //        board->AddPiece(Piece(Player::First, scene->GetNode("wPiece1"), YafXY(5, 3)));
-        //        board->AddPiece(Piece(Player::First, scene->GetNode("wPiece2"), YafXY(4, 4)));
-        //        board->AddPiece(Piece(Player::First, scene->GetNode("wPiece3"), YafXY(4, 2)));
-        //        board->AddPiece(Piece(Player::None,  scene->GetNode("oPiece"), YafXY(,.)));
-        //        board->AddPiece(Piece(Player::Second, scene->GetNode("bPiece1"), YafXY(3, 3)));
-        //        board->AddPiece(Piece(Player::Second, scene->GetNode("bPiece2"), YafXY(3, 4)));
-        //        board->AddPiece(Piece(Player::Second, scene->GetNode("bPiece3"), YafXY(3, 2)));
-
         auto firstBracket = response.find_first_of('[');
         auto lastBracket = response.find_last_of(']');
 
 		auto boardBlock = response.substr(firstBracket + 1, lastBracket - firstBracket - 1);
 
-        auto boardSplit = split_string(boardBlock, '[');
-        for (auto& str : boardSplit)
-        {
-            str.erase(std::remove_if(str.begin(), str.end(), [](char c) { return c == ',' || c == '[' || c == ']'; }), str.end());
-        }
+        auto lastComma = response.find_last_of(',');
+        auto lastParens = response.find_last_of(')');
 
-        for (auto x = 0u; x < boardSplit.size(); ++x)
-        {
-            for (auto y = 0u; y < boardSplit[x].size(); ++y)
-            {
-                if (boardSplit[x][y] == 'w')
-                {
-                    std::string nodeName = "wPiece";
-                    if (x == 3 && y == 2)
-                        nodeName += "1";
-                    else if (x == 3 && y == 4)
-                        nodeName += "2";
-                    else if (x == 3 && y == 5)
-                        nodeName += "3";
+        auto player = response.substr(lastComma + 1, lastParens - lastComma - 1);
+        board->SetCurrentPlayer(Board::PlayerFromProlog(player));
 
-                    board->AddPiece(Piece(Player::First, scene->GetNode(nodeName), YafXY(x, y)));
-                }
-                else if (boardSplit[x][y] == 'b')
-                {
-                    std::string nodeName = "bPiece";
-                    if (x == 3 && y == 3)
-                        nodeName += "1";
-                    else if (x == 3 && y == 4)
-                        nodeName += "2";
-                    else if (x == 3 && y == 2)
-                        nodeName += "3";
-
-                    board->AddPiece(Piece(Player::Second, scene->GetNode(nodeName), YafXY(x, y)));
-                }
-                else if (boardSplit[x][y] == 'o')
-                {
-                    board->AddPiece(Piece(Player::None, scene->GetNode("oPiece"), YafXY(x, y)));
-                }
-            }
-        }
-
-        system("PAUSE");
+        board->ParsePrologBoard(boardBlock);
+        board->SetCurrentState(GameState::PickSourcePiece);
     }
-
-    // init_ok(Board).
-    // init_invalid.
 
     CGFapplication app;
 

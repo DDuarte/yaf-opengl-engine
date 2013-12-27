@@ -23,8 +23,8 @@ public:
     void OverwriteScene(YafScene* newScene);
     ~YafScene();
 
-    void SetGlobals(YafRGBA bg, YafDrawMode dm, YafShading s, YafCullFace cf, YafCullOrder co);
-    void SetLightOptions(bool doubleSided, bool local, bool enabled, YafRGBA ambient);
+    void SetGlobals(YafXYZW<> bg, YafDrawMode dm, YafShading s, YafCullFace cf, YafCullOrder co);
+    void SetLightOptions(bool doubleSided, bool local, bool enabled, YafXYZW<> ambient);
 
     YafDrawMode* GetDrawMode() { return &_drawMode; } // can be changed
     int* GetActiveCamera() { return &_activeCamera; } // can be changed
@@ -60,11 +60,12 @@ public:
     virtual void update(unsigned long millis) override;
     virtual void initCameras() override;
 
+    Board* GetBoard() const { return _board; }
     void SetBoard(Board* board) { _board = board; }
 
 private:
     // Globals
-    YafRGBA _backgroundColor;
+    YafXYZW<> _backgroundColor;
     YafDrawMode _drawMode;
     YafShading _shading;
     YafCullFace _cullFace;
@@ -79,7 +80,7 @@ private:
     bool _lightDoubleSided;
     bool _lightLocal;
     bool _lightEnabled;
-    YafRGBA _lightAmbient;
+    YafXYZW<> _lightAmbient;
     std::map<std::string, YafLight*> _lights;
 
     // Textures

@@ -7,7 +7,8 @@
 #include <tuple>
 #include <algorithm>
 
-Board::Board(YafScene* scene, NetworkProlog* network) : _scene(scene), _network(network), _cells(nullptr), _lines(0), _columns(0)
+Board::Board(YafScene* scene, NetworkProlog* network) : _scene(scene), _network(network),
+    _cells(nullptr), _lines(0), _columns(0), _currentPlayer(Player::None), _currentState(GameState::None)
 {
     _scene->SetBoard(this);
 }
@@ -92,5 +93,112 @@ void Board::Update(uint millis)
                 }
             }
         }
+    }
+}
+
+void Board::ParsePrologBoard(const std::string& boardStr)
+{
+    DeassignNodes();
+
+    _boardStrings.push(boardStr);
+
+    auto boardSplit = split_string(boardStr, '[');
+    for (auto& str : boardSplit)
+    {
+        str.erase(std::remove_if(str.begin(), str.end(), [](char c) { return c == ',' || c == '[' || c == ']'; }), str.end());
+    }
+
+    for (auto x = 0u; x < boardSplit.size(); ++x)
+    {
+        for (auto y = 0u; y < boardSplit[x].size(); ++y)
+        {
+            switch (boardSplit[x][y])
+            {
+            case 'w':
+                AddPiece(Piece(Player::First, YafXY<uint>(x, y)));
+                break;
+            case 'b':
+                AddPiece(Piece(Player::Second, YafXY<uint>(x, y)));
+                break;
+            case 'o':
+                AddPiece(Piece(Player::None, YafXY<uint>(x, y)));
+                break;
+            }
+        }
+    }
+}
+
+void Board::DeassignNodes()
+{
+    _whitePieces.push("wPiece1");
+    _whitePieces.push("wPiece2");
+    _whitePieces.push("wPiece3");
+    _blackPieces.push("bPiece1");
+    _blackPieces.push("bPiece2");
+    _blackPieces.push("bPiece3");
+
+    for (auto& p : _pieces)
+        p.SetNode(nullptr);
+
+    _pieces.clear();
+}
+
+void Board::AssignNodeForPiece(Piece& piece)
+{
+    YafNode* node = nullptr;
+    YafXY<> pos;
+
+    switch (piece.GetOwner())
+    {
+        case Player::First:
+            node = _scene->GetNode(_whitePieces.front());
+            _whitePieces.pop();
+            break;
+        case Player::Second:
+            node = _scene->GetNode(_blackPieces.front());
+            _blackPieces.pop();
+            break;
+        case Player::None:
+            node = _scene->GetNode("oPiece");
+            break;
+        default:
+            return;
+    }
+
+    pos = YafPieceAnimation::BoardIndexesToXY(piece.GetPosition().X, piece.GetPosition().Y);
+    node->Position.X = pos.X;
+    node->Position.Y = pos.Y;
+    node->Position.Z = 0.0f;
+    piece.SetNode(node);
+}
+
+Player Board::PlayerFromProlog(const std::string& str)
+{
+    if (str == "player1" || str == "computer1")
+        return Player::First;
+    else if (str == "player2" || str == "computer2")
+        return Player::Second;
+    return Player::None;
+}
+
+Player Board::PlayerFromNode(const std::string& id)
+{
+    if (starts_with(id, "wPiece"))
+        return Player::First;
+    else if (starts_with(id, "bPiece"))
+        return Player::Second;
+    return Player::None;
+}
+
+std::string Board::PlayerToProlog(Player player)
+{
+    switch (player)
+    {
+        case Player::First:
+            return "player1";
+        case Player::Second:
+            return "player2";
+        default:
+            return "";
     }
 }

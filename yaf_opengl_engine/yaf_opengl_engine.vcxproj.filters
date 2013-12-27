@@ -12,9 +12,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\YafMisc.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\YafNode.cpp">
       <Filter>src</Filter>
     </ClCompile>

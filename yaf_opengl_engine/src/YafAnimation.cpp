@@ -49,7 +49,7 @@ void YafLinearAnimation::Update(unsigned long millis)
 
     if (position != _controlPoints.size() - 1)
     {
-        YafXYZ vector(_controlPoints[position + 1].X - _controlPoints[position].X,
+        YafXYZ<> vector(_controlPoints[position + 1].X - _controlPoints[position].X,
             _controlPoints[position + 1].Y - _controlPoints[position].Y,
             _controlPoints[position + 1].Z - _controlPoints[position].Z);
 
@@ -71,12 +71,12 @@ void YafLinearAnimation::Update(unsigned long millis)
     }
 }
 
-YafLinearAnimation::YafLinearAnimation(const std::string& id, YafNode* node, float time, const std::vector<YafXYZ>& controlPoints) : YafAnimation(id, node), _time(static_cast<unsigned long>(time * 1000)), _controlPoints(controlPoints), _firstMillis(0), _currentPoint(controlPoints[0]), _currentAngle(0)
+YafLinearAnimation::YafLinearAnimation(const std::string& id, YafNode* node, float time, const std::vector<YafXYZ<>>& controlPoints) : YafAnimation(id, node), _time(static_cast<unsigned long>(time * 1000)), _controlPoints(controlPoints), _firstMillis(0), _currentPoint(controlPoints[0]), _currentAngle(0)
 {
     float distance = 0;
     for (int i = 0; i < _controlPoints.size() - 1; ++i)
     {
-        auto dist = YafXYZ::GetDistance(_controlPoints[i], _controlPoints[i + 1]);
+        auto dist = YafXYZ<>::GetDistance(_controlPoints[i], _controlPoints[i + 1]);
         distance += dist;
         _controlPointsDistance.push_back(dist);
     }
@@ -101,9 +101,9 @@ void YafPieceAnimation::MoveTo(int x1, int y1, int x2, int y2)
     auto moveFrom = BoardIndexesToXY(x1, y1);
     auto moveTo = BoardIndexesToXY(x2, y2);
 
-    std::vector<YafXYZ> points(2);
-    points[0] = YafXYZ(moveFrom.X, moveFrom.Y, 0.0f);
-    points[1] = YafXYZ(moveTo.X, moveTo.Y, 0.0f);
+    std::vector<YafXYZ<>> points(2);
+    points[0] = YafXYZ<>(moveFrom.X, moveFrom.Y, 0.0f);
+    points[1] = YafXYZ<>(moveTo.X, moveTo.Y, 0.0f);
     auto dist = sqrt(pow(moveTo.X - moveFrom.X, 2.0f) + pow(moveTo.Y - moveFrom.Y, 2.0f));
     _animation = new YafLinearAnimation(Id + "In", Node, dist / SPEED, points);
 }
@@ -113,12 +113,12 @@ YafPieceAnimation::~YafPieceAnimation()
     delete _animation;
 }
 
-YafXY YafPieceAnimation::BoardIndexesToXY(int xi, int yi)
+YafXY<> YafPieceAnimation::BoardIndexesToXY(int xi, int yi)
 {
     if (xi == 0)
         yi *= 2;
 
-    YafXY move;
+    YafXY<> move;
     move.Y = (6.0f - yi) * -2.35f;
 
     if (yi % 2 == 0)

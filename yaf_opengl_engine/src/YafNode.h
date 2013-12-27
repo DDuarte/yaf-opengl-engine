@@ -35,8 +35,8 @@ class YafPrimitive : public YafChild
 class YafRectangle : public YafPrimitive
 {
 public:
-    YafXY Point1;
-    YafXY Point2;
+    YafXY<> Point1;
+    YafXY<> Point2;
 
     virtual void Draw(YafAppearance* app = nullptr, YafAppearance* appSel = nullptr) override;
 
@@ -45,16 +45,16 @@ public:
 class YafTriangle : public YafPrimitive
 {
 public:
-    YafTriangle(YafXYZ p1, YafXYZ p2, YafXYZ p3);
+    YafTriangle(YafXYZ<> p1, YafXYZ<> p2, YafXYZ<> p3);
 
-    YafXYZ Point1;
-    YafXYZ Point2;
-    YafXYZ Point3;
+    YafXYZ<> Point1;
+    YafXYZ<> Point2;
+    YafXYZ<> Point3;
 
     virtual void Draw(YafAppearance* app = nullptr, YafAppearance* appSel = nullptr) override;
 
 private:
-    YafXYZ _normal;
+    YafXYZ<> _normal;
 
 };
 
@@ -119,7 +119,7 @@ public:
     int PartsV;
     GLenum Compute;
 
-    std::vector<YafXYZ> ControlPoints;
+    std::vector<YafXYZ<>> ControlPoints;
 
     virtual void Draw(YafAppearance* app = nullptr, YafAppearance* appSel = nullptr) override;
 };
@@ -175,11 +175,11 @@ public:
     bool Pickable;
     bool Selected;
 
-    YafXYZ Position;
+    YafXYZ<> Position;
     float Pitch;
     float Yaw;
     float Roll;
-    YafXYZ Scale;
+    YafXYZ<> Scale;
 private:
     void MoveRefNodesToChildren(YafScene* scene);
 

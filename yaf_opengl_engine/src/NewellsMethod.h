@@ -4,14 +4,14 @@
 #include "YafMisc.h"
 #include <vector>
 
-inline YafXYZ CalculateSurfaceNormal(const std::vector<YafXYZ>& polygon)
+inline YafXYZ<> CalculateSurfaceNormal(const std::vector<YafXYZ<>>& polygon)
 {
-    YafXYZ normal;
+    YafXYZ<> normal;
 
     for (size_t i = 0; i < polygon.size(); ++i)
     {
-        const YafXYZ& current = polygon[i];
-        const YafXYZ& next = polygon[(i + 1) % polygon.size()];
+        const YafXYZ<>& current = polygon[i];
+        const YafXYZ<>& next = polygon[(i + 1) % polygon.size()];
 
         normal.X += (current.Y - next.Y) * (current.Z + next.Z);
         normal.Y += (current.Z - next.Z) * (current.X + next.X);

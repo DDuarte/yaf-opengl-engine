@@ -91,7 +91,7 @@ YafScene::~YafScene()
         delete x->second;
 }
 
-void YafScene::SetGlobals(YafRGBA bg, YafDrawMode dm, YafShading s, YafCullFace cf, YafCullOrder co)
+void YafScene::SetGlobals(YafXYZW<> bg, YafDrawMode dm, YafShading s, YafCullFace cf, YafCullOrder co)
 {
     _backgroundColor = bg;
     _drawMode = dm;
@@ -100,7 +100,7 @@ void YafScene::SetGlobals(YafRGBA bg, YafDrawMode dm, YafShading s, YafCullFace 
     _cullOrder = co;
 }
 
-void YafScene::SetLightOptions(bool doubleSided, bool local, bool enabled, YafRGBA ambient)
+void YafScene::SetLightOptions(bool doubleSided, bool local, bool enabled, YafXYZW<> ambient)
 {
     _lightDoubleSided = doubleSided;
     _lightLocal = local;
@@ -126,7 +126,7 @@ void YafScene::init()
     glCullFace(YafToOpenGL(_cullFace));
     glFrontFace(YafToOpenGL(_cullOrder));
 
-    glClearColor(_backgroundColor.R, _backgroundColor.G, _backgroundColor.B, _backgroundColor.A);
+    glClearColor(_backgroundColor.X, _backgroundColor.Y, _backgroundColor.Z, _backgroundColor.W);
 
     for (auto l = _lights.begin(); l != _lights.end(); ++l)
         l->second->InitLight();

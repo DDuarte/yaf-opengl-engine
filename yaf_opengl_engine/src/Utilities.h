@@ -10,7 +10,27 @@
 template<typename T>
 std::vector<T> ConcatenateVectors(std::vector<T>& v1, std::vector<T>& v2);
 
-std::vector<float> ParseFloats(const std::string& s, int n);
+template<unsigned int N, typename T = float>
+std::vector<T> ParseNumbers(const std::string& s)
+{
+    std::vector<T> numbers;
+
+    char* str = const_cast<char*>(s.c_str());
+    char* pch;
+    char* context = nullptr;
+
+    pch = strtok_s(str, " ", &context);
+    while (pch)
+    {
+        numbers.push_back(static_cast<T>(atof(pch)));
+        pch = strtok_s(nullptr, " ", &context);
+    }
+
+    if (numbers.size() != N)
+        throw YafParsingException("Incorrect number of arguments: " + s);
+
+    return numbers;
+}
 
 bool starts_with(const std::string& str, const std::string& prefix); ///< Returns true if str starts with prefix
 bool ends_with(const std::string& str, const std::string& suffix); ///< Returns true if str ends with suffix

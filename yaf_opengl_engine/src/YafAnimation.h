@@ -18,15 +18,15 @@ class YafLinearAnimation : public YafAnimation
 {
 public:
     virtual void ApplyAnimation() override;
-    YafLinearAnimation(const std::string& id, YafNode* node, float time, const std::vector<YafXYZ>& controlPoints);
+    YafLinearAnimation(const std::string& id, YafNode* node, float time, const std::vector<YafXYZ<>>& controlPoints);
     virtual void Update(unsigned long millis) override;
-    YafXYZ GetCurrentPoint() const { return _currentPoint; }
+    YafXYZ<> GetCurrentPoint() const { return _currentPoint; }
 private:
     int Position(unsigned long millis, float& path);
     unsigned long _time;
-    std::vector<YafXYZ> _controlPoints;
+    std::vector<YafXYZ<>> _controlPoints;
     unsigned long _firstMillis;
-    YafXYZ _currentPoint;
+    YafXYZ<> _currentPoint;
     float _speed;
     std::vector<float> _controlPointsDistance;
     float _currentAngle;
@@ -39,11 +39,10 @@ public:
     ~YafPieceAnimation();
     virtual void ApplyAnimation() override;
     virtual void Update(unsigned long millis) override;
+    static YafXY<> BoardIndexesToXY(int xi, int yi);
 private:
     YafLinearAnimation* _animation;
     void MoveTo(int x1, int y1, int x2, int y2);
-
-    static YafXY BoardIndexesToXY(int xi, int yi);
 };
 
 #endif

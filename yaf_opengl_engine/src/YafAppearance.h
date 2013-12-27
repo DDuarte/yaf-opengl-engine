@@ -24,10 +24,10 @@ class YafAppearance : public YafElement, public CGFappearance
 public:
     YafAppearance() : YafElement("") { }
     YafAppearance(const std::string& id) : YafElement(id) { }
-    YafRGBA Emissive;
-    YafRGBA Ambient;
-    YafRGBA Diffuse;
-    YafRGBA Specular;
+    YafXYZW<> Emissive;
+    YafXYZW<> Ambient;
+    YafXYZW<> Diffuse;
+    YafXYZW<> Specular;
     float Shininess;
     YafTexture* Texture; // can be null
     float TexLengthS;

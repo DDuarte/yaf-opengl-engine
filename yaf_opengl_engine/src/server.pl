@@ -52,6 +52,10 @@ parse_input(init(Mode, Diff), Reply, Game, Player, Mode, Diff, _) :-
     create_board(8, Game),
     Reply = init_ok(Game, Player).
 
+parse_input(moves_from(Board, Line, Col, Plr), Reply, Game, Player, Mode, Diff, _) :-
+    possible_moves(Board, Plr, [Line, Col], Moves),
+    Reply = moves_from_ok(Moves).
+
 parse_input(quit, _, _, _, _, _, _) :- !.
 
 %% board creation - main method is create_board(N, B) - N has to be even %%

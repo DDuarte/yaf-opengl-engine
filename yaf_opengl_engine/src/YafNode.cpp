@@ -83,9 +83,9 @@ bool YafNode::IsCyclic(std::string& which)
     return false;
 }
 
-YafTriangle::YafTriangle(YafXYZ p1, YafXYZ p2, YafXYZ p3) : Point1(p1), Point2(p2), Point3(p3)
+YafTriangle::YafTriangle(YafXYZ<> p1, YafXYZ<> p2, YafXYZ<> p3) : Point1(p1), Point2(p2), Point3(p3)
 {
-    std::vector<YafXYZ> vec;
+    std::vector<YafXYZ<>> vec;
     vec.push_back(Point1);
     vec.push_back(Point2);
     vec.push_back(Point3);
@@ -135,9 +135,9 @@ void YafRectangle::Draw(YafAppearance* app /* = nullptr */, YafAppearance* appSe
 
 void YafTriangle::Draw(YafAppearance* app /* = nullptr */, YafAppearance* appSel /* = nullptr */)
 {
-    float a = YafXYZ::GetDistance(Point2, Point3);
-    float b = YafXYZ::GetDistance(Point1, Point3);
-    float c = YafXYZ::GetDistance(Point1, Point2);
+    float a = YafXYZ<>::GetDistance(Point2, Point3);
+    float b = YafXYZ<>::GetDistance(Point1, Point3);
+    float c = YafXYZ<>::GetDistance(Point1, Point2);
 
     glNormal3d(_normal.X, _normal.Y, _normal.Z);
     glBegin(GL_TRIANGLES);
@@ -178,7 +178,7 @@ void YafSphere::Draw(YafAppearance* /* app /* = nullptr */, YafAppearance* appSe
 
 void YafTorus::Draw(YafAppearance* /* app /* = nullptr */, YafAppearance* appSel /* = nullptr */)
 {
-    YafXYZ vNormal;
+    YafXYZ<> vNormal;
     double majorStep = 2.0f * M_PI / Slices;
     double minorStep = 2.0f * M_PI / Loops;
     int i, j;
