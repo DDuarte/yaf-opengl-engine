@@ -7,11 +7,9 @@
 
 Scoreboard::Scoreboard(Board* board)
 {
-    _home = 0;
-    _away = 0;
-    _firstMillis = 0;
-    _countDown = 30;
-    _lastCountDown = 0;
+    ResetScores();
+    ResetCountdown();
+    ResetTimer();
 	_board = board;
 }
 
@@ -58,13 +56,6 @@ void Scoreboard::IncHome()
 void Scoreboard::IncAway()
 {
     _away++;
-}
-
-void Scoreboard::Reset()
-{
-    _home = 0;
-    _away = 0;
-    _firstMillis = 0;
 }
 
 void Scoreboard::Draw()
@@ -128,20 +119,5 @@ void Scoreboard::Draw()
         glPopMatrix();
     }
 
-#if FUNNY
-        if(_currentCountDown == 0)
-        {
-            glPushMatrix();
-                glTranslatef(13.1f, 9.07f, -7.5f);
-                glScalef(0.02f, 0.02f, 0.02f);
-                glRotatef(90.0f,0,-1,0);
-                glColor3f(1.0,1.0,1.0);        // branco
-
-                std::string test = "HAPPY NEW YEAR!";
-                for(uint i = 0 ; i < test.size() ; ++i)
-                    glutStrokeCharacter(GLUT_STROKE_ROMAN,test[i] );
-            glPopMatrix();
-        }
-#endif
     glEnable(GL_LIGHTING);
 }

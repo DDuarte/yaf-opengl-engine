@@ -60,7 +60,7 @@ public:
 
     void AddPiece(Piece& piece) { AssignNodeForPiece(piece); _pieces.push_back(piece); }
     const Piece* GetPiece(uint x, uint y) const;
-    void MovePiece(Piece* piece, uint x, uint y);
+    bool MovePiece(Piece* piece, uint x, uint y);
 
     void Update(uint millis);
     void Draw() { _scoreboard.Draw(); }
@@ -87,6 +87,10 @@ public:
     static Player PlayerFromProlog(const std::string& str);
     static std::string PlayerToProlog(Player player);
     static Player PlayerFromNode(const std::string& id);
+
+    std::string InitialBoard;
+    void ResetRound(Player winner);
+
 private:
     std::vector<Piece> _pieces;
     YafScene* _scene;

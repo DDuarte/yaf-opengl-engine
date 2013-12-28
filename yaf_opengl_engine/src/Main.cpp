@@ -416,6 +416,7 @@ int main(int argc, char* argv[])
         auto player = response.substr(lastComma + 1, lastParens - lastComma - 1);
         board->SetCurrentPlayer(Board::PlayerFromProlog(player));
 
+        board->InitialBoard = boardBlock;
         board->ParsePrologBoard(boardBlock);
         board->SetCurrentState(GameState::PickSourcePiece);
     }

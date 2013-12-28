@@ -211,8 +211,6 @@ void YafInterface::ProcessHits(GLint hits, GLuint* buffer)
                         {
                             std::cerr << "Received " << response << std::endl;
                         }
-
-                        //system("PAUSE");
                     }
 
                     break;

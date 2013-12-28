@@ -60,53 +60,24 @@ const Piece* Board::GetPiece(uint x, uint y) const
         return &(*it);
 }
 
-void Board::MovePiece(Piece* piece, uint x, uint y)
+bool Board::MovePiece(Piece* piece, uint x, uint y)
 {
     if (!piece)
-        return;
+        return false;
 
     if (x > 7 || x < 0 || y > 6 || y < 0) // remove piece
-    {
-        piece->GetNode()->Position.Z = -999999.0f; // lol.
-        auto it = std::find(_pieces.begin(), _pieces.end(), *piece);
-        if (it != _pieces.end())
-            _pieces.erase(it);
-        return;
-    }
+        return true;
 
     auto anim = new YafPieceAnimation(piece->GetNode()->Id + "anim", piece->GetNode(), piece->GetPosition().X, piece->GetPosition().Y, x, y);
     _scene->AddAnimation(anim);
     piece->GetNode()->SetAnimation(anim);
     piece->SetPosition(x, y);
-
-    _network->EnqueueMessage(PrologPredicate::Build("move", x, y));
+    return false;
 }
 
 void Board::Update(uint millis)
 {
     _scoreboard.Update(millis);
-    //for (auto& p : _pieces)
-    //{
-    //    if (p.GetNode()->Selected)
-    //    {
-    //        for (auto xi = 0u; xi < _lines; ++xi)
-    //        {
-    //            for (auto yi = 0u, realyi = 0u; yi < _columns; ++yi)
-    //            {
-    //                if (xi == 0) realyi = yi / 2;
-    //                else
-    //                    realyi = yi;
-    //
-    //                if (_cells[xi][realyi]->Selected)
-    //                {
-    //                    MovePiece(&p, xi, realyi);
-    //                    p.GetNode()->Selected = false;
-    //                    _cells[xi][realyi]->Selected = false;
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
 }
 
 void Board::ParsePrologMoves(const std::string& movesStr)
@@ -146,9 +117,16 @@ void Board::ParsePrologMoveTo(const std::string& moveToStr)
         p.first.second = const_cast<Piece*>(GetPiece(p.first.first.X, p.first.first.Y));
     }
 
+    bool gameOver = false;
+
     for (auto& p : moves)
     {
-        MovePiece(p.first.second, p.second.X, p.second.Y);
+        gameOver |= MovePiece(p.first.second, p.second.X, p.second.Y);
+    }
+
+    if (gameOver)
+    {
+        ResetRound(_currentPlayer);
     }
 }
 
@@ -156,7 +134,7 @@ void Board::ParsePrologBoard(const std::string& boardStr)
 {
     DeassignNodes();
 
-    _boardStrings.push(boardStr);
+    AddToBoardStack(boardStr);
 
     auto boardSplit = split_string(boardStr, '[');
     for (auto& str : boardSplit)
@@ -202,7 +180,6 @@ void Board::DeassignNodes()
 void Board::AssignNodeForPiece(Piece& piece)
 {
     YafNode* node = nullptr;
-    YafXY<> pos;
 
     switch (piece.GetOwner())
     {
@@ -221,10 +198,11 @@ void Board::AssignNodeForPiece(Piece& piece)
             return;
     }
 
-    pos = YafPieceAnimation::BoardIndexesToXY(piece.GetPosition().X, piece.GetPosition().Y);
+    auto pos = YafPieceAnimation::BoardIndexesToXY(piece.GetPosition().X, piece.GetPosition().Y);
     node->Position.X = pos.X;
     node->Position.Y = pos.Y;
     node->Position.Z = 0.0f;
+    node->SetAnimation(nullptr);
     piece.SetNode(node);
 }
 
@@ -269,6 +247,8 @@ void Board::NextPlayer()
     _currentState = GameState::PickSourcePiece;
     _pieceToMove = nullptr;
 
+    _scoreboard.ResetCountdown();
+
     ClearSelections();
 }
 
@@ -288,6 +268,26 @@ void Board::ClearSelections()
     }
 
     std::for_each(_pieces.begin(), _pieces.end(), [](Piece& p) { p.SetSelected(false); });
+}
+
+void Board::ResetRound(Player winner)
+{
+    ClearSelections();
+    _currentState = GameState::PickSourcePiece;
+    _currentPlayer = Player::First;
+    _pieceToMove = nullptr;
+
+    _scene->GetNode("oPiece")->Position.Z = -999999.0f; // lol.
+    _pieces.erase(std::remove_if(std::begin(_pieces), std::end(_pieces), [](const Piece& p) { return p.GetOwner() == Player::None; }));
+
+    if (winner == Player::First)
+        _scoreboard.IncHome();
+    else if (winner == Player::Second)
+        _scoreboard.IncAway();
+
+    while (!_boardStrings.empty())
+        _boardStrings.pop();
+    ParsePrologBoard(InitialBoard);
 }
 
 void Piece::SetSelected(bool value)
