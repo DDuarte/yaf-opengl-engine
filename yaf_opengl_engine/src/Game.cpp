@@ -8,7 +8,7 @@
 #include <algorithm>
 
 Board::Board(YafScene* scene, NetworkProlog* network) : _scene(scene), _network(network),
-    _cells(nullptr), _lines(0), _columns(0), _currentPlayer(Player::None), _currentState(GameState::None)
+_cells(nullptr), _lines(0), _columns(0), _currentPlayer(Player::None), _currentState(GameState::None), _scoreboard(this)
 {
     _scene->SetBoard(this);
 }

@@ -1,15 +1,18 @@
 #include "Scoreboard.h"
+#include "Game.h"
 
 #include <gl/glew.h>
 #include <gl/freeglut.h>
 
-Scoreboard::Scoreboard()
+
+Scoreboard::Scoreboard(Board* board)
 {
     _home = 0;
     _away = 0;
     _firstMillis = 0;
     _countDown = 30;
     _lastCountDown = 0;
+	_board = board;
 }
 
 void Scoreboard::Update(uint millis)
@@ -39,7 +42,13 @@ void Scoreboard::Update(uint millis)
    }
    _currentCountDown = _countDown - (currentTime - _lastCountDown);
    if (_currentCountDown < 0)
-       _countDown = -1;
+   {
+	   _countDown = -1;
+	   if (_board->GetCurrentPlayer() == Player::First)
+		   _away++;
+	   else if (_board->GetCurrentPlayer() == Player::Second)
+		   _home++;
+   }
 }
 
 void Scoreboard::IncHome()

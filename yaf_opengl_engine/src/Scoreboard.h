@@ -4,10 +4,12 @@
 #include <string>
 #include "YafMisc.h"
 
+class Board;
+
 class Scoreboard
 {
 public:
-    Scoreboard();
+	Scoreboard(Board* board);
     void Update(uint millis);
     void IncHome();
     void IncAway();
@@ -23,6 +25,7 @@ private:
     uint _firstMillis;
     std::string _currentTime;
     int _currentCountDown;
+	Board* _board;
 };
 
 #endif
