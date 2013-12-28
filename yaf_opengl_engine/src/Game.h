@@ -36,7 +36,7 @@ public:
     YafXY<uint> GetPosition() const { return _position; }
     bool IsSelected() const { return _selected; }
 
-    void SetSelected(bool value) { _selected = _selected; }
+    void SetSelected(bool value);
     void SetPosition(uint x, uint y) { _position.X = x, _position.Y = y; }
     void SetNode(YafNode* node) { _node = node; }
 private:
@@ -64,6 +64,7 @@ public:
     void Draw() { _scoreboard.Draw(); }
 
     void ParsePrologBoard(const std::string& boardStr);
+    void ParsePrologMoves(const std::string& movesStr);
 
     void SetCurrentPlayer(Player plr) { _currentPlayer = plr; }
     Player GetCurrentPlayer() const { return _currentPlayer; }

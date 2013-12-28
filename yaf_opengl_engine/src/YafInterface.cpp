@@ -135,7 +135,6 @@ void YafInterface::ProcessHits(GLint hits, GLuint* buffer)
                     }
 
                     printf("%s ", n.first.c_str());
-                    n.second->Selected = !n.second->Selected;
 
                     if (_scene->GetBoard()->GetCurrentState() == GameState::PickSourcePiece)
                     {
@@ -143,8 +142,20 @@ void YafInterface::ProcessHits(GLint hits, GLuint* buffer)
                         auto x = piece->GetPosition().X;
                         auto y = piece->GetPosition().Y;
                         auto player = Board::PlayerToProlog(_scene->GetBoard()->GetCurrentPlayer());
-                        _scene->GetBoard()->GetNetwork()->EnqueueMessage(PrologPredicate::Build("moves_from", board, x, y, player));
-                        return;
+                        _scene->GetBoard()->GetNetwork()->EnqueueMessage(PrologPredicate::Build("moves_from", '[' + board + ']', x, y, player));
+                        auto response = _scene->GetBoard()->GetNetwork()->GetMessage();
+
+                        if (starts_with(response, "moves_from_ok"))
+                        {
+                            auto firstBracket = response.find_first_of('[');
+                            auto lastBracket = response.find_last_of(']');
+
+                            auto moveBlock = response.substr(firstBracket + 1, lastBracket - firstBracket - 1);
+
+                            _scene->GetBoard()->ParsePrologMoves(moveBlock);
+                            _scene->GetBoard()->SetCurrentState(GameState::PickDestinationCell);
+                            return;
+                        }
                     }
 
                     break;

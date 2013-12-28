@@ -72,27 +72,57 @@ void Board::MovePiece(Piece* piece, uint x, uint y) const
 void Board::Update(uint millis)
 {
     _scoreboard.Update(millis);
-    for (auto& p : _pieces)
-    {
-        if (p.GetNode()->Selected)
-        {
-            for (auto xi = 0u; xi < _lines; ++xi)
-            {
-                for (auto yi = 0u, realyi = 0u; yi < _columns; ++yi)
-                {
-                    if (xi == 0) realyi = yi / 2;
-                    else
-                        realyi = yi;
+    //for (auto& p : _pieces)
+    //{
+    //    if (p.GetNode()->Selected)
+    //    {
+    //        for (auto xi = 0u; xi < _lines; ++xi)
+    //        {
+    //            for (auto yi = 0u, realyi = 0u; yi < _columns; ++yi)
+    //            {
+    //                if (xi == 0) realyi = yi / 2;
+    //                else
+    //                    realyi = yi;
+    //
+    //                if (_cells[xi][realyi]->Selected)
+    //                {
+    //                    MovePiece(&p, xi, realyi);
+    //                    p.GetNode()->Selected = false;
+    //                    _cells[xi][realyi]->Selected = false;
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
+}
 
-                    if (_cells[xi][realyi]->Selected)
-                    {
-                        MovePiece(&p, xi, realyi);
-                        p.GetNode()->Selected = false;
-                        _cells[xi][realyi]->Selected = false;
-                    }
-                }
-            }
+void Board::ParsePrologMoves(const std::string& movesStr)
+{
+    for (auto xi = 0u; xi < _lines; ++xi)
+    {
+        for (auto yi = 0u, realyi = 0u; yi < _columns; ++yi)
+        {
+            if (xi == 0)
+                realyi = yi / 2;
+            else
+                realyi = yi;
+    
+            _cells[xi][realyi]->Selected = false;
         }
+    }
+
+    auto movesSplit = split_string(movesStr, '[');
+    for (auto& str : movesSplit)
+    {
+        str.erase(std::remove_if(str.begin(), str.end(), [](char c) { return c == ',' || c == '[' || c == ']'; }), str.end());
+        uint x = str[0] - '0';
+        uint y = str[1] - '0';
+        for (auto& p : _pieces)
+        {
+            p.SetSelected(p.GetPosition().X == x && p.GetPosition().Y == y);
+        }
+
+        _cells[x][y]->Selected = true;
     }
 }
 
@@ -201,4 +231,11 @@ std::string Board::PlayerToProlog(Player player)
         default:
             return "";
     }
+}
+
+void Piece::SetSelected(bool value)
+{
+    _selected = value;
+    if (_node)
+        _node->Selected = value;
 }
