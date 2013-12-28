@@ -47,14 +47,38 @@ serverLoop(Stream, Game, Player, Mode, Diff, Result) :-
     flush_output(Stream),
     (ClientMsg == quit; ClientMsg == end_of_file), !.
 
+parse_input(init(Mode, _), Reply, _, _, _, _, _) :-
+    \+ gmode(Mode),
+    Reply = init_invalid, !.
+    
+parse_input(init(_, Diff), Reply, _, _, _, _, _) :-
+    \+ diff(Diff),
+    Reply = init_invalid, !.
+    
 parse_input(init(Mode, Diff), Reply, Game, Player, Mode, Diff, _) :-
     first_player(Mode, Player),
     create_board(8, Game),
-    Reply = init_ok(Game, Player).
+    Reply = init_ok(Game, Player), !.
 
-parse_input(moves_from(Board, Line, Col, Plr), Reply, Game, Player, Mode, Diff, _) :-
-    possible_moves(Board, Plr, [Line, Col], Moves),
-    Reply = moves_from_ok(Moves).
+parse_input(moves_from(_, _, _, Plr), Reply, _, Player, _, _, _) :-
+    \+ (Plr = Player),
+    Reply = move_from_invalid, !.
+
+parse_input(moves_from(Board, Line, Col, Player), Reply, _, Player, _, _, _) :-
+    possible_moves(Board, Player, [Line, Col], Moves),
+    Reply = moves_from_ok(Moves), !.
+
+parse_input(move_to(Board, Line1, Col1, Line2, Col2, Player), Reply, _, _, _, _, _) :-
+    \+ valid_move(Board, Player, Line1, Col1, Line2, Col2),
+    Reply = move_to_invalid, !.
+
+parse_input(move_to(_, _, _, _, _, Plr), Reply, _, Player, _, _, _) :-
+    \+ (Plr = Player),
+    Reply = move_to_invalid, !.
+
+parse_input(move_to(Board, Line1, Col1, Line2, Col2, _), Reply, _, _, _, _, _) :-
+    move(Board, [Line1, Col1], [Line2, Col2], Board2, [], MovesOut),
+    Reply = move_to_ok(Board2, MovesOut), !.
 
 parse_input(quit, _, _, _, _, _, _) :- !.
 
@@ -192,25 +216,28 @@ swap_piece(Game, Position1, Position2, Game1) :-
     replace_piece(Game,   Piece1, Position2, Game11),
     replace_piece(Game11, Piece2, Position1, Game1).
 
-move(Game, MoveSrc, MoveDest, Game1) :- % move to empty cell %
+move(Game, MoveSrc, MoveDest, Game1, MovesIn, MovesOut) :- % move to empty cell %
     object(Game, MoveDest, e),
-    swap_piece(Game, MoveSrc, MoveDest, Game1).
+    swap_piece(Game, MoveSrc, MoveDest, Game1),
+    append(MovesIn, [[MoveSrc, MoveDest]], MovesOut).
 
-move(Game, MoveSrc, MoveDest, Game1) :- % move objective piece %
+move(Game, MoveSrc, MoveDest, Game1, MovesIn, MovesOut) :- % move objective piece %
     object(Game, MoveSrc, o),
     \+inbounds(Game, MoveDest),
-    replace_piece(Game, e, MoveSrc, Game1).
+    replace_piece(Game, e, MoveSrc, Game1),
+    append(MovesIn, [[MoveSrc, MoveDest]], MovesOut).
 
-move(Game, MoveSrc, MoveDest, Game1) :- % vertical move (same column) %
+move(Game, MoveSrc, MoveDest, Game1, MovesIn, MovesOut) :- % vertical move (same column) %
     position(MoveSrc, LS, CS),
     position(MoveDest, LD, CD),
     CD = CS,
     NewL is LD + LD - LS,
     position(NewDest, NewL, CD),
-    move(Game, MoveDest, NewDest, Game2),
-    swap_piece(Game2, MoveSrc, MoveDest, Game1).
+    move(Game, MoveDest, NewDest, Game2, MovesIn, MovesOut1),
+    swap_piece(Game2, MoveSrc, MoveDest, Game1),
+    append(MovesOut1, [[MoveSrc, MoveDest]], MovesOut).
 
-move(Game, MoveSrc, MoveDest, Game1) :- % same line, odd column %
+move(Game, MoveSrc, MoveDest, Game1, MovesIn, MovesOut) :- % same line, odd column %
     position(MoveSrc, LS, CS),
     position(MoveDest, LD, CD),
     LS = LD,
@@ -218,10 +245,11 @@ move(Game, MoveSrc, MoveDest, Game1) :- % same line, odd column %
     NewL is LD + 1,
     NewC is CD + CD - CS,
     position(NewDest, NewL, NewC),
-    move(Game, MoveDest, NewDest, Game2),
-    swap_piece(Game2, MoveSrc, MoveDest, Game1).
+    move(Game, MoveDest, NewDest, Game2, MovesIn, MovesOut1),
+    swap_piece(Game2, MoveSrc, MoveDest, Game1),
+    append(MovesOut1, [[MoveSrc, MoveDest]], MovesOut).
 
-move(Game, MoveSrc, MoveDest, Game1) :- % same line, even column %
+move(Game, MoveSrc, MoveDest, Game1, MovesIn, MovesOut) :- % same line, even column %
     position(MoveSrc, LS, CS),
     position(MoveDest, LD, CD),
     LS = LD,
@@ -229,16 +257,18 @@ move(Game, MoveSrc, MoveDest, Game1) :- % same line, even column %
     NewL is LD - 1,
     NewC is CD + CD - CS,
     position(NewDest, NewL, NewC),
-    move(Game, MoveDest, NewDest, Game2),
-    swap_piece(Game2, MoveSrc, MoveDest, Game1).
+    move(Game, MoveDest, NewDest, Game2, MovesIn, MovesOut1),
+    swap_piece(Game2, MoveSrc, MoveDest, Game1),
+    append(MovesOut1, [[MoveSrc, MoveDest]], MovesOut).
 
-move(Game, MoveSrc, MoveDest, Game1) :- % different line %
+move(Game, MoveSrc, MoveDest, Game1, MovesIn, MovesOut) :- % different line %
     position(MoveSrc, _, CS),
     position(MoveDest, LD, CD),
     NewC is CD + CD - CS,
     position(NewDest, LD, NewC),
-    move(Game, MoveDest, NewDest, Game2),
-    swap_piece(Game2, MoveSrc, MoveDest, Game1).
+    move(Game, MoveDest, NewDest, Game2, MovesIn, MovesOut1),
+    swap_piece(Game2, MoveSrc, MoveDest, Game1),
+    append(MovesOut1, [[MoveSrc, MoveDest]], MovesOut).
 
 choose_move_player(Game, Player, MoveSrc, MoveDest) :-
     write('Move Source Line (number): '),

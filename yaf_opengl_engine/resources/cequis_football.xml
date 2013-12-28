@@ -323,7 +323,7 @@
                  <noderef id="piece" />
             </children>
         </node>
-        <node id="oPiece" position="0 0 0" pitch="0" yaw="0" roll="0" scale="0.8 0.8 1">
+        <node id="oPiece" position="0 0 0" pitch="0" yaw="0" roll="0" scale="0.8 0.8 1" pickable="true">
             <appearanceref id="ball" />
             <children>
                  <noderef id="piece" />

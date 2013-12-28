@@ -8,7 +8,8 @@
 #include <algorithm>
 
 Board::Board(YafScene* scene, NetworkProlog* network) : _scene(scene), _network(network),
-_cells(nullptr), _lines(0), _columns(0), _currentPlayer(Player::None), _currentState(GameState::None), _scoreboard(this)
+_cells(nullptr), _lines(0), _columns(0), _currentPlayer(Player::None), _currentState(GameState::None),
+_scoreboard(this), _pieceToMove(nullptr)
 {
     _scene->SetBoard(this);
 }
@@ -59,9 +60,21 @@ const Piece* Board::GetPiece(uint x, uint y) const
         return &(*it);
 }
 
-void Board::MovePiece(Piece* piece, uint x, uint y) const
+void Board::MovePiece(Piece* piece, uint x, uint y)
 {
-    auto anim = new YafPieceAnimation(piece->GetNode()->Id + "anim", piece->GetNode(), static_cast<int>(piece->GetPosition().X), static_cast<int>(piece->GetPosition().Y), x, y);
+    if (!piece)
+        return;
+
+    if (x > 7 || x < 0 || y > 6 || y < 0) // remove piece
+    {
+        piece->GetNode()->Position.Z = -999999.0f; // lol.
+        auto it = std::find(_pieces.begin(), _pieces.end(), *piece);
+        if (it != _pieces.end())
+            _pieces.erase(it);
+        return;
+    }
+
+    auto anim = new YafPieceAnimation(piece->GetNode()->Id + "anim", piece->GetNode(), piece->GetPosition().X, piece->GetPosition().Y, x, y);
     _scene->AddAnimation(anim);
     piece->GetNode()->SetAnimation(anim);
     piece->SetPosition(x, y);
@@ -98,18 +111,7 @@ void Board::Update(uint millis)
 
 void Board::ParsePrologMoves(const std::string& movesStr)
 {
-    for (auto xi = 0u; xi < _lines; ++xi)
-    {
-        for (auto yi = 0u, realyi = 0u; yi < _columns; ++yi)
-        {
-            if (xi == 0)
-                realyi = yi / 2;
-            else
-                realyi = yi;
-    
-            _cells[xi][realyi]->Selected = false;
-        }
-    }
+    ClearSelections();
 
     auto movesSplit = split_string(movesStr, '[');
     for (auto& str : movesSplit)
@@ -123,6 +125,30 @@ void Board::ParsePrologMoves(const std::string& movesStr)
         }
 
         _cells[x][y]->Selected = true;
+    }
+}
+
+
+void Board::ParsePrologMoveTo(const std::string& moveToStr)
+{
+    auto moveToSplit = split_string(moveToStr, '[');
+    std::vector<std::pair<std::pair<YafXY<uint>, Piece*>, YafXY<uint>>> moves;
+
+    for (int i = 0; i < moveToSplit.size(); i += 3)
+    {
+        auto pair = make_pair(make_pair(YafXY<uint>(moveToSplit[i+1][1] - '0', moveToSplit[i+1][3] - '0'), nullptr),
+                                        YafXY<uint>(moveToSplit[i+2][1] - '0', moveToSplit[i+2][3] - '0'));
+        moves.push_back(pair);
+    }
+
+    for (auto& p : moves)
+    {
+        p.first.second = const_cast<Piece*>(GetPiece(p.first.first.X, p.first.first.Y));
+    }
+
+    for (auto& p : moves)
+    {
+        MovePiece(p.first.second, p.second.X, p.second.Y);
     }
 }
 
@@ -231,6 +257,37 @@ std::string Board::PlayerToProlog(Player player)
         default:
             return "";
     }
+}
+
+void Board::NextPlayer()
+{
+    if (_currentPlayer == Player::First)
+        _currentPlayer = Player::Second;
+    else if (_currentPlayer == Player::Second)
+        _currentPlayer = Player::First;
+
+    _currentState = GameState::PickSourcePiece;
+    _pieceToMove = nullptr;
+
+    ClearSelections();
+}
+
+void Board::ClearSelections()
+{
+    for (auto xi = 0u; xi < _lines; ++xi)
+    {
+        for (auto yi = 0u, realyi = 0u; yi < _columns; ++yi)
+        {
+            if (xi == 0)
+                realyi = yi / 2;
+            else
+                realyi = yi;
+
+            _cells[xi][realyi]->Selected = false;
+        }
+    }
+
+    std::for_each(_pieces.begin(), _pieces.end(), [](Piece& p) { p.SetSelected(false); });
 }
 
 void Piece::SetSelected(bool value)

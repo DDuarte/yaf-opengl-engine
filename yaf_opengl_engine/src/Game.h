@@ -39,6 +39,8 @@ public:
     void SetSelected(bool value);
     void SetPosition(uint x, uint y) { _position.X = x, _position.Y = y; }
     void SetNode(YafNode* node) { _node = node; }
+
+    bool operator==(const Piece& rhs) { return _node ? _node == rhs._node : (_position.X == rhs._position.X && _position.Y == rhs._position.Y); }
 private:
     Player _owner;
     YafNode* _node;
@@ -58,13 +60,14 @@ public:
 
     void AddPiece(Piece& piece) { AssignNodeForPiece(piece); _pieces.push_back(piece); }
     const Piece* GetPiece(uint x, uint y) const;
-    void MovePiece(Piece* piece, uint x, uint y) const;
+    void MovePiece(Piece* piece, uint x, uint y);
 
     void Update(uint millis);
     void Draw() { _scoreboard.Draw(); }
 
     void ParsePrologBoard(const std::string& boardStr);
     void ParsePrologMoves(const std::string& movesStr);
+    void ParsePrologMoveTo(const std::string& moveToStr);
 
     void SetCurrentPlayer(Player plr) { _currentPlayer = plr; }
     Player GetCurrentPlayer() const { return _currentPlayer; }
@@ -72,8 +75,14 @@ public:
     void SetCurrentState(GameState gs) { _currentState = gs; }
     GameState GetCurrentState() const { return _currentState; }
 
+    void SetPieceToMove(const Piece* piece) { _pieceToMove = piece; }
+    const Piece* GetPieceToMove() const { return _pieceToMove; }
+
+    void NextPlayer();
+
     const std::stack<std::string>& GetBoardStack() const { return _boardStrings; }
     const std::vector<Piece>& GetPieces() const { return _pieces; }
+    void AddToBoardStack(const std::string& str) { _boardStrings.push(str); }
 
     static Player PlayerFromProlog(const std::string& str);
     static std::string PlayerToProlog(Player player);
@@ -86,6 +95,7 @@ private:
     uint _columns;
     YafNode*** _cells;
     Scoreboard _scoreboard;
+    const Piece* _pieceToMove;
 
     Player _currentPlayer;
     GameState _currentState;
@@ -97,6 +107,7 @@ private:
 
     void AssignNodeForPiece(Piece& piece);
     void DeassignNodes();
+    void ClearSelections();
 };
 
 #endif
