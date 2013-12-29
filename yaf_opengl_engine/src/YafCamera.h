@@ -84,25 +84,24 @@ public:
     {
         glMatrixMode(GL_MODELVIEW);
 
-        if (_firstTime)
-        {
+        //if (_firstTime)
+        //{
             glLoadIdentity();
             gluLookAt(position[0], position[1], position[2],
                 Target.X, Target.Y, Target.Z,
                 0.0, 1.0, 0.0);
-            _firstTime = false;
-        }
-        else
-        {
-            glLoadIdentity();
-            glTranslatef(position[0], position[1], position[2]);
-            glRotatef(rotation[0], 1.f, 0.f, 0.f);
-            glRotatef(rotation[1], 0.f, 1.f, 0.f);
-            glRotatef(rotation[2], 0.f, 0.f, 1.f);
-            //gluLookAt(position[0], position[1], position[2],
-            //Target.X, Target.Y, Target.Z,
-            //    0.0, 1.0, 0.0);
-        }
+        //}
+        //else
+        //{
+        //    glLoadIdentity();
+        //    glTranslatef(position[0], position[1], position[2]);
+        //    glRotatef(rotation[0], 1.f, 0.f, 0.f);
+        //    glRotatef(rotation[1], 0.f, 1.f, 0.f);
+        //    glRotatef(rotation[2], 0.f, 0.f, 1.f);
+        //    //gluLookAt(position[0], position[1], position[2],
+        //    //Target.X, Target.Y, Target.Z,
+        //    //    0.0, 1.0, 0.0);
+        //}
     }
 
     virtual void updateProjectionMatrix(int width, int height) override
