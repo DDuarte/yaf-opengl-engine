@@ -38,7 +38,16 @@ void Scoreboard::Update(uint millis)
        _lastCountDown = millis / 1000;
        return;
    }
-   _currentCountDown = _countDown - (currentTime - _lastCountDown);
+
+   else if (_reset)
+   {
+	   _lastCountDown = millis / 1000;
+	   _reset = false;
+	   return;
+   }
+
+   _currentCountDown = _countDown - (millis/1000 - _lastCountDown);
+
    if (_currentCountDown < 0)
    {
 	   _countDown = -1;
@@ -120,4 +129,10 @@ void Scoreboard::Draw()
     }
 
     glEnable(GL_LIGHTING);
+}
+
+void Scoreboard::ResetCountdown()
+{
+	_countDown = COUNTDOWN;
+	_reset = true;
 }
