@@ -274,7 +274,7 @@ void Board::ResetRound(Player winner)
 {
     ClearSelections();
     _currentState = GameState::PickSourcePiece;
-    _currentPlayer = Player::First;
+    _currentPlayer = Player::Second;
     _pieceToMove = nullptr;
 
     _scene->GetNode("oPiece")->Position.Z = -999999.0f; // lol.
