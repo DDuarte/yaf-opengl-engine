@@ -58,7 +58,7 @@ spld --output=server.exe --static server.sav</Command>
       <Outputs>server.exe</Outputs>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>move /Y server.exe $(SolutionDir)bin</Command>
+      <Command>copy /Y server.exe $(SolutionDir)bin</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
