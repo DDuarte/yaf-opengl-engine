@@ -394,7 +394,7 @@ int main(int argc, char* argv[])
 
     board->GetNetwork()->EnqueueMessage(PrologPredicate::Build("init", "pVSp", "normal")); // TODO: Add customization options for difficulty and mode
 
-	auto response = board->GetNetwork()->GetMessage();
+    auto response = board->GetNetwork()->GetMessage();
 
     if (starts_with(response, "init_invalid"))
     {
@@ -408,7 +408,7 @@ int main(int argc, char* argv[])
         auto firstBracket = response.find_first_of('[');
         auto lastBracket = response.find_last_of(']');
 
-		auto boardBlock = response.substr(firstBracket + 1, lastBracket - firstBracket - 1);
+        auto boardBlock = response.substr(firstBracket + 1, lastBracket - firstBracket - 1);
 
         auto lastComma = response.find_last_of(',');
         auto lastParens = response.find_last_of(')');

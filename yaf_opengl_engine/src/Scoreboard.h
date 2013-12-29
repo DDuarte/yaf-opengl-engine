@@ -11,12 +11,12 @@ class Board;
 class Scoreboard
 {
 public:
-	Scoreboard(Board* board);
+    Scoreboard(Board* board);
     void Update(uint millis);
     void IncHome();
     void IncAway();
     void ResetScores() { _home = 0; _away = 0; }
-	void ResetCountdown();
+    void ResetCountdown();
     void ResetTimer() { _firstMillis = 0; }
     void Draw();
     void SetCountDown(uint count){ _countDown = count; }
@@ -29,8 +29,8 @@ private:
     uint _firstMillis;
     std::string _currentTime;
     int _currentCountDown;
-	Board* _board;
-	bool _reset;
+    Board* _board;
+    bool _reset;
 };
 
 #endif

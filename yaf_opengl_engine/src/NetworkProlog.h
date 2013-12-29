@@ -58,11 +58,11 @@ private:
     template<> // unsigned long overload
     static std::string stringify<>(const unsigned long& val) { return std::to_string(val); }
 
-	template<> // int overload
-	static std::string stringify<>(const int& val) { return std::to_string(val); }
+    template<> // int overload
+    static std::string stringify<>(const int& val) { return std::to_string(val); }
 
-	template<> // unsigned int overload
-	static std::string stringify<>(const unsigned int& val) { return std::to_string(val); }
+    template<> // unsigned int overload
+    static std::string stringify<>(const unsigned int& val) { return std::to_string(val); }
 };
 
 class NetworkProlog

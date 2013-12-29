@@ -10,7 +10,7 @@ Scoreboard::Scoreboard(Board* board)
     ResetScores();
     ResetCountdown();
     ResetTimer();
-	_board = board;
+    _board = board;
 }
 
 void Scoreboard::Update(uint millis)
@@ -41,20 +41,20 @@ void Scoreboard::Update(uint millis)
 
    else if (_reset)
    {
-	   _lastCountDown = millis / 1000;
-	   _reset = false;
-	   return;
+       _lastCountDown = millis / 1000;
+       _reset = false;
+       return;
    }
 
    _currentCountDown = _countDown - (millis/1000 - _lastCountDown);
 
    if (_currentCountDown < 0)
    {
-	   _countDown = -1;
-	   if (_board->GetCurrentPlayer() == Player::First)
-		   _away++;
-	   else if (_board->GetCurrentPlayer() == Player::Second)
-		   _home++;
+       _countDown = -1;
+       if (_board->GetCurrentPlayer() == Player::First)
+           _away++;
+       else if (_board->GetCurrentPlayer() == Player::Second)
+           _home++;
    }
 }
 
@@ -133,6 +133,6 @@ void Scoreboard::Draw()
 
 void Scoreboard::ResetCountdown()
 {
-	_countDown = COUNTDOWN;
-	_reset = true;
+    _countDown = COUNTDOWN;
+    _reset = true;
 }
