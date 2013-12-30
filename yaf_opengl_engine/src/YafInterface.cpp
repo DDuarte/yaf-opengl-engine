@@ -170,6 +170,9 @@ void YafInterface::ProcessHits(GLint hits, GLuint* buffer)
 
                     if (_scene->GetBoard()->GetCurrentState() == GameState::PickSourcePiece && !isCell)
                     {
+                        if (_scene->GetBoard()->GetBoardStack().empty())
+                            break;
+
                         auto& board = _scene->GetBoard()->GetBoardStack().top();
                         auto x = piece->GetPosition().X;
                         auto y = piece->GetPosition().Y;

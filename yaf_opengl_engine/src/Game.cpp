@@ -329,9 +329,14 @@ void Board::Undo()
 {
     ShowUndo = false;
 
-    _boardStrings.pop();
-    ParsePrologBoard(_boardStrings.top());
-    _boardStrings.pop();
+    if (!_boardStrings.empty())
+        _boardStrings.pop();
+
+    if (!_boardStrings.empty())
+    {
+        ParsePrologBoard(_boardStrings.top());
+        _boardStrings.pop();
+    }
 
     NextPlayer();
 }
