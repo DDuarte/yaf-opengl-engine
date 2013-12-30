@@ -154,6 +154,12 @@
             textureref="menu"
             texlength_s="-2"
             texlength_t="2" />
+        <appearance id="dark"
+            emissive="0 0 0 1"
+            ambient="0 0 0 1"
+            diffuse="0 0 0 1"
+            specular="0 0 0 1"
+            shininess="0" />
     </appearances>
     <graph rootid="game">
         <node id="game" position="0 0 0" pitch="90" yaw="0" roll="0" scale="1 1 1">
@@ -169,7 +175,7 @@
             </children>
         </node>
         <node id="menu" position="1000 0 0" pitch="-90" yaw="0" roll="0" scale="1 1 1">
-            <appearanceref id="menu"/>
+            <appearanceref id="dark"/>
             <children>
                 <noderef id="menu_background" />
                 <noderef id="button_PvP" />
@@ -181,6 +187,7 @@
             </children>
         </node>
         <node id="menu_background" position="0 0 0" pitch="0" yaw="0" roll="0" scale="500 250 1">
+            <appearanceref id="menu"/>
             <children>
                 <noderef id="aux" />
             </children>
