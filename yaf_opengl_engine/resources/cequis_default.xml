@@ -1,8 +1,10 @@
 <yaf>
     <globals background="0 0 0 0" drawmode="fill" shading="gouraud" cullface="front" cullorder="CW" />
-    <cameras initial="free_cam" >
+    <cameras initial="menu_cam" >
         <free id="free_cam" near="0.1" far="5000" angle="50" pos="-17 30 0" target="0 0 0" />
-        <!-- todo: add non-movable perspective cameras (at least two) -->
+        <perspective id="menu_cam" near="0.1" far="5000" angle="50" pos="1000 0 -500" target="1000 0 0" /> 
+        <!-- todo: add non-movable perspective cameras (at least two)
+             <ortho id="ss" near="ff" far="ff" left="ff" right="ff" top="ff" bottom="ff" />         -->
     </cameras>
     <lighting doublesided="false" local="false" enabled="true" ambient="0.01 0.01 0.01 1" >
         <omni id="light1" enabled="true"
@@ -23,6 +25,7 @@
         <texture id="floor" file="floor.jpg" />
         <texture id="wood_dark" file="wood_dark.jpg" />
         <texture id="undo" file="undo.png" />
+        <texture id="menu" file="menu.jpg" />    
     </textures>
     <appearances>
         <appearance id="black"
@@ -142,6 +145,15 @@
             textureref="undo"
             texlength_s="55"
             texlength_t="55" /> 
+        <appearance id="menu"
+            emissive="0.5 0.5 0.5 0.5"
+            ambient="0.5 0.5 0.5 0.5"
+            diffuse="0.5 0.5 0.5 0.5"
+            specular="0.5 0.5 0.5 0.5"
+            shininess="1"
+            textureref="menu"
+            texlength_s="-2"
+            texlength_t="2" />
     </appearances>
     <graph rootid="game">
         <node id="game" position="0 0 0" pitch="90" yaw="0" roll="0" scale="1 1 1">
@@ -153,6 +165,59 @@
                 <noderef id="table" />
                 <noderef id="score" />
                 <noderef id="background" />
+                <noderef id="menu" />
+            </children>
+        </node>
+        <node id="menu" position="1000 0 0" pitch="-90" yaw="0" roll="0" scale="1 1 1">
+            <appearanceref id="menu"/>
+            <children>
+                <noderef id="menu_background" />
+                <noderef id="button_PvP" />
+                <noderef id="button_PvEasy" />
+                <noderef id="button_PvNormal" />
+                <noderef id="button_Easy" />
+                <noderef id="button_Normal" />
+                <noderef id="button_Exit" />
+            </children>
+        </node>
+        <node id="menu_background" position="0 0 0" pitch="0" yaw="0" roll="0" scale="500 250 1">
+            <children>
+                <noderef id="aux" />
+            </children>
+        </node>
+        <node id="button_PvP" position="365 -48 0" pitch="0" yaw="0" roll="0" scale="80 8 1" pickable="true">
+            <children>
+                <noderef id="aux" />
+            </children>
+        </node>
+        <node id="button_PvEasy" position="365 -79 0" pitch="0" yaw="0" roll="0" scale="80 8 1" pickable="true">
+            <children>
+                <noderef id="aux" />
+            </children>
+        </node>
+        <node id="button_PvNormal" position="355 -110 0" pitch="0" yaw="0" roll="0" scale="90 8 1" pickable="true">
+            <children>
+                <noderef id="aux" />
+            </children>
+        </node>
+        <node id="button_Easy" position="365 -143 0" pitch="0" yaw="0" roll="0" scale="80 8 1" pickable="true">
+            <children>
+                <noderef id="aux" />
+            </children>
+        </node>
+        <node id="button_Normal" position="365 -173 0" pitch="0" yaw="0" roll="0" scale="80 8 1" pickable="true">
+            <children>
+                <noderef id="aux" />
+            </children>
+        </node>
+        <node id="button_Exit" position="365 -204 0" pitch="0" yaw="0" roll="0" scale="80 8 1" pickable="true">
+            <children>
+                <noderef id="aux" />
+            </children>
+        </node>
+        <node id="aux" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" >
+            <children>
+                <rectangle xy1="-1 1" xy2="1 -1" />
             </children>
         </node>
          <node id="score" position="13.14 0 -3.03 " pitch="90" yaw="90" roll="0" scale="0.5 0.5 0.5">
@@ -243,7 +308,7 @@
         </node>
         <node id="rect" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
             <children>
-                <rectangle xy1="-35.35 35.35" xy2="35.35 -35.35" />
+                <rectangle xy1="-1 1" xy2="1 -1" />
             </children>
         </node>
         <node id="table" position="0 0 0.5" pitch="0" yaw="0" roll="45" scale="1 1 1">
