@@ -42,6 +42,12 @@ public:
         glLoadIdentity();
         gluPerspective(Angle, (double) width / (double) height, Near, Far);
     }
+
+    virtual bool rotateTo(int axis, float angle, float increment = 0.5f) override { return false; }
+    virtual bool rotate(int axis, float angle) override { return false; }
+    virtual bool setRotation(int axis, float angle) override { return false; }
+    virtual bool moveTo(int axis, float value, float increment = 0.5f) override { return false; }
+    virtual bool translate(int axis, float value) override { return false; }
 };
 
 class YafOrthoCamera : public YafCamera
