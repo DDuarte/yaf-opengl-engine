@@ -39,7 +39,15 @@ void YafInterface::processMouse(int button, int state, int x, int y)
     CGFinterface::processMouse(button, state, x, y);
 
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-        Pick(x, y);
+    {
+        if (x >= 10.0f && x <= 65.0f && (CGFapplication::width - y) >= 10.0f && (CGFapplication::width - y) <= 65.0f)
+        {
+            if (_scene->GetBoard()->ShowUndo)
+                _scene->GetBoard()->Undo();
+        }
+        else
+            Pick(x, y);
+    }
 }
 
 void YafInterface::processKeyboard(unsigned char key, int x, int y)
@@ -78,7 +86,9 @@ void YafInterface::Pick(int x, int y)
 
     glMultMatrixf(projmat);
 
+    _scene->Picking = true;
     _scene->display();
+    _scene->Picking = false;
 
     glMatrixMode(GL_PROJECTION);
     glPopMatrix();
@@ -160,6 +170,7 @@ void YafInterface::ProcessHits(GLint hits, GLuint* buffer)
 
                             _scene->GetBoard()->ParsePrologMoves(moveBlock);
                             _scene->GetBoard()->SetCurrentState(GameState::PickDestinationCell);
+                            _scene->GetBoard()->ShowUndo = false;
                             return;
                         }
                         else if (starts_with(response, "moves_from_invalid"))

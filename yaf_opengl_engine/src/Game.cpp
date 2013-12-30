@@ -9,7 +9,7 @@
 
 Board::Board(YafScene* scene, NetworkProlog* network) : _scene(scene), _network(network),
 _cells(nullptr), _lines(0), _columns(0), _currentPlayer(Player::None), _currentState(GameState::None),
-_scoreboard(this), _pieceToMove(nullptr)
+_scoreboard(this), _pieceToMove(nullptr), ShowUndo(false)
 {
     _scene->SetBoard(this);
 }
@@ -172,7 +172,10 @@ void Board::DeassignNodes()
     _blackPieces.push("bPiece3");
 
     for (auto& p : _pieces)
+    {
+        p.GetNode()->SetAnimation(nullptr);
         p.SetNode(nullptr);
+    }
 
     _pieces.clear();
 }
@@ -239,17 +242,17 @@ std::string Board::PlayerToProlog(Player player)
 
 void Board::NextPlayer()
 {
+    _currentState = GameState::PickSourcePiece;
+    _pieceToMove = nullptr;
+    ClearSelections();
+    _scoreboard.ResetCountdown();
+
+    ShowUndo = true;
+
     if (_currentPlayer == Player::First)
         _currentPlayer = Player::Second;
     else if (_currentPlayer == Player::Second)
         _currentPlayer = Player::First;
-
-    _currentState = GameState::PickSourcePiece;
-    _pieceToMove = nullptr;
-
-    _scoreboard.ResetCountdown();
-
-    ClearSelections();
 }
 
 void Board::ClearSelections()
@@ -288,6 +291,15 @@ void Board::ResetRound(Player winner)
     while (!_boardStrings.empty())
         _boardStrings.pop();
     ParsePrologBoard(InitialBoard);
+}
+
+void Board::Undo()
+{
+    ShowUndo = false;
+
+    _boardStrings.pop();
+    ParsePrologBoard(_boardStrings.top());
+    _boardStrings.pop();
 }
 
 void Piece::SetSelected(bool value)

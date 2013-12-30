@@ -63,6 +63,7 @@ public:
     Board* GetBoard() const { return _board; }
     void SetBoard(Board* board) { _board = board; }
 
+    bool Picking = false;
 private:
     // Globals
     YafXYZW<> _backgroundColor;

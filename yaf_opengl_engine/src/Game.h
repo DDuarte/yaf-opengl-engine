@@ -91,6 +91,8 @@ public:
     std::string InitialBoard;
     void ResetRound(Player winner);
 
+    bool ShowUndo;
+    void Undo();
 private:
     std::vector<Piece> _pieces;
     YafScene* _scene;

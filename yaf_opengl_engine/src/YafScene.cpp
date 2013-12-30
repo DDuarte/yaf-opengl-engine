@@ -2,6 +2,7 @@
 #include "YafNode.h"
 #include "YafAppearance.h"
 #include "Game.h"
+#include "CGFapplication.h"
 
 #include <iostream>
 
@@ -178,6 +179,34 @@ void YafScene::display()
     _board->Draw();
 
     glPopMatrix();
+
+    // draw hud
+    if (!Picking)
+    {
+        glMatrixMode(GL_PROJECTION);
+        glPushMatrix();
+        glLoadIdentity();
+        gluOrtho2D(0, CGFapplication::width, 0, CGFapplication::height);
+        glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
+        glLoadIdentity();
+        glDisable(GL_DEPTH_TEST);
+
+        glColor3f(0.0, 0.0, 1.0);
+        if (_board->ShowUndo)
+        {
+            _appearances["undo"]->apply();
+            YafRectangle rect;
+            rect.Point1 = YafXY<>(10.0f, 10.0f);
+            rect.Point2 = YafXY<>(65.0f, 65.0f);
+            rect.Draw(_appearances["undo"]);
+        }
+
+        glEnable(GL_DEPTH_TEST);
+        glPopMatrix();
+        glMatrixMode(GL_PROJECTION);
+        glPopMatrix();
+    }
 
     glutSwapBuffers();
 }

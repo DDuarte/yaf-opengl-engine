@@ -22,6 +22,7 @@
         <texture id="roof" file="roof.jpg" />
         <texture id="floor" file="floor.jpg" />
         <texture id="wood_dark" file="wood_dark.jpg" />
+        <texture id="undo" file="undo.png" />
     </textures>
     <appearances>
         <appearance id="black"
@@ -78,7 +79,7 @@
             textureref="wood_light"
             texlength_s="1"
             texlength_t="1" />
-            <appearance id="score"
+        <appearance id="score"
             emissive="0 0 0.1 0.5"
             ambient="0.5 0.5 1 0.5"
             diffuse="0.5 0.5 1 0.5"
@@ -87,7 +88,7 @@
             textureref="score"
             texlength_s="1"
             texlength_t="1" />
-            <appearance id="wall"
+        <appearance id="wall"
             emissive="0.5 0.5 0.5 0.5"
             ambient="0.5 0.5 0.5 0.5"
             diffuse="0.5 0.5 0.5 0.5"
@@ -96,7 +97,7 @@
             textureref="wall"
             texlength_s="35.35"
             texlength_t="35.35" />
-            <appearance id="floor"
+        <appearance id="floor"
             emissive="0.5 0.5 0.5 0.5"
             ambient="0.5 0.5 0.5 0.5"
             diffuse="0.5 0.5 0.5 0.5"
@@ -105,7 +106,7 @@
             textureref="floor"
             texlength_s="5"
             texlength_t="5" />
-            <appearance id="roof"
+        <appearance id="roof"
             emissive="0.5 0.5 0.5 0.5"
             ambient="0.5 0.5 0.5 0.5"
             diffuse="0.5 0.5 0.5 0.5"
@@ -114,7 +115,7 @@
             textureref="roof"
             texlength_s="35.35"
             texlength_t="35.35" />
-            <appearance id="blue"
+        <appearance id="blue"
             emissive="0.5 0.5 0.5 0.5"
             ambient="0.5 0.5 0.5 0.5"
             diffuse="0.5 0.5 0.5 0.5"
@@ -123,7 +124,7 @@
             textureref="blue"
             texlength_s="1"
             texlength_t="1" />
-            <appearance id="wood_dark"
+        <appearance id="wood_dark"
             emissive="0.5 0.5 0.5 0.5"
             ambient="0.5 0.5 0.5 0.5"
             diffuse="0.5 0.5 0.5 0.5"
@@ -131,7 +132,16 @@
             shininess="1"
             textureref="wood_dark"
             texlength_s="1"
-            texlength_t="1" />            
+            texlength_t="1" />
+        <appearance id="undo"
+            emissive="0.5 0.5 0.5 0.5"
+            ambient="0.5 0.5 0.5 0.5"
+            diffuse="0.5 0.5 0.5 0.5"
+            specular="0.5 0.5 0.5 0.5"
+            shininess="1"
+            textureref="undo"
+            texlength_s="55"
+            texlength_t="55" /> 
     </appearances>
     <graph rootid="game">
         <node id="game" position="0 0 0" pitch="90" yaw="0" roll="0" scale="1 1 1">
@@ -142,7 +152,7 @@
                 <noderef id="board" />
                 <noderef id="table" />
                 <noderef id="score" />
-                <noderef id= "background" />
+                <noderef id="background" />
             </children>
         </node>
          <node id="score" position="13.14 0 -3.03 " pitch="90" yaw="90" roll="0" scale="0.5 0.5 0.5">
