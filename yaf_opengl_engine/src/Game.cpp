@@ -300,6 +300,8 @@ void Board::Undo()
     _boardStrings.pop();
     ParsePrologBoard(_boardStrings.top());
     _boardStrings.pop();
+
+    NextPlayer();
 }
 
 void Piece::SetSelected(bool value)
