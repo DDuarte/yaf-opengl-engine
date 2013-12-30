@@ -40,7 +40,7 @@ void YafInterface::processMouse(int button, int state, int x, int y)
 
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
     {
-        if (x >= 10.0f && x <= 65.0f && (CGFapplication::width - y) >= 10.0f && (CGFapplication::width - y) <= 65.0f)
+        if (x >= 10.0f && x <= 65.0f && (CGFapplication::height - y) >= 10.0f && (CGFapplication::height - y) <= 65.0f)
         {
             if (_scene->GetBoard()->ShowUndo)
                 _scene->GetBoard()->Undo();
@@ -107,11 +107,13 @@ void YafInterface::ProcessHits(GLint hits, GLuint* buffer)
     GLuint nselected;
 
     // iterate over the list of hits, and choosing the one closer to the viewer (lower depth)
-    for (int i = 0; i < hits; i++) {
+    for (int i = 0; i < hits; i++)
+    {
         int num = *ptr; ptr++;
         GLuint z1 = *ptr; ptr++;
         ptr++;
-        if (z1 < mindepth && num>0) {
+        if (z1 < mindepth && num > 0)
+        {
             mindepth = z1;
             selected = ptr;
             nselected = num;
