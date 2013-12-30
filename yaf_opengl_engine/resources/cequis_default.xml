@@ -1,6 +1,6 @@
 <yaf>
     <globals background="0 0 0 0" drawmode="fill" shading="gouraud" cullface="front" cullorder="CW" />
-    <cameras initial="free_cam" >
+    <cameras initial="menu_cam" >
         <free id="free_cam" near="0.1" far="5000" angle="50" pos="-17 30 0" target="0 0 0" />
         <perspective id="menu_cam" near="0.1" far="5000" angle="50" pos="1000 0 -500" target="1000 0 0" /> 
     </cameras>
@@ -184,7 +184,7 @@
                 <noderef id="button_Exit" />
             </children>
         </node>
-        <node id="menu_background" position="0 0 0" pitch="0" yaw="0" roll="0" scale="500 250 1">
+        <node id="menu_background" position="0 0 1" pitch="0" yaw="0" roll="0" scale="500 250 1">
             <appearanceref id="menu"/>
             <children>
                 <noderef id="aux" />
