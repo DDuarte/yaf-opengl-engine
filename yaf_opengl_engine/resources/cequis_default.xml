@@ -177,17 +177,17 @@
             <children>
                 <noderef id="menu_background" />
                 <noderef id="button_PvP" />
-                <noderef id="text_PvP" />
+                <noderef id="button_text_PvP" />
                 <noderef id="button_PvEasy" />
-                <noderef id="text_PvE" />
+                <noderef id="button_text_PvEasy" />
                 <noderef id="button_PvNormal" />
-                <noderef id="text_PvN" />
+                <noderef id="button_text_PvNormal" />
                 <noderef id="button_Easy" />
-                <noderef id="text_EvE" />
+                <noderef id="button_text_Easy" />
                 <noderef id="button_Normal" />
-                <noderef id="text_NvN" />
+                <noderef id="button_text_Normal" />
                 <noderef id="button_Exit" />
-                <noderef id="text_Exit" />
+                <noderef id="button_text_Exit" />
             </children>
         </node>
         <node id="menu_background" position="0 0 1" pitch="0" yaw="0" roll="0" scale="500 250 1">
@@ -201,7 +201,7 @@
                 <noderef id="aux" />
             </children>
         </node>
-        <node id="text_PvP" position="440 -51 -1" pitch="0" yaw="0" roll="0" scale="-0.09 0.09 0.09">
+        <node id="button_text_PvP" position="440 -51 -1" pitch="0" yaw="0" roll="0" scale="-0.09 0.09 0.09" pickable="true">
             <children>
                 <text text="Play Player vs Player" />
             </children>
@@ -211,30 +211,27 @@
                 <noderef id="aux" />
             </children>
         </node>
-        
-        <node id="text_PvE" position="440 -82 -1" pitch="0" yaw="0" roll="0" scale="-0.09 0.09 0.09">
+        <node id="button_text_PvEasy" position="440 -82 -1" pitch="0" yaw="0" roll="0" scale="-0.09 0.09 0.09" pickable="true">
             <children>
                 <text text="Play Player vs PC - Easy" />
             </children>
         </node>
-        
         <node id="button_PvNormal" position="355 -110 0" pitch="0" yaw="0" roll="0" scale="90 8 1" pickable="true">
             <children>
                 <noderef id="aux" />
             </children>
         </node>
-        <node id="text_PvN" position="440 -113 -1" pitch="0" yaw="0" roll="0" scale="-0.09 0.09 0.09">
+        <node id="button_text_PvNormal" position="440 -113 -1" pitch="0" yaw="0" roll="0" scale="-0.09 0.09 0.09" pickable="true">
             <children>
                 <text text="Play Player vs PC - Normal" />
             </children>
         </node>
-        
         <node id="button_Easy" position="367 -143 0" pitch="0" yaw="0" roll="0" scale="78 8 1" pickable="true">
             <children>
                 <noderef id="aux" />
             </children>
         </node>
-        <node id="text_EvE" position="440 -146 -1" pitch="0" yaw="0" roll="0" scale="-0.09 0.09 0.09">
+        <node id="button_text_Easy" position="440 -146 -1" pitch="0" yaw="0" roll="0" scale="-0.09 0.09 0.09" pickable="true">
             <children>
                 <text text="Play PC vs PC - Easy" />
             </children>
@@ -244,7 +241,7 @@
                 <noderef id="aux" />
             </children>
         </node>
-        <node id="text_NvN" position="440 -176 -1" pitch="0" yaw="0" roll="0" scale="-0.09 0.09 0.09">
+        <node id="button_text_Normal" position="440 -176 -1" pitch="0" yaw="0" roll="0" scale="-0.09 0.09 0.09" pickable="true">
             <children>
                 <text text="Play PC vs PC - Normal" />
             </children>
@@ -254,7 +251,7 @@
                 <noderef id="aux" />
             </children>
         </node>
-        <node id="text_Exit" position="440 -207 -1" pitch="0" yaw="0" roll="0" scale="-0.09 0.09 0.09">
+        <node id="button_text_Exit" position="440 -207 -1" pitch="0" yaw="0" roll="0" scale="-0.09 0.09 0.09" pickable="true">
             <children>
                 <text text="Exit" />
             </children>

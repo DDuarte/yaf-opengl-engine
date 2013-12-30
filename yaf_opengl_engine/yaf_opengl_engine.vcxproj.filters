@@ -39,6 +39,9 @@
     <ClCompile Include="src\Scoreboard.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Menu.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\YafLight.h">
@@ -90,6 +93,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="src\NetworkProlog.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Menu.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

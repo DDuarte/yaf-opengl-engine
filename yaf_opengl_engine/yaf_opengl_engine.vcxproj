@@ -17,6 +17,7 @@
   <ItemGroup>
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\Scoreboard.cpp" />
     <ClCompile Include="src\Utilities.cpp" />
     <ClCompile Include="src\YafAnimation.cpp" />
@@ -29,6 +30,7 @@
     <ClInclude Include="src\ConcurrentQueue.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\Main.h" />
+    <ClInclude Include="src\Menu.h" />
     <ClInclude Include="src\NetworkProlog.h" />
     <ClInclude Include="src\NewellsMethod.h" />
     <ClInclude Include="src\Scoreboard.h" />

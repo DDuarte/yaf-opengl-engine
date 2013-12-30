@@ -7,6 +7,7 @@
 
 #include "YafMisc.h"
 #include "Scoreboard.h"
+#include "NetworkProlog.h"
 
 enum class Player
 {
@@ -22,9 +23,21 @@ enum class GameState
     PickDestinationCell,
 };
 
+enum class GameMode
+{
+    PvsP,
+    PvsPC,
+    PCvsPC,
+};
+
+enum class GameDifficulty
+{
+    Easy,
+    Normal
+};
+
 class YafNode;
 class YafScene;
-class NetworkProlog;
 
 class Piece
 {
@@ -51,12 +64,12 @@ private:
 class Board
 {
 public:
-    Board(YafScene* scene, NetworkProlog* network);
+    Board(YafScene* scene, GameMode mode, GameDifficulty diff);
     ~Board() { for (auto i = 0u; i < _lines; ++i) delete[] _cells[i]; delete[] _cells; }
 
     void FillCells();
 
-    NetworkProlog* GetNetwork() const { return _network; }
+    NetworkProlog* GetNetwork() { return &_network; }
 
     void AddPiece(Piece& piece) { AssignNodeForPiece(piece); _pieces.push_back(piece); }
     const Piece* GetPiece(uint x, uint y) const;
@@ -96,12 +109,14 @@ public:
 private:
     std::vector<Piece> _pieces;
     YafScene* _scene;
-    NetworkProlog* _network;
+    NetworkProlog _network;
     uint _lines;
     uint _columns;
     YafNode*** _cells;
     Scoreboard _scoreboard;
     const Piece* _pieceToMove;
+    GameMode _mode;
+    GameDifficulty _diff;
 
     Player _currentPlayer;
     GameState _currentState;
@@ -114,6 +129,34 @@ private:
     void AssignNodeForPiece(Piece& piece);
     void DeassignNodes();
     void ClearSelections();
+
+    static std::string ModeToString(GameMode mode)
+    {
+        switch (mode)
+        {
+        case GameMode::PvsP:
+            return "pVSp";
+        case GameMode::PvsPC:
+            return "pVSc";
+        case GameMode::PCvsPC:
+            return "cVSc";
+        default:
+            return "";
+        }
+    }
+
+    static std::string DiffToString(GameDifficulty diff)
+    {
+        switch (diff)
+        {
+        case GameDifficulty::Easy:
+            return "easy";
+        case GameDifficulty::Normal:
+            return "normal";
+        default:
+            return "";
+        }
+    }
 };
 
 #endif

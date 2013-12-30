@@ -176,7 +176,8 @@ void YafScene::display()
 
     _rootNode->Draw();
 
-    _board->Draw();
+    if (_menu.GetBoard())
+        _menu.GetBoard()->Draw();
 
     glPopMatrix();
 
@@ -193,7 +194,7 @@ void YafScene::display()
         glDisable(GL_DEPTH_TEST);
 
         glColor3f(0.0, 0.0, 1.0);
-        if (_board->ShowUndo)
+        if (_menu.GetBoard() && _menu.GetBoard()->ShowUndo)
         {
             _appearances["undo"]->apply();
             YafRectangle rect;
@@ -230,7 +231,8 @@ void YafScene::initCameras()
 void YafScene::update(unsigned long millis)
 {
     _rootNode->Update(millis);
-    _board->Update(millis);
+    if (_menu.GetBoard())
+        _menu.GetBoard()->Update(millis);
 }
 
 void YafScene::SetRootNode(YafNode* node)
@@ -293,4 +295,8 @@ void YafScene::AddAnimation(YafAnimation* animation)
 
      newScene->initCameras();
      newScene->init();
+ }
+
+ YafScene::YafScene() : _menu(this)
+ {
  }

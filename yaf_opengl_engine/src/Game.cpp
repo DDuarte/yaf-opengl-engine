@@ -7,11 +7,43 @@
 #include <tuple>
 #include <algorithm>
 
-Board::Board(YafScene* scene, NetworkProlog* network) : _scene(scene), _network(network),
+Board::Board(YafScene* scene, GameMode mode, GameDifficulty diff) : _scene(scene), ShowUndo(false),
 _cells(nullptr), _lines(0), _columns(0), _currentPlayer(Player::None), _currentState(GameState::None),
-_scoreboard(this), _pieceToMove(nullptr), ShowUndo(false)
+_scoreboard(this), _pieceToMove(nullptr), _mode(mode), _diff(diff)
 {
-    _scene->SetBoard(this);
+    _scene->SetState(State::Game);
+    _scene->activateCamera(0);
+
+    if (!_network.Startup())
+        throw std::runtime_error("Could not start network.");
+
+    FillCells();
+
+    _network.EnqueueMessage(PrologPredicate::Build("init", ModeToString(mode), DiffToString(diff)));
+
+    auto response = _network.GetMessage();
+
+    if (starts_with(response, "init_invalid"))
+    {
+        throw std::runtime_error("Received init_invalid.");
+    }
+    else if (starts_with(response, "init_ok"))
+    {
+        auto firstBracket = response.find_first_of('[');
+        auto lastBracket = response.find_last_of(']');
+
+        auto boardBlock = response.substr(firstBracket + 1, lastBracket - firstBracket - 1);
+
+        auto lastComma = response.find_last_of(',');
+        auto lastParens = response.find_last_of(')');
+
+        auto player = response.substr(lastComma + 1, lastParens - lastComma - 1);
+        SetCurrentPlayer(Board::PlayerFromProlog(player));
+
+        InitialBoard = boardBlock;
+        ParsePrologBoard(boardBlock);
+        SetCurrentState(GameState::PickSourcePiece);
+    }
 }
 
 void Board::FillCells()

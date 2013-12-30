@@ -423,41 +423,6 @@ int main(int argc, char* argv[])
         return ExitProgram();
     }
 
-    NetworkProlog net;
-    net.Startup();
-
-    auto board = new Board(scene, &net);
-    board->FillCells();
-
-    board->GetNetwork()->EnqueueMessage(PrologPredicate::Build("init", "pVSp", "normal")); // TODO: Add customization options for difficulty and mode
-
-    auto response = board->GetNetwork()->GetMessage();
-
-    if (starts_with(response, "init_invalid"))
-    {
-        std::cerr << "Received (inv) " << response << ". Aborting." << std::endl;
-        std::cout << "Press ENTER key to continue." << std::endl;
-        std::cin.get();
-        return EXIT_FAILURE;
-    }
-    else if (starts_with(response, "init_ok"))
-    {
-        auto firstBracket = response.find_first_of('[');
-        auto lastBracket = response.find_last_of(']');
-
-        auto boardBlock = response.substr(firstBracket + 1, lastBracket - firstBracket - 1);
-
-        auto lastComma = response.find_last_of(',');
-        auto lastParens = response.find_last_of(')');
-
-        auto player = response.substr(lastComma + 1, lastParens - lastComma - 1);
-        board->SetCurrentPlayer(Board::PlayerFromProlog(player));
-
-        board->InitialBoard = boardBlock;
-        board->ParsePrologBoard(boardBlock);
-        board->SetCurrentState(GameState::PickSourcePiece);
-    }
-
     CGFapplication app;
 
     try

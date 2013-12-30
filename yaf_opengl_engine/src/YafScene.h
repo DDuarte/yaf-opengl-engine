@@ -11,15 +11,23 @@
 #include "YafLight.h"
 #include "YafNode.h"
 #include "YafAnimation.h"
+#include "Menu.h"
 
 class YafNode;
 class YafTexture;
 class YafAppearance;
 class Board;
 
+enum class State
+{
+    Menu,
+    Game
+};
+
 class YafScene : public CGFscene
 {
 public:
+    YafScene();
     void OverwriteScene(YafScene* newScene);
     ~YafScene();
 
@@ -60,8 +68,11 @@ public:
     virtual void update(unsigned long millis) override;
     virtual void initCameras() override;
 
-    Board* GetBoard() const { return _board; }
-    void SetBoard(Board* board) { _board = board; }
+    Board* GetBoard() const { return _menu.GetBoard(); }
+
+    Menu& GetMenu() { return _menu; }
+    State GetState() const { return _state; }
+    void SetState(State state) { _state = state; }
 
     bool Picking = false;
 private:
@@ -98,7 +109,8 @@ private:
     std::map<std::string, YafNode*> _nodes;
 
     // Game related
-    Board* _board;
+    Menu _menu;
+    State _state = State::Menu;
 };
 
 #endif // YafScene_h__

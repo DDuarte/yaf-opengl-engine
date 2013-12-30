@@ -40,13 +40,19 @@ void YafInterface::processMouse(int button, int state, int x, int y)
 
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
     {
-        if (x >= 10.0f && x <= 65.0f && (CGFapplication::height - y) >= 10.0f && (CGFapplication::height - y) <= 65.0f)
+        if (_scene->GetState() == State::Game)
         {
             if (_scene->GetBoard()->ShowUndo)
-                _scene->GetBoard()->Undo();
+            {
+                if (x >= 10.0f && x <= 65.0f && (CGFapplication::height - y) >= 10.0f && (CGFapplication::height - y) <= 65.0f)
+                {
+                    _scene->GetBoard()->Undo();
+                    return;
+                }
+            }
         }
-        else
-            Pick(x, y);
+
+        Pick(x, y);
     }
 }
 
@@ -128,10 +134,19 @@ void YafInterface::ProcessHits(GLint hits, GLuint* buffer)
         printf("Picked ID's: ");
         for (auto i = 0u; i < nselected; i++)
         {
+            printf("- %i\n", selected[i]);
             for (auto n : _scene->GetNodes())
             {
                 if ((GLuint) std::hash<std::string>()(n.first) == selected[i])
                 {
+                    if (_scene->GetState() == State::Menu)
+                    {
+                        if (starts_with(n.first, "button_"))
+                            _scene->GetMenu().Click(n.first);
+                        return;
+                    }
+
+                    printf("%s ", n.first.c_str());
                     if (_scene->GetBoard()->GetCurrentState() == GameState::PickSourcePiece &&
                         _scene->GetBoard()->GetCurrentPlayer() != Board::PlayerFromNode(n.first))
                         break;
