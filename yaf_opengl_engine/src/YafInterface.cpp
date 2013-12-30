@@ -25,7 +25,7 @@ void ReloadYaf(YafScene* scene, const std::string& file)
     }
     catch (GLexception& ex)
     {
-        std::cerr << "(ReloadYaf) Glexception while parsing caught: " << ex.what() << std::endl;
+        std::cerr << "(ReloadYaf) GLexception while parsing caught: " << ex.what() << std::endl;
     }
 }
 

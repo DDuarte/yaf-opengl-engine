@@ -55,7 +55,10 @@ void YafNode::Draw(YafAppearance* app, YafAppearance* appSel)
     glScalef(Scale.X, Scale.Y, Scale.Z);
 
     if (Pickable)
-        glPushName(static_cast<GLuint>(std::hash<std::string>()(Id)));
+    {
+        auto hash = static_cast<GLuint>(std::hash<std::string>()(Id));
+        glPushName(hash);
+    }
 
     for (auto i = 0u; i < _children.size(); ++i)
         _children[i]->Draw(appearance, appearanceSelected);
@@ -324,4 +327,23 @@ void YafWaterline::Update(unsigned long millis)
     _shader.bind();
     _shader.update((millis % 10000) / 10000.0f);
     _shader.unbind();
+}
+
+void YafText::Draw(YafAppearance* app /*= nullptr*/, YafAppearance* appSel /*= nullptr*/)
+{
+    glDisable(GL_LIGHTING);
+    glPushMatrix();
+    glColor3f(1.0f, 1.0f, 1.0f);
+
+    auto weird = false;
+    for (auto c : Text)
+    {
+        if (c == '`')
+            weird = !weird;
+        else
+            glutStrokeCharacter(weird ? GLUT_STROKE_MONO_ROMAN : GLUT_STROKE_ROMAN, c);
+    }
+
+    glPopMatrix();
+    glEnable(GL_LIGHTING);
 }

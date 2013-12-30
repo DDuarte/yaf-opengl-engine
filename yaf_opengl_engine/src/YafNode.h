@@ -55,7 +55,14 @@ public:
 
 private:
     YafXYZ<> _normal;
+};
 
+class YafText : public YafPrimitive
+{
+public:
+    std::string Text;
+
+    virtual void Draw(YafAppearance* app = nullptr, YafAppearance* appSel = nullptr) override;
 };
 
 class YafCylinder : public YafPrimitive

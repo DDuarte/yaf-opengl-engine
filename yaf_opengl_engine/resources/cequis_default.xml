@@ -177,6 +177,7 @@
             <children>
                 <noderef id="menu_background" />
                 <noderef id="button_PvP" />
+                <noderef id="text_PvP" />
                 <noderef id="button_PvEasy" />
                 <noderef id="button_PvNormal" />
                 <noderef id="button_Easy" />
@@ -193,6 +194,11 @@
         <node id="button_PvP" position="365 -48 0" pitch="0" yaw="0" roll="0" scale="80 8 1" pickable="true">
             <children>
                 <noderef id="aux" />
+            </children>
+        </node>
+        <node id="text_PvP" position="375 -50 -1" pitch="0" yaw="0" roll="0" scale="-0.1 0.1 0.1">
+            <children>
+                <text text="Play `Player vs Player`" />
             </children>
         </node>
         <node id="button_PvEasy" position="365 -79 0" pitch="0" yaw="0" roll="0" scale="80 8 1" pickable="true">

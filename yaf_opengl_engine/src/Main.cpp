@@ -245,12 +245,13 @@ YafScene* ParseYafFile(const std::string& file)
         auto childrenPlane = GetAllChildren(childrenElement, "plane");
         auto childrenPatch = GetAllChildren(childrenElement, "patch");
         auto childrenWaterline = GetAllChildren(childrenElement, "waterline");
+        auto childrenText = GetAllChildren(childrenElement, "text");
 
         if (childrenRectangle.empty() && childrenTriangle.empty() &&
             childrenCylinder.empty() && childrenSphere.empty() &&
             childrenTorus.empty() && childrenNodeRef.empty() &&
             childrenPlane.empty() && childrenPatch.empty() &&
-            childrenWaterline.empty())
+            childrenWaterline.empty() && childrenText.empty())
             throw YafParsingException("<graph node children> (" + node->Id + ") needs at least one primitive or node");
 
         for (auto r = childrenRectangle.begin(); r != childrenRectangle.end(); ++r)
@@ -347,6 +348,13 @@ YafScene* ParseYafFile(const std::string& file)
             wat->FragmentShader = GetAttribute<std::string>(*w, "fragmentshader", "graph node children waterline");
             wat->VertexShader = GetAttribute<std::string>(*w, "vertexshader", "graph node children waterline");
             node->AddChild(wat);
+        }
+
+        for (auto t = childrenText.begin(); t != childrenText.end(); ++t)
+        {
+            auto text = new YafText;
+            text->Text = GetAttribute<std::string>(*t, "text", "graph node children text");
+            node->AddChild(text);
         }
 
         scene->AddNode(node);
