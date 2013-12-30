@@ -363,6 +363,33 @@ YafScene* ParseYafFile(const std::string& file)
     return scene;
 }
 
+bool StartPrologServer(const std::string& cmd)
+{
+    STARTUPINFO si;
+    PROCESS_INFORMATION pi;
+    ZeroMemory(&si, sizeof(si));
+    si.cb = sizeof(si);
+    ZeroMemory(&pi, sizeof(pi));
+    LPSTR cmdLpstr = const_cast<char *>(cmd.c_str());
+    return CreateProcess(NULL,     // No module name (use command line)
+                         cmdLpstr, // Command line
+                         NULL,     // Process handle not inheritable
+                         NULL,     // Thread handle not inheritable
+                         FALSE,    // Set handle inheritance to FALSE
+                         0,        // No creation flags
+                         NULL,     // Use parent's environment block
+                         NULL,     // Use parent's starting directory 
+                         &si,      // Pointer to STARTUPINFO structure
+                         &pi) == TRUE; // Pointer to PROCESS_INFORMATION structure
+}
+
+int ExitProgram(bool err = true)
+{
+    std::cout << "Press ENTER key to continue." << std::endl;
+    std::cin.get();
+    return err ? EXIT_FAILURE : EXIT_SUCCESS;
+}
+
 int main(int argc, char* argv[])
 {
     YafScene* scene = nullptr;
@@ -374,16 +401,18 @@ int main(int argc, char* argv[])
     catch (YafParsingException& ex)
     {
         std::cerr << "Exception while parsing caught: " << ex.what() << std::endl;
-        std::cout << "Press ENTER key to continue." << std::endl;
-        std::cin.get();
-        return EXIT_FAILURE;
+        return ExitProgram();
     }
     catch (GLexception& ex)
     {
         std::cerr << "GLexception while parsing caught: " << ex.what() << std::endl;
-        std::cout << "Press ENTER key to continue." << std::endl;
-        std::cin.get();
-        return EXIT_FAILURE;
+        return ExitProgram();
+    }
+
+    if (!StartPrologServer("server.exe"))
+    {
+        std::cerr << "Could not start server.exe" << std::endl;
+        return ExitProgram();
     }
 
     NetworkProlog net;
@@ -438,23 +467,17 @@ int main(int argc, char* argv[])
         delete scene;
 
         std::cerr << "GLexception: " << ex.what() << std::endl;
-        std::cout << "Press ENTER key to continue." << std::endl;
-        std::cin.get();
-        return EXIT_FAILURE;
+        return ExitProgram();
     }
     catch (std::exception& ex)
     {
         delete scene;
 
         std::cerr << "Exception: " << ex.what() << std::endl;
-        std::cout << "Press ENTER key to continue." << std::endl;
-        std::cin.get();
-        return EXIT_FAILURE;
+        return ExitProgram();
     }
 
     delete scene;
 
-    std::cout << "Press ENTER key to continue." << std::endl;
-    std::cin.get();
-    return EXIT_SUCCESS;
+    return ExitProgram(false);
 }
