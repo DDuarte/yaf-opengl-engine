@@ -1,6 +1,6 @@
 <yaf>
     <globals background="0 0 0 0" drawmode="fill" shading="gouraud" cullface="front" cullorder="CW" />
-    <cameras initial="menu_cam" >
+    <cameras initial="free_cam" >
         <free id="free_cam" near="0.1" far="5000" angle="50" pos="-17 30 0" target="0 0 0" />
         <perspective id="menu_cam" near="0.1" far="5000" angle="50" pos="1000 0 -500" target="1000 0 0" /> 
         <!-- todo: add non-movable perspective cameras (at least two)
@@ -315,7 +315,7 @@
         </node>
         <node id="rect" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1">
             <children>
-                <rectangle xy1="-1 1" xy2="1 -1" />
+                <rectangle xy1="-35.35 35.35" xy2="35.35 -35.35" />
             </children>
         </node>
         <node id="table" position="0 0 0.5" pitch="0" yaw="0" roll="45" scale="1 1 1">
