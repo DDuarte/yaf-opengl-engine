@@ -141,7 +141,7 @@
     <LibraryPath>$(SolutionDir)dep\tinyxml\bin\;$(SolutionDir)dep\CGFlib\bin\;$(SolutionDir)dep\glui\bin\;$(SolutionDir)dep\freeglut\VisualStudio\2012\bin\;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)bin\</OutDir>
     <IntDir>$(ProjectDir)temp\</IntDir>
-    <TargetName>yaf</TargetName>
+    <TargetName>cequis</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_VS_110|x64'">
     <LinkIncremental>true</LinkIncremental>
