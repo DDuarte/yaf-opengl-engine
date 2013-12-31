@@ -58,6 +58,18 @@ void YafInterface::processMouse(int button, int state, int x, int y)
                 return;
             }
         }
+        else if (_scene->GetState() == State::GameReplay)
+        {
+            if (_scene->GetBoard()->GetBoardReplay().empty())
+                _scene->GetBoard()->ResetRound(Player::None);
+            else
+            {
+                _scene->GetBoard()->ParsePrologBoard(_scene->GetBoard()->GetBoardReplay().front());
+                _scene->GetBoard()->GetBoardReplay().erase(_scene->GetBoard()->GetBoardReplay().begin());
+            }
+
+            return;
+        }
 
         Pick(x, y);
     }

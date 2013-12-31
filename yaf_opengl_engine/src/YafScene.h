@@ -21,7 +21,8 @@ class Board;
 enum class State
 {
     Menu,
-    Game
+    Game,
+    GameReplay
 };
 
 class YafScene : public CGFscene

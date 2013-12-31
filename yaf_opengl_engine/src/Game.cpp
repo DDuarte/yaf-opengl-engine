@@ -351,12 +351,30 @@ void Board::ResetRound(Player winner)
     _pieceToMove = nullptr;
 
     _scene->GetNode("oPiece")->Position.Z = -999999.0f; // lol.
-    _pieces.erase(std::remove_if(std::begin(_pieces), std::end(_pieces), [](const Piece& p) { return p.GetOwner() == Player::None; }));
+
+    if (_pieces.size() == 7) // 3 + 3 + 1
+        _pieces.erase(std::remove_if(std::begin(_pieces), std::end(_pieces), [](const Piece& p) { return p.GetOwner() == Player::None; }));
 
     if (winner == Player::First)
         _scoreboard.IncHome();
     else if (winner == Player::Second)
         _scoreboard.IncAway();
+    else if (winner == Player::None)
+        _scene->SetState(State::Game);
+
+    if (winner != Player::None)
+    {
+        auto boxId = MessageBox(NULL, "Replay game?", "Game movie", MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2);
+        if (boxId == IDYES)
+        {
+            while (!_boardStrings.empty())
+            {
+                _boardReplay.insert(_boardReplay.begin(), _boardStrings.top());
+                _boardStrings.pop();
+            }
+            _scene->SetState(State::GameReplay);
+        }
+    }
 
     while (!_boardStrings.empty())
         _boardStrings.pop();
@@ -384,7 +402,7 @@ void Board::SendMoves(uint x1, uint y1, uint x2, uint y2, bool callNextPlayer)
     if (_boardStrings.empty())
         return;
 
-    auto& board = GetBoardStack().top();
+    auto& board = _boardStrings.top();
     auto player = Board::PlayerToProlog(_currentPlayer);
     _network.EnqueueMessage(PrologPredicate::Build("move_to", '[' + board + ']', x1, y1, x2, y2, player));
     auto response = _network.GetMessage();

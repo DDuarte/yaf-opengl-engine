@@ -93,6 +93,7 @@ public:
 
     void NextPlayer(bool computerMove = true);
 
+    std::vector<std::string>& GetBoardReplay() { return _boardReplay; }
     const std::stack<std::string>& GetBoardStack() const { return _boardStrings; }
     const std::vector<Piece>& GetPieces() const { return _pieces; }
     void AddToBoardStack(const std::string& str) { _boardStrings.push(str); }
@@ -131,6 +132,7 @@ private:
     std::queue<std::string> _blackPieces;
 
     std::stack<std::string> _boardStrings;
+    std::vector<std::string> _boardReplay;
 
     void AssignNodeForPiece(Piece& piece);
     void DeassignNodes();
