@@ -1,8 +1,8 @@
 <yaf>
     <globals background="0 0 0 0" drawmode="fill" shading="gouraud" cullface="front" cullorder="CW" />
-    <cameras initial="free_cam" >
+    <cameras initial="menu_cam" >
         <free id="free_cam" near="0.1" far="5000" angle="50" pos="-17 30 0" target="0 0 0" />
-        <!-- todo: add non-movable perspective cameras (at least two) -->
+        <perspective id="menu_cam" near="0.1" far="5000" angle="50" pos="1000 0 -500" target="1000 0 0" /> 
     </cameras>
     <lighting doublesided="false" local="false" enabled="true" ambient="0.01 0.01 0.01 1" >
         <omni id="light1" enabled="true"
@@ -27,6 +27,7 @@
         <texture id="roof" file="roof.jpg" />
         <texture id="floor" file="floor.jpg" />
         <texture id="undo" file="undo.png" />
+        <texture id="menu" file="menu.jpg" />   
     </textures>
     <appearances>
         <appearance id="white"
@@ -182,6 +183,21 @@
             textureref="brasil"
             texlength_s="1"
             texlength_t="1" />
+        <appearance id="menu"
+            emissive="0.5 0.5 0.5 0.5"
+            ambient="0.5 0.5 0.5 0.5"
+            diffuse="0.5 0.5 0.5 0.5"
+            specular="0.5 0.5 0.5 0.5"
+            shininess="1"
+            textureref="menu"
+            texlength_s="-2"
+            texlength_t="2" />
+        <appearance id="dark"
+            emissive="0 0 0 1"
+            ambient="0 0 0 1"
+            diffuse="0 0 0 1"
+            specular="0 0 0 1"
+            shininess="0" />
         <appearance id="undo"
             emissive="0.5 0.5 0.5 0.5"
             ambient="0.5 0.5 0.5 0.5"
@@ -202,6 +218,96 @@
                 <noderef id="table" />
                 <noderef id="score" />
                 <noderef id= "background" />
+                <noderef id="menu" />
+            </children>
+        </node>
+        <node id="menu" position="1000 0 0" pitch="-90" yaw="0" roll="0" scale="1 1 1">
+            <appearanceref id="dark"/>
+            <children>
+                <noderef id="menu_background" />
+                <noderef id="button_PvP" />
+                <noderef id="button_text_PvP" />
+                <noderef id="button_PvEasy" />
+                <noderef id="button_text_PvEasy" />
+                <noderef id="button_PvNormal" />
+                <noderef id="button_text_PvNormal" />
+                <noderef id="button_Easy" />
+                <noderef id="button_text_Easy" />
+                <noderef id="button_Normal" />
+                <noderef id="button_text_Normal" />
+                <noderef id="button_Exit" />
+                <noderef id="button_text_Exit" />
+            </children>
+        </node>
+        <node id="menu_background" position="0 0 1" pitch="0" yaw="0" roll="0" scale="500 250 1">
+            <appearanceref id="menu"/>
+            <children>
+                <noderef id="aux" />
+            </children>
+        </node>
+        <node id="button_PvP" position="375 -48 0" pitch="0" yaw="0" roll="0" scale="70 8 1" pickable="true">
+            <children>
+                <noderef id="aux" />
+            </children>
+        </node>
+        <node id="button_text_PvP" position="440 -51 -1" pitch="0" yaw="0" roll="0" scale="-0.09 0.09 0.09" pickable="true">
+            <children>
+                <text text="Play Player vs Player" />
+            </children>
+        </node>
+        <node id="button_PvEasy" position="360 -79 0" pitch="0" yaw="0" roll="0" scale="85 8 1" pickable="true">
+            <children>
+                <noderef id="aux" />
+            </children>
+        </node>
+        <node id="button_text_PvEasy" position="440 -82 -1" pitch="0" yaw="0" roll="0" scale="-0.09 0.09 0.09" pickable="true">
+            <children>
+                <text text="Play Player vs PC - Easy" />
+            </children>
+        </node>
+        <node id="button_PvNormal" position="355 -110 0" pitch="0" yaw="0" roll="0" scale="90 8 1" pickable="true">
+            <children>
+                <noderef id="aux" />
+            </children>
+        </node>
+        <node id="button_text_PvNormal" position="440 -113 -1" pitch="0" yaw="0" roll="0" scale="-0.09 0.09 0.09" pickable="true">
+            <children>
+                <text text="Play Player vs PC - Normal" />
+            </children>
+        </node>
+        <node id="button_Easy" position="367 -143 0" pitch="0" yaw="0" roll="0" scale="78 8 1" pickable="true">
+            <children>
+                <noderef id="aux" />
+            </children>
+        </node>
+        <node id="button_text_Easy" position="440 -146 -1" pitch="0" yaw="0" roll="0" scale="-0.09 0.09 0.09" pickable="true">
+            <children>
+                <text text="Play PC vs PC - Easy" />
+            </children>
+        </node>
+        <node id="button_Normal" position="363 -173 0" pitch="0" yaw="0" roll="0" scale="82 8 1" pickable="true">
+            <children>
+                <noderef id="aux" />
+            </children>
+        </node>
+        <node id="button_text_Normal" position="440 -176 -1" pitch="0" yaw="0" roll="0" scale="-0.09 0.09 0.09" pickable="true">
+            <children>
+                <text text="Play PC vs PC - Normal" />
+            </children>
+        </node>
+        <node id="button_Exit" position="430 -204 0" pitch="0" yaw="0" roll="0" scale="15 8 1" pickable="true">
+            <children>
+                <noderef id="aux" />
+            </children>
+        </node>
+        <node id="button_text_Exit" position="440 -207 -1" pitch="0" yaw="0" roll="0" scale="-0.09 0.09 0.09" pickable="true">
+            <children>
+                <text text="Exit" />
+            </children>
+        </node>
+        <node id="aux" position="0 0 0" pitch="0" yaw="0" roll="0" scale="1 1 1" >
+            <children>
+                <rectangle xy1="-1 1" xy2="1 -1" />
             </children>
         </node>
          <node id="score" position="13.14 0 -3.03 " pitch="90" yaw="90" roll="0" scale="0.5 0.5 0.5">
