@@ -9,8 +9,7 @@
             location="0 10 0"
             ambient="0.5 0.5 0.5 0.5"
             diffuse="0.5 0.5 0.5 0.5"
-            specular="0 0 0 0.5"
-        />
+            specular="0 0 0 0.5" />
     </lighting>
     <textures>
         <texture id="white" file="white.jpg" />
@@ -27,6 +26,7 @@
         <texture id="wall" file="wall.jpg" />
         <texture id="roof" file="roof.jpg" />
         <texture id="floor" file="floor.jpg" />
+        <texture id="undo" file="undo.png" />
     </textures>
     <appearances>
         <appearance id="white"
@@ -182,6 +182,15 @@
             textureref="brasil"
             texlength_s="1"
             texlength_t="1" />
+        <appearance id="undo"
+            emissive="0.5 0.5 0.5 0.5"
+            ambient="0.5 0.5 0.5 0.5"
+            diffuse="0.5 0.5 0.5 0.5"
+            specular="0.5 0.5 0.5 0.5"
+            shininess="1"
+            textureref="undo"
+            texlength_s="55"
+            texlength_t="55" /> 
     </appearances>
     <graph rootid="game">
         <node id="game" position="0 0 0" pitch="90" yaw="0" roll="0" scale="1 1 1">
