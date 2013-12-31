@@ -272,7 +272,42 @@ std::string Board::PlayerToProlog(Player player)
     }
 }
 
-void Board::NextPlayer()
+void Board::DoComputerMove()
+{
+    if (_mode == GameMode::PvsPC && _currentPlayer == Player::First)
+        return;
+
+    if (_boardStrings.empty())
+        return;
+
+    auto& board = _boardStrings.top();
+    auto player = _currentPlayer == Player::First ? "computer1" : "computer2";
+    _network.EnqueueMessage(PrologPredicate::Build("request_computer_move", '[' + board + ']', player));
+    auto response = _network.GetMessage();
+
+    if (starts_with(response, "request_computer_move_ok"))
+    {
+        auto moveStart = response.find_first_of('[');
+        auto moveEnd = response.find_last_of("]");
+        auto moveBlock = response.substr(moveStart, moveEnd - moveStart + 1);
+
+        // [4,4],[5,4]
+        uint x1 = moveBlock[1] - '0';
+        uint y1 = moveBlock[3] - '0';
+        uint x2 = moveBlock[7] - '0';
+        uint y2 = moveBlock[9] - '0';
+
+        SendMoves(x1, y1, x2, y2, false);
+
+        return;
+    }
+    else if (starts_with(response, "request_computer_move_invalid"))
+    {
+        std::cerr << "Received " << response << std::endl;
+    }
+}
+
+void Board::NextPlayer(bool computerMove)
 {
     _currentState = GameState::PickSourcePiece;
     _pieceToMove = nullptr;
@@ -285,6 +320,9 @@ void Board::NextPlayer()
         _currentPlayer = Player::Second;
     else if (_currentPlayer == Player::Second)
         _currentPlayer = Player::First;
+
+    if (computerMove && _mode != GameMode::PvsP)
+        DoComputerMove();
 }
 
 void Board::ClearSelections()
@@ -339,6 +377,42 @@ void Board::Undo()
     }
 
     NextPlayer();
+}
+
+void Board::SendMoves(uint x1, uint y1, uint x2, uint y2, bool callNextPlayer)
+{
+    if (_boardStrings.empty())
+        return;
+
+    auto& board = GetBoardStack().top();
+    auto player = Board::PlayerToProlog(_currentPlayer);
+    _network.EnqueueMessage(PrologPredicate::Build("move_to", '[' + board + ']', x1, y1, x2, y2, player));
+    auto response = _network.GetMessage();
+
+    //  move_to_ok([[[4,4],[5,5]],[[4,3],[4,4]],[[3,2],[4,3]]])
+
+    if (starts_with(response, "move_to_ok"))
+    {
+        auto boardStart = response.find_first_of('[');
+        auto boardEnd = response.find("]]");
+        auto boardBlock = response.substr(boardStart + 1, boardEnd - boardStart);
+
+        AddToBoardStack(boardBlock);
+
+        auto moveStart = response.find("[[[");
+        auto moveEnd = response.find_last_of(']');
+        auto moveBlock = response.substr(moveStart + 1, moveEnd - moveStart - 1);
+
+        ParsePrologMoveTo(moveBlock);
+
+        if (callNextPlayer)
+            NextPlayer();
+        return;
+    }
+    else if (starts_with(response, "move_to_invalid"))
+    {
+        std::cerr << "Received " << response << std::endl;
+    }
 }
 
 void Piece::SetSelected(bool value)

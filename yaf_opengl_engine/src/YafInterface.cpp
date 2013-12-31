@@ -50,6 +50,13 @@ void YafInterface::processMouse(int button, int state, int x, int y)
                     return;
                 }
             }
+
+            if (_scene->GetBoard()->GetMode() == GameMode::PCvsPC)
+            {
+                _scene->GetBoard()->DoComputerMove();
+                _scene->GetBoard()->NextPlayer(false);
+                return;
+            }
         }
 
         Pick(x, y);
@@ -131,14 +138,13 @@ void YafInterface::ProcessHits(GLint hits, GLuint* buffer)
     // if there were hits, the one selected is in "selected", and it consist of nselected "names" (integer ID's)
     if (selected != NULL)
     {
-        printf("Picked ID's: ");
         for (auto i = 0u; i < nselected; i++)
         {
-            printf("- %i\n", selected[i]);
             for (auto n : _scene->GetNodes())
             {
                 if ((GLuint) std::hash<std::string>()(n.first) == selected[i])
                 {
+                    printf("%s ", n.first.c_str());
                     if (_scene->GetState() == State::Menu)
                     {
                         if (starts_with(n.first, "button_"))
@@ -146,10 +152,16 @@ void YafInterface::ProcessHits(GLint hits, GLuint* buffer)
                         return;
                     }
 
-                    printf("%s ", n.first.c_str());
+                    if (_scene->GetBoard()->GetMode() == GameMode::PCvsPC)
+                        return;
+
+                    if (_scene->GetBoard()->GetCurrentPlayer() != Player::First &&
+                        _scene->GetBoard()->GetMode() == GameMode::PvsPC)
+                        return;
+
                     if (_scene->GetBoard()->GetCurrentState() == GameState::PickSourcePiece &&
                         _scene->GetBoard()->GetCurrentPlayer() != Board::PlayerFromNode(n.first))
-                        break;
+                        return;
 
                     const Piece* piece = nullptr;
 
@@ -174,9 +186,10 @@ void YafInterface::ProcessHits(GLint hits, GLuint* buffer)
                             break;
 
                         auto& board = _scene->GetBoard()->GetBoardStack().top();
+                        auto player = Board::PlayerToProlog(_scene->GetBoard()->GetCurrentPlayer());
+
                         auto x = piece->GetPosition().X;
                         auto y = piece->GetPosition().Y;
-                        auto player = Board::PlayerToProlog(_scene->GetBoard()->GetCurrentPlayer());
                         _scene->GetBoard()->GetNetwork()->EnqueueMessage(PrologPredicate::Build("moves_from", '[' + board + ']', x, y, player));
                         _scene->GetBoard()->SetPieceToMove(piece);
                         auto response = _scene->GetBoard()->GetNetwork()->GetMessage();
@@ -197,15 +210,15 @@ void YafInterface::ProcessHits(GLint hits, GLuint* buffer)
                         {
                             std::cerr << "Received " << response << std::endl;
                         }
+
+                        // request_computer_move(Board, Player)
                     }
                     else if (_scene->GetBoard()->GetCurrentState() == GameState::PickDestinationCell)
                     {
-                        auto& board = _scene->GetBoard()->GetBoardStack().top();
                         auto pieceToMove = _scene->GetBoard()->GetPieceToMove();
                         auto x1 = pieceToMove->GetPosition().X;
                         auto y1 = pieceToMove->GetPosition().Y;
-                        auto player = Board::PlayerToProlog(_scene->GetBoard()->GetCurrentPlayer());
-                        int x2, y2;
+                        uint x2, y2;
                         if (isCell) // selection is cell
                         {
                             x2 = n.first[4] - '0'; // cellXY
@@ -217,31 +230,7 @@ void YafInterface::ProcessHits(GLint hits, GLuint* buffer)
                             y2 = piece->GetPosition().Y;
                         }
 
-                        _scene->GetBoard()->GetNetwork()->EnqueueMessage(PrologPredicate::Build("move_to", '[' + board + ']', x1, y1, x2, y2, player));
-                        auto response = _scene->GetBoard()->GetNetwork()->GetMessage();
-
-                        //  move_to_ok([[[4,4],[5,5]],[[4,3],[4,4]],[[3,2],[4,3]]])
-
-                        if (starts_with(response, "move_to_ok"))
-                        {
-                            auto boardStart = response.find_first_of('[');
-                            auto boardEnd = response.find("]]");
-                            auto boardBlock = response.substr(boardStart + 1, boardEnd - boardStart);
-
-                            _scene->GetBoard()->AddToBoardStack(boardBlock);
-
-                            auto moveStart = response.find("[[[");
-                            auto moveEnd = response.find_last_of(']');
-                            auto moveBlock = response.substr(moveStart + 1, moveEnd - moveStart - 1);
-
-                            _scene->GetBoard()->ParsePrologMoveTo(moveBlock);
-                            _scene->GetBoard()->NextPlayer();
-                            return;
-                        }
-                        else if (starts_with(response, "move_to_invalid"))
-                        {
-                            std::cerr << "Received " << response << std::endl;
-                        }
+                        _scene->GetBoard()->SendMoves(x1, y1, x2, y2);
                     }
 
                     break;

@@ -91,7 +91,7 @@ public:
     void SetPieceToMove(const Piece* piece) { _pieceToMove = piece; }
     const Piece* GetPieceToMove() const { return _pieceToMove; }
 
-    void NextPlayer();
+    void NextPlayer(bool computerMove = true);
 
     const std::stack<std::string>& GetBoardStack() const { return _boardStrings; }
     const std::vector<Piece>& GetPieces() const { return _pieces; }
@@ -106,6 +106,12 @@ public:
 
     bool ShowUndo;
     void Undo();
+
+    GameMode GetMode() const { return _mode; }
+    GameDifficulty GetDiff() const { return _diff; }
+
+    void SendMoves(uint x1, uint y1, uint x2, uint y2, bool callNextPlayer = true);
+    void DoComputerMove();
 private:
     std::vector<Piece> _pieces;
     YafScene* _scene;

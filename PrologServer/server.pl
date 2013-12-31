@@ -68,6 +68,14 @@ parse_input(moves_from(Board, Line, Col, Player), Reply, _, Player, _, _, _) :-
     possible_moves(Board, Player, [Line, Col], Moves),
     Reply = moves_from_ok(Moves), !.
 
+parse_input(request_computer_move(_, Plr), Reply, _, Player, _, _, _) :-
+    \+ (Plr = Player),
+    Reply = request_computer_move_invalid, !.
+
+parse_input(request_computer_move(Board, Player), Reply, _, Player, _, Diff, _) :-
+    choose_move(Diff, Board, Player, MoveSrc, MoveDest),
+    Reply = request_computer_move_ok(MoveSrc, MoveDest), !.
+
 parse_input(move_to(Board, Line1, Col1, Line2, Col2, Player), Reply, _, _, _, _, _) :-
     \+ valid_move(Board, Player, Line1, Col1, Line2, Col2),
     Reply = move_to_invalid, !.
