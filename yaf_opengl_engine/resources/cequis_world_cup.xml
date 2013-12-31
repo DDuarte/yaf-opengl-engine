@@ -48,15 +48,6 @@
             textureref="black"
             texlength_s="1"
             texlength_t="1" />
-        <appearance id="kitty"
-            emissive="0.5 0.5 0.5 1"
-            ambient="0.5 0.5 0.5 1"
-            diffuse="0.5 0.5 0.5 1"
-            specular="0.5 0.5 0.5 1"
-            shininess="0.5"
-            textureref="kitty"
-            texlength_s="1"
-            texlength_t="1" />
         <appearance id="pika"
             emissive="0.5 0.5 0.5 1"
             ambient="0.5 0.5 0.5 1"
