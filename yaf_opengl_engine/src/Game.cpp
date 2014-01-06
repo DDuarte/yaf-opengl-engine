@@ -364,7 +364,8 @@ void Board::ResetRound(Player winner)
 
     if (winner != Player::None)
     {
-        auto boxId = MessageBox(NULL, "Replay game?", "Game movie", MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2);
+        std::string msg = "Player " + std::string((winner == Player::First ? "1" : "2")) + " won.\nReplay game?";
+        auto boxId = MessageBox(NULL, msg.c_str(), "Game movie", MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2);
         if (boxId == IDYES)
         {
             while (!_boardStrings.empty())
