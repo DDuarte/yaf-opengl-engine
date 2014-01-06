@@ -18,6 +18,8 @@ void ReloadYaf(YafScene* scene, const std::string& file)
     {
         auto newScene = ParseYafFile(file);
         scene->OverwriteScene(newScene);
+        scene->GetBoard()->FillCells();
+        scene->GetBoard()->ParsePrologBoard(scene->GetBoard()->GetBoardStack().top());
     }
     catch (YafParsingException& ex)
     {

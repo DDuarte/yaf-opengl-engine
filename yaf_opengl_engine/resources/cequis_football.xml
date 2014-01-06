@@ -2,7 +2,8 @@
     <globals background="0 0 0 0" drawmode="fill" shading="gouraud" cullface="front" cullorder="CW" />
     <cameras initial="menu_cam" >
         <free id="free_cam" near="0.1" far="5000" angle="50" pos="-17 30 0" target="0 0 0" />
-        <perspective id="menu_cam" near="0.1" far="5000" angle="50" pos="1000 0 -500" target="1000 0 0" /> 
+        <perspective id="menu_cam" near="0.1" far="5000" angle="50" pos="1000 0 -500" target="1000 0 0" />
+    </cameras>
     <lighting doublesided="false" local="false" enabled="true" ambient="0.01 0.01 0.01 1" >
         <omni id="light1" enabled="true"
             location="0 10 0"
